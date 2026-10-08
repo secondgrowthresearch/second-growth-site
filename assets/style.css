@@ -60,6 +60,13 @@
   --chart-status-warning: #fab219;
   --chart-status-serious: #ec835a;
   --chart-status-critical: #d03b3b;
+
+  /* Map-only convention, fixed regardless of theme or data ramp: water
+     reads as blue the way a printed reference atlas does. Never used for
+     data encoding, so it stays visually distinct from the unemployment
+     layer's blue sequential ramp (lightest step #e3f3f7). */
+  --map-water: #b7dce7;
+  --map-frame: var(--ink);
 }
 
 * { box-sizing: border-box; }
@@ -197,6 +204,51 @@ li { margin-bottom: 0.4em; }
   background: var(--chart-surface);
   padding: 0.5em 0.9em;
   border-radius: 2px;
+}
+
+/* Locator inset -- a small "where is this in the state" reference,
+   the same convention print atlases use for an unfamiliar sub-region
+   (their equivalent of an Alaska/Hawaii inset on a US map). */
+.map-locator {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 30%;
+  max-width: 112px;
+  min-width: 76px;
+  background: var(--chart-surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  padding: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  z-index: 2;
+}
+.map-locator svg { display: block; width: 100%; height: auto; }
+
+/* Below ~480px the map itself is narrow enough that a wide subbasin
+   label (e.g. "Tulare Lake Subbasin") can run under the corner inset.
+   Drop the inset out of the map and stack it underneath instead --
+   still legible, never overlapping the data. */
+@media (max-width: 480px) {
+  #gw-map-svg-container { display: flex; flex-direction: column; }
+  .map-locator {
+    position: static;
+    order: 2;
+    width: 140px;
+    max-width: 140px;
+    min-width: 0;
+    margin: 10px auto 0 auto;
+    box-shadow: none;
+  }
+}
+
+.map-locator-caption {
+  font-size: 0.6em;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--chart-text-secondary);
+  font-weight: 600;
+  margin: 3px 0 0 0;
 }
 
 .chart svg text {

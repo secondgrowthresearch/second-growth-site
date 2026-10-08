@@ -144,6 +144,12 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("role", "img")
         .attr("aria-label", "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor");
 
+      svg.append("rect")
+        .attr("class", "map-water-bg")
+        .attr("x", 0).attr("y", 0)
+        .attr("width", width).attr("height", height)
+        .attr("fill", "var(--map-water)");
+
       var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
       path = d3.geoPath(projection);
 
@@ -154,7 +160,7 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("class", "county chart-hit")
         .attr("d", path)
         .attr("stroke", "var(--ink)")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 2.5);
 
       svg.selectAll("text.county-label")
         .data(geo.features)
@@ -175,6 +181,14 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("y", function (d) { return path.centroid(d)[1] + 16; })
         .attr("text-anchor", "middle")
         .attr("font-size", 11);
+
+      svg.append("rect")
+        .attr("class", "map-frame")
+        .attr("x", 0.75).attr("y", 0.75)
+        .attr("width", width - 1.5).attr("height", height - 1.5)
+        .attr("fill", "none")
+        .attr("stroke", "var(--map-frame)")
+        .attr("stroke-width", 1.5);
 
       render("sdi");
 

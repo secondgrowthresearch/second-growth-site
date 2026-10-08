@@ -286,6 +286,12 @@ This research actually runs on two different geographies — county lines for th
         ? "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor"
         : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
 
+    svg.append("rect")
+      .attr("class", "map-water-bg")
+      .attr("x", 0).attr("y", 0)
+      .attr("width", width).attr("height", height)
+      .attr("fill", "var(--map-water)");
+
     projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
     path = d3.geoPath(projection);
 
@@ -296,7 +302,7 @@ This research actually runs on two different geographies — county lines for th
       .attr("class", "feature chart-hit")
       .attr("d", path)
       .attr("stroke", "var(--ink)")
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 2.5)
       .on("click", function (event, d) { selectFeature(base, d); });
 
     svg.selectAll("text.feature-label")
@@ -318,6 +324,14 @@ This research actually runs on two different geographies — county lines for th
       .attr("y", function (d) { return path.centroid(d)[1] + 16; })
       .attr("text-anchor", "middle")
       .attr("font-size", 11);
+
+    svg.append("rect")
+      .attr("class", "map-frame")
+      .attr("x", 0.75).attr("y", 0.75)
+      .attr("width", width - 1.5).attr("height", height - 1.5)
+      .attr("fill", "none")
+      .attr("stroke", "var(--map-frame)")
+      .attr("stroke-width", 1.5);
 
     render();
     renderMarkers(base);
@@ -882,7 +896,12 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
     <input type="range" id="gw-year-range" min="1950" max="2026" step="1" value="2026">
     <div class="time-slider-ends"><span>1950</span><span>2026</span></div>
   </div>
-  <div id="gw-map-svg-container" style="min-height:300px"></div>
+  <div id="gw-map-svg-container" style="min-height:300px; position:relative;">
+    <div id="gw-locator-container" class="map-locator">
+      <div id="gw-locator-svg"></div>
+      <p class="map-locator-caption">Where this sits in California</p>
+    </div>
+  </div>
   <div class="chart-legend map-legend" id="gw-map-legend"></div>
   <details class="chart-table-toggle">
     <summary>View as table</summary>
@@ -1013,6 +1032,41 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
   var gwAnnual = null; // {subbasin: {year: {depth, wells}}}, loaded below
 
+  function buildGwLocator(subbasinGeo, caGeo) {
+    var mount = document.getElementById("gw-locator-svg");
+    if (!mount) return;
+    var size = 108;
+    var locSvg = d3.select(mount).append("svg")
+      .attr("viewBox", "0 0 " + size + " " + size)
+      .attr("role", "img")
+      .attr("aria-label", "Locator map showing where the Kings and Tulare Lake subbasins sit within California");
+
+    locSvg.append("rect")
+      .attr("width", size).attr("height", size)
+      .attr("fill", "var(--map-water)");
+
+    var locProjection = d3.geoMercator().fitExtent([[5, 5], [size - 5, size - 5]], caGeo);
+    var locPath = d3.geoPath(locProjection);
+
+    locSvg.append("path")
+      .datum(caGeo.features[0])
+      .attr("d", locPath)
+      .attr("fill", "var(--chart-surface)")
+      .attr("stroke", "var(--ink)")
+      .attr("stroke-width", 1);
+
+    var center = d3.geoCentroid(subbasinGeo);
+    var xy = locProjection(center);
+    if (xy) {
+      locSvg.append("circle")
+        .attr("cx", xy[0]).attr("cy", xy[1])
+        .attr("r", 5)
+        .attr("fill", "var(--chart-cat-1)")
+        .attr("stroke", "var(--ink)")
+        .attr("stroke-width", 1.25);
+    }
+  }
+
   function gwApplyYear(year) {
     if (!gwAnnual) return;
     var idByKey = {"kings": "5-022.08", "tulare-lake": "5-022.12"};
@@ -1038,6 +1092,12 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
         .attr("role", "img")
         .attr("aria-label", "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
 
+      gwSvg.append("rect")
+        .attr("class", "map-water-bg")
+        .attr("x", 0).attr("y", 0)
+        .attr("width", gwWidth).attr("height", gwHeight)
+        .attr("fill", "var(--map-water)");
+
       var gwProjection = d3.geoMercator().fitExtent([[20, 20], [gwWidth - 20, gwHeight - 20]], geo);
       gwPath = d3.geoPath(gwProjection);
 
@@ -1048,7 +1108,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
         .attr("class", "subbasin chart-hit")
         .attr("d", gwPath)
         .attr("stroke", "var(--ink)")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 2.5);
 
       gwSvg.selectAll("text.subbasin-label")
         .data(geo.features)
@@ -1071,6 +1131,18 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
         .attr("text-anchor", "middle")
         .attr("font-size", 11)
         .attr("fill", "var(--chart-text-secondary)");
+
+      gwSvg.append("rect")
+        .attr("class", "map-frame")
+        .attr("x", 0.75).attr("y", 0.75)
+        .attr("width", gwWidth - 1.5).attr("height", gwHeight - 1.5)
+        .attr("fill", "none")
+        .attr("stroke", "var(--map-frame)")
+        .attr("stroke-width", 1.5);
+
+      fetch("/assets/data/california-outline.geojson")
+        .then(function (r) { return r.json(); })
+        .then(function (caGeo) { buildGwLocator(geo, caGeo); });
 
       gwRender("depth");
 
