@@ -185,7 +185,12 @@ def main() -> None:
     shutil.copytree(ROOT / "assets", SITE / "assets", dirs_exist_ok=True)
     print("copied assets/ (style.css)")
 
-    # No CNAME: no domain has been registered yet.
+    # Custom domain for GitHub Pages -- the site uses root-relative links
+    # throughout (nav, /assets/..., fetch() calls), which only resolve
+    # correctly when served from a domain's root, not a GitHub Pages
+    # project subpath like <org>.github.io/<repo>/.
+    (SITE / "CNAME").write_text("secondgrowthresearch.org\n", encoding="utf-8")
+    print("wrote CNAME (secondgrowthresearch.org)")
 
     print(f"\nSite built at {SITE}")
 
