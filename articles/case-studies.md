@@ -10,6 +10,175 @@ Commodity food processing has been a defining industry across these counties for
 
 These aren't isolated business decisions happening in a vacuum. They track a structural pressure on the region: California's Sustainable Groundwater Management Act is expected to push a significant share of San Joaquin Valley irrigated farmland out of production over the next two decades as groundwater use is brought into balance. Processing capacity and the water-constrained supply it depends on are moving in the same direction, in the same places, at the same time.
 
+### Groundwater: a different geography
+
+Hanford and Corcoran are both Kings County — but they sit in two different **groundwater subbasins**, which follow hydrology, not county lines. A water map of this region has to use its own geography, not the county map above.
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<div class="chart" id="gw-map-chart">
+  <p class="chart-title" id="gw-map-title">Depth to groundwater, by subbasin</p>
+  <p class="chart-subtitle" id="gw-map-subtitle">Most recent reading, averaged across all wells with data since 2023</p>
+  <div class="layer-toggle" role="group" aria-label="Choose which groundwater measure the map shows">
+    <button type="button" class="layer-toggle-btn active" data-layer="depth">Current depth to groundwater</button>
+    <button type="button" class="layer-toggle-btn" data-layer="change">Change since 2015</button>
+  </div>
+  <div id="gw-map-svg-container" style="min-height:300px"></div>
+  <div class="chart-legend" id="gw-map-legend"></div>
+  <details class="chart-table-toggle">
+    <summary>View as table</summary>
+    <table>
+      <thead><tr><th>Subbasin</th><th>Current depth to groundwater</th><th>Wells</th><th>Change since 2015</th><th>Paired wells</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kings Subbasin</strong> (Hanford)</td><td>131.0 ft</td><td>229</td><td>−11.2 ft (shallower)</td><td>71</td></tr>
+        <tr><td><strong>Tulare Lake Subbasin</strong> (Corcoran)</td><td>176.6 ft</td><td>73</td><td>−2.6 ft (shallower)</td><td>23</td></tr>
+      </tbody>
+    </table>
+  </details>
+  <p class="chart-source" id="gw-map-source">Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements. See <a href="data.md">Data</a>.</p>
+</div>
+
+**An honest finding, not the one we expected**: both subbasins show groundwater levels getting *shallower* since 2015, not deeper — the opposite of the ongoing-decline story this section just described. The likely driver, not independently confirmed here: California's exceptionally wet 2023 winter recharged aquifers statewide. A short-term precipitation rebound doesn't overturn the long-run SGMA story (sustainable yield is judged over decades, not one wet year) — but we'd rather show the real number than quietly pick the metric that fit the narrative. Full method in [Data](data.md).
+
+<script>
+(function () {
+  var gwLayers = {
+    depth: {
+      title: "Depth to groundwater, by subbasin",
+      subtitle: "Most recent reading, averaged across all wells with data since 2023",
+      byId: {
+        "5-022.08": {name: "Kings Subbasin", note: "Hanford", value: 131.0},
+        "5-022.12": {name: "Tulare Lake Subbasin", note: "Corcoran", value: 176.6}
+      },
+      diverging: false,
+      // Gold family, light->dark -- the project's third validated series hue.
+      ramp: ["#f9ecd2", "#e8c87a", "#c9960f", "#9a7108", "#6b4e05"],
+      domain: [80, 220],
+      format: function (v) { return v.toFixed(1) + " ft"; },
+      tooltipLabel: "Depth to groundwater",
+      legendLow: "Shallower",
+      legendHigh: "Deeper",
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements. See <a href="data.md">Data</a>.'
+    },
+    change: {
+      title: "Change in groundwater depth since 2015, by subbasin",
+      subtitle: "Paired per-well comparison, 2015 vs. most recent reading since 2023 — negative = shallower = recovery",
+      byId: {
+        "5-022.08": {name: "Kings Subbasin", note: "Hanford", value: -11.2},
+        "5-022.12": {name: "Tulare Lake Subbasin", note: "Corcoran", value: -2.6}
+      },
+      diverging: true,
+      // Diverging: rust (decline) <-> neutral <-> denim (recovery) -- the
+      // project's validated diverging pair.
+      ramp: ["#7a2415", "#c23b1f", "#ece6d6", "#0e86a8", "#0a5c73"],
+      domain: [-15, 15],
+      format: function (v) { return (v > 0 ? "+" : "−") + Math.abs(v).toFixed(1) + " ft"; },
+      tooltipLabel: "Change since 2015",
+      legendLow: "Decline (deeper)",
+      legendHigh: "Recovery (shallower)",
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, paired per-well comparison. See <a href="data.md">Data</a>.'
+    }
+  };
+
+  var gwContainer = document.getElementById("gw-map-svg-container");
+  var gwWidth = gwContainer.clientWidth || 700, gwHeight = 300;
+  var gwSvg = null, gwPath = null;
+
+  function gwColorFor(layer, v) {
+    if (layer.diverging) {
+      var half = Math.max(Math.abs(layer.domain[0]), Math.abs(layer.domain[1]));
+      var t = Math.max(-1, Math.min(1, v / half));
+      var idx = Math.round((1 - t) / 2 * (layer.ramp.length - 1));
+      return layer.ramp[idx];
+    }
+    var t2 = Math.max(0, Math.min(1, (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0])));
+    var idx2 = Math.min(layer.ramp.length - 1, Math.floor(t2 * layer.ramp.length));
+    return layer.ramp[idx2];
+  }
+
+  function gwRender(layerKey) {
+    var layer = gwLayers[layerKey];
+    document.getElementById("gw-map-title").textContent = layer.title;
+    document.getElementById("gw-map-subtitle").textContent = layer.subtitle;
+    document.getElementById("gw-map-source").innerHTML = layer.source;
+    document.querySelectorAll("#gw-map-chart .layer-toggle-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-layer") === layerKey);
+      btn.setAttribute("aria-pressed", btn.getAttribute("data-layer") === layerKey ? "true" : "false");
+    });
+
+    gwSvg.selectAll("path.subbasin")
+      .attr("fill", function (d) { return gwColorFor(layer, layer.byId[d.properties.Basin_Subbasin_Number].value); })
+      .attr("data-label", function (d) {
+        var info = layer.byId[d.properties.Basin_Subbasin_Number];
+        return info.name + " (" + info.note + ")";
+      })
+      .attr("data-value", function (d) { return layer.tooltipLabel + ": " + layer.format(layer.byId[d.properties.Basin_Subbasin_Number].value); })
+      .attr("data-key-color", function (d) { return gwColorFor(layer, layer.byId[d.properties.Basin_Subbasin_Number].value); });
+
+    gwSvg.selectAll("text.subbasin-label")
+      .text(function (d) { return layer.byId[d.properties.Basin_Subbasin_Number].name; });
+
+    gwSvg.selectAll("text.subbasin-value")
+      .text(function (d) { return layer.format(layer.byId[d.properties.Basin_Subbasin_Number].value); });
+
+    var legend = document.getElementById("gw-map-legend");
+    var swatches = "";
+    for (var i = 0; i < layer.ramp.length; i++) {
+      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';"></span>';
+    }
+    legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
+  }
+
+  fetch("/assets/data/kings-tulare-lake-subbasins.geojson")
+    .then(function (r) { return r.json(); })
+    .then(function (geo) {
+      gwSvg = d3.select(gwContainer).append("svg")
+        .attr("viewBox", "0 0 " + gwWidth + " " + gwHeight)
+        .attr("role", "img")
+        .attr("aria-label", "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
+
+      var gwProjection = d3.geoMercator().fitExtent([[20, 20], [gwWidth - 20, gwHeight - 20]], geo);
+      gwPath = d3.geoPath(gwProjection);
+
+      gwSvg.selectAll("path.subbasin")
+        .data(geo.features)
+        .enter()
+        .append("path")
+        .attr("class", "subbasin chart-hit")
+        .attr("d", gwPath)
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 2);
+
+      gwSvg.selectAll("text.subbasin-label")
+        .data(geo.features)
+        .enter()
+        .append("text")
+        .attr("class", "subbasin-label mark-label")
+        .attr("x", function (d) { return gwPath.centroid(d)[0]; })
+        .attr("y", function (d) { return gwPath.centroid(d)[1]; })
+        .attr("text-anchor", "middle")
+        .attr("font-size", 13)
+        .attr("fill", "var(--chart-text-primary)");
+
+      gwSvg.selectAll("text.subbasin-value")
+        .data(geo.features)
+        .enter()
+        .append("text")
+        .attr("class", "subbasin-value")
+        .attr("x", function (d) { return gwPath.centroid(d)[0]; })
+        .attr("y", function (d) { return gwPath.centroid(d)[1] + 16; })
+        .attr("text-anchor", "middle")
+        .attr("font-size", 11)
+        .attr("fill", "var(--chart-text-secondary)");
+
+      gwRender("depth");
+
+      document.querySelectorAll("#gw-map-chart .layer-toggle-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () { gwRender(btn.getAttribute("data-layer")); });
+      });
+    });
+})();
+</script>
+
 ## Kings County: the flagship case study
 
 In March 2026, Del Monte closed its Hanford tomato-processing plant — the only tomato-processing facility in the company's entire ten-plant U.S./Mexico roster — eliminating 378 to 500-plus jobs.
