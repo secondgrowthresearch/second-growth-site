@@ -12,6 +12,118 @@ It's built on **location quotients**, a standard, long-established tool in regio
 
 Our first application: how dependent four Central Valley counties are on **food manufacturing** (NAICS 311) — the sector behind the Del Monte and Olam/OFI plant closures we document in our [case studies](case-studies.md).
 
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<div class="chart" id="sdi-map-chart">
+  <p class="chart-title">Food manufacturing dependence, by county</p>
+  <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, 2025</p>
+  <div id="sdi-map-svg-container" style="min-height:360px"></div>
+  <div class="chart-legend" id="sdi-map-legend"></div>
+  <details class="chart-table-toggle">
+    <summary>View as table</summary>
+    <table>
+      <thead><tr><th>County</th><th>Employment SDI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.153</td></tr>
+        <tr><td>Fresno</td><td>0.100</td></tr>
+        <tr><td>Tulare</td><td>0.119</td></tr>
+        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.205</td></tr>
+      </tbody>
+    </table>
+  </details>
+  <p class="chart-source">County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
+</div>
+<script>
+(function () {
+  var sdiByFips = {
+    "06031": {name: "Kings", value: 0.153, note: "Hanford closure"},
+    "06019": {name: "Fresno", value: 0.100, note: null},
+    "06107": {name: "Tulare", value: 0.119, note: null},
+    "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
+  };
+  // Sequential ramp (rust family, light->dark), matching the validated chart palette.
+  var ramp = ["#f8e2d8", "#e3a88f", "#c23b1f", "#8a2414", "#5c160c"];
+  function colorFor(v) {
+    // 0.10 -> 0.22 covers our real range with headroom
+    var t = Math.max(0, Math.min(1, (v - 0.09) / (0.22 - 0.09)));
+    var idx = Math.min(ramp.length - 1, Math.floor(t * ramp.length));
+    return ramp[idx];
+  }
+
+  var container = document.getElementById("sdi-map-svg-container");
+  var width = container.clientWidth || 700, height = 360;
+
+  fetch("/assets/data/central-valley-counties.geojson")
+    .then(function (r) { return r.json(); })
+    .then(function (geo) {
+      var svg = d3.select(container).append("svg")
+        .attr("viewBox", "0 0 " + width + " " + height)
+        .attr("role", "img")
+        .attr("aria-label", "Map of Kings, Fresno, Tulare, and Stanislaus counties shaded by food-processing Sector Dependence Index");
+
+      var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
+      var path = d3.geoPath(projection);
+
+      svg.selectAll("path.county")
+        .data(geo.features)
+        .enter()
+        .append("path")
+        .attr("class", "county chart-hit")
+        .attr("d", path)
+        .attr("fill", function (d) { return colorFor(sdiByFips[d.properties.fips].value); })
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 2)
+        .attr("data-label", function (d) {
+          var info = sdiByFips[d.properties.fips];
+          return info.name + (info.note ? " (" + info.note + ")" : "");
+        })
+        .attr("data-value", function (d) { return "Employment SDI " + sdiByFips[d.properties.fips].value.toFixed(3); })
+        .attr("data-key-color", function (d) { return colorFor(sdiByFips[d.properties.fips].value); });
+
+      svg.selectAll("text.county-label")
+        .data(geo.features)
+        .enter()
+        .append("text")
+        .attr("class", "county-label mark-label")
+        .attr("x", function (d) { return path.centroid(d)[0]; })
+        .attr("y", function (d) { return path.centroid(d)[1]; })
+        .attr("text-anchor", "middle")
+        .attr("font-size", 13)
+        .attr("fill", function (d) {
+          var v = sdiByFips[d.properties.fips].value;
+          return v > 0.16 ? "#fff" : "var(--chart-text-primary)";
+        })
+        .text(function (d) { return sdiByFips[d.properties.fips].name; });
+
+      svg.selectAll("text.county-value")
+        .data(geo.features)
+        .enter()
+        .append("text")
+        .attr("class", "county-value")
+        .attr("x", function (d) { return path.centroid(d)[0]; })
+        .attr("y", function (d) { return path.centroid(d)[1] + 16; })
+        .attr("text-anchor", "middle")
+        .attr("font-size", 11)
+        .attr("fill", function (d) {
+          var v = sdiByFips[d.properties.fips].value;
+          return v > 0.16 ? "#fff" : "var(--chart-text-secondary)";
+        })
+        .text(function (d) { return sdiByFips[d.properties.fips].value.toFixed(3); });
+
+      var legend = document.getElementById("sdi-map-legend");
+      var grad = document.createElement("div");
+      grad.style.display = "flex";
+      grad.style.alignItems = "center";
+      grad.style.gap = "8px";
+      var swatches = "";
+      for (var i = 0; i < ramp.length; i++) {
+        swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + ramp[i] + ';"></span>';
+      }
+      grad.innerHTML = '<span>Lower dependence</span>' + swatches + '<span>Higher dependence</span>';
+      legend.appendChild(grad);
+    });
+})();
+</script>
+
 **Employment SDI, benchmarked against the United States, 2025:**
 
 <div class="chart">
