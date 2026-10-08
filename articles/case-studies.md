@@ -39,7 +39,7 @@ This research actually runs on two different geographies — county lines for th
   <div id="explorer-svg-container" style="min-height:360px"></div>
   <div class="chart-legend" id="explorer-legend"></div>
   <div class="tl-detail" id="explorer-detail">
-    <p class="tl-detail-empty">Click a marker on the map for what happened there.</p>
+    <p class="tl-detail-empty">Click a county or subbasin for its full detail, or a marker for what happened at that specific location.</p>
   </div>
   <details class="chart-table-toggle">
     <summary>View as table (both geographies)</summary>
@@ -145,11 +145,13 @@ This research actually runs on two different geographies — county lines for th
   var markers = [
     {
       name: "Hanford", lon: -119.6457, lat: 36.3274, bases: ["county", "subbasin"],
+      county: "06031", subbasin: "5-022.08",
       events: [{label: "2026 — Del Monte closes Hanford tomato plant, Kings County; 378–500+ jobs", sourcing: "WARN filing plus local/trade-press reporting."}],
       photos: []
     },
     {
       name: "Corcoran", lon: -119.5604, lat: 36.0980, bases: ["county", "subbasin"],
+      county: "06031", subbasin: "5-022.12",
       events: [],
       photos: [
         {id: "photo-corcoran-picket-line", label: "Photo: 1933 cotton strike picket line"},
@@ -159,20 +161,35 @@ This research actually runs on two different geographies — county lines for th
     },
     {
       name: "Firebaugh", lon: -120.4569, lat: 36.8597, bases: ["county"],
+      county: "06019", subbasin: null,
       events: [{label: "2024 — Olam/OFI closes Firebaugh plant (dried onion/parsley), western Fresno County; 275 jobs", sourcing: "WARN filing plus local/trade-press reporting."}],
       photos: []
     },
     {
       name: "Lemoore", lon: -119.7811, lat: 36.3002, bases: ["county"],
+      county: "06031", subbasin: null,
       events: [{label: "2024 — Olam/OFI closes Lemoore tomato plant; reported job count ranges from 250 to 567 across sources, unresolved", sourcing: "Disputed. Not yet resolved with an independent primary source."}],
       photos: []
     },
     {
       name: "Modesto/Hughson", lon: -120.9969, lat: 37.6391, bases: ["county"],
+      county: "06099", subbasin: null,
       events: [{label: "2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs", sourcing: "Multiple independent news outlets, federal aid records."}],
       photos: []
     }
   ];
+
+  // Full 1990-2025 Employment SDI series per county, US benchmark -- same
+  // verified data as the 4-county comparison chart on The Index page
+  // (methodology/output/*_county_naics311_sdi.csv). Tulare's 2019 omitted:
+  // confirmed data-pipeline artifact, see that chart's own documentation
+  // and methodology/README.md for the full writeup.
+  var countySdiSeries = {
+    "06031": {1990:0.0701,1991:0.1067,1992:0.0796,1993:0.0813,1994:0.0812,1995:0.0828,1996:0.0805,1997:0.0855,1998:0.086,1999:0.1056,2000:0.0984,2001:0.103,2002:0.1186,2003:0.1701,2004:0.1855,2005:0.1802,2006:0.1751,2007:0.1367,2008:0.1803,2009:0.1569,2010:0.1631,2011:0.1757,2012:0.1811,2013:0.1811,2014:0.1768,2015:0.2114,2016:0.2048,2017:0.4187,2018:0.4059,2019:0.3976,2020:0.4016,2021:0.3901,2022:0.2095,2023:0.1827,2024:0.1889,2025:0.1529},
+    "06019": {1990:0.0861,1991:0.0962,1992:0.0897,1993:0.0852,1994:0.0868,1995:0.0949,1996:0.0847,1997:0.0929,1998:0.0925,1999:0.0919,2000:0.0975,2001:0.113,2002:0.1117,2003:0.1294,2004:0.1405,2005:0.1281,2006:0.1233,2007:0.1164,2008:0.1151,2009:0.1238,2010:0.1232,2011:0.1178,2012:0.1117,2013:0.1177,2014:0.113,2015:0.1278,2016:0.1218,2017:0.1295,2018:0.1201,2019:0.1181,2020:0.1327,2021:0.1183,2022:0.1141,2023:0.1113,2024:0.105,2025:0.0995},
+    "06107": {1990:0.0793,1991:0.1309,1992:0.091,1993:0.0735,1994:0.0667,1995:0.0724,1996:0.0483,1997:0.0537,1998:0.0494,1999:0.0583,2000:0.0596,2001:0.0653,2002:0.0712,2003:0.0793,2004:0.0935,2005:0.0951,2006:0.1048,2007:0.1107,2008:0.1058,2009:0.1081,2010:0.0947,2011:0.1086,2012:0.1169,2013:0.114,2014:0.1175,2015:0.1053,2016:0.1163,2017:0.1187,2018:0.1163,2020:0.1209,2021:0.126,2022:0.1196,2023:0.125,2024:0.118,2025:0.1195},
+    "06099": {1990:0.2769,1991:0.2465,1992:0.2484,1993:0.2568,1994:0.2497,1995:0.2348,1996:0.2264,1997:0.2208,1998:0.2146,1999:0.202,2000:0.2063,2001:0.2129,2002:0.2049,2003:0.2952,2004:0.3064,2005:0.2978,2006:0.2865,2007:0.1671,2008:0.2501,2009:0.2576,2010:0.2586,2011:0.2401,2012:0.2653,2013:0.1979,2014:0.1986,2015:0.1899,2016:0.1918,2017:0.2346,2018:0.2335,2019:0.2227,2020:0.2273,2021:0.3616,2022:0.2211,2023:0.2438,2024:0.2227,2025:0.2046}
+  };
 
   var container = document.getElementById("explorer-svg-container");
   var width = container.clientWidth || 700;
@@ -279,7 +296,8 @@ This research actually runs on two different geographies — county lines for th
       .attr("class", "feature chart-hit")
       .attr("d", path)
       .attr("stroke", "#fff")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2)
+      .on("click", function (event, d) { selectFeature(base, d); });
 
     svg.selectAll("text.feature-label")
       .data(geo.features)
@@ -340,6 +358,138 @@ This research actually runs on two different geographies — county lines for th
       link.style.display = "block";
       detail.appendChild(link);
     });
+  }
+
+  function buildSparkline(series) {
+    var years = Object.keys(series).map(Number).sort(function (a, b) { return a - b; });
+    if (years.length < 2) return null;
+    var values = years.map(function (yr) { return series[yr]; });
+    var w = 240, h = 46, pad = 4;
+    var minV = Math.min.apply(null, values), maxV = Math.max.apply(null, values);
+    var span = maxV - minV || 1;
+
+    function x(i) { return pad + i * (w - 2 * pad) / (years.length - 1); }
+    function y(v) { return h - pad - (v - minV) / span * (h - 2 * pad); }
+
+    // Break into contiguous segments so a gap year (e.g. Tulare's excluded
+    // 2019) shows as a visible break, not a false straight line across it.
+    var segments = [];
+    var current = [];
+    for (var i = 0; i < years.length; i++) {
+      if (i > 0 && years[i] !== years[i - 1] + 1) {
+        segments.push(current);
+        current = [];
+      }
+      current.push(i);
+    }
+    segments.push(current);
+
+    var svgNS = "http://www.w3.org/2000/svg";
+    var wrap = document.createElement("div");
+    wrap.style.marginTop = "0.6em";
+    var svgEl = document.createElementNS(svgNS, "svg");
+    svgEl.setAttribute("viewBox", "0 0 " + w + " " + h);
+    svgEl.setAttribute("width", w);
+    svgEl.setAttribute("height", h);
+    svgEl.setAttribute("aria-hidden", "true");
+    svgEl.style.display = "block";
+
+    segments.forEach(function (seg) {
+      var pts = seg.map(function (i) { return x(i) + "," + y(values[i]); }).join(" ");
+      var poly = document.createElementNS(svgNS, "polyline");
+      poly.setAttribute("points", pts);
+      poly.setAttribute("fill", "none");
+      poly.setAttribute("stroke", "var(--chart-cat-1)");
+      poly.setAttribute("stroke-width", "2");
+      poly.setAttribute("stroke-linejoin", "round");
+      poly.setAttribute("stroke-linecap", "round");
+      svgEl.appendChild(poly);
+    });
+
+    var lastI = years.length - 1;
+    var dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x(lastI));
+    dot.setAttribute("cy", y(values[lastI]));
+    dot.setAttribute("r", "3");
+    dot.setAttribute("fill", "var(--chart-cat-1)");
+    svgEl.appendChild(dot);
+
+    wrap.appendChild(svgEl);
+    var caption = document.createElement("p");
+    caption.style.fontSize = "0.78em";
+    caption.style.color = "var(--chart-muted)";
+    caption.style.margin = "0.3em 0 0 0";
+    caption.textContent = "Employment SDI, " + years[0] + "–" + years[lastI] + " (sparkline — see The Index for the full chart)";
+    wrap.appendChild(caption);
+    return wrap;
+  }
+
+  function selectFeature(base, d) {
+    var idProp = idPropFor(base);
+    var key = d.properties[idProp];
+    var detail = document.getElementById("explorer-detail");
+    detail.innerHTML = "";
+    detail.style.borderLeftColor = "var(--ink)";
+
+    var name = base === "county" ? countyLayers.sdi.byKey[key].name : subbasinLayers.depth.byKey[key].name;
+    var nameP = document.createElement("p");
+    nameP.className = "tl-detail-event";
+    nameP.textContent = name;
+    detail.appendChild(nameP);
+
+    var statsP = document.createElement("p");
+    statsP.className = "tl-detail-sourcing";
+    if (base === "county") {
+      var sdiVal = countyLayers.sdi.byKey[key].value;
+      var unempVal = countyLayers.unemployment.byKey[key].value;
+      statsP.innerHTML = "<span style=\"display:inline-block; white-space:nowrap; margin-right:1em;\"><strong>Employment SDI (2025):</strong> " + sdiVal.toFixed(3) + "</span><span style=\"display:inline-block; white-space:nowrap;\"><strong>Unemployment (Aug 2026):</strong> " + unempVal.toFixed(1) + "%</span>";
+    } else {
+      var depthVal = subbasinLayers.depth.byKey[key].value;
+      var changeVal = subbasinLayers.change.byKey[key].value;
+      statsP.innerHTML = "<span style=\"display:inline-block; white-space:nowrap; margin-right:1em;\"><strong>Depth to groundwater:</strong> " + depthVal.toFixed(1) + " ft</span><span style=\"display:inline-block; white-space:nowrap;\"><strong>Change since 2015:</strong> " + (changeVal > 0 ? "+" : "−") + Math.abs(changeVal).toFixed(1) + " ft</span>";
+    }
+    detail.appendChild(statsP);
+
+    if (base === "county" && countySdiSeries[key]) {
+      var spark = buildSparkline(countySdiSeries[key]);
+      if (spark) detail.appendChild(spark);
+    }
+
+    var related = markers.filter(function (m) {
+      return base === "county" ? m.county === key : m.subbasin === key;
+    });
+
+    var relHeader = document.createElement("p");
+    relHeader.className = "tl-detail-sourcing";
+    relHeader.style.marginTop = "0.7em";
+    relHeader.innerHTML = "<strong>Documented here:</strong>";
+    detail.appendChild(relHeader);
+
+    if (related.length === 0) {
+      var noneP = document.createElement("p");
+      noneP.className = "tl-detail-sourcing";
+      noneP.textContent = "No documented closures or photos yet.";
+      detail.appendChild(noneP);
+    } else {
+      related.forEach(function (m) {
+        m.events.forEach(function (ev) {
+          var p = document.createElement("p");
+          p.className = "tl-detail-sourcing";
+          p.style.marginLeft = "1em";
+          p.textContent = m.name + ": " + ev.label;
+          detail.appendChild(p);
+        });
+        m.photos.forEach(function (ph) {
+          var link = document.createElement("a");
+          link.className = "tl-detail-photo";
+          link.href = "#" + ph.id;
+          link.textContent = m.name + " — " + ph.label + " ↓";
+          link.style.display = "block";
+          link.style.marginLeft = "1em";
+          detail.appendChild(link);
+        });
+      });
+    }
   }
 
   function renderMarkers(base) {
