@@ -25,6 +25,7 @@
   --chart-cat-1: #c23b1f;   /* rust family -- series 1 */
   --chart-cat-2: #0e86a8;   /* denim family -- series 2 */
   --chart-cat-3: #b8860b;   /* gold family -- series 3 */
+  --chart-cat-4: #6b4c9a;   /* plum family -- series 4, validated with 1-3 under --pairs all */
   --chart-text-primary: var(--ink);
   --chart-text-secondary: var(--ink-soft);
   --chart-muted: #8c7d63;
@@ -258,6 +259,9 @@ li { margin-bottom: 0.4em; }
 
 .tl-event { transition: opacity 0.2s ease; }
 .tl-event.tl-dimmed { opacity: 0.15; }
+
+.compare-line { transition: opacity 0.2s ease; }
+.compare-line.compare-dimmed { opacity: 0.12; }
 
 .chart-hit { cursor: pointer; }
 .chart-hit.tl-selected { stroke: var(--ink); stroke-width: 3; }
