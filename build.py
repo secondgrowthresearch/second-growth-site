@@ -270,6 +270,64 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
   }}
 }})();
 </script>
+<script>
+// Generic "Download data (CSV)" button for any .chart that has a <table>
+// (every chart's "View as table" toggle). Reads the same table a reader
+// already sees -- never a separate, possibly-divergent data file -- and
+// serializes it client-side. Works on the full table regardless of which
+// toggle/slider state a map chart is currently showing, since the table
+// itself is the complete dataset, not a snapshot of the current view.
+(function () {{
+  function csvField(text) {{
+    text = text.replace(/\\s+/g, ' ').trim();
+    if (/[",\\n]/.test(text)) text = '"' + text.replace(/"/g, '""') + '"';
+    return text;
+  }}
+
+  function tableToCSV(table) {{
+    var lines = [];
+    table.querySelectorAll('tr').forEach(function (row) {{
+      var cells = row.querySelectorAll('th,td');
+      lines.push(Array.from(cells).map(function (c) {{ return csvField(c.textContent); }}).join(','));
+    }});
+    return lines.join('\\r\\n');
+  }}
+
+  document.querySelectorAll('.chart').forEach(function (chart) {{
+    var table = chart.querySelector('table');
+    if (!table) return;
+
+    var titleEl = chart.querySelector('.chart-title');
+    var title = titleEl ? titleEl.textContent.trim() : 'data';
+    var slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '') || 'data';
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'chart-download-btn';
+    btn.textContent = 'Download data (CSV)';
+    btn.addEventListener('click', function () {{
+      var csv = tableToCSV(table);
+      var blob = new Blob([csv], {{type: 'text/csv;charset=utf-8;'}});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = slug + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () {{ URL.revokeObjectURL(url); }}, 1000);
+    }});
+
+    var sources = chart.querySelectorAll('.chart-source');
+    var lastSource = sources.length ? sources[sources.length - 1] : null;
+    if (lastSource && lastSource.parentNode) {{
+      lastSource.parentNode.insertBefore(btn, lastSource);
+    }} else {{
+      chart.appendChild(btn);
+    }}
+  }});
+}})();
+</script>
 </body>
 </html>
 """

@@ -444,6 +444,21 @@ li { margin-bottom: 0.4em; }
   margin: 0;
 }
 
+.chart-download-btn {
+  display: inline-block;
+  margin: 0.9em 0 0 0;
+  padding: 0.45em 0.85em;
+  font-family: "Work Sans", "Segoe UI", -apple-system, sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--chart-text-primary);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+}
+.chart-download-btn:hover { background: var(--line); }
+.chart-download-btn:focus-visible { outline: 3px solid var(--wheat-dark); outline-offset: 2px; }
+
 /* Header */
 
 .site-header {
