@@ -1121,7 +1121,3 @@ Both counties carry real, continuing exposure to the same sector — Olam/OFI's 
 ## An honest limitation
 
 This research documents industry exit and its effect on displaced labor. It does not, by itself, resolve separate infrastructure problems — like drinking-water contamination in some unincorporated Central Valley communities — that sit on the same groundwater basins but require their own distinct remedies. We try to be precise about what our research does and doesn't address, rather than overstating its reach.
-
-## Where this is going
-
-This is the first of what we expect to be several regional case studies. The underlying question is the same wherever we look: when a single industry that organized a place for generations exits, who bears the cost, and what form of ownership might have changed that outcome.

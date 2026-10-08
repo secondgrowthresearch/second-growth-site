@@ -35,6 +35,4 @@ We'd rather state these plainly than have a reader find them first.
 
 Full source list with citation detail: [Data](data.md).
 
-## Where this is going
-
-Stanislaus, Fresno, and Tulare counties are already computed using this same method (see [the Index](the-index.md) for the results). Next: extending the trade adjustment to the U.S. benchmark, and resolving the 311/312 output-bundling gap if a cleaner source is found.
+Stanislaus, Fresno, and Tulare counties are computed using this same method; see [the Index](the-index.md) for the results.
