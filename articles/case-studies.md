@@ -17,60 +17,82 @@ These aren't isolated business decisions happening in a vacuum. They track a str
 <div class="chart" id="timeline-chart">
   <p class="chart-title">Central Valley/Sacramento commodity-ag processing, 1912–2026</p>
   <p class="chart-subtitle">Founding and ownership milestones, bankruptcy filings and policy, and plant closures — sourced to original reporting, company filings, and public records. See <a href="data.md">Data</a> for full citations, including the two events flagged below as thinly sourced.</p>
+  <div class="layer-toggle" role="group" aria-label="Filter the timeline by category">
+    <button type="button" class="layer-toggle-btn active" data-category="all">All events</button>
+    <button type="button" class="layer-toggle-btn" data-category="founding">Founding / ownership</button>
+    <button type="button" class="layer-toggle-btn" data-category="bankruptcy">Bankruptcy / policy</button>
+    <button type="button" class="layer-toggle-btn" data-category="closure">Closures</button>
+  </div>
   <svg viewBox="0 0 780 560" role="img" aria-labelledby="tl-title tl-desc">
     <title id="tl-title">Timeline of Central Valley and Sacramento commodity-ag processing events, 1912 to 2026</title>
-    <desc id="tl-desc">Thirteen events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, the 2012-13 Campbell Soup closure, the 2014 Sustainable Groundwater Management Act, and a cluster of five bankruptcy and closure events in 2024-2026, shown in a zoomed inset because they fall within about two years of each other. Hover or tap any point for the full event description; the table below the chart has full text and sourcing notes.</desc>
+    <desc id="tl-desc">Thirteen events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, the 2012-13 Campbell Soup closure, the 2014 Sustainable Groundwater Management Act, and a cluster of five bankruptcy and closure events in 2024-2026, shown in a zoomed inset because they fall within about two years of each other. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
 
     <!-- Track 1: 1912-2020, main spine at y=150 -->
     <line class="axis-line" x1="70" y1="150" x2="740" y2="150"></line>
 
     <!-- 1912 Libby built (above, gold, anchor start) -->
+    <g class="tl-event" data-category="founding">
     <line x1="70" y1="150" x2="70" y2="135" class="axis-line"></line>
-    <circle class="chart-hit" data-label="1912 — Libby, McNeill &amp; Libby cannery built, Sacramento" data-value="Founding" data-key-color="var(--chart-cat-3)" cx="70" cy="150" r="6" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="1912 — Libby, McNeill &amp; Libby cannery built, Sacramento" data-value="Founding" data-key-color="var(--chart-cat-3)" data-sourcing="Well documented." cx="70" cy="150" r="6" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="2"></circle>
     <text x="70" y="108" text-anchor="start" font-size="10">Libby built</text>
     <text class="mark-label" x="70" y="125" text-anchor="start" fill="var(--chart-cat-3)" font-size="12">1912</text>
+    </g>
 
     <!-- 1931 Bercut-Richards founded (below, gold, middle) -->
+    <g class="tl-event" data-category="founding">
     <line x1="187.9" y1="150" x2="187.9" y2="165" class="axis-line"></line>
-    <circle class="chart-hit" data-label="1931 — Bercut-Richards cannery founded, Sacramento" data-value="Founding" data-key-color="var(--chart-cat-3)" cx="187.9" cy="150" r="6" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="1931 — Bercut-Richards cannery founded, Sacramento" data-value="Founding" data-key-color="var(--chart-cat-3)" data-sourcing="Well documented." cx="187.9" cy="150" r="6" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="2"></circle>
     <text class="mark-label" x="187.9" y="180" text-anchor="middle" fill="var(--chart-cat-3)" font-size="12">1931</text>
     <text x="187.9" y="196" text-anchor="middle" font-size="10">Bercut-Richards</text>
+    </g>
 
     <!-- 1966-67 Forty Acres / UFW (above, gold, middle) -->
+    <g class="tl-event" data-category="founding">
     <line x1="408.1" y1="150" x2="408.1" y2="135" class="axis-line"></line>
-    <circle class="chart-hit" data-label="1966–67 — Forty Acres becomes UFW headquarters; Farm Worker Cooperative founded, Delano" data-value="Ownership precedent" data-key-color="var(--chart-cat-3)" cx="408.1" cy="150" r="6" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="1966–67 — Forty Acres becomes UFW headquarters; Farm Worker Cooperative founded, Delano" data-value="Ownership precedent" data-key-color="var(--chart-cat-3)" data-sourcing="NPS National Historic Landmark nomination (2008)." data-photo-id="photo-forty-acres" cx="408.1" cy="150" r="6" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="2"></circle>
     <text x="408.1" y="108" text-anchor="middle" font-size="10">Forty Acres (UFW)</text>
     <text class="mark-label" x="408.1" y="125" text-anchor="middle" fill="var(--chart-cat-3)" font-size="12">1966–67</text>
+    </g>
 
     <!-- ~1982 Libby closes (below, rust, middle, uncertain date = dashed) -->
+    <g class="tl-event" data-category="closure">
     <line x1="504.3" y1="150" x2="504.3" y2="165" class="axis-line"></line>
-    <circle class="chart-hit" data-label="~1982 — Libby, McNeill &amp; Libby cannery closes, Sacramento (closure date not firmly confirmed)" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="504.3" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="~1982 — Libby, McNeill &amp; Libby cannery closes, Sacramento (closure date not firmly confirmed)" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Thin. No contemporaneous news source located; exact year unconfirmed (early-1980s range, building NRHP-listed March 1982)." cx="504.3" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
     <text class="mark-label" x="504.3" y="180" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">~1982</text>
     <text x="504.3" y="196" text-anchor="middle" font-size="10">Libby closes*</text>
+    </g>
 
     <!-- 1993 Bercut-Richards closes (above, rust, middle, uncertain = dashed) -->
+    <g class="tl-event" data-category="closure">
     <line x1="572.5" y1="150" x2="572.5" y2="135" class="axis-line"></line>
-    <circle class="chart-hit" data-label="1993 — Bercut-Richards cannery closes, Sacramento (no contemporaneous source located)" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="572.5" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="1993 — Bercut-Richards cannery closes, Sacramento (no contemporaneous source located)" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Thin. No contemporaneous 1993 news source located; drawn from retrospective secondary sources." cx="572.5" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
     <text x="572.5" y="108" text-anchor="middle" font-size="10">Bercut-Richards*</text>
     <text class="mark-label" x="572.5" y="125" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">1993</text>
+    </g>
 
     <!-- 2000 Tri Valley Growers bankruptcy (below, denim, middle) -->
+    <g class="tl-event" data-category="bankruptcy">
     <line x1="615.9" y1="150" x2="615.9" y2="165" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2000 — Tri Valley Growers files Chapter 11; roughly 11,000 Central Valley jobs lost" data-value="Bankruptcy" data-key-color="var(--chart-cat-2)" cx="615.9" cy="150" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2000 — Tri Valley Growers files Chapter 11; roughly 11,000 Central Valley jobs lost" data-value="Bankruptcy" data-key-color="var(--chart-cat-2)" data-sourcing="UC Davis Giannini Foundation (2004), Journal of Cooperatives (2009), cross-verified job figure." cx="615.9" cy="150" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
     <text class="mark-label" x="615.9" y="180" text-anchor="middle" fill="var(--chart-cat-2)" font-size="12">2000</text>
     <text x="615.9" y="196" text-anchor="middle" font-size="10">TVG</text>
+    </g>
 
     <!-- 2012-13 Campbell Soup closes Sacramento (above, rust, end-anchor) -->
+    <g class="tl-event" data-category="closure">
     <line x1="693.5" y1="150" x2="693.5" y2="135" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2012–13 — Campbell Soup closes Sacramento plant; 700 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="693.5" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2012–13 — Campbell Soup closes Sacramento plant; 700 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Company press release plus three independent local-news outlets." cx="693.5" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
     <text x="693.5" y="108" text-anchor="end" font-size="10">Campbell</text>
     <text class="mark-label" x="693.5" y="125" text-anchor="end" fill="var(--chart-cat-1)" font-size="12">2012–13</text>
+    </g>
 
     <!-- 2014 SGMA signed (below, denim, end-anchor) -->
+    <g class="tl-event" data-category="bankruptcy">
     <line x1="702.8" y1="150" x2="702.8" y2="165" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2014 — California's Sustainable Groundwater Management Act (SGMA) signed into law" data-value="Policy" data-key-color="var(--chart-cat-2)" cx="702.8" cy="150" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2014 — California's Sustainable Groundwater Management Act (SGMA) signed into law" data-value="Policy" data-key-color="var(--chart-cat-2)" data-sourcing="Public legislative record." cx="702.8" cy="150" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
     <text class="mark-label" x="702.8" y="180" text-anchor="end" fill="var(--chart-cat-2)" font-size="12">2014</text>
     <text x="702.8" y="196" text-anchor="end" font-size="10">SGMA</text>
+    </g>
 
     <text x="70" y="222" text-anchor="start" font-size="10" fill="var(--chart-muted)">1912</text>
     <text x="740" y="222" text-anchor="end" font-size="10" fill="var(--chart-muted)">2020</text>
@@ -86,34 +108,44 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <line class="axis-line" x1="70" y1="330" x2="740" y2="330"></line>
 
     <!-- 2024 Olam/OFI Firebaugh (above, rust, middle) -->
+    <g class="tl-event" data-category="closure">
     <line x1="208.6" y1="330" x2="208.6" y2="315" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2024 — Olam/OFI closes Firebaugh plant (dried onion/parsley), western Fresno County; 275 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="208.6" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2024 — Olam/OFI closes Firebaugh plant (dried onion/parsley), western Fresno County; 275 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="WARN filing plus local/trade-press reporting." cx="208.6" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
     <text x="208.6" y="288" text-anchor="middle" font-size="10">Firebaugh</text>
     <text class="mark-label" x="208.6" y="305" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2024</text>
+    </g>
 
     <!-- 2024 Olam/OFI Lemoore (below, rust, middle, disputed job count) -->
+    <g class="tl-event" data-category="closure">
     <line x1="277.9" y1="330" x2="277.9" y2="345" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2024 — Olam/OFI closes Lemoore tomato plant; reported job count ranges from 250 to 567 across sources, unresolved" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="277.9" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2024 — Olam/OFI closes Lemoore tomato plant; reported job count ranges from 250 to 567 across sources, unresolved" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Disputed. Reported job counts range from 250 to 567 across sources; not yet resolved with an independent primary source." cx="277.9" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
     <text class="mark-label" x="277.9" y="360" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2024</text>
     <text x="277.9" y="376" text-anchor="middle" font-size="10">Lemoore*</text>
+    </g>
 
     <!-- 2025 Del Monte Chapter 11 (above, denim, middle) -->
+    <g class="tl-event" data-category="bankruptcy">
     <line x1="439.7" y1="330" x2="439.7" y2="315" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2025 — Del Monte Foods files Chapter 11" data-value="Bankruptcy" data-key-color="var(--chart-cat-2)" cx="439.7" cy="330" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2025 — Del Monte Foods files Chapter 11" data-value="Bankruptcy" data-key-color="var(--chart-cat-2)" data-sourcing="Company bankruptcy filing, July 2025." cx="439.7" cy="330" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
     <text x="439.7" y="288" text-anchor="middle" font-size="10">Del Monte Ch. 11</text>
     <text class="mark-label" x="439.7" y="305" text-anchor="middle" fill="var(--chart-cat-2)" font-size="12">2025</text>
+    </g>
 
     <!-- 2026 Del Monte Hanford (below, rust, end-anchor) -->
+    <g class="tl-event" data-category="closure">
     <line x1="624.5" y1="330" x2="624.5" y2="345" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2026 — Del Monte closes Hanford tomato plant, Kings County; 378–500+ jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="624.5" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2026 — Del Monte closes Hanford tomato plant, Kings County; 378–500+ jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="WARN filing plus local/trade-press reporting." cx="624.5" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
     <text class="mark-label" x="624.5" y="360" text-anchor="end" fill="var(--chart-cat-1)" font-size="12">2026</text>
     <text x="624.5" y="376" text-anchor="end" font-size="10">Hanford</text>
+    </g>
 
     <!-- 2026 Del Monte Modesto/Hughson (above, rust, end-anchor) -->
+    <g class="tl-event" data-category="closure">
     <line x1="670.7" y1="330" x2="670.7" y2="315" class="axis-line"></line>
-    <circle class="chart-hit" data-label="2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" cx="670.7" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Multiple independent news outlets, federal aid records." cx="670.7" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
     <text x="670.7" y="288" text-anchor="end" font-size="10">Modesto/Hughson</text>
     <text class="mark-label" x="670.7" y="305" text-anchor="end" fill="var(--chart-cat-1)" font-size="12">2026</text>
+    </g>
 
     <text x="70" y="402" text-anchor="start" font-size="10" fill="var(--chart-muted)">2024</text>
     <text x="740" y="402" text-anchor="end" font-size="10" fill="var(--chart-muted)">2026</text>
@@ -122,6 +154,9 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-cat-3)"></span>Founding / ownership precedent</span>
     <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-cat-2)"></span>Bankruptcy filing / policy</span>
     <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-cat-1)"></span>Plant closure / mass layoff</span>
+  </div>
+  <div class="tl-detail" id="tl-detail">
+    <p class="tl-detail-empty">Click or tap any point on the timeline above for its full description and sourcing.</p>
   </div>
   <details class="chart-table-toggle">
     <summary>View as table, with sourcing notes</summary>
@@ -147,6 +182,79 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </details>
   <p class="chart-source">Sources: UC Davis Giannini Foundation of Agricultural Economics; company press releases and SEC filings; WARN Act filings; Modesto Focus, KTLA, ABC30, San Joaquin Valley Sun, and other local/trade reporting; National Park Service NHL nomination records. See <a href="data.md">Data</a> for the full citation list.</p>
 </div>
+<script>
+(function () {
+  var chart = document.getElementById("timeline-chart");
+  var detail = document.getElementById("tl-detail");
+
+  // Category filter: dim non-matching events rather than hiding them, so
+  // the overall shape of the 114-year span stays visible.
+  var filterBtns = chart.querySelectorAll(".layer-toggle-btn");
+  var events = chart.querySelectorAll(".tl-event");
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filterBtns.forEach(function (b) {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+      var cat = btn.getAttribute("data-category");
+      events.forEach(function (g) {
+        var match = cat === "all" || g.getAttribute("data-category") === cat;
+        g.classList.toggle("tl-dimmed", !match);
+      });
+    });
+  });
+
+  // Click-to-pin: hover already shows a quick tooltip (shared site-wide
+  // script); clicking pins the full description, sourcing confidence, and
+  // a jump-link to the matching photo where one exists on this page.
+  function selectEvent(circle) {
+    chart.querySelectorAll(".chart-hit").forEach(function (c) {
+      c.classList.remove("tl-selected");
+    });
+    circle.classList.add("tl-selected");
+
+    var label = circle.getAttribute("data-label");
+    var sourcing = circle.getAttribute("data-sourcing");
+    var photoId = circle.getAttribute("data-photo-id");
+    var color = circle.getAttribute("data-key-color");
+
+    detail.innerHTML = "";
+    detail.style.borderLeftColor = color;
+
+    var eventP = document.createElement("p");
+    eventP.className = "tl-detail-event";
+    eventP.textContent = label;
+    detail.appendChild(eventP);
+
+    var sourcingP = document.createElement("p");
+    sourcingP.className = "tl-detail-sourcing";
+    var strong = document.createElement("strong");
+    strong.textContent = "Sourcing: ";
+    sourcingP.appendChild(strong);
+    sourcingP.appendChild(document.createTextNode(sourcing));
+    detail.appendChild(sourcingP);
+
+    if (photoId) {
+      var link = document.createElement("a");
+      link.className = "tl-detail-photo";
+      link.href = "#" + photoId;
+      link.textContent = "See the photograph ↓";
+      detail.appendChild(link);
+    }
+  }
+
+  chart.querySelectorAll(".chart-hit").forEach(function (circle) {
+    circle.addEventListener("click", function () { selectEvent(circle); });
+    circle.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        selectEvent(circle);
+      }
+    });
+  });
+})();
+</script>
 
 <div class="figure-pair">
   <figure class="figure">
@@ -159,7 +267,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </figure>
 </div>
 
-<figure class="figure">
+<figure class="figure" id="photo-forty-acres">
   <img src="/assets/photos/07-forty-acres-clinic-habs.jpg" alt="The Rodrigo Terronez Memorial Clinic building at the Forty Acres site in Delano, California, mission-style architecture with a red tile roof.">
   <figcaption class="figure-caption"><strong>Forty Acres, Delano — the Rodrigo Terronez Memorial Clinic.</strong> No public-domain photo of the 1966–67 opening itself survives in the archives we checked (the only images we found were rights-restricted). This federal historic-documentation photo of the site itself is the substitute: the building the United Farm Workers raised as an explicit attempt at cooperative economic ownership, not just collective bargaining. <span class="figure-source">Historic American Buildings Survey, National Park Service. Public domain, Library of Congress.</span></figcaption>
 </figure>
