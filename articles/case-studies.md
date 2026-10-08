@@ -148,6 +148,17 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   <p class="chart-source">Sources: UC Davis Giannini Foundation of Agricultural Economics; company press releases and SEC filings; WARN Act filings; Modesto Focus, KTLA, ABC30, San Joaquin Valley Sun, and other local/trade reporting; National Park Service NHL nomination records. See <a href="data.md">Data</a> for the full citation list.</p>
 </div>
 
+<div class="figure-pair">
+  <figure class="figure">
+    <img src="/assets/photos/04-sacramento-cannery-family-1936.jpg" alt="A Tennessee migrant family's camp on the American River near Sacramento, 1936. The mother worked in a fruit cannery.">
+    <figcaption class="figure-caption"><strong>American River camp, Sacramento, 1936.</strong> A Tennessee family who came to California in 1935 — the mother worked in a fruit cannery alongside walnut, tomato, and peach work. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+  </figure>
+  <figure class="figure">
+    <img src="/assets/photos/05-shafter-cannery-union-1938.jpg" alt="A night street meeting in Shafter, California, 1938, where an organizer for the United Cannery Agricultural Packing and Allied Workers of America addresses a crowd.">
+    <figcaption class="figure-caption"><strong>Shafter, California, 1938.</strong> A cannery and agricultural workers' union organizer addresses a night street meeting — nearly three decades before the UFW's own Delano organizing a few miles away. The strike this meeting was part of failed. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+  </figure>
+</div>
+
 ### Groundwater: a different geography
 
 Hanford and Corcoran are both Kings County — but they sit in two different **groundwater subbasins**, which follow hydrology, not county lines. A water map of this region has to use its own geography, not the county map above.
@@ -183,6 +194,17 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 **The long arc, scrub the slider to see it**: both subbasins have gotten dramatically deeper since 1950 — Kings Subbasin from 38 ft to 131 ft (roughly 3.4x), Tulare Lake Subbasin from 38 ft to 173 ft (roughly 4.6x) — a real, 76-year decline consistent with the broader SGMA story this section opened with.
 
 **An honest complication, not smoothed over**: the "Change since 2015" layer (a careful, same-well paired comparison) shows both subbasins getting *shallower* in just the last decade, not deeper — and a simpler year-to-year average comparison using the slider above disagrees with that paired method about Kings Subbasin's recent *direction* entirely. The two methods use different, non-identical sets of wells (the monitoring network itself has shrunk over time — Kings Subbasin alone went from 544 reporting wells in 1950 to 193 in 2026), and we don't have a confident answer for which is closer to the truth. We'd rather show you the disagreement than quietly pick the number that fits the narrative. Full method and the real numbers behind both claims: [Data](data.md).
+
+<div class="figure-pair">
+  <figure class="figure">
+    <img src="/assets/photos/01-corcoran-picket-line-1933.jpg" alt="Trucks loaded with striking cotton workers in a 1933 picket line near Corcoran, California, one truck marked with a hand-lettered DON'T SCAB sign.">
+    <figcaption class="figure-caption"><strong>Corcoran, California, October 1933.</strong> A picket line during that year's statewide cotton strike — the same town this section's Tulare Lake Subbasin map is named for. <span class="figure-source">Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+  </figure>
+  <figure class="figure">
+    <img src="/assets/photos/02-corcoran-cotton-housing-sjv-bg-1936.jpg" alt="Rows of wooden company housing for cotton pickers south of Corcoran, California, with the open San Joaquin Valley in the background, 1936.">
+    <figcaption class="figure-caption"><strong>South of Corcoran, 1936.</strong> Company housing for cotton pickers, the San Joaquin Valley's open land running to the horizon behind it — the same land this groundwater map now tracks by the foot. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+  </figure>
+</div>
 
 <script>
 (function () {
@@ -369,6 +391,11 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 In March 2026, Del Monte closed its Hanford tomato-processing plant — the only tomato-processing facility in the company's entire ten-plant U.S./Mexico roster — eliminating 378 to 500-plus jobs.
 
 Food manufacturing wasn't a marginal part of Kings County's economy when that plant closed. By our [Sector Dependence Index](the-index.md), the sector's share of the county's entire export-driven economic base **more than doubled between 1990 and 2025** (Employment SDI: 0.070 → 0.153 against the U.S. benchmark) — meaning the closure landed on a *growing*, increasingly central pillar of the county's economy, not a shrinking, marginal one. That's a measurable claim, not an impression — see [the Index](the-index.md) for the full numbers and [Methodology](methodology.md) for how we calculated them.
+
+<figure class="figure">
+  <img src="/assets/photos/03-corcoran-cotton-housing-1936.jpg" alt="Company housing for cotton workers near Corcoran, Kings County, California, 1936.">
+  <figcaption class="figure-caption"><strong>Company housing for cotton workers near Corcoran, Kings County, 1936.</strong> Ninety years before the Hanford closure, this county's economy already ran on a single crop's hired labor, housed by the company that employed it. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+</figure>
 
 ## Stanislaus County: the larger, older closure
 
