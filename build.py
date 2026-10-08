@@ -77,7 +77,7 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
 <meta name="description" content="{SITE_TAGLINE}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
@@ -97,6 +97,64 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
     <p>{SITE_NAME} &middot; <a href="/about.html">About</a></p>
   </div>
 </footer>
+<div class="chart-tooltip" id="chart-tooltip" role="status" aria-live="polite"></div>
+<script>
+// Generic hover/focus tooltip for any chart on the page. A chart hit
+// element just needs class="chart-hit" plus data-label / data-value and
+// optionally data-key-color (a swatch hex shown in the tooltip row).
+// Dataviz skill contract: tooltips enhance, never gate -- every value here
+// is also present as a direct label or in that chart's <details> table.
+(function () {{
+  var tip = document.getElementById('chart-tooltip');
+  if (!tip) return;
+
+  function showTip(el, x, y) {{
+    var label = el.getAttribute('data-label') || '';
+    var value = el.getAttribute('data-value') || '';
+    var color = el.getAttribute('data-key-color');
+    tip.textContent = '';
+    var row = document.createElement('div');
+    row.className = 'tt-row';
+    if (color) {{
+      var key = document.createElement('span');
+      key.className = 'tt-key';
+      key.style.background = color;
+      row.appendChild(key);
+    }}
+    var labelNode = document.createTextNode(label + ': ');
+    row.appendChild(labelNode);
+    var valueNode = document.createElement('span');
+    valueNode.className = 'tt-value';
+    valueNode.appendChild(document.createTextNode(value));
+    row.appendChild(valueNode);
+    tip.appendChild(row);
+    tip.style.left = x + 'px';
+    tip.style.top = (y - 10) + 'px';
+    tip.classList.add('visible');
+  }}
+
+  function hideTip() {{ tip.classList.remove('visible'); }}
+
+  document.addEventListener('pointermove', function (e) {{
+    var el = e.target.closest ? e.target.closest('.chart-hit') : null;
+    if (el) {{
+      var r = el.getBoundingClientRect();
+      showTip(el, r.left + r.width / 2, r.top);
+    }}
+  }});
+  document.addEventListener('pointerover', function (e) {{
+    var el = e.target.closest ? e.target.closest('.chart-hit') : null;
+    if (!el) hideTip();
+  }});
+  document.querySelectorAll('.chart-hit').forEach(function (el) {{
+    el.addEventListener('focus', function () {{
+      var r = el.getBoundingClientRect();
+      showTip(el, r.left + r.width / 2, r.top);
+    }});
+    el.addEventListener('blur', hideTip);
+  }});
+}})();
+</script>
 </body>
 </html>
 """
