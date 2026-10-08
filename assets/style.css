@@ -410,6 +410,40 @@ li { margin-bottom: 0.4em; }
 .lightbox-close:hover { background: rgba(255, 255, 255, 0.15); }
 .lightbox-close:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }
 
+/* ------------------------------------------------------------------ */
+/* Stat callouts                                                      */
+/* ------------------------------------------------------------------ */
+
+.stat-pair {
+  display: flex;
+  gap: 1.4em;
+  flex-wrap: wrap;
+  margin: 1.8em 0;
+}
+
+.stat-card {
+  flex: 1 1 240px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 1.4em 1.2em;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: "Zilla Slab", Georgia, serif;
+  font-weight: 700;
+  font-size: 2.6em;
+  color: var(--chart-cat-1);
+  margin: 0 0 0.3em 0;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: var(--chart-text-secondary);
+  margin: 0;
+}
+
 /* Header */
 
 .site-header {

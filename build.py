@@ -220,6 +220,56 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
   }});
 }})();
 </script>
+<script>
+// Generic scroll-triggered count-up for any .stat-number element. Counts
+// from 0 to data-target once, the first time it scrolls into view.
+// data-decimals / data-prefix / data-suffix control formatting. Respects
+// prefers-reduced-motion by jumping straight to the final value.
+(function () {{
+  var statEls = document.querySelectorAll('.stat-number');
+  if (!statEls.length) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function formatValue(el, value) {{
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    return prefix + value.toFixed(decimals) + suffix;
+  }}
+
+  function animate(el) {{
+    var target = parseFloat(el.getAttribute('data-target'));
+    if (reduceMotion || isNaN(target)) {{
+      el.textContent = formatValue(el, target);
+      return;
+    }}
+    var duration = 1200;
+    var start = null;
+    function step(ts) {{
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = formatValue(el, target * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    }}
+    requestAnimationFrame(step);
+  }}
+
+  if ('IntersectionObserver' in window) {{
+    var observer = new IntersectionObserver(function (entries) {{
+      entries.forEach(function (entry) {{
+        if (entry.isIntersecting) {{
+          animate(entry.target);
+          observer.unobserve(entry.target);
+        }}
+      }});
+    }}, {{threshold: 0.5}});
+    statEls.forEach(function (el) {{ observer.observe(el); }});
+  }} else {{
+    statEls.forEach(function (el) {{ animate(el); }});
+  }}
+}})();
+</script>
 </body>
 </html>
 """
