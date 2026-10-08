@@ -28,7 +28,11 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Historical record
 
-Primary and contemporaneous news sourcing for specific historical Central Valley plant closures going back to 1993, used to test whether the current wave of closures is part of a genuinely continuous, decades-long pattern rather than a recent, isolated event.
+Primary and contemporaneous sourcing for Central Valley/Sacramento commodity-ag processing events going back to 1912 — cannery foundings, the 1966–67 United Farm Workers ownership precedent at Delano's Forty Acres, and documented plant closures from the early 1980s forward — used to test whether the current wave of closures is part of a genuinely continuous, decades-long pattern rather than a recent, isolated event. See [Case Studies](case-studies.md) for the timeline built from this record.
+
+## Photographs
+
+Historical photographs on this site are drawn from the Library of Congress's Farm Security Administration/Office of War Information Collection and Historic American Buildings Survey — U.S. government works, confirmed public domain on a per-item basis before use, not assumed from a collection's general reputation. Several other candidate images (1966 Delano UFW photographs, Sacramento cannery interior photographs) were identified and explicitly excluded after turning out to be under copyright.
 
 ## A note on completeness
 
