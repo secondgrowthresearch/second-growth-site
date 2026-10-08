@@ -254,6 +254,32 @@ li { margin-bottom: 0.4em; }
 .layer-toggle-btn:hover { background: var(--line); }
 .layer-toggle-btn.active { background: var(--slate-2); color: #fff; }
 
+.time-slider {
+  margin: 0.2em 0 1.1em 0;
+  padding: 0.7em 1em;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+.time-slider label {
+  display: block;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--chart-text-secondary);
+  margin-bottom: 0.4em;
+}
+.time-slider label strong { color: var(--chart-text-primary); font-size: 1.1em; }
+.time-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--wheat-dark);
+}
+.time-slider-ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78em;
+  color: var(--chart-muted);
+  margin-top: 0.1em;
+}
+
 .chart-source {
   margin-top: 1em;
   font-size: 0.78em;

@@ -19,8 +19,13 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
   <p class="chart-title" id="gw-map-title">Depth to groundwater, by subbasin</p>
   <p class="chart-subtitle" id="gw-map-subtitle">Most recent reading, averaged across all wells with data since 2023</p>
   <div class="layer-toggle" role="group" aria-label="Choose which groundwater measure the map shows">
-    <button type="button" class="layer-toggle-btn active" data-layer="depth">Current depth to groundwater</button>
+    <button type="button" class="layer-toggle-btn active" data-layer="depth">Depth to groundwater (by year)</button>
     <button type="button" class="layer-toggle-btn" data-layer="change">Change since 2015</button>
+  </div>
+  <div class="time-slider" id="gw-time-slider">
+    <label for="gw-year-range">Year: <strong id="gw-year-label">2026</strong></label>
+    <input type="range" id="gw-year-range" min="1950" max="2026" step="1" value="2026">
+    <div class="time-slider-ends"><span>1950</span><span>2026</span></div>
   </div>
   <div id="gw-map-svg-container" style="min-height:300px"></div>
   <div class="chart-legend" id="gw-map-legend"></div>
@@ -37,27 +42,29 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
   <p class="chart-source" id="gw-map-source">Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements. See <a href="data.md">Data</a>.</p>
 </div>
 
-**An honest finding, not the one we expected**: both subbasins show groundwater levels getting *shallower* since 2015, not deeper — the opposite of the ongoing-decline story this section just described. The likely driver, not independently confirmed here: California's exceptionally wet 2023 winter recharged aquifers statewide. A short-term precipitation rebound doesn't overturn the long-run SGMA story (sustainable yield is judged over decades, not one wet year) — but we'd rather show the real number than quietly pick the metric that fit the narrative. Full method in [Data](data.md).
+**The long arc, scrub the slider to see it**: both subbasins have gotten dramatically deeper since 1950 — Kings Subbasin from 38 ft to 131 ft (roughly 3.4x), Tulare Lake Subbasin from 38 ft to 173 ft (roughly 4.6x) — a real, 76-year decline consistent with the broader SGMA story this section opened with.
+
+**An honest complication, not smoothed over**: the "Change since 2015" layer (a careful, same-well paired comparison) shows both subbasins getting *shallower* in just the last decade, not deeper — and a simpler year-to-year average comparison using the slider above disagrees with that paired method about Kings Subbasin's recent *direction* entirely. The two methods use different, non-identical sets of wells (the monitoring network itself has shrunk over time — Kings Subbasin alone went from 544 reporting wells in 1950 to 193 in 2026), and we don't have a confident answer for which is closer to the truth. We'd rather show you the disagreement than quietly pick the number that fits the narrative. Full method and the real numbers behind both claims: [Data](data.md).
 
 <script>
 (function () {
   var gwLayers = {
     depth: {
       title: "Depth to groundwater, by subbasin",
-      subtitle: "Most recent reading, averaged across all wells with data since 2023",
+      subtitle: "Annual average, by year selected below",
       byId: {
-        "5-022.08": {name: "Kings Subbasin", note: "Hanford", value: 131.0},
-        "5-022.12": {name: "Tulare Lake Subbasin", note: "Corcoran", value: 176.6}
+        "5-022.08": {name: "Kings Subbasin", note: "Hanford", value: 131.4},
+        "5-022.12": {name: "Tulare Lake Subbasin", note: "Corcoran", value: 173.2}
       },
       diverging: false,
       // Gold family, light->dark -- the project's third validated series hue.
       ramp: ["#f9ecd2", "#e8c87a", "#c9960f", "#9a7108", "#6b4e05"],
-      domain: [80, 220],
+      domain: [30, 235],
       format: function (v) { return v.toFixed(1) + " ft"; },
       tooltipLabel: "Depth to groundwater",
       legendLow: "Shallower",
       legendHigh: "Deeper",
-      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements. See <a href="data.md">Data</a>.'
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, annual average by well. See <a href="data.md">Data</a>.'
     },
     change: {
       title: "Change in groundwater depth since 2015, by subbasin",
@@ -114,10 +121,20 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
       .attr("data-value", function (d) { return layer.tooltipLabel + ": " + layer.format(layer.byId[d.properties.Basin_Subbasin_Number].value); })
       .attr("data-key-color", function (d) { return gwColorFor(layer, layer.byId[d.properties.Basin_Subbasin_Number].value); });
 
+    function textColorFor(d) {
+      var v = layer.byId[d.properties.Basin_Subbasin_Number].value;
+      var t = layer.diverging
+        ? Math.abs(v) / Math.max(Math.abs(layer.domain[0]), Math.abs(layer.domain[1]))
+        : (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
+      return t > 0.55 ? "#fff" : null; // null -> fall back to the CSS default (ink)
+    }
+
     gwSvg.selectAll("text.subbasin-label")
+      .attr("fill", function (d) { return textColorFor(d) || "var(--chart-text-primary)"; })
       .text(function (d) { return layer.byId[d.properties.Basin_Subbasin_Number].name; });
 
     gwSvg.selectAll("text.subbasin-value")
+      .attr("fill", function (d) { return textColorFor(d) || "var(--chart-text-secondary)"; })
       .text(function (d) { return layer.format(layer.byId[d.properties.Basin_Subbasin_Number].value); });
 
     var legend = document.getElementById("gw-map-legend");
@@ -128,9 +145,28 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
     legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
   }
 
-  fetch("/assets/data/kings-tulare-lake-subbasins.geojson")
-    .then(function (r) { return r.json(); })
-    .then(function (geo) {
+  var gwAnnual = null; // {subbasin: {year: {depth, wells}}}, loaded below
+
+  function gwApplyYear(year) {
+    if (!gwAnnual) return;
+    var idByKey = {"kings": "5-022.08", "tulare-lake": "5-022.12"};
+    Object.keys(idByKey).forEach(function (key) {
+      var rec = gwAnnual[key] && gwAnnual[key][year];
+      if (rec) gwLayers.depth.byId[idByKey[key]].value = rec.depth;
+    });
+    gwLayers.depth.subtitle = "Annual average, " + year;
+    document.getElementById("gw-year-label").textContent = year;
+  }
+
+  Promise.all([
+    fetch("/assets/data/kings-tulare-lake-subbasins.geojson").then(function (r) { return r.json(); }),
+    fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); })
+  ])
+    .then(function (results) {
+      var geo = results[0];
+      gwAnnual = results[1];
+      gwApplyYear(document.getElementById("gw-year-range").value);
+
       gwSvg = d3.select(gwContainer).append("svg")
         .attr("viewBox", "0 0 " + gwWidth + " " + gwHeight)
         .attr("role", "img")
@@ -172,8 +208,19 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
       gwRender("depth");
 
+      var slider = document.getElementById("gw-year-range");
+      slider.addEventListener("input", function () {
+        gwApplyYear(slider.value);
+        gwRender("depth");
+      });
+
       document.querySelectorAll("#gw-map-chart .layer-toggle-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () { gwRender(btn.getAttribute("data-layer")); });
+        btn.addEventListener("click", function () {
+          var layerKey = btn.getAttribute("data-layer");
+          document.getElementById("gw-time-slider").style.display = layerKey === "depth" ? "" : "none";
+          if (layerKey === "depth") gwApplyYear(slider.value);
+          gwRender(layerKey);
+        });
       });
     });
 })();
