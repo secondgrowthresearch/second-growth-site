@@ -14,54 +14,137 @@ Our first application: how dependent four Central Valley counties are on **food 
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <div class="chart" id="sdi-map-chart">
-  <p class="chart-title">Food manufacturing dependence, by county</p>
-  <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, 2025</p>
-  <div id="sdi-map-svg-container" style="min-height:360px"></div>
-  <div class="chart-legend" id="sdi-map-legend"></div>
+  <p class="chart-title" id="cv-map-title">Food manufacturing dependence, by county</p>
+  <p class="chart-subtitle" id="cv-map-subtitle">Employment SDI vs. the U.S. benchmark, 2025</p>
+  <div class="layer-toggle" role="group" aria-label="Choose which factor the map shows">
+    <button type="button" class="layer-toggle-btn active" data-layer="sdi">Food-processing dependence (SDI)</button>
+    <button type="button" class="layer-toggle-btn" data-layer="unemployment">Unemployment rate</button>
+  </div>
+  <div id="cv-map-svg-container" style="min-height:360px"></div>
+  <div class="chart-legend" id="cv-map-legend"></div>
   <details class="chart-table-toggle">
-    <summary>View as table</summary>
+    <summary>View as table (both factors)</summary>
     <table>
-      <thead><tr><th>County</th><th>Employment SDI</th></tr></thead>
+      <thead><tr><th>County</th><th>Employment SDI (2025)</th><th>Unemployment rate (Aug 2026, not seasonally adjusted)</th></tr></thead>
       <tbody>
-        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.153</td></tr>
-        <tr><td>Fresno</td><td>0.100</td></tr>
-        <tr><td>Tulare</td><td>0.119</td></tr>
-        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.205</td></tr>
+        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.153</td><td>8.5%</td></tr>
+        <tr><td>Fresno</td><td>0.100</td><td>7.8%</td></tr>
+        <tr><td>Tulare</td><td>0.119</td><td>10.4%</td></tr>
+        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.205</td><td>7.0%</td></tr>
       </tbody>
     </table>
   </details>
-  <p class="chart-source">County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
+  <p class="chart-source" id="cv-map-source">County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
 </div>
 <script>
 (function () {
-  var sdiByFips = {
-    "06031": {name: "Kings", value: 0.153, note: "Hanford closure"},
-    "06019": {name: "Fresno", value: 0.100, note: null},
-    "06107": {name: "Tulare", value: 0.119, note: null},
-    "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
+  var layers = {
+    sdi: {
+      title: "Food manufacturing dependence, by county",
+      subtitle: "Employment SDI vs. the U.S. benchmark, 2025",
+      byFips: {
+        "06031": {name: "Kings", value: 0.153, note: "Hanford closure"},
+        "06019": {name: "Fresno", value: 0.100, note: null},
+        "06107": {name: "Tulare", value: 0.119, note: null},
+        "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
+      },
+      // Rust family, light->dark -- matches the validated chart palette.
+      ramp: ["#f8e2d8", "#e3a88f", "#c23b1f", "#8a2414", "#5c160c"],
+      domain: [0.09, 0.22],
+      format: function (v) { return v.toFixed(3); },
+      tooltipLabel: "Employment SDI",
+      legendLow: "Lower dependence",
+      legendHigh: "Higher dependence",
+      source: 'County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.'
+    },
+    unemployment: {
+      title: "Unemployment rate, by county",
+      subtitle: "August 2026, not seasonally adjusted (Central Valley unemployment has a real seasonal cycle — see note below)",
+      byFips: {
+        "06031": {name: "Kings", value: 8.5, note: null},
+        "06019": {name: "Fresno", value: 7.8, note: null},
+        "06107": {name: "Tulare", value: 10.4, note: null},
+        "06099": {name: "Stanislaus", value: 7.0, note: null}
+      },
+      // Denim family, light->dark -- the project's second validated series hue,
+      // used deliberately so switching layers is visually unmistakable.
+      ramp: ["#e3f3f7", "#a9d6e2", "#0e86a8", "#0a5c73", "#053542"],
+      domain: [6, 11],
+      format: function (v) { return v.toFixed(1) + "%"; },
+      tooltipLabel: "Unemployment rate",
+      legendLow: "Lower unemployment",
+      legendHigh: "Higher unemployment",
+      source: 'County boundaries: U.S. Census Bureau via us-atlas. Unemployment: BLS Local Area Unemployment Statistics, see <a href="data.md">Data</a>. Not seasonally adjusted.'
+    }
   };
-  // Sequential ramp (rust family, light->dark), matching the validated chart palette.
-  var ramp = ["#f8e2d8", "#e3a88f", "#c23b1f", "#8a2414", "#5c160c"];
-  function colorFor(v) {
-    // 0.10 -> 0.22 covers our real range with headroom
-    var t = Math.max(0, Math.min(1, (v - 0.09) / (0.22 - 0.09)));
-    var idx = Math.min(ramp.length - 1, Math.floor(t * ramp.length));
-    return ramp[idx];
+
+  var container = document.getElementById("cv-map-svg-container");
+  var width = container.clientWidth || 700, height = 360;
+  var currentLayer = "sdi";
+  var geoData = null;
+  var svg = null, path = null;
+
+  function colorFor(layer, v) {
+    var t = Math.max(0, Math.min(1, (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0])));
+    var idx = Math.min(layer.ramp.length - 1, Math.floor(t * layer.ramp.length));
+    return layer.ramp[idx];
   }
 
-  var container = document.getElementById("sdi-map-svg-container");
-  var width = container.clientWidth || 700, height = 360;
+  function render(layerKey) {
+    currentLayer = layerKey;
+    var layer = layers[layerKey];
+    document.getElementById("cv-map-title").textContent = layer.title;
+    document.getElementById("cv-map-subtitle").textContent = layer.subtitle;
+    document.getElementById("cv-map-source").innerHTML = layer.source;
+    document.querySelectorAll(".layer-toggle-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-layer") === layerKey);
+      btn.setAttribute("aria-pressed", btn.getAttribute("data-layer") === layerKey ? "true" : "false");
+    });
+
+    svg.selectAll("path.county")
+      .attr("fill", function (d) { return colorFor(layer, layer.byFips[d.properties.fips].value); })
+      .attr("data-label", function (d) {
+        var info = layer.byFips[d.properties.fips];
+        return info.name + (info.note ? " (" + info.note + ")" : "");
+      })
+      .attr("data-value", function (d) { return layer.tooltipLabel + " " + layer.format(layer.byFips[d.properties.fips].value); })
+      .attr("data-key-color", function (d) { return colorFor(layer, layer.byFips[d.properties.fips].value); });
+
+    svg.selectAll("text.county-label")
+      .attr("fill", function (d) {
+        var v = layer.byFips[d.properties.fips].value;
+        var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
+        return t > 0.5 ? "#fff" : "var(--chart-text-primary)";
+      })
+      .text(function (d) { return layer.byFips[d.properties.fips].name; });
+
+    svg.selectAll("text.county-value")
+      .attr("fill", function (d) {
+        var v = layer.byFips[d.properties.fips].value;
+        var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
+        return t > 0.5 ? "#fff" : "var(--chart-text-secondary)";
+      })
+      .text(function (d) { return layer.format(layer.byFips[d.properties.fips].value); });
+
+    var legend = document.getElementById("cv-map-legend");
+    var swatches = "";
+    for (var i = 0; i < layer.ramp.length; i++) {
+      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';"></span>';
+    }
+    legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
+  }
 
   fetch("/assets/data/central-valley-counties.geojson")
     .then(function (r) { return r.json(); })
     .then(function (geo) {
-      var svg = d3.select(container).append("svg")
+      geoData = geo;
+      svg = d3.select(container).append("svg")
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("role", "img")
-        .attr("aria-label", "Map of Kings, Fresno, Tulare, and Stanislaus counties shaded by food-processing Sector Dependence Index");
+        .attr("aria-label", "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor");
 
       var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
-      var path = d3.geoPath(projection);
+      path = d3.geoPath(projection);
 
       svg.selectAll("path.county")
         .data(geo.features)
@@ -69,15 +152,8 @@ Our first application: how dependent four Central Valley counties are on **food 
         .append("path")
         .attr("class", "county chart-hit")
         .attr("d", path)
-        .attr("fill", function (d) { return colorFor(sdiByFips[d.properties.fips].value); })
         .attr("stroke", "#fff")
-        .attr("stroke-width", 2)
-        .attr("data-label", function (d) {
-          var info = sdiByFips[d.properties.fips];
-          return info.name + (info.note ? " (" + info.note + ")" : "");
-        })
-        .attr("data-value", function (d) { return "Employment SDI " + sdiByFips[d.properties.fips].value.toFixed(3); })
-        .attr("data-key-color", function (d) { return colorFor(sdiByFips[d.properties.fips].value); });
+        .attr("stroke-width", 2);
 
       svg.selectAll("text.county-label")
         .data(geo.features)
@@ -87,12 +163,7 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("x", function (d) { return path.centroid(d)[0]; })
         .attr("y", function (d) { return path.centroid(d)[1]; })
         .attr("text-anchor", "middle")
-        .attr("font-size", 13)
-        .attr("fill", function (d) {
-          var v = sdiByFips[d.properties.fips].value;
-          return v > 0.16 ? "#fff" : "var(--chart-text-primary)";
-        })
-        .text(function (d) { return sdiByFips[d.properties.fips].name; });
+        .attr("font-size", 13);
 
       svg.selectAll("text.county-value")
         .data(geo.features)
@@ -102,24 +173,13 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("x", function (d) { return path.centroid(d)[0]; })
         .attr("y", function (d) { return path.centroid(d)[1] + 16; })
         .attr("text-anchor", "middle")
-        .attr("font-size", 11)
-        .attr("fill", function (d) {
-          var v = sdiByFips[d.properties.fips].value;
-          return v > 0.16 ? "#fff" : "var(--chart-text-secondary)";
-        })
-        .text(function (d) { return sdiByFips[d.properties.fips].value.toFixed(3); });
+        .attr("font-size", 11);
 
-      var legend = document.getElementById("sdi-map-legend");
-      var grad = document.createElement("div");
-      grad.style.display = "flex";
-      grad.style.alignItems = "center";
-      grad.style.gap = "8px";
-      var swatches = "";
-      for (var i = 0; i < ramp.length; i++) {
-        swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + ramp[i] + ';"></span>';
-      }
-      grad.innerHTML = '<span>Lower dependence</span>' + swatches + '<span>Higher dependence</span>';
-      legend.appendChild(grad);
+      render("sdi");
+
+      document.querySelectorAll(".layer-toggle-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () { render(btn.getAttribute("data-layer")); });
+      });
     });
 })();
 </script>

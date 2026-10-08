@@ -232,6 +232,28 @@ li { margin-bottom: 0.4em; }
   box-shadow: none;
 }
 
+.layer-toggle {
+  display: flex;
+  gap: 0;
+  margin: 0.4em 0 1.1em 0;
+  border: 2px solid var(--ink);
+  width: fit-content;
+}
+
+.layer-toggle-btn {
+  font-family: "Work Sans", "Segoe UI", -apple-system, sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--chart-text-primary);
+  background: var(--paper);
+  border: none;
+  padding: 0.5em 0.9em;
+  cursor: pointer;
+}
+.layer-toggle-btn + .layer-toggle-btn { border-left: 2px solid var(--ink); }
+.layer-toggle-btn:hover { background: var(--line); }
+.layer-toggle-btn.active { background: var(--slate-2); color: #fff; }
+
 .chart-source {
   margin-top: 1em;
   font-size: 0.78em;
