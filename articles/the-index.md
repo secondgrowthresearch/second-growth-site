@@ -21,7 +21,7 @@ Our first application: how dependent four Central Valley counties are on **food 
     <button type="button" class="layer-toggle-btn" data-layer="unemployment">Unemployment rate</button>
   </div>
   <div id="cv-map-svg-container" style="min-height:360px"></div>
-  <div class="chart-legend" id="cv-map-legend"></div>
+  <div class="chart-legend map-legend" id="cv-map-legend"></div>
   <details class="chart-table-toggle">
     <summary>View as table (both factors)</summary>
     <table>
@@ -130,7 +130,7 @@ Our first application: how dependent four Central Valley counties are on **food 
     var legend = document.getElementById("cv-map-legend");
     var swatches = "";
     for (var i = 0; i < layer.ramp.length; i++) {
-      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';"></span>';
+      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';border:1px solid var(--ink);"></span>';
     }
     legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
   }

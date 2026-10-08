@@ -37,7 +37,7 @@ This research actually runs on two different geographies — county lines for th
   </label>
 
   <div id="explorer-svg-container" style="min-height:360px"></div>
-  <div class="chart-legend" id="explorer-legend"></div>
+  <div class="chart-legend map-legend" id="explorer-legend"></div>
   <div class="tl-detail" id="explorer-detail">
     <p class="tl-detail-empty">Click a county or subbasin for its full detail, or a marker for what happened at that specific location.</p>
   </div>
@@ -258,7 +258,7 @@ This research actually runs on two different geographies — county lines for th
     var legend = document.getElementById("explorer-legend");
     var swatches = "";
     for (var i = 0; i < layer.ramp.length; i++) {
-      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';"></span>';
+      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';border:1px solid var(--ink);"></span>';
     }
     legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
   }
@@ -883,7 +883,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
     <div class="time-slider-ends"><span>1950</span><span>2026</span></div>
   </div>
   <div id="gw-map-svg-container" style="min-height:300px"></div>
-  <div class="chart-legend" id="gw-map-legend"></div>
+  <div class="chart-legend map-legend" id="gw-map-legend"></div>
   <details class="chart-table-toggle">
     <summary>View as table</summary>
     <table>
@@ -1006,7 +1006,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
     var legend = document.getElementById("gw-map-legend");
     var swatches = "";
     for (var i = 0; i < layer.ramp.length; i++) {
-      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';"></span>';
+      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';border:1px solid var(--ink);"></span>';
     }
     legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
   }

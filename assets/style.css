@@ -186,6 +186,19 @@ li { margin-bottom: 0.4em; }
 }
 .chart-legend-swatch.line { width: 18px; height: 3px; border-radius: 2px; }
 
+/* Map legends read as a boxed cartographic key -- bordered, on the
+   chart surface -- rather than a bare row of swatches, matching the
+   neutral reference-atlas convention maps should follow generally. */
+.map-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  border: 1.5px solid var(--ink);
+  background: var(--chart-surface);
+  padding: 0.5em 0.9em;
+  border-radius: 2px;
+}
+
 .chart svg text {
   font-family: "Work Sans", "Segoe UI", -apple-system, sans-serif;
   fill: var(--chart-muted);
