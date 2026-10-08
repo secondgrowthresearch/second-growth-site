@@ -312,6 +312,19 @@ li { margin-bottom: 0.4em; }
   margin-top: 0.1em;
 }
 
+.explorer-marker-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0 0 1.1em 0;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--chart-text-primary);
+  cursor: pointer;
+  width: fit-content;
+}
+.explorer-marker-toggle input { accent-color: var(--wheat-dark); cursor: pointer; }
+
 .chart-source {
   margin-top: 1em;
   font-size: 0.78em;

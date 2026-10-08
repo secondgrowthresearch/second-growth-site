@@ -31,9 +31,16 @@ This research actually runs on two different geographies — county lines for th
     <input type="range" id="explorer-year-range" min="1950" max="2026" step="1" value="2026">
     <div class="time-slider-ends"><span>1950</span><span>2026</span></div>
   </div>
+  <label class="explorer-marker-toggle">
+    <input type="checkbox" id="explorer-marker-checkbox" checked>
+    Show closure &amp; photo locations
+  </label>
 
   <div id="explorer-svg-container" style="min-height:360px"></div>
   <div class="chart-legend" id="explorer-legend"></div>
+  <div class="tl-detail" id="explorer-detail">
+    <p class="tl-detail-empty">Click a marker on the map for what happened there.</p>
+  </div>
   <details class="chart-table-toggle">
     <summary>View as table (both geographies)</summary>
     <table>
@@ -127,6 +134,46 @@ This research actually runs on two different geographies — county lines for th
     }
   };
 
+  // Point markers: real closure/historical-photo locations within the four
+  // counties this map actually depicts. Deliberately excludes timeline
+  // events with no specific in-area location (Tri Valley Growers was
+  // headquartered in San Ramon, outside this map; SGMA is a statewide law,
+  // not a place; Del Monte's Chapter 11 filing isn't tied to one site) --
+  // not forcing a fake pin rather than leaving them off. Coordinates are
+  // standard city-center points, not sourced to a specific dataset -- fine
+  // at this map's scale (county/subbasin level), not claimed as precise.
+  var markers = [
+    {
+      name: "Hanford", lon: -119.6457, lat: 36.3274, bases: ["county", "subbasin"],
+      events: [{label: "2026 — Del Monte closes Hanford tomato plant, Kings County; 378–500+ jobs", sourcing: "WARN filing plus local/trade-press reporting."}],
+      photos: []
+    },
+    {
+      name: "Corcoran", lon: -119.5604, lat: 36.0980, bases: ["county", "subbasin"],
+      events: [],
+      photos: [
+        {id: "photo-corcoran-picket-line", label: "Photo: 1933 cotton strike picket line"},
+        {id: "photo-corcoran-housing-sjv", label: "Photo: company housing, 1936"},
+        {id: "photo-corcoran-housing-kings", label: "Photo: company housing, 1936 (Kings County section)"}
+      ]
+    },
+    {
+      name: "Firebaugh", lon: -120.4569, lat: 36.8597, bases: ["county"],
+      events: [{label: "2024 — Olam/OFI closes Firebaugh plant (dried onion/parsley), western Fresno County; 275 jobs", sourcing: "WARN filing plus local/trade-press reporting."}],
+      photos: []
+    },
+    {
+      name: "Lemoore", lon: -119.7811, lat: 36.3002, bases: ["county"],
+      events: [{label: "2024 — Olam/OFI closes Lemoore tomato plant; reported job count ranges from 250 to 567 across sources, unresolved", sourcing: "Disputed. Not yet resolved with an independent primary source."}],
+      photos: []
+    },
+    {
+      name: "Modesto/Hughson", lon: -120.9969, lat: 37.6391, bases: ["county"],
+      events: [{label: "2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs", sourcing: "Multiple independent news outlets, federal aid records."}],
+      photos: []
+    }
+  ];
+
   var container = document.getElementById("explorer-svg-container");
   var width = container.clientWidth || 700;
   var countyHeight = 360, subbasinHeight = 300;
@@ -134,7 +181,7 @@ This research actually runs on two different geographies — county lines for th
   var currentCountyLayer = "sdi";
   var currentSubbasinLayer = "depth";
   var countyGeo = null, subbasinGeo = null, subbasinAnnual = null;
-  var svg = null, path = null;
+  var svg = null, path = null, projection = null;
 
   function colorFor(layer, v) {
     if (layer.diverging) {
@@ -222,7 +269,7 @@ This research actually runs on two different geographies — county lines for th
         ? "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor"
         : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
 
-    var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
+    projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
     path = d3.geoPath(projection);
 
     svg.selectAll("path.feature")
@@ -255,6 +302,91 @@ This research actually runs on two different geographies — county lines for th
       .attr("font-size", 11);
 
     render();
+    renderMarkers(base);
+  }
+
+  function selectMarker(marker) {
+    var detail = document.getElementById("explorer-detail");
+    detail.innerHTML = "";
+    detail.style.borderLeftColor = "var(--ink)";
+
+    var nameP = document.createElement("p");
+    nameP.className = "tl-detail-event";
+    nameP.textContent = marker.name;
+    detail.appendChild(nameP);
+
+    if (marker.events.length === 0 && marker.photos.length === 0) {
+      var noneP = document.createElement("p");
+      noneP.className = "tl-detail-sourcing";
+      noneP.textContent = "No documented event at this location yet.";
+      detail.appendChild(noneP);
+    }
+
+    marker.events.forEach(function (ev) {
+      var evP = document.createElement("p");
+      evP.className = "tl-detail-sourcing";
+      var strong = document.createElement("strong");
+      strong.textContent = ev.label + " ";
+      evP.appendChild(strong);
+      evP.appendChild(document.createTextNode("(" + ev.sourcing + ") See the timeline above for full sourcing."));
+      detail.appendChild(evP);
+    });
+
+    marker.photos.forEach(function (ph) {
+      var link = document.createElement("a");
+      link.className = "tl-detail-photo";
+      link.href = "#" + ph.id;
+      link.textContent = ph.label + " ↓";
+      link.style.display = "block";
+      detail.appendChild(link);
+    });
+  }
+
+  function renderMarkers(base) {
+    svg.selectAll("g.explorer-marker").remove();
+    var checkbox = document.getElementById("explorer-marker-checkbox");
+    if (!checkbox.checked) return;
+
+    var visible = markers.filter(function (m) { return m.bases.indexOf(base) !== -1; });
+
+    var markerGroups = svg.selectAll("g.explorer-marker")
+      .data(visible)
+      .enter()
+      .append("g")
+      .attr("class", "explorer-marker")
+      .attr("transform", function (d) {
+        var p = projection([d.lon, d.lat]);
+        return "translate(" + p[0] + "," + p[1] + ")";
+      })
+      .style("cursor", "pointer")
+      .on("click", function (event, d) { selectMarker(d); });
+
+    markerGroups.append("circle")
+      .attr("class", "chart-hit")
+      .attr("r", 7)
+      .attr("fill", "var(--ink)")
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 2)
+      .attr("tabindex", 0)
+      .attr("role", "button")
+      .attr("data-label", function (d) { return d.name; })
+      .attr("data-value", function (d) {
+        var n = d.events.length + d.photos.length;
+        return n + (n === 1 ? " item" : " items") + " — click to see on the map";
+      })
+      .attr("data-key-color", "var(--ink)");
+
+    markerGroups.append("text")
+      .attr("x", 0)
+      .attr("y", -11)
+      .attr("text-anchor", "middle")
+      .attr("font-size", 10.5)
+      .attr("font-weight", 700)
+      .attr("fill", "var(--chart-text-primary)")
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 3)
+      .attr("paint-order", "stroke")
+      .text(function (d) { return d.name; });
   }
 
   function switchBase(base) {
@@ -306,6 +438,10 @@ This research actually runs on two different geographies — county lines for th
         if (currentSubbasinLayer === "depth") applyYear(yearSlider.value);
         render();
       });
+    });
+
+    document.getElementById("explorer-marker-checkbox").addEventListener("change", function () {
+      renderMarkers(currentBase);
     });
   });
 })();
@@ -616,11 +752,11 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 **An honest complication, not smoothed over**: the "Change since 2015" layer (a careful, same-well paired comparison) shows both subbasins getting *shallower* in just the last decade, not deeper — and a simpler year-to-year average comparison using the slider above disagrees with that paired method about Kings Subbasin's recent *direction* entirely. The two methods use different, non-identical sets of wells (the monitoring network itself has shrunk over time — Kings Subbasin alone went from 544 reporting wells in 1950 to 193 in 2026), and we don't have a confident answer for which is closer to the truth. We'd rather show you the disagreement than quietly pick the number that fits the narrative. Full method and the real numbers behind both claims: [Data](data.md).
 
 <div class="figure-pair">
-  <figure class="figure">
+  <figure class="figure" id="photo-corcoran-picket-line">
     <img src="/assets/photos/01-corcoran-picket-line-1933.jpg" alt="Trucks loaded with striking cotton workers in a 1933 picket line near Corcoran, California, one truck marked with a hand-lettered DON'T SCAB sign.">
     <figcaption class="figure-caption"><strong>Corcoran, California, October 1933.</strong> A picket line during that year's statewide cotton strike — the same town this section's Tulare Lake Subbasin map is named for. <span class="figure-source">Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
   </figure>
-  <figure class="figure">
+  <figure class="figure" id="photo-corcoran-housing-sjv">
     <img src="/assets/photos/02-corcoran-cotton-housing-sjv-bg-1936.jpg" alt="Rows of wooden company housing for cotton pickers south of Corcoran, California, with the open San Joaquin Valley in the background, 1936.">
     <figcaption class="figure-caption"><strong>South of Corcoran, 1936.</strong> Company housing for cotton pickers, the San Joaquin Valley's open land running to the horizon behind it — the same land this groundwater map now tracks by the foot. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
   </figure>
@@ -812,7 +948,7 @@ In March 2026, Del Monte closed its Hanford tomato-processing plant — the only
 
 Food manufacturing wasn't a marginal part of Kings County's economy when that plant closed. By our [Sector Dependence Index](the-index.md), the sector's share of the county's entire export-driven economic base **more than doubled between 1990 and 2025** (Employment SDI: 0.070 → 0.153 against the U.S. benchmark) — meaning the closure landed on a *growing*, increasingly central pillar of the county's economy, not a shrinking, marginal one. That's a measurable claim, not an impression — see [the Index](the-index.md) for the full numbers and [Methodology](methodology.md) for how we calculated them.
 
-<figure class="figure">
+<figure class="figure" id="photo-corcoran-housing-kings">
   <img src="/assets/photos/03-corcoran-cotton-housing-1936.jpg" alt="Company housing for cotton workers near Corcoran, Kings County, California, 1936.">
   <figcaption class="figure-caption"><strong>Company housing for cotton workers near Corcoran, Kings County, 1936.</strong> Ninety years before the Hanford closure, this county's economy already ran on a single crop's hired labor, housed by the company that employed it. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
 </figure>
