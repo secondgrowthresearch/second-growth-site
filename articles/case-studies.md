@@ -159,6 +159,11 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </figure>
 </div>
 
+<figure class="figure">
+  <img src="/assets/photos/07-forty-acres-clinic-habs.jpg" alt="The Rodrigo Terronez Memorial Clinic building at the Forty Acres site in Delano, California, mission-style architecture with a red tile roof.">
+  <figcaption class="figure-caption"><strong>Forty Acres, Delano — the Rodrigo Terronez Memorial Clinic.</strong> No public-domain photo of the 1966–67 opening itself survives in the archives we checked (the only images we found were rights-restricted). This federal historic-documentation photo of the site itself is the substitute: the building the United Farm Workers raised as an explicit attempt at cooperative economic ownership, not just collective bargaining. <span class="figure-source">Historic American Buildings Survey, National Park Service. Public domain, Library of Congress.</span></figcaption>
+</figure>
+
 ### Groundwater: a different geography
 
 Hanford and Corcoran are both Kings County — but they sit in two different **groundwater subbasins**, which follow hydrology, not county lines. A water map of this region has to use its own geography, not the county map above.
