@@ -22,8 +22,10 @@ SITE_TAGLINE = "Documenting what happens to a place's people and economy when th
 # source markdown path (relative to ROOT) -> output path (relative to SITE, root-relative URL)
 PAGES = [
     ("articles/home.md", "index.html"),
+    ("articles/the-index.md", "the-index.html"),
+    ("articles/case-studies.md", "case-studies.html"),
     ("articles/methodology.md", "methodology.html"),
-    ("articles/research.md", "research.html"),
+    ("articles/data.md", "data.html"),
     ("articles/about.md", "about.html"),
 ]
 
@@ -32,8 +34,10 @@ LINK_MAP = {Path(src).name: "/" + out for src, out in PAGES}
 
 NAV = [
     ("/", "Home"),
+    ("/the-index.html", "The Index"),
+    ("/case-studies.html", "Case Studies"),
     ("/methodology.html", "Methodology"),
-    ("/research.html", "Research & Case Studies"),
+    ("/data.html", "Data"),
     ("/about.html", "About"),
 ]
 

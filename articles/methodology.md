@@ -1,27 +1,59 @@
 # Methodology: the Sector Dependence Index
 
-## The question we're trying to measure
+This page is written for readers who want to verify, replicate, or challenge the calculation behind [the Sector Dependence Index](the-index.md) — not a general introduction. If you want the plain-language version first, start there.
 
-Before you can document what happens when a single industry leaves a place, you need a plain way to say how dependent that place was on the industry in the first place. A county where one processing sector accounts for a sliver of local employment is a different story than a county where that same sector is a large share of how people earn a living. We needed a consistent way to tell those two situations apart, across counties and across time — not a one-off judgment call for each case.
+## 1. Location quotient (LQ)
 
-That's what the Sector Dependence Index (SDI) is for: a measure of how concentrated a local economy is in a single industry, built so the same method can be applied to any county and any sector, and compared fairly.
+```
+LQ = (community sector employment / community total employment)
+     ÷ (benchmark sector employment / benchmark total employment)
+```
 
-## The underlying tool: location quotients
+An LQ above 1 means the sector is more concentrated locally than in the benchmark economy — the standard signal that it's an export-oriented ("basic") sector, not one that merely serves local demand. An LQ below 1 means the opposite.
 
-The SDI is built on **location quotients**, a standard economic tool for comparing a local economy to a larger reference economy (for example, a state or the nation). In plain terms, a location quotient asks: *does this industry make up a bigger share of employment (or income) here than it does in the economy as a whole?*
+## 2. Basic employment
 
-- A location quotient of **1.0** means the industry has the same relative weight locally as it does in the broader reference economy — no unusual concentration.
-- A location quotient **above 1.0** means the industry is over-represented locally — the place is more dependent on it than the typical place is.
-- A location quotient **below 1.0** means the industry is under-represented locally.
+Not every job in a sector counts as "basic" (export-driven) — only the share above what local population alone would support:
 
-This is a widely used, well-established technique in regional economics. We didn't invent it — we're applying it consistently to the specific question of single-industry dependence and exit.
+```
+basic jobs = ((LQ − 1) / LQ) × sector employment
+```
 
-## What the SDI adds
+(zero wherever LQ ≤ 1).
 
-Location quotients on their own are a snapshot. The Sector Dependence Index applies that same logic across employment and income data for a specific sector in a specific place, and tracks it over time, so a county's dependence on an industry — and the trajectory of that dependence as the industry contracts or exits — can be documented and compared rather than asserted.
+## 3. Sector Dependence Index
 
-We rely on public, named data sources for this work — the kind of employment, wage, and land-use records that state and federal agencies already publish — rather than proprietary or unsourced figures. Every number in our case studies is meant to be traceable back to where it came from.
+**Employment SDI** is a sector's basic employment as a share of the county's *total* basic employment across every sector — not "how many jobs," but "what share of this county's entire export-driven economy rides on this one sector." **Income SDI** is the same idea, weighted by average income per sector rather than raw headcount, since a sector's job count and its income importance can diverge.
 
-## Where this stands
+## 4. Trade adjustment
 
-This methodology is under active development. We're being deliberately general here rather than publishing specifics we haven't finished validating — as the underlying calculation is finalized and applied to our first case study (the Central Valley's food-processing sector), we'll publish the real numbers alongside the sourcing behind them. See [Research & Case Studies](research.md) for the case study this methodology supports.
+The plain LQ formula above implicitly assumes the *benchmark* region is roughly self-sufficient in the sector — neither a meaningful net exporter nor importer. That assumption doesn't always hold, and we check it against real data rather than asserting it.
+
+`trade_adjustment_factor` is defined as the estimated share of benchmark sector employment attributable to the benchmark's own internal consumption — `1 − net_export_share_of_benchmark_output`. A factor below 1.0 (benchmark is a net exporter) raises the resulting LQ; a factor above 1.0 (benchmark is a net importer) lowers it.
+
+**What's real and applied today**: a true, year-by-year factor for the **California benchmark, 2010–2025**, computed from:
+- **Net exports**: U.S. Census Bureau bulk monthly state-exports/imports-by-NAICS files (international trade only; no API key required)
+- **Output**: BEA's SAGDP2 state GDP-by-industry (current-dollar, no API key required)
+
+**What this isn't yet**: the U.S.-benchmark comparison still runs unadjusted (factor = 1.0) — extending it needs the same Census data summed nationally instead of filtered to California, a pull we haven't run yet.
+
+## Honest limitations
+
+We'd rather state these plainly than have a reader find them first.
+
+- **International trade only.** The net-export data captures trade crossing international borders, not California's domestic market — shipments to and from other U.S. states, which is almost certainly the larger channel for a sector like food processing. No general-purpose, free, state-and-sector-level *interstate* trade-flow dataset exists in the U.S. — this is a known, long-standing gap in American regional economics, not something specific to our research. Using international net exports as the available proxy is standard applied-economics practice for exactly that reason.
+- **A sector-bundling mismatch.** No free, government source breaks out food manufacturing (NAICS 311) alone at the state-output level — the finest available breakout bundles it with beverage and tobacco manufacturing (NAICS 312). Our net-export figures are 311-only; our output denominator is 311+312. This makes our trade-adjustment factor a slight understatement of the true 311-only adjustment.
+- **The real direction surprised our own prior assumption.** Before we had real trade data, we assumed food processing was heavily export-oriented at both the California and U.S. benchmark levels, and that correcting for it would raise the measured dependence. The real data shows California's position in this sector has in fact flipped to a net-*import* deficit in recent years — which, where we've applied the correction, *lowers* the adjusted figures relative to an unadjusted run. We're noting this as an example of why we check assumptions against data rather than publish them as fact.
+
+## Data sources
+
+- Employment and wages: U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW), county and state/national level, 1990–2026
+- Trade: U.S. Census Bureau, state exports/imports by NAICS (bulk files)
+- Output: U.S. Bureau of Economic Analysis, Regional Economic Accounts (SAGDP2)
+- Closure and layoff documentation: California EDD WARN Act filings, original news reporting, company records
+
+Full source list with citation detail: [Data](data.md).
+
+## Where this is going
+
+Stanislaus, Fresno, and Tulare counties are already computed using this same method (see [the Index](the-index.md) for the results). Next: extending the trade adjustment to the U.S. benchmark, and resolving the 311/312 output-bundling gap if a cleaner source is found.
