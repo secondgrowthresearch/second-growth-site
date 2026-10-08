@@ -155,6 +155,71 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
   }});
 }})();
 </script>
+<script>
+// Generic click-to-enlarge lightbox for any <figure class="figure"><img>...
+// on the page. Reuses the figure's own figcaption content directly, so the
+// enlarged view never shows different text than the inline one.
+(function () {{
+  var figImages = document.querySelectorAll('.figure img');
+  if (!figImages.length) return;
+
+  var overlay = document.createElement('div');
+  overlay.className = 'lightbox';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close enlarged image">&times;</button>' +
+    '<img class="lightbox-img" alt="">' +
+    '<p class="lightbox-caption"></p>';
+  document.body.appendChild(overlay);
+
+  var imgEl = overlay.querySelector('.lightbox-img');
+  var capEl = overlay.querySelector('.lightbox-caption');
+  var closeBtn = overlay.querySelector('.lightbox-close');
+  var lastFocused = null;
+
+  function open(trigger) {{
+    lastFocused = trigger;
+    imgEl.src = trigger.src;
+    imgEl.alt = trigger.alt || '';
+    var figcaption = trigger.closest('figure').querySelector('figcaption');
+    capEl.innerHTML = figcaption ? figcaption.innerHTML : '';
+    overlay.classList.add('visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    closeBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }}
+
+  function close() {{
+    overlay.classList.remove('visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    imgEl.src = '';
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }}
+
+  figImages.forEach(function (img) {{
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', 'Click to enlarge');
+    img.addEventListener('click', function () {{ open(img); }});
+    img.addEventListener('keydown', function (e) {{
+      if (e.key === 'Enter' || e.key === ' ') {{
+        e.preventDefault();
+        open(img);
+      }}
+    }});
+  }});
+
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', function (e) {{
+    if (e.target === overlay) close();
+  }});
+  document.addEventListener('keydown', function (e) {{
+    if (e.key === 'Escape' && overlay.classList.contains('visible')) close();
+  }});
+}})();
+</script>
 </body>
 </html>
 """
