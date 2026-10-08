@@ -48,8 +48,9 @@ Our first application: how dependent four Central Valley counties are on **food 
         "06107": {name: "Tulare", value: 0.119, note: null},
         "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
       },
-      // Rust family, light->dark -- matches the validated chart palette.
-      ramp: ["#f8e2d8", "#e3a88f", "#c23b1f", "#8a2414", "#5c160c"],
+      // Green family, light->dark -- trial replacement for the rust ramp,
+      // lightness-monotonic and legibility-checked against both text colors.
+      ramp: ["#e4ead6", "#a8c489", "#4f8534", "#2f5c1f", "#17370c"],
       domain: [0.09, 0.22],
       format: function (v) { return v.toFixed(3); },
       tooltipLabel: "Employment SDI",
@@ -111,7 +112,7 @@ Our first application: how dependent four Central Valley counties are on **food 
       .attr("data-key-color", function (d) { return colorFor(layer, layer.byFips[d.properties.fips].value); });
 
     svg.selectAll("text.county-label")
-      .attr("fill", function (d) {
+      .style("fill", function (d) {
         var v = layer.byFips[d.properties.fips].value;
         var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
         return t > 0.5 ? "#fff" : "var(--chart-text-primary)";
@@ -119,7 +120,7 @@ Our first application: how dependent four Central Valley counties are on **food 
       .text(function (d) { return layer.byFips[d.properties.fips].name; });
 
     svg.selectAll("text.county-value")
-      .attr("fill", function (d) {
+      .style("fill", function (d) {
         var v = layer.byFips[d.properties.fips].value;
         var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
         return t > 0.5 ? "#fff" : "var(--chart-text-secondary)";
@@ -152,7 +153,7 @@ Our first application: how dependent four Central Valley counties are on **food 
         .append("path")
         .attr("class", "county chart-hit")
         .attr("d", path)
-        .attr("stroke", "#fff")
+        .attr("stroke", "var(--ink)")
         .attr("stroke-width", 2);
 
       svg.selectAll("text.county-label")

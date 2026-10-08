@@ -248,11 +248,11 @@ This research actually runs on two different geographies — county lines for th
       .attr("data-key-color", function (d) { return colorFor(layer, layer.byKey[d.properties[idProp]].value); });
 
     svg.selectAll("text.feature-label")
-      .attr("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-primary)"; })
+      .style("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-primary)"; })
       .text(function (d) { return layer.byKey[d.properties[idProp]].name; });
 
     svg.selectAll("text.feature-value")
-      .attr("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-secondary)"; })
+      .style("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-secondary)"; })
       .text(function (d) { return layer.format(layer.byKey[d.properties[idProp]].value); });
 
     var legend = document.getElementById("explorer-legend");
@@ -295,7 +295,7 @@ This research actually runs on two different geographies — county lines for th
       .append("path")
       .attr("class", "feature chart-hit")
       .attr("d", path)
-      .attr("stroke", "#fff")
+      .attr("stroke", "var(--ink)")
       .attr("stroke-width", 2)
       .on("click", function (event, d) { selectFeature(base, d); });
 
@@ -996,11 +996,11 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
     }
 
     gwSvg.selectAll("text.subbasin-label")
-      .attr("fill", function (d) { return textColorFor(d) || "var(--chart-text-primary)"; })
+      .style("fill", function (d) { return textColorFor(d) || "var(--chart-text-primary)"; })
       .text(function (d) { return layer.byId[d.properties.Basin_Subbasin_Number].name; });
 
     gwSvg.selectAll("text.subbasin-value")
-      .attr("fill", function (d) { return textColorFor(d) || "var(--chart-text-secondary)"; })
+      .style("fill", function (d) { return textColorFor(d) || "var(--chart-text-secondary)"; })
       .text(function (d) { return layer.format(layer.byId[d.properties.Basin_Subbasin_Number].value); });
 
     var legend = document.getElementById("gw-map-legend");
@@ -1047,7 +1047,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
         .append("path")
         .attr("class", "subbasin chart-hit")
         .attr("d", gwPath)
-        .attr("stroke", "#fff")
+        .attr("stroke", "var(--ink)")
         .attr("stroke-width", 2);
 
       gwSvg.selectAll("text.subbasin-label")
