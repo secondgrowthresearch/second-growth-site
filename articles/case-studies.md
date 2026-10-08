@@ -4,6 +4,313 @@
 
 Second Growth's first body of research documents more than fifty years of commodity agriculture consolidation in California's Central Valley, and what it has meant for the people who did the work of growing and processing it. We're starting with four counties — **Kings, Fresno, Tulare, and Stanislaus** — where that pattern is long-running and well documented.
 
+### Start here: the whole picture, one map
+
+This research actually runs on two different geographies — county lines for the economic data, groundwater subbasins for the water data, because water doesn't follow county lines. Switch between them below before reading the section-by-section detail that follows.
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<div class="chart" id="explorer-chart">
+  <p class="chart-title" id="explorer-title">Food manufacturing dependence, by county</p>
+  <p class="chart-subtitle" id="explorer-subtitle">Employment SDI vs. the U.S. benchmark, 2025</p>
+
+  <div class="layer-toggle" role="group" aria-label="Choose the map's base geography">
+    <button type="button" class="layer-toggle-btn active" data-base="county">County boundaries</button>
+    <button type="button" class="layer-toggle-btn" data-base="subbasin">Groundwater subbasins</button>
+  </div>
+
+  <div class="layer-toggle" role="group" aria-label="Choose which factor the map shows" id="explorer-county-layers">
+    <button type="button" class="layer-toggle-btn active" data-layer="sdi">Food-processing dependence (SDI)</button>
+    <button type="button" class="layer-toggle-btn" data-layer="unemployment">Unemployment rate</button>
+  </div>
+  <div class="layer-toggle" role="group" aria-label="Choose which groundwater measure the map shows" id="explorer-subbasin-layers" style="display:none">
+    <button type="button" class="layer-toggle-btn active" data-layer="depth">Depth to groundwater (by year)</button>
+    <button type="button" class="layer-toggle-btn" data-layer="change">Change since 2015</button>
+  </div>
+  <div class="time-slider" id="explorer-time-slider" style="display:none">
+    <label for="explorer-year-range">Year: <strong id="explorer-year-label">2026</strong></label>
+    <input type="range" id="explorer-year-range" min="1950" max="2026" step="1" value="2026">
+    <div class="time-slider-ends"><span>1950</span><span>2026</span></div>
+  </div>
+
+  <div id="explorer-svg-container" style="min-height:360px"></div>
+  <div class="chart-legend" id="explorer-legend"></div>
+  <details class="chart-table-toggle">
+    <summary>View as table (both geographies)</summary>
+    <table>
+      <thead><tr><th>Geography</th><th>Area</th><th>SDI (2025)</th><th>Unemployment (Aug 2026)</th><th>Groundwater depth (2026)</th><th>Change since 2015</th></tr></thead>
+      <tbody>
+        <tr><td>County</td><td>Kings</td><td>0.153</td><td>8.5%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Fresno</td><td>0.100</td><td>7.8%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Tulare</td><td>0.119</td><td>10.4%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Stanislaus</td><td>0.205</td><td>7.0%</td><td>—</td><td>—</td></tr>
+        <tr><td>Subbasin</td><td>Kings Subbasin</td><td>—</td><td>—</td><td>131.4 ft</td><td>−11.2 ft</td></tr>
+        <tr><td>Subbasin</td><td>Tulare Lake Subbasin</td><td>—</td><td>—</td><td>173.2 ft</td><td>−2.6 ft</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-source">Counties and subbasins are genuinely different geographies, not a single table pivoted two ways — see the "—" cells above. Kings County alone spans both the Kings and Tulare Lake groundwater subbasins.</p>
+  </details>
+  <p class="chart-source" id="explorer-source">County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
+</div>
+<script>
+(function () {
+  var countyLayers = {
+    sdi: {
+      title: "Food manufacturing dependence, by county",
+      subtitle: "Employment SDI vs. the U.S. benchmark, 2025",
+      byKey: {
+        "06031": {name: "Kings", value: 0.153, note: "Hanford closure"},
+        "06019": {name: "Fresno", value: 0.100, note: null},
+        "06107": {name: "Tulare", value: 0.119, note: null},
+        "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
+      },
+      diverging: false,
+      ramp: ["#f8e2d8", "#e3a88f", "#c23b1f", "#8a2414", "#5c160c"],
+      domain: [0.09, 0.22],
+      format: function (v) { return v.toFixed(3); },
+      tooltipLabel: "Employment SDI",
+      legendLow: "Lower dependence",
+      legendHigh: "Higher dependence",
+      source: 'County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.'
+    },
+    unemployment: {
+      title: "Unemployment rate, by county",
+      subtitle: "August 2026, not seasonally adjusted (Central Valley unemployment has a real seasonal cycle — see note below)",
+      byKey: {
+        "06031": {name: "Kings", value: 8.5, note: null},
+        "06019": {name: "Fresno", value: 7.8, note: null},
+        "06107": {name: "Tulare", value: 10.4, note: null},
+        "06099": {name: "Stanislaus", value: 7.0, note: null}
+      },
+      diverging: false,
+      ramp: ["#e3f3f7", "#a9d6e2", "#0e86a8", "#0a5c73", "#053542"],
+      domain: [6, 11],
+      format: function (v) { return v.toFixed(1) + "%"; },
+      tooltipLabel: "Unemployment rate",
+      legendLow: "Lower unemployment",
+      legendHigh: "Higher unemployment",
+      source: 'County boundaries: U.S. Census Bureau via us-atlas. Unemployment: BLS Local Area Unemployment Statistics, see <a href="data.md">Data</a>. Not seasonally adjusted.'
+    }
+  };
+
+  var subbasinLayers = {
+    depth: {
+      title: "Depth to groundwater, by subbasin",
+      subtitle: "Annual average, by year selected below",
+      byKey: {
+        "5-022.08": {name: "Kings Subbasin", note: "Hanford", value: 131.4},
+        "5-022.12": {name: "Tulare Lake Subbasin", note: "Corcoran", value: 173.2}
+      },
+      diverging: false,
+      ramp: ["#f9ecd2", "#e8c87a", "#c9960f", "#9a7108", "#6b4e05"],
+      domain: [30, 235],
+      format: function (v) { return v.toFixed(1) + " ft"; },
+      tooltipLabel: "Depth to groundwater",
+      legendLow: "Shallower",
+      legendHigh: "Deeper",
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, annual average by well. See <a href="data.md">Data</a>.'
+    },
+    change: {
+      title: "Change in groundwater depth since 2015, by subbasin",
+      subtitle: "Paired per-well comparison, 2015 vs. most recent reading since 2023 — negative = shallower = recovery",
+      byKey: {
+        "5-022.08": {name: "Kings Subbasin", note: "Hanford", value: -11.2},
+        "5-022.12": {name: "Tulare Lake Subbasin", note: "Corcoran", value: -2.6}
+      },
+      diverging: true,
+      ramp: ["#7a2415", "#c23b1f", "#ece6d6", "#0e86a8", "#0a5c73"],
+      domain: [-15, 15],
+      format: function (v) { return (v > 0 ? "+" : "−") + Math.abs(v).toFixed(1) + " ft"; },
+      tooltipLabel: "Change since 2015",
+      legendLow: "Decline (deeper)",
+      legendHigh: "Recovery (shallower)",
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, paired per-well comparison. See <a href="data.md">Data</a>.'
+    }
+  };
+
+  var container = document.getElementById("explorer-svg-container");
+  var width = container.clientWidth || 700;
+  var countyHeight = 360, subbasinHeight = 300;
+  var currentBase = "county";
+  var currentCountyLayer = "sdi";
+  var currentSubbasinLayer = "depth";
+  var countyGeo = null, subbasinGeo = null, subbasinAnnual = null;
+  var svg = null, path = null;
+
+  function colorFor(layer, v) {
+    if (layer.diverging) {
+      var half = Math.max(Math.abs(layer.domain[0]), Math.abs(layer.domain[1]));
+      var t = Math.max(-1, Math.min(1, v / half));
+      var idx = Math.round((1 - t) / 2 * (layer.ramp.length - 1));
+      return layer.ramp[idx];
+    }
+    var t2 = Math.max(0, Math.min(1, (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0])));
+    var idx2 = Math.min(layer.ramp.length - 1, Math.floor(t2 * layer.ramp.length));
+    return layer.ramp[idx2];
+  }
+
+  function textColorFor(layer, v) {
+    var t = layer.diverging
+      ? Math.abs(v) / Math.max(Math.abs(layer.domain[0]), Math.abs(layer.domain[1]))
+      : (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
+    return t > 0.55 ? "#fff" : null;
+  }
+
+  function idPropFor(base) { return base === "county" ? "fips" : "Basin_Subbasin_Number"; }
+
+  function render() {
+    var base = currentBase;
+    var layers = base === "county" ? countyLayers : subbasinLayers;
+    var layerKey = base === "county" ? currentCountyLayer : currentSubbasinLayer;
+    var layer = layers[layerKey];
+    var idProp = idPropFor(base);
+
+    document.getElementById("explorer-title").textContent = layer.title;
+    document.getElementById("explorer-subtitle").textContent = layer.subtitle;
+    document.getElementById("explorer-source").innerHTML = layer.source;
+
+    var btnGroupSel = base === "county" ? "#explorer-county-layers" : "#explorer-subbasin-layers";
+    document.querySelectorAll(btnGroupSel + " .layer-toggle-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-layer") === layerKey);
+      btn.setAttribute("aria-pressed", btn.getAttribute("data-layer") === layerKey ? "true" : "false");
+    });
+
+    svg.selectAll("path.feature")
+      .attr("fill", function (d) { return colorFor(layer, layer.byKey[d.properties[idProp]].value); })
+      .attr("data-label", function (d) {
+        var info = layer.byKey[d.properties[idProp]];
+        return info.name + (info.note ? " (" + info.note + ")" : "");
+      })
+      .attr("data-value", function (d) { return layer.tooltipLabel + ": " + layer.format(layer.byKey[d.properties[idProp]].value); })
+      .attr("data-key-color", function (d) { return colorFor(layer, layer.byKey[d.properties[idProp]].value); });
+
+    svg.selectAll("text.feature-label")
+      .attr("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-primary)"; })
+      .text(function (d) { return layer.byKey[d.properties[idProp]].name; });
+
+    svg.selectAll("text.feature-value")
+      .attr("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-secondary)"; })
+      .text(function (d) { return layer.format(layer.byKey[d.properties[idProp]].value); });
+
+    var legend = document.getElementById("explorer-legend");
+    var swatches = "";
+    for (var i = 0; i < layer.ramp.length; i++) {
+      swatches += '<span style="display:inline-block;width:22px;height:14px;background:' + layer.ramp[i] + ';"></span>';
+    }
+    legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
+  }
+
+  function applyYear(year) {
+    if (!subbasinAnnual) return;
+    var idByKey = {"kings": "5-022.08", "tulare-lake": "5-022.12"};
+    Object.keys(idByKey).forEach(function (key) {
+      var rec = subbasinAnnual[key] && subbasinAnnual[key][year];
+      if (rec) subbasinLayers.depth.byKey[idByKey[key]].value = rec.depth;
+    });
+    subbasinLayers.depth.subtitle = "Annual average, " + year;
+    document.getElementById("explorer-year-label").textContent = year;
+  }
+
+  function buildSvg(base) {
+    var geo = base === "county" ? countyGeo : subbasinGeo;
+    var height = base === "county" ? countyHeight : subbasinHeight;
+    d3.select(container).selectAll("svg").remove();
+
+    svg = d3.select(container).append("svg")
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("role", "img")
+      .attr("aria-label", base === "county"
+        ? "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor"
+        : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
+
+    var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
+    path = d3.geoPath(projection);
+
+    svg.selectAll("path.feature")
+      .data(geo.features)
+      .enter()
+      .append("path")
+      .attr("class", "feature chart-hit")
+      .attr("d", path)
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 2);
+
+    svg.selectAll("text.feature-label")
+      .data(geo.features)
+      .enter()
+      .append("text")
+      .attr("class", "feature-label mark-label")
+      .attr("x", function (d) { return path.centroid(d)[0]; })
+      .attr("y", function (d) { return path.centroid(d)[1]; })
+      .attr("text-anchor", "middle")
+      .attr("font-size", 13);
+
+    svg.selectAll("text.feature-value")
+      .data(geo.features)
+      .enter()
+      .append("text")
+      .attr("class", "feature-value")
+      .attr("x", function (d) { return path.centroid(d)[0]; })
+      .attr("y", function (d) { return path.centroid(d)[1] + 16; })
+      .attr("text-anchor", "middle")
+      .attr("font-size", 11);
+
+    render();
+  }
+
+  function switchBase(base) {
+    currentBase = base;
+    document.getElementById("explorer-county-layers").style.display = base === "county" ? "" : "none";
+    document.getElementById("explorer-subbasin-layers").style.display = base === "subbasin" ? "" : "none";
+    document.getElementById("explorer-time-slider").style.display = (base === "subbasin" && currentSubbasinLayer === "depth") ? "" : "none";
+    buildSvg(base);
+  }
+
+  Promise.all([
+    fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); }),
+    fetch("/assets/data/kings-tulare-lake-subbasins.geojson").then(function (r) { return r.json(); }),
+    fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); })
+  ]).then(function (results) {
+    countyGeo = results[0];
+    subbasinGeo = results[1];
+    subbasinAnnual = results[2];
+    applyYear(document.getElementById("explorer-year-range").value);
+
+    buildSvg("county");
+
+    document.querySelectorAll("#explorer-chart [data-base]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll("#explorer-chart [data-base]").forEach(function (b) {
+          b.classList.toggle("active", b === btn);
+        });
+        switchBase(btn.getAttribute("data-base"));
+      });
+    });
+
+    document.querySelectorAll("#explorer-county-layers .layer-toggle-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        currentCountyLayer = btn.getAttribute("data-layer");
+        render();
+      });
+    });
+
+    var yearSlider = document.getElementById("explorer-year-range");
+    yearSlider.addEventListener("input", function () {
+      applyYear(yearSlider.value);
+      render();
+    });
+
+    document.querySelectorAll("#explorer-subbasin-layers .layer-toggle-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        currentSubbasinLayer = btn.getAttribute("data-layer");
+        document.getElementById("explorer-time-slider").style.display = currentSubbasinLayer === "depth" ? "" : "none";
+        if (currentSubbasinLayer === "depth") applyYear(yearSlider.value);
+        render();
+      });
+    });
+  });
+})();
+</script>
+
 ### The pattern we're tracking
 
 Commodity food processing has been a defining industry across these counties for generations — the kind of industry a region's labor market, tax base, and civic life organize around. Over the past two years alone, plant closures and mass layoffs tied to major processors have removed well over two thousand documented jobs across Stanislaus, Kings, and Fresno counties, and that period sits inside a far longer pattern of consolidation that goes back decades. Reporting around one recent closure placed it among roughly sixty Central Valley plant closures or mass layoffs in a single year.
