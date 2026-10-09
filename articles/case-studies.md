@@ -36,7 +36,12 @@ This research actually runs on two different geographies — county lines for th
     Show closure &amp; photo locations
   </label>
 
-  <div id="explorer-svg-container" style="min-height:360px"></div>
+  <div id="explorer-svg-container" style="min-height:360px; position:relative;">
+    <div id="explorer-locator-container" class="map-locator" style="display:none">
+      <div id="explorer-locator-svg"></div>
+      <p class="map-locator-caption">Where this sits in California</p>
+    </div>
+  </div>
   <div class="chart-legend map-legend" id="explorer-legend"></div>
   <div class="tl-detail" id="explorer-detail">
     <p class="tl-detail-empty">Click a county or subbasin for its full detail, or a marker for what happened at that specific location.</p>
@@ -56,7 +61,7 @@ This research actually runs on two different geographies — county lines for th
     </table>
     <p class="chart-source">Counties and subbasins are genuinely different geographies, not a single table pivoted two ways — see the "—" cells above. Kings County alone spans both the Kings and Tulare Lake groundwater subbasins.</p>
   </details>
-  <p class="chart-source" id="explorer-source">County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
+  <p class="chart-source" id="explorer-source">County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
 </div>
 <script>
 (function () {
@@ -71,13 +76,15 @@ This research actually runs on two different geographies — county lines for th
         "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
       },
       diverging: false,
-      ramp: ["#f8e2d8", "#e3a88f", "#c23b1f", "#8a2414", "#5c160c"],
+      // Green family, matching the-index.md's SDI county map -- the same
+      // metric should use the same ramp everywhere it appears.
+      ramp: ["#e4ead6", "#a8c489", "#4f8534", "#2f5c1f", "#17370c"],
       domain: [0.09, 0.22],
       format: function (v) { return v.toFixed(3); },
       tooltipLabel: "Employment SDI",
       legendLow: "Lower dependence",
       legendHigh: "Higher dependence",
-      source: 'County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.'
+      source: 'County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.'
     },
     unemployment: {
       title: "Unemployment rate, by county",
@@ -95,7 +102,7 @@ This research actually runs on two different geographies — county lines for th
       tooltipLabel: "Unemployment rate",
       legendLow: "Lower unemployment",
       legendHigh: "Higher unemployment",
-      source: 'County boundaries: U.S. Census Bureau via us-atlas. Unemployment: BLS Local Area Unemployment Statistics, see <a href="data.md">Data</a>. Not seasonally adjusted.'
+      source: 'County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Unemployment: BLS Local Area Unemployment Statistics, see <a href="data.md">Data</a>. Not seasonally adjusted.'
     }
   };
 
@@ -114,7 +121,7 @@ This research actually runs on two different geographies — county lines for th
       tooltipLabel: "Depth to groundwater",
       legendLow: "Shallower",
       legendHigh: "Deeper",
-      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, annual average by well. See <a href="data.md">Data</a>.'
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. County lines shown for reference: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Groundwater: DWR periodic groundwater level measurements, annual average by well. See <a href="data.md">Data</a>.'
     },
     change: {
       title: "Change in groundwater depth since 2015, by subbasin",
@@ -130,7 +137,7 @@ This research actually runs on two different geographies — county lines for th
       tooltipLabel: "Change since 2015",
       legendLow: "Decline (deeper)",
       legendHigh: "Recovery (shallower)",
-      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, paired per-well comparison. See <a href="data.md">Data</a>.'
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. County lines shown for reference: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Groundwater: DWR periodic groundwater level measurements, paired per-well comparison. See <a href="data.md">Data</a>.'
     }
   };
 
@@ -193,12 +200,68 @@ This research actually runs on two different geographies — county lines for th
 
   var container = document.getElementById("explorer-svg-container");
   var width = container.clientWidth || 700;
-  var countyHeight = 360, subbasinHeight = 300;
+  // County base now shows the whole state for context (see
+  // the-index.md's matching comment for the aspect-ratio source);
+  // subbasin base keeps its existing tighter zoom.
+  var countyHeight = Math.round(width * 1.1), subbasinHeight = 300;
   var currentBase = "county";
   var currentCountyLayer = "sdi";
   var currentSubbasinLayer = "depth";
   var countyGeo = null, subbasinGeo = null, subbasinAnnual = null;
+  var allCaCountiesGeo = null, caOutlineGeo = null;
   var svg = null, path = null, projection = null;
+
+  // Natural Earth 1:50m Gray Earth, pre-warped to true Web Mercator --
+  // see the-index.md's TERRAIN constant for the full explanation.
+  var EXPLORER_TERRAIN = {
+    url: "/assets/data/ca-terrain.png",
+    lon0: -125.21666666667213, lon1: -113.48333333333997,
+    lat0: 32.183333333339114, lat1: 42.51666666667141
+  };
+
+  function addExplorerTerrain(svg, projection) {
+    var topLeft = projection([EXPLORER_TERRAIN.lon0, EXPLORER_TERRAIN.lat1]);
+    var bottomRight = projection([EXPLORER_TERRAIN.lon1, EXPLORER_TERRAIN.lat0]);
+    svg.append("image")
+      .attr("class", "map-terrain")
+      .attr("href", EXPLORER_TERRAIN.url)
+      .attr("x", topLeft[0]).attr("y", topLeft[1])
+      .attr("width", bottomRight[0] - topLeft[0])
+      .attr("height", bottomRight[1] - topLeft[1])
+      .attr("preserveAspectRatio", "none");
+  }
+
+  function buildExplorerLocator(subbasinGeo, caGeo) {
+    var mount = document.getElementById("explorer-locator-svg");
+    if (!mount) return;
+    mount.innerHTML = "";
+    var size = 108;
+    var locSvg = d3.select(mount).append("svg")
+      .attr("viewBox", "0 0 " + size + " " + size)
+      .attr("role", "img")
+      .attr("aria-label", "Locator map showing where the Kings and Tulare Lake subbasins sit within California");
+
+    var locProjection = d3.geoMercator().fitExtent([[5, 5], [size - 5, size - 5]], caGeo);
+    var locPath = d3.geoPath(locProjection);
+
+    locSvg.append("path")
+      .datum(caGeo.features[0])
+      .attr("d", locPath)
+      .attr("fill", "var(--chart-surface)")
+      .attr("stroke", "var(--ink)")
+      .attr("stroke-width", 1);
+
+    var center = d3.geoCentroid(subbasinGeo);
+    var xy = locProjection(center);
+    if (xy) {
+      locSvg.append("circle")
+        .attr("cx", xy[0]).attr("cy", xy[1])
+        .attr("r", 5)
+        .attr("fill", "var(--chart-cat-1)")
+        .attr("stroke", "var(--ink)")
+        .attr("stroke-width", 1.25);
+    }
+  }
 
   function colorFor(layer, v) {
     if (layer.diverging) {
@@ -279,21 +342,57 @@ This research actually runs on two different geographies — county lines for th
     var height = base === "county" ? countyHeight : subbasinHeight;
     d3.select(container).selectAll("svg").remove();
 
+    var locatorEl = document.getElementById("explorer-locator-container");
+    if (locatorEl) locatorEl.style.display = base === "subbasin" ? "" : "none";
+
     svg = d3.select(container).append("svg")
       .attr("viewBox", "0 0 " + width + " " + height)
       .attr("role", "img")
       .attr("aria-label", base === "county"
-        ? "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor"
-        : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
+        ? "Map of California, with Kings, Fresno, Tulare, and Stanislaus counties highlighted and shaded by a selectable factor"
+        : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure, with county lines shown for reference");
 
-    svg.append("rect")
-      .attr("class", "map-water-bg")
-      .attr("x", 0).attr("y", 0)
-      .attr("width", width).attr("height", height)
-      .attr("fill", "var(--map-water)");
-
-    projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
+    // Fit to the whole state for the county base (same reasoning as
+    // the-index.md); keep the subbasin base at its existing tighter zoom.
+    var fitTo = base === "county" ? caOutlineGeo : geo;
+    projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], fitTo);
     path = d3.geoPath(projection);
+
+    addExplorerTerrain(svg, projection);
+
+    if (base === "county") {
+      svg.selectAll("path.context-county")
+        .data(allCaCountiesGeo.features)
+        .enter()
+        .append("path")
+        .attr("class", "context-county")
+        .attr("d", path)
+        .attr("fill", "var(--chart-surface)")
+        .attr("fill-opacity", 0.55)
+        .attr("stroke", "var(--chart-baseline)")
+        .attr("stroke-width", 0.75);
+
+      svg.append("path")
+        .attr("class", "state-outline")
+        .datum(caOutlineGeo.features[0])
+        .attr("d", path)
+        .attr("fill", "none")
+        .attr("stroke", "var(--ink)")
+        .attr("stroke-width", 1.75);
+    } else {
+      svg.selectAll("path.county-ref")
+        .data(countyGeo.features)
+        .enter()
+        .append("path")
+        .attr("class", "county-ref")
+        .attr("d", path)
+        .attr("fill", "none")
+        .attr("stroke", "var(--chart-text-secondary)")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "4,3");
+
+      buildExplorerLocator(subbasinGeo, caOutlineGeo);
+    }
 
     svg.selectAll("path.feature")
       .data(geo.features)
@@ -541,6 +640,7 @@ This research actually runs on two different geographies — county lines for th
       .attr("data-key-color", "var(--ink)");
 
     markerGroups.append("text")
+      .attr("class", "marker-label")
       .attr("x", 0)
       .attr("y", -11)
       .attr("text-anchor", "middle")
@@ -564,11 +664,15 @@ This research actually runs on two different geographies — county lines for th
   Promise.all([
     fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/kings-tulare-lake-subbasins.geojson").then(function (r) { return r.json(); }),
-    fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); })
+    fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); }),
+    fetch("/assets/data/california-counties.geojson").then(function (r) { return r.json(); }),
+    fetch("/assets/data/california-outline.geojson").then(function (r) { return r.json(); })
   ]).then(function (results) {
     countyGeo = results[0];
     subbasinGeo = results[1];
     subbasinAnnual = results[2];
+    allCaCountiesGeo = results[3];
+    caOutlineGeo = results[4];
     applyYear(document.getElementById("explorer-year-range").value);
 
     buildSvg("county");
@@ -913,7 +1017,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
       </tbody>
     </table>
   </details>
-  <p class="chart-source" id="gw-map-source">Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements. See <a href="data.md">Data</a>.</p>
+  <p class="chart-source" id="gw-map-source">Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. County lines shown for reference: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Groundwater: DWR periodic groundwater level measurements. See <a href="data.md">Data</a>.</p>
 </div>
 
 **The long arc, scrub the slider to see it**: both subbasins have gotten dramatically deeper since 1950 — Kings Subbasin from 38 ft to 131 ft (roughly 3.4x), Tulare Lake Subbasin from 38 ft to 173 ft (roughly 4.6x) — a real, 76-year decline consistent with the broader SGMA story this section opened with.
@@ -949,7 +1053,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
       tooltipLabel: "Depth to groundwater",
       legendLow: "Shallower",
       legendHigh: "Deeper",
-      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, annual average by well. See <a href="data.md">Data</a>.'
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. County lines shown for reference: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Groundwater: DWR periodic groundwater level measurements, annual average by well. See <a href="data.md">Data</a>.'
     },
     change: {
       title: "Change in groundwater depth since 2015, by subbasin",
@@ -967,7 +1071,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
       tooltipLabel: "Change since 2015",
       legendLow: "Decline (deeper)",
       legendHigh: "Recovery (shallower)",
-      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. Groundwater: DWR periodic groundwater level measurements, paired per-well comparison. See <a href="data.md">Data</a>.'
+      source: 'Subbasin boundaries: DWR Bulletin 118, via CA GIS open-data portal. County lines shown for reference: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Groundwater: DWR periodic groundwater level measurements, paired per-well comparison. See <a href="data.md">Data</a>.'
     }
   };
 
@@ -1032,6 +1136,28 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
   var gwAnnual = null; // {subbasin: {year: {depth, wells}}}, loaded below
 
+  // Natural Earth 1:50m Gray Earth, pre-warped to true Web Mercator --
+  // see the-index.md's TERRAIN constant for the full explanation. Same
+  // source image and bounds reused here: the two-corner placement is
+  // exact against this map's own projection regardless of its zoom.
+  var GW_TERRAIN = {
+    url: "/assets/data/ca-terrain.png",
+    lon0: -125.21666666667213, lon1: -113.48333333333997,
+    lat0: 32.183333333339114, lat1: 42.51666666667141
+  };
+
+  function addGwTerrain(svg, projection) {
+    var topLeft = projection([GW_TERRAIN.lon0, GW_TERRAIN.lat1]);
+    var bottomRight = projection([GW_TERRAIN.lon1, GW_TERRAIN.lat0]);
+    svg.append("image")
+      .attr("class", "map-terrain")
+      .attr("href", GW_TERRAIN.url)
+      .attr("x", topLeft[0]).attr("y", topLeft[1])
+      .attr("width", bottomRight[0] - topLeft[0])
+      .attr("height", bottomRight[1] - topLeft[1])
+      .attr("preserveAspectRatio", "none");
+  }
+
   function buildGwLocator(subbasinGeo, caGeo) {
     var mount = document.getElementById("gw-locator-svg");
     if (!mount) return;
@@ -1040,10 +1166,6 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
       .attr("viewBox", "0 0 " + size + " " + size)
       .attr("role", "img")
       .attr("aria-label", "Locator map showing where the Kings and Tulare Lake subbasins sit within California");
-
-    locSvg.append("rect")
-      .attr("width", size).attr("height", size)
-      .attr("fill", "var(--map-water)");
 
     var locProjection = d3.geoMercator().fitExtent([[5, 5], [size - 5, size - 5]], caGeo);
     var locPath = d3.geoPath(locProjection);
@@ -1080,26 +1202,37 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
   Promise.all([
     fetch("/assets/data/kings-tulare-lake-subbasins.geojson").then(function (r) { return r.json(); }),
-    fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); })
+    fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); }),
+    fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); })
   ])
     .then(function (results) {
       var geo = results[0];
       gwAnnual = results[1];
+      var countyRef = results[2];
       gwApplyYear(document.getElementById("gw-year-range").value);
 
       gwSvg = d3.select(gwContainer).append("svg")
         .attr("viewBox", "0 0 " + gwWidth + " " + gwHeight)
         .attr("role", "img")
-        .attr("aria-label", "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure");
-
-      gwSvg.append("rect")
-        .attr("class", "map-water-bg")
-        .attr("x", 0).attr("y", 0)
-        .attr("width", gwWidth).attr("height", gwHeight)
-        .attr("fill", "var(--map-water)");
+        .attr("aria-label", "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure, with county lines shown for reference");
 
       var gwProjection = d3.geoMercator().fitExtent([[20, 20], [gwWidth - 20, gwHeight - 20]], geo);
       gwPath = d3.geoPath(gwProjection);
+
+      addGwTerrain(gwSvg, gwProjection);
+
+      // County lines, for reference only -- the whole point of this map
+      // is that subbasins don't follow them. Dashed, unfilled, no label.
+      gwSvg.selectAll("path.county-ref")
+        .data(countyRef.features)
+        .enter()
+        .append("path")
+        .attr("class", "county-ref")
+        .attr("d", gwPath)
+        .attr("fill", "none")
+        .attr("stroke", "var(--chart-text-secondary)")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "4,3");
 
       gwSvg.selectAll("path.subbasin")
         .data(geo.features)

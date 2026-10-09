@@ -34,7 +34,7 @@ Our first application: how dependent four Central Valley counties are on **food 
       </tbody>
     </table>
   </details>
-  <p class="chart-source" id="cv-map-source">County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
+  <p class="chart-source" id="cv-map-source">County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
 </div>
 <script>
 (function () {
@@ -56,7 +56,7 @@ Our first application: how dependent four Central Valley counties are on **food 
       tooltipLabel: "Employment SDI",
       legendLow: "Lower dependence",
       legendHigh: "Higher dependence",
-      source: 'County boundaries: U.S. Census Bureau via us-atlas. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.'
+      source: 'County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.'
     },
     unemployment: {
       title: "Unemployment rate, by county",
@@ -75,15 +75,42 @@ Our first application: how dependent four Central Valley counties are on **food 
       tooltipLabel: "Unemployment rate",
       legendLow: "Lower unemployment",
       legendHigh: "Higher unemployment",
-      source: 'County boundaries: U.S. Census Bureau via us-atlas. Unemployment: BLS Local Area Unemployment Statistics, see <a href="data.md">Data</a>. Not seasonally adjusted.'
+      source: 'County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. Unemployment: BLS Local Area Unemployment Statistics, see <a href="data.md">Data</a>. Not seasonally adjusted.'
     }
   };
 
   var container = document.getElementById("cv-map-svg-container");
-  var width = container.clientWidth || 700, height = 360;
+  // California's true bounding-box aspect ratio (computed from the state
+  // outline in true Mercator units) is close to 1.16 (taller than wide).
+  // 1.1 leaves a little breathing room for padding without wasting space.
+  var width = container.clientWidth || 700, height = Math.round(width * 1.1);
   var currentLayer = "sdi";
   var geoData = null;
   var svg = null, path = null;
+
+  // Natural Earth 1:50m Gray Earth (shaded relief + hypsography, public
+  // domain), pre-warped from source Plate Carree into true Web Mercator
+  // by assets/data/ca-terrain.png's build step so a straight two-corner
+  // placement against any d3.geoMercator() projection is geometrically
+  // exact, not an approximation. Bounds below are the image's own exact
+  // crop corners (assets/data/ca-terrain-bounds.json).
+  var TERRAIN = {
+    url: "/assets/data/ca-terrain.png",
+    lon0: -125.21666666667213, lon1: -113.48333333333997,
+    lat0: 32.183333333339114, lat1: 42.51666666667141
+  };
+
+  function addTerrain(svg, projection) {
+    var topLeft = projection([TERRAIN.lon0, TERRAIN.lat1]);
+    var bottomRight = projection([TERRAIN.lon1, TERRAIN.lat0]);
+    svg.append("image")
+      .attr("class", "map-terrain")
+      .attr("href", TERRAIN.url)
+      .attr("x", topLeft[0]).attr("y", topLeft[1])
+      .attr("width", bottomRight[0] - topLeft[0])
+      .attr("height", bottomRight[1] - topLeft[1])
+      .attr("preserveAspectRatio", "none");
+  }
 
   function colorFor(layer, v) {
     var t = Math.max(0, Math.min(1, (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0])));
@@ -135,23 +162,47 @@ Our first application: how dependent four Central Valley counties are on **food 
     legend.innerHTML = '<span>' + layer.legendLow + '</span>' + swatches + '<span>' + layer.legendHigh + '</span>';
   }
 
-  fetch("/assets/data/central-valley-counties.geojson")
-    .then(function (r) { return r.json(); })
-    .then(function (geo) {
+  Promise.all([
+    fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); }),
+    fetch("/assets/data/california-counties.geojson").then(function (r) { return r.json(); }),
+    fetch("/assets/data/california-outline.geojson").then(function (r) { return r.json(); })
+  ]).then(function (results) {
+      var geo = results[0], allCaCounties = results[1], caOutline = results[2];
       geoData = geo;
       svg = d3.select(container).append("svg")
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("role", "img")
-        .attr("aria-label", "Map of Kings, Fresno, Tulare, and Stanislaus counties, shaded by a selectable factor");
+        .attr("aria-label", "Map of California, with Kings, Fresno, Tulare, and Stanislaus counties highlighted and shaded by a selectable factor");
 
-      svg.append("rect")
-        .attr("class", "map-water-bg")
-        .attr("x", 0).attr("y", 0)
-        .attr("width", width).attr("height", height)
-        .attr("fill", "var(--map-water)");
-
-      var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], geo);
+      // Fit to the whole state, not just the 4 focus counties, so the
+      // viewer sees where in California this data sits, not just the
+      // data itself.
+      var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], caOutline);
       path = d3.geoPath(projection);
+
+      addTerrain(svg, projection);
+
+      // Every other California county: real geography, not data -- a
+      // light neutral wash over the terrain, thin stroke, no tooltip.
+      svg.selectAll("path.context-county")
+        .data(allCaCounties.features)
+        .enter()
+        .append("path")
+        .attr("class", "context-county")
+        .attr("d", path)
+        .attr("fill", "var(--chart-surface)")
+        .attr("fill-opacity", 0.55)
+        .attr("stroke", "var(--chart-baseline)")
+        .attr("stroke-width", 0.75);
+
+      // The state border itself, bold, on top of the county wash.
+      svg.append("path")
+        .attr("class", "state-outline")
+        .datum(caOutline.features[0])
+        .attr("d", path)
+        .attr("fill", "none")
+        .attr("stroke", "var(--ink)")
+        .attr("stroke-width", 1.75);
 
       svg.selectAll("path.county")
         .data(geo.features)

@@ -61,11 +61,6 @@
   --chart-status-serious: #ec835a;
   --chart-status-critical: #d03b3b;
 
-  /* Map-only convention, fixed regardless of theme or data ramp: water
-     reads as blue the way a printed reference atlas does. Never used for
-     data encoding, so it stays visually distinct from the unemployment
-     layer's blue sequential ramp (lightest step #e3f3f7). */
-  --map-water: #b7dce7;
   --map-frame: var(--ink);
 }
 
@@ -206,6 +201,12 @@ li { margin-bottom: 0.4em; }
   border-radius: 2px;
 }
 
+/* Shaded-relief backdrop (Natural Earth, pre-warped to Mercator) and the
+   context layers drawn over it -- real geography, not data, so they stay
+   visually quieter than the data-encoded features on top. */
+.map-terrain { pointer-events: none; }
+.context-county, .county-ref { pointer-events: none; }
+
 /* Locator inset -- a small "where is this in the state" reference,
    the same convention print atlases use for an unfamiliar sub-region
    (their equivalent of an Alaska/Hawaii inset on a US map). */
@@ -240,6 +241,14 @@ li { margin-bottom: 0.4em; }
     margin: 10px auto 0 auto;
     box-shadow: none;
   }
+
+  /* The explorer's county base now shows the whole state, so the 4
+     focus counties (with their own name+value labels) occupy a small
+     cluster -- marker name labels crowd right on top of them at this
+     width. The marker is still there, still tappable, and still has a
+     tooltip and a click-through detail panel; only the always-on
+     floating name text goes away. */
+  .marker-label { display: none; }
 }
 
 .map-locator-caption {

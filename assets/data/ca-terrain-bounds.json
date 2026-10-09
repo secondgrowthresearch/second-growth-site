@@ -1,0 +1,7 @@
+{
+  "lon0": -125.21666666667213,
+  "lon1": -113.48333333333997,
+  "lat0": 32.183333333339114,
+  "lat1": 42.51666666667141,
+  "note": "Raster is pre-warped to true Web Mercator (not Plate Carree). Place by projecting [lon0,lat1] (top-left) and [lon1,lat0] (bottom-right) through the live d3 projection and stretching the image to exactly fill that rectangle -- the two-point affine placement is geometrically exact because the raster is pixel-square in raw Mercator units."
+}
