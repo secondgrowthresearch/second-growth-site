@@ -37,6 +37,11 @@ This research actually runs on two different geographies — county lines for th
   </label>
 
   <div id="explorer-svg-container" style="min-height:360px; position:relative;">
+    <div class="map-zoom-controls">
+      <button type="button" class="map-zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+      <button type="button" class="map-zoom-btn" data-zoom="out" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="map-zoom-btn map-zoom-reset" data-zoom="reset" aria-label="Reset zoom">Reset</button>
+    </div>
     <div id="explorer-locator-container" class="map-locator" style="display:none">
       <div id="explorer-locator-svg"></div>
       <p class="map-locator-caption">Where this sits in California</p>
@@ -207,9 +212,18 @@ This research actually runs on two different geographies — county lines for th
   var currentBase = "county";
   var currentCountyLayer = "sdi";
   var currentSubbasinLayer = "depth";
-  var countyGeo = null, subbasinGeo = null, subbasinAnnual = null;
+  var subbasinGeo = null, subbasinAnnual = null;
   var allCaCountiesGeo = null, caOutlineGeo = null;
-  var svg = null, path = null, projection = null;
+  var svg = null, zoomG = null, path = null, projection = null;
+
+  // Which counties are "in" the study is a fact about the data, not
+  // something the map code should hardcode -- see the-index.md's
+  // matching comment. Computed once countyLayers is defined above.
+  var focusFips = {};
+  Object.keys(countyLayers).forEach(function (lk) {
+    Object.keys(countyLayers[lk].byKey).forEach(function (fips) { focusFips[fips] = true; });
+  });
+  function isFocus(d) { return !!focusFips[d.id]; }
 
   // Natural Earth 1:50m Gray Earth, pre-warped to true Web Mercator --
   // see the-index.md's TERRAIN constant for the full explanation.
@@ -263,6 +277,23 @@ This research actually runs on two different geographies — county lines for th
     }
   }
 
+  // Shared zoom-button wiring: + / - step by a fixed factor, Reset
+  // returns to the identity transform. Wheel-zoom is off (see the zoom
+  // behavior's filter below) so scrolling past the map scrolls the
+  // page, not the map.
+  function setupZoomControls(container, svg, zoomBehavior) {
+    var controls = container.querySelector(".map-zoom-controls");
+    if (!controls) return;
+    controls.querySelectorAll(".map-zoom-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var action = btn.getAttribute("data-zoom");
+        if (action === "in") svg.transition().duration(200).call(zoomBehavior.scaleBy, 1.5);
+        else if (action === "out") svg.transition().duration(200).call(zoomBehavior.scaleBy, 1 / 1.5);
+        else svg.transition().duration(200).call(zoomBehavior.transform, d3.zoomIdentity);
+      });
+    });
+  }
+
   function colorFor(layer, v) {
     if (layer.diverging) {
       var half = Math.max(Math.abs(layer.domain[0]), Math.abs(layer.domain[1]));
@@ -306,14 +337,16 @@ This research actually runs on two different geographies — county lines for th
     };
   }
 
-  function idPropFor(base) { return base === "county" ? "fips" : "Basin_Subbasin_Number"; }
+  // County features come from the unified 58-county set (id = FIPS);
+  // subbasin features keep their own DWR property name. One accessor so
+  // the rest of the code doesn't care which base it's looking at.
+  function keyFor(base, d) { return base === "county" ? d.id : d.properties.Basin_Subbasin_Number; }
 
   function render() {
     var base = currentBase;
     var layers = base === "county" ? countyLayers : subbasinLayers;
     var layerKey = base === "county" ? currentCountyLayer : currentSubbasinLayer;
     var layer = layers[layerKey];
-    var idProp = idPropFor(base);
 
     document.getElementById("explorer-title").textContent = layer.title;
     document.getElementById("explorer-subtitle").textContent = layer.subtitle;
@@ -325,28 +358,39 @@ This research actually runs on two different geographies — county lines for th
       btn.setAttribute("aria-pressed", btn.getAttribute("data-layer") === layerKey ? "true" : "false");
     });
 
-    svg.selectAll("path.feature")
-      .attr("fill", function (d) { return colorFor(layer, layer.byKey[d.properties[idProp]].value); })
+    zoomG.selectAll("path.feature")
+      .attr("fill", function (d) {
+        var info = layer.byKey[keyFor(base, d)];
+        return info ? colorFor(layer, info.value) : "var(--chart-surface)";
+      })
+      .attr("fill-opacity", function (d) { return base === "subbasin" || isFocus(d) ? 1 : 0.55; })
       .attr("data-label", function (d) {
-        var info = layer.byKey[d.properties[idProp]];
+        var info = layer.byKey[keyFor(base, d)];
+        if (!info) return null;
         return info.name + (info.note ? " (" + info.note + ")" : "");
       })
-      .attr("data-value", function (d) { return layer.tooltipLabel + ": " + layer.format(layer.byKey[d.properties[idProp]].value); })
-      .attr("data-key-color", function (d) { return colorFor(layer, layer.byKey[d.properties[idProp]].value); });
+      .attr("data-value", function (d) {
+        var info = layer.byKey[keyFor(base, d)];
+        return info ? layer.tooltipLabel + ": " + layer.format(info.value) : null;
+      })
+      .attr("data-key-color", function (d) {
+        var info = layer.byKey[keyFor(base, d)];
+        return info ? colorFor(layer, info.value) : null;
+      });
 
-    svg.selectAll("text.feature-label")
+    zoomG.selectAll("text.feature-label")
       .style("fill", function (d) {
         if (labelPlacement(d, path).leader) return "var(--chart-text-primary)";
-        return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-primary)";
+        return textColorFor(layer, layer.byKey[keyFor(base, d)].value) || "var(--chart-text-primary)";
       })
-      .text(function (d) { return layer.byKey[d.properties[idProp]].name; });
+      .text(function (d) { return layer.byKey[keyFor(base, d)].name; });
 
-    svg.selectAll("text.feature-value")
+    zoomG.selectAll("text.feature-value")
       .style("fill", function (d) {
         if (labelPlacement(d, path).leader) return "var(--chart-text-secondary)";
-        return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-secondary)";
+        return textColorFor(layer, layer.byKey[keyFor(base, d)].value) || "var(--chart-text-secondary)";
       })
-      .text(function (d) { return layer.format(layer.byKey[d.properties[idProp]].value); });
+      .text(function (d) { return layer.format(layer.byKey[keyFor(base, d)].value); });
 
     var legend = document.getElementById("explorer-legend");
     var swatches = "";
@@ -368,7 +412,10 @@ This research actually runs on two different geographies — county lines for th
   }
 
   function buildSvg(base) {
-    var geo = base === "county" ? countyGeo : subbasinGeo;
+    // County base now draws every California county (data-presence
+    // decides which get the data treatment, see isFocus); subbasin base
+    // is just the subbasins themselves, both of which always have data.
+    var geo = base === "county" ? allCaCountiesGeo : subbasinGeo;
     var height = base === "county" ? countyHeight : subbasinHeight;
     d3.select(container).selectAll("svg").remove();
 
@@ -378,9 +425,10 @@ This research actually runs on two different geographies — county lines for th
     svg = d3.select(container).append("svg")
       .attr("viewBox", "0 0 " + width + " " + height)
       .attr("role", "img")
-      .attr("aria-label", base === "county"
+      .attr("aria-label", (base === "county"
         ? "Map of California, with Kings, Fresno, Tulare, and Stanislaus counties highlighted and shaded by a selectable factor"
-        : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure, with county lines shown for reference");
+        : "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure, with county lines shown for reference")
+        + ". Scroll-wheel zoom is off; use the on-map zoom buttons, drag to pan, or pinch to zoom.");
 
     // Fit to the whole state for the county base (same reasoning as
     // the-index.md); keep the subbasin base at its existing tighter zoom.
@@ -388,34 +436,29 @@ This research actually runs on two different geographies — county lines for th
     projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], fitTo);
     path = d3.geoPath(projection);
 
-    addExplorerTerrain(svg, projection);
+    zoomG = svg.append("g").attr("class", "zoom-g");
+
+    addExplorerTerrain(zoomG, projection);
 
     if (base === "county") {
-      svg.selectAll("path.context-county")
-        .data(allCaCountiesGeo.features)
-        .enter()
-        .append("path")
-        .attr("class", "context-county")
-        .attr("d", path)
-        .attr("fill", "var(--chart-surface)")
-        .attr("fill-opacity", 0.55)
-        .attr("stroke", "var(--chart-baseline)")
-        .attr("stroke-width", 0.75);
-
-      svg.append("path")
+      zoomG.append("path")
         .attr("class", "state-outline")
         .datum(caOutlineGeo.features[0])
         .attr("d", path)
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("fill", "none")
         .attr("stroke", "var(--ink)")
         .attr("stroke-width", 1.75);
     } else {
-      svg.selectAll("path.county-ref")
-        .data(countyGeo.features)
+      // Every California county, for reference only -- not just the
+      // four this case study currently tracks.
+      zoomG.selectAll("path.county-ref")
+        .data(allCaCountiesGeo.features)
         .enter()
         .append("path")
         .attr("class", "county-ref")
         .attr("d", path)
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("fill", "none")
         .attr("stroke", "var(--chart-text-secondary)")
         .attr("stroke-width", 1)
@@ -424,19 +467,23 @@ This research actually runs on two different geographies — county lines for th
       buildExplorerLocator(subbasinGeo, caOutlineGeo);
     }
 
-    svg.selectAll("path.feature")
+    zoomG.selectAll("path.feature")
       .data(geo.features)
       .enter()
       .append("path")
-      .attr("class", "feature chart-hit")
+      .attr("class", function (d) { return base === "subbasin" || isFocus(d) ? "feature chart-hit" : "feature"; })
       .attr("d", path)
-      .attr("stroke", "var(--ink)")
-      .attr("stroke-width", 2.5)
-      .on("click", function (event, d) { selectFeature(base, d); });
+      .attr("vector-effect", "non-scaling-stroke")
+      .attr("stroke", function (d) { return base === "subbasin" || isFocus(d) ? "var(--ink)" : "var(--chart-baseline)"; })
+      .attr("stroke-width", function (d) { return base === "subbasin" || isFocus(d) ? 2.5 : 0.75; })
+      .on("click", function (event, d) {
+        if (base === "subbasin" || isFocus(d)) selectFeature(base, d);
+      });
 
-    var leaderData = geo.features.filter(function (d) { return labelPlacement(d, path).leader !== null; });
+    var labelData = base === "subbasin" ? geo.features : geo.features.filter(isFocus);
+    var leaderData = labelData.filter(function (d) { return labelPlacement(d, path).leader !== null; });
 
-    svg.selectAll("line.feature-leader")
+    zoomG.selectAll("line.feature-leader")
       .data(leaderData)
       .enter()
       .append("line")
@@ -445,10 +492,11 @@ This research actually runs on two different geographies — county lines for th
       .attr("y1", function (d) { return labelPlacement(d, path).leader.y1; })
       .attr("x2", function (d) { return labelPlacement(d, path).leader.x2; })
       .attr("y2", function (d) { return labelPlacement(d, path).leader.y2; })
+      .attr("vector-effect", "non-scaling-stroke")
       .attr("stroke", "var(--ink)")
       .attr("stroke-width", 1);
 
-    svg.selectAll("circle.feature-anchor")
+    zoomG.selectAll("circle.feature-anchor")
       .data(leaderData)
       .enter()
       .append("circle")
@@ -458,8 +506,8 @@ This research actually runs on two different geographies — county lines for th
       .attr("r", 2.5)
       .attr("fill", "var(--ink)");
 
-    svg.selectAll("text.feature-label")
-      .data(geo.features)
+    zoomG.selectAll("text.feature-label")
+      .data(labelData)
       .enter()
       .append("text")
       .attr("class", "feature-label mark-label")
@@ -468,8 +516,8 @@ This research actually runs on two different geographies — county lines for th
       .attr("text-anchor", "middle")
       .attr("font-size", 13);
 
-    svg.selectAll("text.feature-value")
-      .data(geo.features)
+    zoomG.selectAll("text.feature-value")
+      .data(labelData)
       .enter()
       .append("text")
       .attr("class", "feature-value")
@@ -485,6 +533,15 @@ This research actually runs on two different geographies — county lines for th
       .attr("fill", "none")
       .attr("stroke", "var(--map-frame)")
       .attr("stroke-width", 1.5);
+
+    var zoomBehavior = d3.zoom()
+      .scaleExtent([1, 8])
+      .translateExtent([[0, 0], [width, height]])
+      .filter(function (event) { return event.type !== "wheel"; })
+      .on("zoom", function (event) { zoomG.attr("transform", event.transform); });
+    svg.call(zoomBehavior);
+
+    setupZoomControls(container, svg, zoomBehavior);
 
     render();
     renderMarkers(base);
@@ -592,8 +649,7 @@ This research actually runs on two different geographies — county lines for th
   }
 
   function selectFeature(base, d) {
-    var idProp = idPropFor(base);
-    var key = d.properties[idProp];
+    var key = keyFor(base, d);
     var detail = document.getElementById("explorer-detail");
     detail.innerHTML = "";
     detail.style.borderLeftColor = "var(--ink)";
@@ -660,13 +716,13 @@ This research actually runs on two different geographies — county lines for th
   }
 
   function renderMarkers(base) {
-    svg.selectAll("g.explorer-marker").remove();
+    zoomG.selectAll("g.explorer-marker").remove();
     var checkbox = document.getElementById("explorer-marker-checkbox");
     if (!checkbox.checked) return;
 
     var visible = markers.filter(function (m) { return m.bases.indexOf(base) !== -1; });
 
-    var markerGroups = svg.selectAll("g.explorer-marker")
+    var markerGroups = zoomG.selectAll("g.explorer-marker")
       .data(visible)
       .enter()
       .append("g")
@@ -716,17 +772,15 @@ This research actually runs on two different geographies — county lines for th
   }
 
   Promise.all([
-    fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/kings-tulare-lake-subbasins.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); }),
     fetch("/assets/data/california-counties.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/california-outline.geojson").then(function (r) { return r.json(); })
   ]).then(function (results) {
-    countyGeo = results[0];
-    subbasinGeo = results[1];
-    subbasinAnnual = results[2];
-    allCaCountiesGeo = results[3];
-    caOutlineGeo = results[4];
+    subbasinGeo = results[0];
+    subbasinAnnual = results[1];
+    allCaCountiesGeo = results[2];
+    caOutlineGeo = results[3];
     applyYear(document.getElementById("explorer-year-range").value);
 
     buildSvg("county");
@@ -1055,6 +1109,11 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
     <div class="time-slider-ends"><span>1950</span><span>2026</span></div>
   </div>
   <div id="gw-map-svg-container" style="min-height:300px; position:relative;">
+    <div class="map-zoom-controls">
+      <button type="button" class="map-zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+      <button type="button" class="map-zoom-btn" data-zoom="out" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="map-zoom-btn map-zoom-reset" data-zoom="reset" aria-label="Reset zoom">Reset</button>
+    </div>
     <div id="gw-locator-container" class="map-locator">
       <div id="gw-locator-svg"></div>
       <p class="map-locator-caption">Where this sits in California</p>
@@ -1131,7 +1190,24 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
   var gwContainer = document.getElementById("gw-map-svg-container");
   var gwWidth = gwContainer.clientWidth || 700, gwHeight = 300;
-  var gwSvg = null, gwPath = null;
+  var gwSvg = null, gwZoomG = null, gwPath = null;
+
+  // Shared zoom-button wiring: + / - step by a fixed factor, Reset
+  // returns to the identity transform. Wheel-zoom is off (see the zoom
+  // behavior's filter below) so scrolling past the map scrolls the
+  // page, not the map.
+  function setupZoomControls(container, svg, zoomBehavior) {
+    var controls = container.querySelector(".map-zoom-controls");
+    if (!controls) return;
+    controls.querySelectorAll(".map-zoom-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var action = btn.getAttribute("data-zoom");
+        if (action === "in") svg.transition().duration(200).call(zoomBehavior.scaleBy, 1.5);
+        else if (action === "out") svg.transition().duration(200).call(zoomBehavior.scaleBy, 1 / 1.5);
+        else svg.transition().duration(200).call(zoomBehavior.transform, d3.zoomIdentity);
+      });
+    });
+  }
 
   function gwColorFor(layer, v) {
     if (layer.diverging) {
@@ -1257,7 +1333,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
   Promise.all([
     fetch("/assets/data/kings-tulare-lake-subbasins.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/subbasin_annual_depth_to_groundwater.json").then(function (r) { return r.json(); }),
-    fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); })
+    fetch("/assets/data/california-counties.geojson").then(function (r) { return r.json(); })
   ])
     .then(function (results) {
       var geo = results[0];
@@ -1268,36 +1344,42 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
       gwSvg = d3.select(gwContainer).append("svg")
         .attr("viewBox", "0 0 " + gwWidth + " " + gwHeight)
         .attr("role", "img")
-        .attr("aria-label", "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure, with county lines shown for reference");
+        .attr("aria-label", "Map of the Kings and Tulare Lake groundwater subbasins, shaded by a selectable groundwater measure, with county lines shown for reference. Scroll-wheel zoom is off; use the on-map zoom buttons, drag to pan, or pinch to zoom.");
 
       var gwProjection = d3.geoMercator().fitExtent([[20, 20], [gwWidth - 20, gwHeight - 20]], geo);
       gwPath = d3.geoPath(gwProjection);
 
-      addGwTerrain(gwSvg, gwProjection);
+      gwZoomG = gwSvg.append("g").attr("class", "zoom-g");
 
-      // County lines, for reference only -- the whole point of this map
-      // is that subbasins don't follow them. Dashed, unfilled, no label.
-      gwSvg.selectAll("path.county-ref")
+      addGwTerrain(gwZoomG, gwProjection);
+
+      // Every California county, for reference only -- the whole point
+      // of this map is that subbasins don't follow county lines. All 58
+      // drawn equally (not just the four this case study currently
+      // tracks); dashed, unfilled, no label.
+      gwZoomG.selectAll("path.county-ref")
         .data(countyRef.features)
         .enter()
         .append("path")
         .attr("class", "county-ref")
         .attr("d", gwPath)
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("fill", "none")
         .attr("stroke", "var(--chart-text-secondary)")
         .attr("stroke-width", 1)
         .attr("stroke-dasharray", "4,3");
 
-      gwSvg.selectAll("path.subbasin")
+      gwZoomG.selectAll("path.subbasin")
         .data(geo.features)
         .enter()
         .append("path")
         .attr("class", "subbasin chart-hit")
         .attr("d", gwPath)
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("stroke", "var(--ink)")
         .attr("stroke-width", 2.5);
 
-      gwSvg.selectAll("text.subbasin-label")
+      gwZoomG.selectAll("text.subbasin-label")
         .data(geo.features)
         .enter()
         .append("text")
@@ -1308,7 +1390,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
         .attr("font-size", 13)
         .attr("fill", "var(--chart-text-primary)");
 
-      gwSvg.selectAll("text.subbasin-value")
+      gwZoomG.selectAll("text.subbasin-value")
         .data(geo.features)
         .enter()
         .append("text")
@@ -1326,6 +1408,15 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
         .attr("fill", "none")
         .attr("stroke", "var(--map-frame)")
         .attr("stroke-width", 1.5);
+
+      var gwZoomBehavior = d3.zoom()
+        .scaleExtent([1, 8])
+        .translateExtent([[0, 0], [gwWidth, gwHeight]])
+        .filter(function (event) { return event.type !== "wheel"; })
+        .on("zoom", function (event) { gwZoomG.attr("transform", event.transform); });
+      gwSvg.call(gwZoomBehavior);
+
+      setupZoomControls(gwContainer, gwSvg, gwZoomBehavior);
 
       fetch("/assets/data/california-outline.geojson")
         .then(function (r) { return r.json(); })
