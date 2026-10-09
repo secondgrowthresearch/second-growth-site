@@ -282,6 +282,30 @@ This research actually runs on two different geographies — county lines for th
     return t > 0.55 ? "#fff" : null;
   }
 
+  // Kings County, at full-state zoom (county base), is too small on
+  // screen to hold its own two-line label without colliding with
+  // Fresno and Tulare next door. Below a pixel-size threshold, pull the
+  // label out below the shape on a leader line instead of centering it
+  // inside -- subbasins are plenty large and never trigger this.
+  function labelPlacement(d, path) {
+    var bounds = path.bounds(d);
+    var centroid = path.centroid(d);
+    var w = bounds[1][0] - bounds[0][0], h = bounds[1][1] - bounds[0][1];
+    // Thresholds scale with the map's own width (calibrated at a ~800px
+    // desktop map) rather than fixed pixels -- otherwise every county
+    // shrinks together on a narrow phone screen and ones that fit fine
+    // on desktop (Tulare) start false-triggering the small-county path
+    // alongside Kings, and their leader labels collide with each other.
+    if (w >= width * 0.0725 && h >= width * 0.05) {
+      return {nameX: centroid[0], nameY: centroid[1], valueX: centroid[0], valueY: centroid[1] + 16, leader: null};
+    }
+    var labelX = centroid[0] - 4, labelY = bounds[1][1] + 24;
+    return {
+      nameX: labelX, nameY: labelY, valueX: labelX, valueY: labelY + 14,
+      leader: {x1: centroid[0], y1: centroid[1], x2: labelX, y2: labelY - 17}
+    };
+  }
+
   function idPropFor(base) { return base === "county" ? "fips" : "Basin_Subbasin_Number"; }
 
   function render() {
@@ -311,11 +335,17 @@ This research actually runs on two different geographies — county lines for th
       .attr("data-key-color", function (d) { return colorFor(layer, layer.byKey[d.properties[idProp]].value); });
 
     svg.selectAll("text.feature-label")
-      .style("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-primary)"; })
+      .style("fill", function (d) {
+        if (labelPlacement(d, path).leader) return "var(--chart-text-primary)";
+        return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-primary)";
+      })
       .text(function (d) { return layer.byKey[d.properties[idProp]].name; });
 
     svg.selectAll("text.feature-value")
-      .style("fill", function (d) { return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-secondary)"; })
+      .style("fill", function (d) {
+        if (labelPlacement(d, path).leader) return "var(--chart-text-secondary)";
+        return textColorFor(layer, layer.byKey[d.properties[idProp]].value) || "var(--chart-text-secondary)";
+      })
       .text(function (d) { return layer.format(layer.byKey[d.properties[idProp]].value); });
 
     var legend = document.getElementById("explorer-legend");
@@ -404,13 +434,37 @@ This research actually runs on two different geographies — county lines for th
       .attr("stroke-width", 2.5)
       .on("click", function (event, d) { selectFeature(base, d); });
 
+    var leaderData = geo.features.filter(function (d) { return labelPlacement(d, path).leader !== null; });
+
+    svg.selectAll("line.feature-leader")
+      .data(leaderData)
+      .enter()
+      .append("line")
+      .attr("class", "feature-leader")
+      .attr("x1", function (d) { return labelPlacement(d, path).leader.x1; })
+      .attr("y1", function (d) { return labelPlacement(d, path).leader.y1; })
+      .attr("x2", function (d) { return labelPlacement(d, path).leader.x2; })
+      .attr("y2", function (d) { return labelPlacement(d, path).leader.y2; })
+      .attr("stroke", "var(--ink)")
+      .attr("stroke-width", 1);
+
+    svg.selectAll("circle.feature-anchor")
+      .data(leaderData)
+      .enter()
+      .append("circle")
+      .attr("class", "feature-anchor")
+      .attr("cx", function (d) { return path.centroid(d)[0]; })
+      .attr("cy", function (d) { return path.centroid(d)[1]; })
+      .attr("r", 2.5)
+      .attr("fill", "var(--ink)");
+
     svg.selectAll("text.feature-label")
       .data(geo.features)
       .enter()
       .append("text")
       .attr("class", "feature-label mark-label")
-      .attr("x", function (d) { return path.centroid(d)[0]; })
-      .attr("y", function (d) { return path.centroid(d)[1]; })
+      .attr("x", function (d) { return labelPlacement(d, path).nameX; })
+      .attr("y", function (d) { return labelPlacement(d, path).nameY; })
       .attr("text-anchor", "middle")
       .attr("font-size", 13);
 
@@ -419,8 +473,8 @@ This research actually runs on two different geographies — county lines for th
       .enter()
       .append("text")
       .attr("class", "feature-value")
-      .attr("x", function (d) { return path.centroid(d)[0]; })
-      .attr("y", function (d) { return path.centroid(d)[1] + 16; })
+      .attr("x", function (d) { return labelPlacement(d, path).valueX; })
+      .attr("y", function (d) { return labelPlacement(d, path).valueY; })
       .attr("text-anchor", "middle")
       .attr("font-size", 11);
 

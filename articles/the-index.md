@@ -118,6 +118,31 @@ Our first application: how dependent four Central Valley counties are on **food 
     return layer.ramp[idx];
   }
 
+  // Kings County, at full-state zoom, is too small on screen to hold its
+  // own two-line label -- the name and value just collide with Fresno
+  // and Tulare's own labels next door. Below a pixel-size threshold,
+  // pull the label out below the shape on a leader line instead of
+  // centering it inside, the way a print atlas handles a small county
+  // or island that can't hold its own name.
+  function labelPlacement(d, path) {
+    var bounds = path.bounds(d);
+    var centroid = path.centroid(d);
+    var w = bounds[1][0] - bounds[0][0], h = bounds[1][1] - bounds[0][1];
+    // Thresholds scale with the map's own width (calibrated at a ~800px
+    // desktop map) rather than fixed pixels -- otherwise every county
+    // shrinks together on a narrow phone screen and ones that fit fine
+    // on desktop (Tulare) start false-triggering the small-county path
+    // alongside Kings, and their leader labels collide with each other.
+    if (w >= width * 0.0725 && h >= width * 0.05) {
+      return {nameX: centroid[0], nameY: centroid[1], valueX: centroid[0], valueY: centroid[1] + 16, leader: null};
+    }
+    var labelX = centroid[0] - 4, labelY = bounds[1][1] + 24;
+    return {
+      nameX: labelX, nameY: labelY, valueX: labelX, valueY: labelY + 14,
+      leader: {x1: centroid[0], y1: centroid[1], x2: labelX, y2: labelY - 17}
+    };
+  }
+
   function render(layerKey) {
     currentLayer = layerKey;
     var layer = layers[layerKey];
@@ -140,6 +165,7 @@ Our first application: how dependent four Central Valley counties are on **food 
 
     svg.selectAll("text.county-label")
       .style("fill", function (d) {
+        if (labelPlacement(d, path).leader) return "var(--chart-text-primary)"; // outside the fill, on neutral ground
         var v = layer.byFips[d.properties.fips].value;
         var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
         return t > 0.5 ? "#fff" : "var(--chart-text-primary)";
@@ -148,6 +174,7 @@ Our first application: how dependent four Central Valley counties are on **food 
 
     svg.selectAll("text.county-value")
       .style("fill", function (d) {
+        if (labelPlacement(d, path).leader) return "var(--chart-text-secondary)";
         var v = layer.byFips[d.properties.fips].value;
         var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
         return t > 0.5 ? "#fff" : "var(--chart-text-secondary)";
@@ -213,13 +240,37 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("stroke", "var(--ink)")
         .attr("stroke-width", 2.5);
 
+      var leaderData = geo.features.filter(function (d) { return labelPlacement(d, path).leader !== null; });
+
+      svg.selectAll("line.county-leader")
+        .data(leaderData)
+        .enter()
+        .append("line")
+        .attr("class", "county-leader")
+        .attr("x1", function (d) { return labelPlacement(d, path).leader.x1; })
+        .attr("y1", function (d) { return labelPlacement(d, path).leader.y1; })
+        .attr("x2", function (d) { return labelPlacement(d, path).leader.x2; })
+        .attr("y2", function (d) { return labelPlacement(d, path).leader.y2; })
+        .attr("stroke", "var(--ink)")
+        .attr("stroke-width", 1);
+
+      svg.selectAll("circle.county-anchor")
+        .data(leaderData)
+        .enter()
+        .append("circle")
+        .attr("class", "county-anchor")
+        .attr("cx", function (d) { return path.centroid(d)[0]; })
+        .attr("cy", function (d) { return path.centroid(d)[1]; })
+        .attr("r", 2.5)
+        .attr("fill", "var(--ink)");
+
       svg.selectAll("text.county-label")
         .data(geo.features)
         .enter()
         .append("text")
         .attr("class", "county-label mark-label")
-        .attr("x", function (d) { return path.centroid(d)[0]; })
-        .attr("y", function (d) { return path.centroid(d)[1]; })
+        .attr("x", function (d) { return labelPlacement(d, path).nameX; })
+        .attr("y", function (d) { return labelPlacement(d, path).nameY; })
         .attr("text-anchor", "middle")
         .attr("font-size", 13);
 
@@ -228,8 +279,8 @@ Our first application: how dependent four Central Valley counties are on **food 
         .enter()
         .append("text")
         .attr("class", "county-value")
-        .attr("x", function (d) { return path.centroid(d)[0]; })
-        .attr("y", function (d) { return path.centroid(d)[1] + 16; })
+        .attr("x", function (d) { return labelPlacement(d, path).valueX; })
+        .attr("y", function (d) { return labelPlacement(d, path).valueY; })
         .attr("text-anchor", "middle")
         .attr("font-size", 11);
 
