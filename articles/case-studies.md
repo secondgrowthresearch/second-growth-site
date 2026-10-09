@@ -178,6 +178,12 @@ This research actually runs on two different geographies — county lines for th
       photos: []
     },
     {
+      name: "Helm", lon: -120.0924, lat: 36.4874, bases: ["county"],
+      county: "06019", subbasin: null,
+      events: [{label: "2016 — ConAgra closes its Hunt-Wesson plant in Helm, Fresno County; 102 jobs", sourcing: "Trade-press reporting on the company's state WARN filing, not independently verified.", page: "case-studies/fresno-2016-conagra-helm.html"}],
+      photos: []
+    },
+    {
       name: "Lemoore", lon: -119.7811, lat: 36.3002, bases: ["county"],
       county: "06031", subbasin: null,
       events: [
@@ -190,6 +196,7 @@ This research actually runs on two different geographies — county lines for th
       name: "Modesto/Hughson", lon: -120.9969, lat: 37.6391, bases: ["county"],
       county: "06099", subbasin: null,
       events: [
+        {label: "2012 — Dawn Foods closes its Modesto bakeries, Stanislaus County; 265 jobs", sourcing: "Secondary WARN tracker, not independently verified; trade-press and local-news reporting.", page: "case-studies/stanislaus-2012-dawn-foods-modesto.html"},
         {label: "2024 — Tropicale Foods closes Modesto ice-cream plant, Stanislaus County; 168–290 jobs", sourcing: "WARN filing, confirmed directly against the official state WARN report, plus local/national news coverage.", page: "case-studies/stanislaus-2024-tropicale-foods-modesto.html"},
         {label: "2024 — Reyes Coca-Cola Bottling closes Modesto facility, Stanislaus County; 101 jobs", sourcing: "WARN filing, confirmed directly against the official state WARN report.", page: "case-studies/stanislaus-2024-reyes-coca-cola-modesto.html"},
         {label: "2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs", sourcing: "Multiple independent news outlets, federal aid records.", page: "case-studies/stanislaus-2026-del-monte-modesto-hughson.html"}
@@ -197,9 +204,21 @@ This research actually runs on two different geographies — county lines for th
       photos: []
     },
     {
+      name: "Patterson", lon: -121.1297, lat: 37.4716, bases: ["county"],
+      county: "06099", subbasin: null,
+      events: [{label: "2012 — Patterson Vegetable Company closes, Stanislaus County; 1,015 jobs (WARN total)", sourcing: "Secondary WARN tracker, not independently verified; local-news reporting.", page: "case-studies/stanislaus-2012-patterson-vegetable.html"}],
+      photos: []
+    },
+    {
       name: "Turlock", lon: -120.8466, lat: 37.4947, bases: ["county"],
       county: "06099", subbasin: null,
       events: [{label: "2025 — Foster Farms ends fresh-turkey operations, Turlock, Stanislaus County; 478–519 jobs", sourcing: "WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting.", page: "case-studies/stanislaus-2025-foster-farms-turlock.html"}],
+      photos: []
+    },
+    {
+      name: "Tulare", lon: -119.3473, lat: 36.2077, bases: ["county"],
+      county: "06107", subbasin: null,
+      events: [{label: "2010 — Land O'Lakes closes its Tulare cheese plant, Tulare County; 80 jobs", sourcing: "Secondary WARN tracker, not independently verified; trade-press reporting.", page: "case-studies/tulare-2010-land-olakes-tulare.html"}],
       photos: []
     }
   ];
@@ -861,7 +880,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
 
 ### The long arc, in one timeline
 
-"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first eight events below are spread across more than a century; the last nine span about six years — though eight of those nine land within the final two, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
+"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first twelve events below are spread across more than a century — including a smaller cluster of four closures from 2010 to 2016 that this project only turned up by searching that window specifically, proof the compounding pattern didn't start in 2020; the last nine span about six years — though eight of those nine land within the final two, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
 
 <div class="chart" id="timeline-chart">
   <p class="chart-title">Central Valley/Sacramento commodity-ag processing, 1912–2026</p>
@@ -874,7 +893,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </div>
   <svg viewBox="0 0 780 560" role="img" aria-labelledby="tl-title tl-desc">
     <title id="tl-title">Timeline of Central Valley and Sacramento commodity-ag processing events, 1912 to 2026</title>
-    <desc id="tl-desc">Seventeen events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, the 2012-13 Campbell Soup closure, the 2014 Sustainable Groundwater Management Act, and a cluster of nine bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because eight of the nine fall within the final two years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
+    <desc id="tl-desc">Twenty-one events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, a cluster of four commodity-processing closures from 2010 to 2016 found by searching that window specifically, the 2014 Sustainable Groundwater Management Act, and a cluster of nine bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because eight of the nine fall within the final two years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
 
     <!-- Track 1: 1912-2020, main spine at y=150 -->
     <line class="axis-line" x1="70" y1="150" x2="740" y2="150"></line>
@@ -927,28 +946,69 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <text x="615.9" y="196" text-anchor="middle" font-size="10">TVG</text>
     </g>
 
-    <!-- 2012-13 Campbell Soup closes Sacramento (above, rust, end-anchor) -->
+    <!-- 2010-2016 sub-cluster: six points (four new + existing Campbell/SGMA)
+         packed into a ~65px span. Track2's far-above zone and this track's
+         own axis-end label both sit close by, so tiers are cycled
+         close-above/far-above/close-below/far-below across all six rather
+         than reusing Campbell/SGMA's original two tiers alone -- confirmed
+         collision-free via getBBox overlap check after two earlier misses
+         (one straight into the axis label, one into Track2's own labels). -->
+
+    <!-- 2010 Land O'Lakes Tulare (close-above) -->
     <g class="tl-event" data-category="closure">
-    <line x1="693.5" y1="150" x2="693.5" y2="135" class="axis-line"></line>
-    <circle class="chart-hit" tabindex="0" role="button" data-label="2012–13 — Campbell Soup closes Sacramento plant; 700 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Company press release plus three independent local-news outlets." cx="693.5" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
-    <text x="693.5" y="108" text-anchor="end" font-size="10">Campbell</text>
-    <text class="mark-label" x="693.5" y="125" text-anchor="end" fill="var(--chart-cat-1)" font-size="12">2012–13</text>
+    <line x1="660" y1="150" x2="660" y2="135" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2010 — Land O'Lakes closes its Tulare cheese plant, Tulare County; 80 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Secondary WARN tracker, not independently verified; trade-press reporting." cx="660" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text x="660" y="108" text-anchor="middle" font-size="10">Tulare</text>
+    <text class="mark-label" x="660" y="125" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2010</text>
     </g>
 
-    <!-- 2014 SGMA signed (below, denim, end-anchor) -->
+    <!-- 2012 Dawn Foods Modesto (far-above) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="673" y1="150" x2="673" y2="100" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2012 — Dawn Foods closes its Modesto bakeries, Stanislaus County; 265 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Secondary WARN tracker, not independently verified; trade-press and local-news reporting." cx="673" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text class="mark-label" x="673" y="90" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2012</text>
+    <text x="673" y="73" text-anchor="middle" font-size="10">Dawn Foods</text>
+    </g>
+
+    <!-- 2012 Patterson Vegetable (close-below) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="686" y1="150" x2="686" y2="165" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2012 — Patterson Vegetable Company closes, Stanislaus County; 1,015 jobs (WARN total)" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Secondary WARN tracker, not independently verified; local-news reporting." cx="686" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text class="mark-label" x="686" y="180" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2012</text>
+    <text x="686" y="196" text-anchor="middle" font-size="10">Patterson</text>
+    </g>
+
+    <!-- 2012-13 Campbell Soup closes Sacramento (far-below, rust, end-anchor) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="699" y1="150" x2="699" y2="200" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2012–13 — Campbell Soup closes Sacramento plant; 700 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Company press release plus three independent local-news outlets." cx="699" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text x="699" y="231" text-anchor="end" font-size="10">Campbell</text>
+    <text class="mark-label" x="699" y="215" text-anchor="end" fill="var(--chart-cat-1)" font-size="12">2012–13</text>
+    </g>
+
+    <!-- 2014 SGMA signed (close-above, denim, end-anchor) -->
     <g class="tl-event" data-category="bankruptcy">
-    <line x1="702.8" y1="150" x2="702.8" y2="165" class="axis-line"></line>
-    <circle class="chart-hit" tabindex="0" role="button" data-label="2014 — California's Sustainable Groundwater Management Act (SGMA) signed into law" data-value="Policy" data-key-color="var(--chart-cat-2)" data-sourcing="Public legislative record." cx="702.8" cy="150" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
-    <text class="mark-label" x="702.8" y="180" text-anchor="end" fill="var(--chart-cat-2)" font-size="12">2014</text>
-    <text x="702.8" y="196" text-anchor="end" font-size="10">SGMA</text>
+    <line x1="712" y1="150" x2="712" y2="135" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2014 — California's Sustainable Groundwater Management Act (SGMA) signed into law" data-value="Policy" data-key-color="var(--chart-cat-2)" data-sourcing="Public legislative record." cx="712" cy="150" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
+    <text x="712" y="108" text-anchor="end" font-size="10">SGMA</text>
+    <text class="mark-label" x="712" y="125" text-anchor="end" fill="var(--chart-cat-2)" font-size="12">2014</text>
+    </g>
+
+    <!-- 2016 ConAgra Helm (far-above, rust, anchor=start) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="725" y1="150" x2="725" y2="100" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2016 — ConAgra closes its Hunt-Wesson plant in Helm, Fresno County; 102 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Trade-press reporting on the company's state WARN filing, not independently verified." cx="725" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text class="mark-label" x="725" y="90" text-anchor="start" fill="var(--chart-cat-1)" font-size="12">2016</text>
+    <text x="725" y="73" text-anchor="start" font-size="10">Helm</text>
     </g>
 
     <text x="70" y="222" text-anchor="start" font-size="10" fill="var(--chart-muted)">1912</text>
     <text x="740" y="222" text-anchor="end" font-size="10" fill="var(--chart-muted)">2020</text>
 
-    <!-- Break / zoom annotation -->
-    <line x1="715" y1="140" x2="725" y2="160" stroke="var(--chart-muted)" stroke-width="2"></line>
-    <line x1="725" y1="140" x2="735" y2="160" stroke="var(--chart-muted)" stroke-width="2"></line>
+    <!-- Break / zoom annotation -- shifted right of its original 715-735
+         position so it clears the new 2016 Helm point -->
+    <line x1="745" y1="140" x2="755" y2="160" stroke="var(--chart-muted)" stroke-width="2"></line>
+    <line x1="755" y1="140" x2="765" y2="160" stroke="var(--chart-muted)" stroke-width="2"></line>
     <text x="405" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="var(--chart-text-secondary)">↓ zoomed in below: 2020–2026 ↓</text>
     <line x1="65" y1="290" x2="75" y2="310" stroke="var(--chart-muted)" stroke-width="2"></line>
     <line x1="75" y1="290" x2="85" y2="310" stroke="var(--chart-muted)" stroke-width="2"></line>
@@ -1054,8 +1114,12 @@ These aren't isolated business decisions happening in a vacuum. They track a str
         <tr><td>~1982</td><td>Libby cannery closes, Sacramento</td><td><strong>Thin.</strong> No contemporaneous news source located; exact year unconfirmed (early-1980s range, building NRHP-listed March 1982)</td></tr>
         <tr><td>1993</td><td>Bercut-Richards cannery closes, Sacramento</td><td><strong>Thin.</strong> No contemporaneous 1993 news source located; drawn from retrospective secondary sources</td></tr>
         <tr><td>2000</td><td>Tri Valley Growers files Chapter 11; ~11,000 Central Valley jobs lost</td><td>UC Davis Giannini Foundation (2004), Journal of Cooperatives (2009), cross-verified job figure</td></tr>
+        <tr><td>2010</td><td>Land O'Lakes closes its Tulare cheese plant, Tulare County; 80 jobs</td><td>Secondary WARN tracker, not independently verified; trade-press reporting</td></tr>
+        <tr><td>2012</td><td>Dawn Foods closes its Modesto bakeries, Stanislaus County; 265 jobs</td><td>Secondary WARN tracker, not independently verified; trade-press and local-news reporting</td></tr>
         <tr><td>2012–13</td><td>Campbell Soup closes Sacramento plant; 700 jobs</td><td>Company press release plus three independent local-news outlets</td></tr>
+        <tr><td>2012</td><td>Patterson Vegetable Company closes, Stanislaus County; 1,015 jobs (WARN total)</td><td>Secondary WARN tracker, not independently verified; local-news reporting</td></tr>
         <tr><td>2014</td><td>California's Sustainable Groundwater Management Act (SGMA) signed into law</td><td>Public legislative record</td></tr>
+        <tr><td>2016</td><td>ConAgra closes its Hunt-Wesson plant in Helm, Fresno County; 102 jobs</td><td>Trade-press reporting on the company's state WARN filing, not independently verified</td></tr>
         <tr><td>2020</td><td>Olam closes Lemoore tomato plant, Kings County; 567 jobs</td><td>WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting</td></tr>
         <tr><td>2024</td><td>Tropicale Foods closes Modesto ice-cream plant, Stanislaus County; 168–290 jobs</td><td>WARN filing, confirmed directly against the official state WARN report, plus local/national news coverage</td></tr>
         <tr><td>2024</td><td>Olam/OFI closes Firebaugh plant; 275 jobs</td><td>WARN filing plus local/trade-press reporting</td></tr>
@@ -1514,7 +1578,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
 ## Case studies, by county and year
 
-Four counties, eight documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. A systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 — not just news search — is what turned up most of the recent additions; it's a stronger method than keyword search alone, and it's how two of the closures below were found in the first place.
+Four counties, twelve documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. Two research passes built this list: a systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 (which is how most of the 2024–2026 closures below were found, rather than news search alone), and a second pass searching specifically for 2000–2020 closures, which turned up four previously undocumented events — proof the pattern this project tracks didn't start in 2020.
 
 ### Kings County
 
@@ -1526,20 +1590,27 @@ Three closures since 2020, all landing on just two towns, Hanford and Lemoore �
 
 ### Fresno County
 
+Two closures a decade apart, at different companies, with the same two-stage shape: a partial downgrade years before the full exit.
+
+- **2016** — [ConAgra closes its Hunt-Wesson plant in Helm](case-studies/fresno-2016-conagra-helm.md) — 102 jobs
 - **2024** — [OFI closes its Firebaugh plant](case-studies/fresno-2024-ofi-firebaugh.md) — 275 jobs
 
 ### Stanislaus County
 
-Four closures within about 21 months — more than any other county we track — spanning four sub-sectors: ice cream, beverage bottling, poultry, and tomato canning. The same compounding pattern documented in Kings County, found independently here.
+Six closures across two distinct clusters, fourteen years apart: two in 2012 (five months apart) and four within about 21 months in 2024–2026 — more documented closures than any other county we track, and the clearest evidence that the compounding pattern isn't new.
 
+- **2012** — [Dawn Foods closes its Modesto bakeries](case-studies/stanislaus-2012-dawn-foods-modesto.md) — 265 jobs
+- **2012** — [Patterson Vegetable Company closes](case-studies/stanislaus-2012-patterson-vegetable.md) — 1,015 jobs (WARN total), the largest single closure in this record
 - **2024** — [Tropicale Foods closes its Modesto ice-cream plant](case-studies/stanislaus-2024-tropicale-foods-modesto.md) — 168–290 jobs
 - **2024** — [Reyes Coca-Cola Bottling closes its Modesto facility](case-studies/stanislaus-2024-reyes-coca-cola-modesto.md) — 101 jobs
 - **2025** — [Foster Farms ends fresh-turkey operations in Turlock](case-studies/stanislaus-2025-foster-farms-turlock.md) — 478–519 jobs
-- **2026** — [Del Monte closes its Modesto/Hughson canneries](case-studies/stanislaus-2026-del-monte-modesto-hughson.md) — 765 jobs, the largest single closure in this record
+- **2026** — [Del Monte closes its Modesto/Hughson canneries](case-studies/stanislaus-2026-del-monte-modesto-hughson.md) — 765 jobs
 
 ### Tulare County
 
-No documented closure case study yet. Tulare carries real, continuing exposure to the same sector — it appears inside the broader ~60-closure wave that hit the region in 2024 (Ruiz Foods' Tulare closure, 215 jobs, among others) — but we don't yet have a primary-sourced closure event of our own to build a page around. Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless; we're not waiting on the narrative to publish the number.
+- **2010** — [Land O'Lakes closes its Tulare cheese plant](case-studies/tulare-2010-land-olakes-tulare.md) — 80 jobs
+
+Tulare carries real, continuing exposure to the same sector beyond this one case study — it appears inside the broader ~60-closure wave that hit the region in 2024 (Ruiz Foods' Tulare closure, 215 jobs, among others). Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
 
 ## What we're documenting
 

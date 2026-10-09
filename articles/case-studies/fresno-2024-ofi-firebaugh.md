@@ -29,7 +29,7 @@ Reporting around the Firebaugh closure situates it inside a much larger wave: ro
 
 ## Part of a larger pattern
 
-OFI/Olam is a second major commodity-processing company (alongside Del Monte) exiting this region more than once. The ~60-closure figure for 2024 alone is the strongest single piece of evidence in this archive that the pattern is regional and sector-wide, not one company's decisions.
+OFI/Olam is a second major commodity-processing company (alongside Del Monte) exiting this region more than once. The ~60-closure figure for 2024 alone is the strongest single piece of evidence in this archive that the pattern is regional and sector-wide, not one company's decisions. Fresno County's other documented closure, [ConAgra's 2016 exit from its Hunt-Wesson plant in Helm](fresno-2016-conagra-helm.md), shows the same company-level pattern seen here — a partial downgrade years before the eventual full closure — playing out independently at a different company, a decade earlier.
 
 ## Sources
 
