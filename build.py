@@ -25,6 +25,7 @@ PAGES = [
     ("articles/the-index.md", "the-index.html"),
     ("articles/case-studies.md", "case-studies.html"),
     ("articles/case-studies/kings-2020-olam-lemoore.md", "case-studies/kings-2020-olam-lemoore.html"),
+    ("articles/case-studies/kings-2023-lacey-milling-hanford.md", "case-studies/kings-2023-lacey-milling-hanford.html"),
     ("articles/case-studies/kings-2024-del-monte-hanford.md", "case-studies/kings-2024-del-monte-hanford.html"),
     ("articles/case-studies/kings-2025-leprino-lemoore.md", "case-studies/kings-2025-leprino-lemoore.html"),
     ("articles/case-studies/tulare-2010-land-olakes-tulare.md", "case-studies/tulare-2010-land-olakes-tulare.html"),
