@@ -20,7 +20,13 @@ Our first application: how dependent four Central Valley counties are on **food 
     <button type="button" class="layer-toggle-btn active" data-layer="sdi">Food-processing dependence (SDI)</button>
     <button type="button" class="layer-toggle-btn" data-layer="unemployment">Unemployment rate</button>
   </div>
-  <div id="cv-map-svg-container" style="min-height:360px"></div>
+  <div id="cv-map-svg-container" style="min-height:360px; position:relative;">
+    <div class="map-zoom-controls">
+      <button type="button" class="map-zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+      <button type="button" class="map-zoom-btn" data-zoom="out" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="map-zoom-btn map-zoom-reset" data-zoom="reset" aria-label="Reset zoom">Reset</button>
+    </div>
+  </div>
   <div class="chart-legend map-legend" id="cv-map-legend"></div>
   <details class="chart-table-toggle">
     <summary>View as table (both factors)</summary>
@@ -85,8 +91,19 @@ Our first application: how dependent four Central Valley counties are on **food 
   // 1.1 leaves a little breathing room for padding without wasting space.
   var width = container.clientWidth || 700, height = Math.round(width * 1.1);
   var currentLayer = "sdi";
-  var geoData = null;
-  var svg = null, path = null;
+  var svg = null, zoomG = null, path = null, zoomBehavior = null;
+
+  // Which counties are "in" the study is a fact about the data, not
+  // something the map code should hardcode -- any county that shows up
+  // in a layer's byFips gets full data treatment (own color, label,
+  // tooltip); every other California county renders as neutral
+  // reference geography. Add a county to a future layer and it becomes
+  // a focus county automatically, no map-code change required.
+  var focusFips = {};
+  Object.keys(layers).forEach(function (lk) {
+    Object.keys(layers[lk].byFips).forEach(function (fips) { focusFips[fips] = true; });
+  });
+  function isFocus(d) { return !!focusFips[d.id]; }
 
   // Natural Earth 1:50m Gray Earth (shaded relief + hypsography, public
   // domain), pre-warped from source Plate Carree into true Web Mercator
@@ -110,6 +127,24 @@ Our first application: how dependent four Central Valley counties are on **food 
       .attr("width", bottomRight[0] - topLeft[0])
       .attr("height", bottomRight[1] - topLeft[1])
       .attr("preserveAspectRatio", "none");
+  }
+
+  // Shared zoom-button wiring: + / - step by a fixed factor, Reset
+  // returns to the identity transform. Wheel-zoom is deliberately off
+  // (see the zoom behavior's filter below) so scrolling past the map
+  // scrolls the page, not the map -- these buttons, drag-to-pan, and
+  // pinch-to-zoom on touch are the supported ways in.
+  function setupZoomControls(container, svg, zoomBehavior) {
+    var controls = container.querySelector(".map-zoom-controls");
+    if (!controls) return;
+    controls.querySelectorAll(".map-zoom-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var action = btn.getAttribute("data-zoom");
+        if (action === "in") svg.transition().duration(200).call(zoomBehavior.scaleBy, 1.5);
+        else if (action === "out") svg.transition().duration(200).call(zoomBehavior.scaleBy, 1 / 1.5);
+        else svg.transition().duration(200).call(zoomBehavior.transform, d3.zoomIdentity);
+      });
+    });
   }
 
   function colorFor(layer, v) {
@@ -155,31 +190,42 @@ Our first application: how dependent four Central Valley counties are on **food 
     });
 
     svg.selectAll("path.county")
-      .attr("fill", function (d) { return colorFor(layer, layer.byFips[d.properties.fips].value); })
+      .attr("fill", function (d) {
+        var info = layer.byFips[d.id];
+        return info ? colorFor(layer, info.value) : "var(--chart-surface)";
+      })
+      .attr("fill-opacity", function (d) { return isFocus(d) ? 1 : 0.55; })
       .attr("data-label", function (d) {
-        var info = layer.byFips[d.properties.fips];
+        var info = layer.byFips[d.id];
+        if (!info) return null;
         return info.name + (info.note ? " (" + info.note + ")" : "");
       })
-      .attr("data-value", function (d) { return layer.tooltipLabel + " " + layer.format(layer.byFips[d.properties.fips].value); })
-      .attr("data-key-color", function (d) { return colorFor(layer, layer.byFips[d.properties.fips].value); });
+      .attr("data-value", function (d) {
+        var info = layer.byFips[d.id];
+        return info ? layer.tooltipLabel + " " + layer.format(info.value) : null;
+      })
+      .attr("data-key-color", function (d) {
+        var info = layer.byFips[d.id];
+        return info ? colorFor(layer, info.value) : null;
+      });
 
     svg.selectAll("text.county-label")
       .style("fill", function (d) {
         if (labelPlacement(d, path).leader) return "var(--chart-text-primary)"; // outside the fill, on neutral ground
-        var v = layer.byFips[d.properties.fips].value;
+        var v = layer.byFips[d.id].value;
         var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
         return t > 0.5 ? "#fff" : "var(--chart-text-primary)";
       })
-      .text(function (d) { return layer.byFips[d.properties.fips].name; });
+      .text(function (d) { return layer.byFips[d.id].name; });
 
     svg.selectAll("text.county-value")
       .style("fill", function (d) {
         if (labelPlacement(d, path).leader) return "var(--chart-text-secondary)";
-        var v = layer.byFips[d.properties.fips].value;
+        var v = layer.byFips[d.id].value;
         var t = (v - layer.domain[0]) / (layer.domain[1] - layer.domain[0]);
         return t > 0.5 ? "#fff" : "var(--chart-text-secondary)";
       })
-      .text(function (d) { return layer.format(layer.byFips[d.properties.fips].value); });
+      .text(function (d) { return layer.format(layer.byFips[d.id].value); });
 
     var legend = document.getElementById("cv-map-legend");
     var swatches = "";
@@ -190,59 +236,51 @@ Our first application: how dependent four Central Valley counties are on **food 
   }
 
   Promise.all([
-    fetch("/assets/data/central-valley-counties.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/california-counties.geojson").then(function (r) { return r.json(); }),
     fetch("/assets/data/california-outline.geojson").then(function (r) { return r.json(); })
   ]).then(function (results) {
-      var geo = results[0], allCaCounties = results[1], caOutline = results[2];
-      geoData = geo;
+      var allCaCounties = results[0], caOutline = results[1];
       svg = d3.select(container).append("svg")
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("role", "img")
-        .attr("aria-label", "Map of California, with Kings, Fresno, Tulare, and Stanislaus counties highlighted and shaded by a selectable factor");
+        .attr("aria-label", "Map of California, with Kings, Fresno, Tulare, and Stanislaus counties highlighted and shaded by a selectable factor. Scroll-wheel zoom is off; use the on-map zoom buttons, drag to pan, or pinch to zoom.");
 
-      // Fit to the whole state, not just the 4 focus counties, so the
+      // Fit to the whole state, not just the focus counties, so the
       // viewer sees where in California this data sits, not just the
       // data itself.
       var projection = d3.geoMercator().fitExtent([[20, 20], [width - 20, height - 20]], caOutline);
       path = d3.geoPath(projection);
 
-      addTerrain(svg, projection);
+      zoomG = svg.append("g").attr("class", "zoom-g");
 
-      // Every other California county: real geography, not data -- a
-      // light neutral wash over the terrain, thin stroke, no tooltip.
-      svg.selectAll("path.context-county")
-        .data(allCaCounties.features)
+      addTerrain(zoomG, projection);
+
+      var geoFeatures = allCaCounties.features;
+
+      zoomG.selectAll("path.county")
+        .data(geoFeatures)
         .enter()
         .append("path")
-        .attr("class", "context-county")
+        .attr("class", function (d) { return isFocus(d) ? "county chart-hit" : "county"; })
         .attr("d", path)
-        .attr("fill", "var(--chart-surface)")
-        .attr("fill-opacity", 0.55)
-        .attr("stroke", "var(--chart-baseline)")
-        .attr("stroke-width", 0.75);
+        .attr("vector-effect", "non-scaling-stroke")
+        .attr("stroke", function (d) { return isFocus(d) ? "var(--ink)" : "var(--chart-baseline)"; })
+        .attr("stroke-width", function (d) { return isFocus(d) ? 2.5 : 0.75; });
 
-      // The state border itself, bold, on top of the county wash.
-      svg.append("path")
+      // The state border itself, bold, on top of every county.
+      zoomG.append("path")
         .attr("class", "state-outline")
         .datum(caOutline.features[0])
         .attr("d", path)
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("fill", "none")
         .attr("stroke", "var(--ink)")
         .attr("stroke-width", 1.75);
 
-      svg.selectAll("path.county")
-        .data(geo.features)
-        .enter()
-        .append("path")
-        .attr("class", "county chart-hit")
-        .attr("d", path)
-        .attr("stroke", "var(--ink)")
-        .attr("stroke-width", 2.5);
+      var focusFeatures = geoFeatures.filter(isFocus);
+      var leaderData = focusFeatures.filter(function (d) { return labelPlacement(d, path).leader !== null; });
 
-      var leaderData = geo.features.filter(function (d) { return labelPlacement(d, path).leader !== null; });
-
-      svg.selectAll("line.county-leader")
+      zoomG.selectAll("line.county-leader")
         .data(leaderData)
         .enter()
         .append("line")
@@ -251,10 +289,11 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("y1", function (d) { return labelPlacement(d, path).leader.y1; })
         .attr("x2", function (d) { return labelPlacement(d, path).leader.x2; })
         .attr("y2", function (d) { return labelPlacement(d, path).leader.y2; })
+        .attr("vector-effect", "non-scaling-stroke")
         .attr("stroke", "var(--ink)")
         .attr("stroke-width", 1);
 
-      svg.selectAll("circle.county-anchor")
+      zoomG.selectAll("circle.county-anchor")
         .data(leaderData)
         .enter()
         .append("circle")
@@ -264,8 +303,8 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("r", 2.5)
         .attr("fill", "var(--ink)");
 
-      svg.selectAll("text.county-label")
-        .data(geo.features)
+      zoomG.selectAll("text.county-label")
+        .data(focusFeatures)
         .enter()
         .append("text")
         .attr("class", "county-label mark-label")
@@ -274,8 +313,8 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("text-anchor", "middle")
         .attr("font-size", 13);
 
-      svg.selectAll("text.county-value")
-        .data(geo.features)
+      zoomG.selectAll("text.county-value")
+        .data(focusFeatures)
         .enter()
         .append("text")
         .attr("class", "county-value")
@@ -291,6 +330,15 @@ Our first application: how dependent four Central Valley counties are on **food 
         .attr("fill", "none")
         .attr("stroke", "var(--map-frame)")
         .attr("stroke-width", 1.5);
+
+      zoomBehavior = d3.zoom()
+        .scaleExtent([1, 8])
+        .translateExtent([[0, 0], [width, height]])
+        .filter(function (event) { return event.type !== "wheel"; })
+        .on("zoom", function (event) { zoomG.attr("transform", event.transform); });
+      svg.call(zoomBehavior);
+
+      setupZoomControls(container, svg, zoomBehavior);
 
       render("sdi");
 

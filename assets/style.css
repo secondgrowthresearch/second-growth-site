@@ -207,6 +207,35 @@ li { margin-bottom: 0.4em; }
 .map-terrain { pointer-events: none; }
 .context-county, .county-ref { pointer-events: none; }
 
+/* Zoom controls -- wheel-zoom is off (it would hijack page scroll), so
+   these buttons are the primary way in, alongside drag-to-pan and
+   pinch-to-zoom on touch. */
+.map-zoom-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 3;
+}
+.map-zoom-btn {
+  background: var(--chart-surface);
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-family: "Work Sans", "Segoe UI", -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0;
+}
+.map-zoom-btn:hover { background: var(--line); }
+.map-zoom-reset { width: auto; font-size: 10px; padding: 0 6px; }
+
 /* Locator inset -- a small "where is this in the state" reference,
    the same convention print atlases use for an unfamiliar sub-region
    (their equivalent of an Alaska/Hawaii inset on a US map). */
