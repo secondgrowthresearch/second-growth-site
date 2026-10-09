@@ -32,6 +32,7 @@ PAGES = [
     ("articles/case-studies/stanislaus-2012-patterson-vegetable.md", "case-studies/stanislaus-2012-patterson-vegetable.html"),
     ("articles/case-studies/fresno-2016-conagra-helm.md", "case-studies/fresno-2016-conagra-helm.html"),
     ("articles/case-studies/fresno-2024-ofi-firebaugh.md", "case-studies/fresno-2024-ofi-firebaugh.html"),
+    ("articles/case-studies/tulare-2024-prima-wawona-cutler.md", "case-studies/tulare-2024-prima-wawona-cutler.html"),
     ("articles/case-studies/stanislaus-2024-tropicale-foods-modesto.md", "case-studies/stanislaus-2024-tropicale-foods-modesto.html"),
     ("articles/case-studies/stanislaus-2024-reyes-coca-cola-modesto.md", "case-studies/stanislaus-2024-reyes-coca-cola-modesto.html"),
     ("articles/case-studies/stanislaus-2025-foster-farms-turlock.md", "case-studies/stanislaus-2025-foster-farms-turlock.html"),

@@ -220,6 +220,12 @@ This research actually runs on two different geographies — county lines for th
       county: "06107", subbasin: null,
       events: [{label: "2010 — Land O'Lakes closes its Tulare cheese plant, Tulare County; 80 jobs", sourcing: "Secondary WARN tracker, not independently verified; trade-press reporting.", page: "case-studies/tulare-2010-land-olakes-tulare.html"}],
       photos: []
+    },
+    {
+      name: "Cutler", lon: -119.2890, lat: 36.5241, bases: ["county"],
+      county: "06107", subbasin: null,
+      events: [{label: "2024 — Prima Wawona closes its Cutler packing house, Tulare County; 5,411 jobs company-wide", sourcing: "Extensive news coverage and company statements; no official WARN filing found in this project's archive.", page: "case-studies/tulare-2024-prima-wawona-cutler.html"}],
+      photos: []
     }
   ];
 
@@ -880,7 +886,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
 
 ### The long arc, in one timeline
 
-"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first twelve events below are spread across more than a century — including a smaller cluster of four closures from 2010 to 2016 that this project only turned up by searching that window specifically, proof the compounding pattern didn't start in 2020; the last nine span about six years — though eight of those nine land within the final two, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
+"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first twelve events below are spread across more than a century — including a smaller cluster of four closures from 2010 to 2016 that this project only turned up by searching that window specifically, proof the compounding pattern didn't start in 2020; the last ten span about six years — though nine of those ten land within the final two, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
 
 <div class="chart" id="timeline-chart">
   <p class="chart-title">Central Valley/Sacramento commodity-ag processing, 1912–2026</p>
@@ -893,7 +899,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </div>
   <svg viewBox="0 0 780 560" role="img" aria-labelledby="tl-title tl-desc">
     <title id="tl-title">Timeline of Central Valley and Sacramento commodity-ag processing events, 1912 to 2026</title>
-    <desc id="tl-desc">Twenty-one events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, a cluster of four commodity-processing closures from 2010 to 2016 found by searching that window specifically, the 2014 Sustainable Groundwater Management Act, and a cluster of nine bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because eight of the nine fall within the final two years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
+    <desc id="tl-desc">Twenty-two events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, a cluster of four commodity-processing closures from 2010 to 2016 found by searching that window specifically, the 2014 Sustainable Groundwater Management Act, and a cluster of ten bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because nine of the ten fall within the final two years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
 
     <!-- Track 1: 1912-2020, main spine at y=150 -->
     <line class="axis-line" x1="70" y1="150" x2="740" y2="150"></line>
@@ -1024,6 +1030,16 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <text x="117.9" y="376" text-anchor="middle" font-size="10">Lemoore (tomato)</text>
     </g>
 
+    <!-- 2024 Prima Wawona Cutler (above, rust, close tier -- isolated,
+         plenty of clear space between Olam Lemoore 2020 and the dense
+         2024 cluster that starts at Tropicale) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="471.5" y1="330" x2="471.5" y2="315" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2024 — Prima Wawona closes its Cutler packing house, Tulare County; 5,411 jobs company-wide" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Extensive news coverage and company statements; no official WARN filing found in this project's archive." cx="471.5" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text x="471.5" y="288" text-anchor="middle" font-size="10">Cutler</text>
+    <text class="mark-label" x="471.5" y="305" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2024</text>
+    </g>
+
     <!-- 2024 Tropicale Foods Modesto (above, rust, FAR tier -- close enough in
          time to Firebaugh and Reyes Coca-Cola below that it needs the outer
          slot to avoid colliding with either label) -->
@@ -1121,6 +1137,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
         <tr><td>2014</td><td>California's Sustainable Groundwater Management Act (SGMA) signed into law</td><td>Public legislative record</td></tr>
         <tr><td>2016</td><td>ConAgra closes its Hunt-Wesson plant in Helm, Fresno County; 102 jobs</td><td>Trade-press reporting on the company's state WARN filing, not independently verified</td></tr>
         <tr><td>2020</td><td>Olam closes Lemoore tomato plant, Kings County; 567 jobs</td><td>WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting</td></tr>
+        <tr><td>2024</td><td>Prima Wawona closes its Cutler packing house, Tulare County; 5,411 jobs company-wide</td><td>Extensive news coverage and company statements; no official WARN filing found in this project's archive</td></tr>
         <tr><td>2024</td><td>Tropicale Foods closes Modesto ice-cream plant, Stanislaus County; 168–290 jobs</td><td>WARN filing, confirmed directly against the official state WARN report, plus local/national news coverage</td></tr>
         <tr><td>2024</td><td>Olam/OFI closes Firebaugh plant; 275 jobs</td><td>WARN filing plus local/trade-press reporting</td></tr>
         <tr><td>2024</td><td>Reyes Coca-Cola Bottling closes Modesto facility, Stanislaus County; 101 jobs</td><td>WARN filing, confirmed directly against the official state WARN report</td></tr>
@@ -1578,7 +1595,7 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
 ## Case studies, by county and year
 
-Four counties, twelve documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. Two research passes built this list: a systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 (which is how most of the 2024–2026 closures below were found, rather than news search alone), and a second pass searching specifically for 2000–2020 closures, which turned up four previously undocumented events — proof the pattern this project tracks didn't start in 2020.
+Four counties, thirteen documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. Three research passes built this list: a systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 (which is how most of the 2024–2026 closures below were found, rather than news search alone), a second pass searching specifically for 2000–2020 closures (which turned up four previously undocumented events, proof the pattern didn't start in 2020), and a third pass that found Prima Wawona's 5,411-job liquidation — the largest closure in this project's record, and one the WARN-filing review itself missed entirely, because no official WARN filing for it exists in the archive this project checked.
 
 ### Kings County
 
@@ -1608,9 +1625,12 @@ Six closures across two distinct clusters, fourteen years apart: two in 2012 (fi
 
 ### Tulare County
 
-- **2010** — [Land O'Lakes closes its Tulare cheese plant](case-studies/tulare-2010-land-olakes-tulare.md) — 80 jobs
+Two closures fourteen years apart — the first a modest 80-job cheese-plant exit, the second the largest single job loss documented anywhere in this project.
 
-Tulare carries real, continuing exposure to the same sector beyond this one case study — it appears inside the broader ~60-closure wave that hit the region in 2024 (Ruiz Foods' Tulare closure, 215 jobs, among others). Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
+- **2010** — [Land O'Lakes closes its Tulare cheese plant](case-studies/tulare-2010-land-olakes-tulare.md) — 80 jobs
+- **2024** — [Prima Wawona closes its Cutler packing house](case-studies/tulare-2024-prima-wawona-cutler.md) — 5,411 jobs company-wide, the largest closure in this record
+
+Tulare carries real, continuing exposure to the same sector beyond these two case studies — it appears inside the broader ~60-closure wave that hit the region in 2024 (Ruiz Foods' Tulare closure, 215 jobs, among others). Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
 
 ## What we're documenting
 
