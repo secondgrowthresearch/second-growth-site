@@ -1608,12 +1608,13 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
 ## Case studies, by county and year
 
-Four counties, fourteen documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. Four research passes built this list: a systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 (which is how most of the 2024–2026 closures below were found, rather than news search alone), a second pass searching specifically for 2000–2020 closures (which turned up four previously undocumented events, proof the pattern didn't start in 2020), a third pass that found Prima Wawona's 5,411-job liquidation — the largest closure in this project's record, and one the WARN-filing review itself missed entirely, because no official WARN filing for it exists in the archive this project checked — and a fourth pass, direct full-text search of the Hanford Sentinel's own historical archive, which found a 136-year-old flour mill no other method had turned up.
+Four counties, twenty-four documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. Five research passes built this list: a systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 (which is how most of the 2024–2026 closures below were found, rather than news search alone), a second pass searching specifically for 2000–2020 closures (which turned up four previously undocumented events, proof the pattern didn't start in 2020), a third pass that found Prima Wawona's 5,411-job liquidation — the largest closure in this project's record, and one the WARN-filing review itself missed entirely, because no official WARN filing for it exists in the archive this project checked — a fourth pass, direct full-text search of the Hanford Sentinel's own historical archive, which found a 136-year-old flour mill no other method had turned up, and a fifth pass, direct full-text search of the Modesto Bee, Hanford Sentinel, and Visalia Times-Delta/Tulare Advance-Register archives, which pushed every county's documented record back to 1991–1993 and surfaced ten more closures, including this project's starkest unresolved job-count discrepancy (Seneca Foods, Modesto).
 
 ### Kings County
 
-Four closures since 2020, all landing on just two towns, Hanford and Lemoore — the first evidence in this project's record that the pattern compounds within a single place rather than just spreading across the region. One of the four — a 136-year-old flour mill — was found through direct historical-newspaper research, not the WARN-filing review that caught the other three.
+Five closures across thirty-three years, all landing on just two towns, Hanford and Lemoore, plus a third dairy-processing exit found in Hanford's own historical record — the clearest evidence in this project that the pattern compounds within a single place rather than just spreading across the region, and that it isn't new. Two of the five — a 136-year-old flour mill and a 1993 dairy plant — were found through direct historical-newspaper research, not the WARN-filing review that caught the others.
 
+- **1993** — [Safeway closes its Hanford milk plant](case-studies/kings-1993-safeway-hanford.md) — 36 jobs
 - **2020** — [Olam's Lemoore tomato plant closes](case-studies/kings-2020-olam-lemoore.md) — 567 jobs
 - **2023** — [Lacey Milling Co. closes, Hanford](case-studies/kings-2023-lacey-milling-hanford.md) — founded 1887, the longest-running facility in this record
 - **2024** — [Del Monte closes its Hanford tomato plant](case-studies/kings-2024-del-monte-hanford.md) — 378–500+ jobs
@@ -1621,30 +1622,39 @@ Four closures since 2020, all landing on just two towns, Hanford and Lemoore —
 
 ### Fresno County
 
-Two closures a decade apart, at different companies, with the same two-stage shape: a partial downgrade years before the full exit.
+Three closures across eight years — two full exits a decade apart with the same two-stage shape (a partial downgrade years before the full closure), plus one consolidation where the plant stayed open under a new, Central-Valley-based owner.
 
 - **2016** — [ConAgra closes its Hunt-Wesson plant in Helm](case-studies/fresno-2016-conagra-helm.md) — 102 jobs
+- **2024** — [Cargill cuts 178 jobs in Fresno after selling its beef plant](case-studies/fresno-2024-cargill-fresno.md) — a consolidation, not a closure
 - **2024** — [OFI closes its Firebaugh plant](case-studies/fresno-2024-ofi-firebaugh.md) — 275 jobs
 
 ### Stanislaus County
 
-Six closures across two distinct clusters, fourteen years apart: two in 2012 (five months apart) and four within about 21 months in 2024–2026 — more documented closures than any other county we track, and the clearest evidence that the compounding pattern isn't new.
+Eleven closures across five distinct clusters spanning thirty-three years — more documented closures than any other county we track, and the deepest, most continuous closure record in this entire project.
 
+- **1993** — [ConAgra closes its Banquet plant in Turlock](case-studies/stanislaus-1993-conagra-banquet-turlock.md) — 600 jobs
+- **2007–08** — [Hershey closes its Oakdale candy plant](case-studies/stanislaus-2007-hershey-oakdale.md) — ~575 jobs, moved to Mexico
 - **2012** — [Dawn Foods closes its Modesto bakeries](case-studies/stanislaus-2012-dawn-foods-modesto.md) — 265 jobs
 - **2012** — [Patterson Vegetable Company closes](case-studies/stanislaus-2012-patterson-vegetable.md) — 1,015 jobs (WARN total), the largest single closure in this record
+- **2013–14** — [Post closes its Grape-Nuts plant](case-studies/stanislaus-2013-post-foods-modesto.md) — ~140 jobs
+- **2018** — [Seneca Foods closes its Modesto cannery](case-studies/stanislaus-2018-seneca-foods-modesto.md) — 265 or 1,975 jobs, an unresolved discrepancy
 - **2024** — [Tropicale Foods closes its Modesto ice-cream plant](case-studies/stanislaus-2024-tropicale-foods-modesto.md) — 168–290 jobs
 - **2024** — [Reyes Coca-Cola Bottling closes its Modesto facility](case-studies/stanislaus-2024-reyes-coca-cola-modesto.md) — 101 jobs
 - **2025** — [Foster Farms ends fresh-turkey operations in Turlock](case-studies/stanislaus-2025-foster-farms-turlock.md) — 478–519 jobs
+- **2025** — [Bronco Wine cuts about 230 jobs in Ceres](case-studies/stanislaus-2025-bronco-wine-ceres.md) — the first wine-industry case in this record
 - **2026** — [Del Monte closes its Modesto/Hughson canneries](case-studies/stanislaus-2026-del-monte-modesto-hughson.md) — 765 jobs
 
 ### Tulare County
 
-Two closures fourteen years apart — the first a modest 80-job cheese-plant exit, the second the largest single job loss documented anywhere in this project.
+Five closures spanning thirty-three years — from a world-class fruit ranch's quiet last act to the largest single job loss documented anywhere in this project.
 
+- **1991** — [Tagus Ranch's raisin plant closes near Tulare](case-studies/tulare-1991-tagus-ranch.md) — 60 jobs
+- **1992** — [Kraft closes its Louis Rich turkey plant](case-studies/tulare-1992-kraft-louis-rich-tulare.md) — 1,400 jobs, the largest closure in this county's record
 - **2010** — [Land O'Lakes closes its Tulare cheese plant](case-studies/tulare-2010-land-olakes-tulare.md) — 80 jobs
+- **2024** — [Ruiz Foods closes its Tulare plant](case-studies/tulare-2024-ruiz-foods-tulare.md) — 215 jobs, a consolidation to the company's Dinuba plant
 - **2024** — [Prima Wawona closes its Cutler packing house](case-studies/tulare-2024-prima-wawona-cutler.md) — 5,411 jobs company-wide, the largest closure in this record
 
-Tulare carries real, continuing exposure to the same sector beyond these two case studies — it appears inside the broader ~60-closure wave that hit the region in 2024 (Ruiz Foods' Tulare closure, 215 jobs, among others). Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
+Tulare carries real, continuing exposure to the same sector beyond these five case studies — it appears inside the broader ~60-closure wave that hit the region in 2024. Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
 
 ## What we're documenting
 
