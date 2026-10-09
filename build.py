@@ -24,6 +24,11 @@ PAGES = [
     ("articles/home.md", "index.html"),
     ("articles/the-index.md", "the-index.html"),
     ("articles/case-studies.md", "case-studies.html"),
+    ("articles/case-studies/kings-2020-olam-lemoore.md", "case-studies/kings-2020-olam-lemoore.html"),
+    ("articles/case-studies/kings-2024-del-monte-hanford.md", "case-studies/kings-2024-del-monte-hanford.html"),
+    ("articles/case-studies/kings-2025-leprino-lemoore.md", "case-studies/kings-2025-leprino-lemoore.html"),
+    ("articles/case-studies/fresno-2024-ofi-firebaugh.md", "case-studies/fresno-2024-ofi-firebaugh.html"),
+    ("articles/case-studies/stanislaus-2026-del-monte-modesto-hughson.md", "case-studies/stanislaus-2026-del-monte-modesto-hughson.html"),
     ("articles/methodology.md", "methodology.html"),
     ("articles/data.md", "data.html"),
     ("articles/about.md", "about.html"),
@@ -42,6 +47,11 @@ NAV = [
 ]
 
 MD_LINK_RE = re.compile(r"\]\(([^)]+)\)")
+# Chart/map source-citation text is written as literal HTML inside JS string
+# literals (e.g. layer.source = '...see <a href="methodology.md">...'), not
+# as Markdown links -- MD_LINK_RE never sees it, so without this second pass
+# every "see Methodology"/"see Data" citation link across the site 404s.
+HTML_HREF_RE = re.compile(r'href="([^"]+\.md)"')
 
 
 def rewrite_links(md_text: str) -> str:
@@ -53,6 +63,14 @@ def rewrite_links(md_text: str) -> str:
         if basename in LINK_MAP:
             return "](" + LINK_MAP[basename] + ")"
         return match.group(0)
+
+    def html_repl(match: re.Match) -> str:
+        basename = match.group(1).split("/")[-1]
+        if basename in LINK_MAP:
+            return 'href="' + LINK_MAP[basename] + '"'
+        return match.group(0)
+
+    md_text = HTML_HREF_RE.sub(html_repl, md_text)
 
     return MD_LINK_RE.sub(repl, md_text)
 
