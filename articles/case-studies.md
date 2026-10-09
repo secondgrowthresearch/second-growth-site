@@ -189,7 +189,16 @@ This research actually runs on two different geographies — county lines for th
     {
       name: "Modesto/Hughson", lon: -120.9969, lat: 37.6391, bases: ["county"],
       county: "06099", subbasin: null,
-      events: [{label: "2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs", sourcing: "Multiple independent news outlets, federal aid records.", page: "case-studies/stanislaus-2026-del-monte-modesto-hughson.html"}],
+      events: [
+        {label: "2024 — Reyes Coca-Cola Bottling closes Modesto facility, Stanislaus County; 101 jobs", sourcing: "WARN filing, confirmed directly against the official state WARN report.", page: "case-studies/stanislaus-2024-reyes-coca-cola-modesto.html"},
+        {label: "2026 — Del Monte closes Modesto/Hughson canneries, Stanislaus County; 765 jobs", sourcing: "Multiple independent news outlets, federal aid records.", page: "case-studies/stanislaus-2026-del-monte-modesto-hughson.html"}
+      ],
+      photos: []
+    },
+    {
+      name: "Turlock", lon: -120.8466, lat: 37.4947, bases: ["county"],
+      county: "06099", subbasin: null,
+      events: [{label: "2025 — Foster Farms ends fresh-turkey operations, Turlock, Stanislaus County; 478–519 jobs", sourcing: "WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting.", page: "case-studies/stanislaus-2025-foster-farms-turlock.html"}],
       photos: []
     }
   ];
@@ -851,7 +860,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
 
 ### The long arc, in one timeline
 
-"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first eight events below are spread across more than a century; the last six span about six years — though five of those six land within the final two, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
+"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first eight events below are spread across more than a century; the last eight span about six years — though seven of those eight land within the final two, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
 
 <div class="chart" id="timeline-chart">
   <p class="chart-title">Central Valley/Sacramento commodity-ag processing, 1912–2026</p>
@@ -864,7 +873,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </div>
   <svg viewBox="0 0 780 560" role="img" aria-labelledby="tl-title tl-desc">
     <title id="tl-title">Timeline of Central Valley and Sacramento commodity-ag processing events, 1912 to 2026</title>
-    <desc id="tl-desc">Fourteen events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, the 2012-13 Campbell Soup closure, the 2014 Sustainable Groundwater Management Act, and a cluster of six bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because five of the six fall within the final two years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
+    <desc id="tl-desc">Sixteen events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, the 2012-13 Campbell Soup closure, the 2014 Sustainable Groundwater Management Act, and a cluster of eight bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because seven of the eight fall within the final two years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
 
     <!-- Track 1: 1912-2020, main spine at y=150 -->
     <line class="axis-line" x1="70" y1="150" x2="740" y2="150"></line>
@@ -939,7 +948,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <!-- Break / zoom annotation -->
     <line x1="715" y1="140" x2="725" y2="160" stroke="var(--chart-muted)" stroke-width="2"></line>
     <line x1="725" y1="140" x2="735" y2="160" stroke="var(--chart-muted)" stroke-width="2"></line>
-    <text x="405" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="var(--chart-text-secondary)">↓ zoomed in below: 2020–2026 (six events, five in the last two years) ↓</text>
+    <text x="405" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="var(--chart-text-secondary)">↓ zoomed in below: 2020–2026 ↓</text>
     <line x1="65" y1="290" x2="75" y2="310" stroke="var(--chart-muted)" stroke-width="2"></line>
     <line x1="75" y1="290" x2="85" y2="310" stroke="var(--chart-muted)" stroke-width="2"></line>
 
@@ -954,7 +963,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <text x="117.9" y="376" text-anchor="middle" font-size="10">Lemoore (tomato)</text>
     </g>
 
-    <!-- 2024 Olam/OFI Firebaugh (above, rust, middle) -->
+    <!-- 2024 Olam/OFI Firebaugh (above, rust, close tier) -->
     <g class="tl-event" data-category="closure">
     <line x1="516.0" y1="330" x2="516.0" y2="315" class="axis-line"></line>
     <circle class="chart-hit" tabindex="0" role="button" data-label="2024 — Olam/OFI closes Firebaugh plant (dried onion/parsley), western Fresno County; 275 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="WARN filing plus local/trade-press reporting." cx="516.0" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
@@ -962,12 +971,30 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <text class="mark-label" x="516.0" y="305" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2024</text>
     </g>
 
-    <!-- 2025 Del Monte Chapter 11 (below, denim, middle) -->
+    <!-- 2024 Reyes Coca-Cola Modesto (below, rust, FAR tier -- four
+         events land within 11 months here, so this cluster uses all
+         four vertical tiers instead of the usual two) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="534.1" y1="330" x2="534.1" y2="362" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2024 — Reyes Coca-Cola Bottling closes Modesto facility, Stanislaus County; 101 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="WARN filing, confirmed directly against the official state WARN report." cx="534.1" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text class="mark-label" x="534.1" y="378" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2024</text>
+    <text x="534.1" y="394" text-anchor="middle" font-size="10">Coca-Cola</text>
+    </g>
+
+    <!-- 2025 Foster Farms Turlock (above, rust, far tier) -->
+    <g class="tl-event" data-category="closure">
+    <line x1="555.2" y1="330" x2="555.2" y2="280" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="2025 — Foster Farms ends fresh-turkey operations, Turlock, Stanislaus County; 478–519 jobs" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting." cx="555.2" cy="330" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text x="555.2" y="253" text-anchor="middle" font-size="10">Turlock</text>
+    <text class="mark-label" x="555.2" y="270" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">2025</text>
+    </g>
+
+    <!-- 2025 Del Monte Chapter 11 (below, denim, close tier) -->
     <g class="tl-event" data-category="bankruptcy">
     <line x1="596.4" y1="330" x2="596.4" y2="345" class="axis-line"></line>
     <circle class="chart-hit" tabindex="0" role="button" data-label="2025 — Del Monte Foods files Chapter 11" data-value="Bankruptcy" data-key-color="var(--chart-cat-2)" data-sourcing="Company bankruptcy filing, July 2025." cx="596.4" cy="330" r="6" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="2"></circle>
     <text class="mark-label" x="596.4" y="360" text-anchor="middle" fill="var(--chart-cat-2)" font-size="12">2025</text>
-    <text x="596.4" y="376" text-anchor="middle" font-size="10">Del Monte Ch. 11</text>
+    <text x="596.4" y="376" text-anchor="middle" font-size="10">Ch. 11</text>
     </g>
 
     <!-- 2025-26 Leprino Foods Lemoore East (above, rust, close tier) -->
@@ -1020,6 +1047,8 @@ These aren't isolated business decisions happening in a vacuum. They track a str
         <tr><td>2014</td><td>California's Sustainable Groundwater Management Act (SGMA) signed into law</td><td>Public legislative record</td></tr>
         <tr><td>2020</td><td>Olam closes Lemoore tomato plant, Kings County; 567 jobs</td><td>WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting</td></tr>
         <tr><td>2024</td><td>Olam/OFI closes Firebaugh plant; 275 jobs</td><td>WARN filing plus local/trade-press reporting</td></tr>
+        <tr><td>2024</td><td>Reyes Coca-Cola Bottling closes Modesto facility, Stanislaus County; 101 jobs</td><td>WARN filing, confirmed directly against the official state WARN report</td></tr>
+        <tr><td>2025</td><td>Foster Farms ends fresh-turkey operations, Turlock, Stanislaus County; 478–519 jobs</td><td>WARN filing, confirmed directly against the official state WARN report, plus trade-press reporting</td></tr>
         <tr><td>2025</td><td>Del Monte Foods files Chapter 11</td><td>Company bankruptcy filing, July 2025</td></tr>
         <tr><td>2025–26</td><td>Leprino Foods closes Lemoore East mozzarella plant, Kings County; 368 jobs</td><td>WARN filings, confirmed directly against the official state WARN report, plus local news (KMPH, Fresno Bee)</td></tr>
         <tr><td>2026</td><td>Del Monte closes Hanford tomato plant, Kings County; 378–500+ jobs</td><td>WARN filing plus local/trade-press reporting</td></tr>
@@ -1473,11 +1502,11 @@ Hanford and Corcoran are both Kings County — but they sit in two different **g
 
 ## Case studies, by county and year
 
-Four counties, five documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath.
+Four counties, seven documented closures so far — each gets its own page: what happened, the full citation trail, and an honest accounting of what we know (and don't) about its aftermath. A systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 — not just news search — is what turned up most of the recent additions; it's a stronger method than keyword search alone, and it's how two of the closures below were found in the first place.
 
 ### Kings County
 
-Three closures since 2020 — more than any other county we track, and the clearest evidence that this pattern compounds within a single place rather than just spreading across the region. All three sit on just two towns, Hanford and Lemoore.
+Three closures since 2020, all landing on just two towns, Hanford and Lemoore — the first evidence in this project's record that the pattern compounds within a single place rather than just spreading across the region.
 
 - **2020** — [Olam's Lemoore tomato plant closes](case-studies/kings-2020-olam-lemoore.md) — 567 jobs
 - **2024** — [Del Monte closes its Hanford tomato plant](case-studies/kings-2024-del-monte-hanford.md) — 378–500+ jobs
@@ -1489,7 +1518,12 @@ Three closures since 2020 — more than any other county we track, and the clear
 
 ### Stanislaus County
 
-- **2026** — [Del Monte closes its Modesto/Hughson canneries](case-studies/stanislaus-2026-del-monte-modesto-hughson.md) — 765 jobs, the largest closure in this record
+Four closures within about 18 months — more than any other county we track — spanning three sub-sectors: ice cream, beverage bottling, poultry, and tomato canning. The same compounding pattern documented in Kings County, found independently here.
+
+- **2024** — Tropicale Foods, Modesto closes — 168 jobs (WARN-confirmed; not yet its own page)
+- **2024** — [Reyes Coca-Cola Bottling closes its Modesto facility](case-studies/stanislaus-2024-reyes-coca-cola-modesto.md) — 101 jobs
+- **2025** — [Foster Farms ends fresh-turkey operations in Turlock](case-studies/stanislaus-2025-foster-farms-turlock.md) — 478–519 jobs
+- **2026** — [Del Monte closes its Modesto/Hughson canneries](case-studies/stanislaus-2026-del-monte-modesto-hughson.md) — 765 jobs, the largest single closure in this record
 
 ### Tulare County
 
