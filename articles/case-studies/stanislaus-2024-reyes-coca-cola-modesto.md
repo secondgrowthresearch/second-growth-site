@@ -28,7 +28,7 @@ Unlike most of the closures in this project's record, no dedicated local news st
 
 ## Part of a larger pattern
 
-A systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 placed this closure inside a cluster of four landing on Stanislaus County within about 18 months: Tropicale Foods, Modesto (May 2024, 168 jobs), this one (Nov 2024), [Foster Farms' Turlock turkey operations](stanislaus-2025-foster-farms-turlock.md) (Jan 2025, 478+ jobs), and [Del Monte's Modesto/Hughson canneries](stanislaus-2026-del-monte-modesto-hughson.md) (Jan–Feb 2026, 765+ jobs) — the same compounding pattern already documented in Kings County, showing up independently in Stanislaus.
+A systematic review of every Fresno, Stanislaus, and Tulare County WARN filing since 2014 placed this closure inside a cluster of four landing on Stanislaus County within about 21 months: [Tropicale Foods' Modesto ice-cream plant](stanislaus-2024-tropicale-foods-modesto.md) (July 2024, 168 jobs), this one (Nov 2024), [Foster Farms' Turlock turkey operations](stanislaus-2025-foster-farms-turlock.md) (Jan 2025, 478+ jobs), and [Del Monte's Modesto/Hughson canneries](stanislaus-2026-del-monte-modesto-hughson.md) (April 2026, 765+ jobs) — the same compounding pattern already documented in Kings County, showing up independently in Stanislaus.
 
 ## Sources
 

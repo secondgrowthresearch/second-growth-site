@@ -28,6 +28,7 @@ PAGES = [
     ("articles/case-studies/kings-2024-del-monte-hanford.md", "case-studies/kings-2024-del-monte-hanford.html"),
     ("articles/case-studies/kings-2025-leprino-lemoore.md", "case-studies/kings-2025-leprino-lemoore.html"),
     ("articles/case-studies/fresno-2024-ofi-firebaugh.md", "case-studies/fresno-2024-ofi-firebaugh.html"),
+    ("articles/case-studies/stanislaus-2024-tropicale-foods-modesto.md", "case-studies/stanislaus-2024-tropicale-foods-modesto.html"),
     ("articles/case-studies/stanislaus-2024-reyes-coca-cola-modesto.md", "case-studies/stanislaus-2024-reyes-coca-cola-modesto.html"),
     ("articles/case-studies/stanislaus-2025-foster-farms-turlock.md", "case-studies/stanislaus-2025-foster-farms-turlock.html"),
     ("articles/case-studies/stanislaus-2026-del-monte-modesto-hughson.md", "case-studies/stanislaus-2026-del-monte-modesto-hughson.html"),
