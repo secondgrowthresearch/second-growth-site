@@ -35,7 +35,11 @@
      True neutral (R=G=B exactly), not just "barely warm": the data marks
      carry color; the chrome doesn't. */
   --chart-text-secondary: #525252;
-  --chart-muted: #828282;
+  /* #828282 measured ~3.84:1 against white -- fails WCAG 2.1 AA's 4.5:1
+     minimum for normal-size text, and this var is used at 10-13px (axis
+     labels, chart-source captions). #6b6b6b clears it at ~5.3:1 while
+     staying in the same "muted, not primary" register. */
+  --chart-muted: #6b6b6b;
   --chart-gridline: #e3e3e3;
   --chart-baseline: #c2c2c2;
 
@@ -585,6 +589,28 @@ li { margin-bottom: 0.4em; }
 }
 .chart-download-btn:hover { background: var(--line); }
 .chart-download-btn:focus-visible { outline: 3px solid var(--wheat-dark); outline-offset: 2px; }
+
+/* Skip link -- visually hidden off-screen until it receives keyboard
+   focus (WCAG 2.1 SC 2.4.1, Bypass Blocks). Lets a keyboard/screen-reader
+   user jump past the full nav instead of tabbing through all of it on
+   every page. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.75em 1.25em;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--wheat);
+}
+
+.skip-link:focus {
+  left: 10px;
+  top: 10px;
+}
 
 /* Header */
 

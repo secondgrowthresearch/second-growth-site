@@ -18,6 +18,7 @@ ROOT = Path(__file__).parent
 SITE = ROOT / "site"
 SITE_NAME = "Second Growth"
 SITE_TAGLINE = "Documenting what happens to a place's people and economy when the single industry that organized it exits."
+DOMAIN = "https://secondgrowthresearch.org"
 
 # source markdown path (relative to ROOT) -> output path (relative to SITE, root-relative URL)
 PAGES = [
@@ -128,23 +129,70 @@ def page_title(html_body: str, fallback: str) -> str:
     return fallback
 
 
-def render_page(title: str, body_html: str, out_path: Path) -> str:
+def page_description(html_body: str, max_len: int = 155) -> str:
+    """First real paragraph after the H1, stripped to plain text and
+    truncated at a word boundary -- gives every page its own, distinct
+    meta description (and OG/Twitter description) instead of the one
+    sitewide tagline every page previously shared. Falls back to
+    SITE_TAGLINE if no usable paragraph is found (e.g. a page that opens
+    straight into a stat-pair or chart rather than prose)."""
+    paragraphs = re.findall(r"<p>(.*?)</p>", html_body, re.S)
+    for raw in paragraphs:
+        text = re.sub(r"<[^>]+>", "", raw)
+        text = re.sub(r"\s+", " ", text).strip()
+        if len(text) >= 40:  # skip stray short/empty paragraphs
+            break
+    else:
+        return SITE_TAGLINE
+
+    if len(text) <= max_len:
+        return text
+    truncated = text[:max_len].rsplit(" ", 1)[0]
+    return truncated.rstrip(",;:") + "…"
+
+
+def html_attr_escape(text: str) -> str:
+    return (
+        text.replace("&", "&amp;")
+        .replace('"', "&quot;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
+
+
+def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str:
     nav_links = "\n".join(
         f'      <a href="{href}">{label}</a>' for href, label in NAV
     )
+    url_path = "/" if out_rel == "index.html" else "/" + out_rel
+    canonical_url = DOMAIN + url_path
+    full_title = f"{title} — {SITE_NAME}"
+    description = html_attr_escape(page_description(body_html))
+    full_title_attr = html_attr_escape(full_title)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} — {SITE_NAME}</title>
-<meta name="description" content="{SITE_TAGLINE}">
+<meta name="description" content="{description}">
+<link rel="canonical" href="{canonical_url}">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{SITE_NAME}">
+<meta property="og:title" content="{full_title_attr}">
+<meta property="og:description" content="{description}">
+<meta property="og:url" content="{canonical_url}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{full_title_attr}">
+<meta name="twitter:description" content="{description}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">{SITE_NAME}</a>
@@ -153,7 +201,7 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
     </nav>
   </div>
 </header>
-<main class="wrap content">
+<main class="wrap content" id="main-content">
 {body_html}
 </main>
 <footer class="site-footer">
@@ -397,7 +445,30 @@ def render_page(title: str, body_html: str, out_path: Path) -> str:
 """
 
 
+def validate_pages() -> None:
+    """build.py hardcodes PAGES rather than globbing articles/ -- deliberate
+    (explicit over magic), but it means a new .md file left out of PAGES
+    previously built silently with no error and no page produced. This
+    catches that failure mode loudly, before any output is written, instead
+    of after a build that looked clean."""
+    known_sources = {src_rel for src_rel, _ in PAGES}
+    on_disk = {
+        str(p.relative_to(ROOT)).replace("\\", "/")
+        for p in (ROOT / "articles").rglob("*.md")
+    }
+    orphaned = sorted(on_disk - known_sources)
+    if orphaned:
+        raise SystemExit(
+            "build.py: found .md file(s) under articles/ not listed in PAGES "
+            "-- they would build silently with no output page:\n  "
+            + "\n  ".join(orphaned)
+            + "\n\nAdd each to the PAGES list in build.py, or delete it if unused."
+        )
+
+
 def main() -> None:
+    validate_pages()
+
     if SITE.exists():
         shutil.rmtree(SITE)
     SITE.mkdir(parents=True)
@@ -415,12 +486,33 @@ def main() -> None:
         body_html = md.convert(raw)
         title = page_title(body_html, fallback=out_rel)
         display_title = "Home" if title == SITE_NAME else title
-        out_path.write_text(render_page(display_title, body_html, out_path), encoding="utf-8")
+        out_path.write_text(render_page(display_title, body_html, out_path, out_rel), encoding="utf-8")
         print(f"built {out_rel}")
 
     # Assets
     shutil.copytree(ROOT / "assets", SITE / "assets", dirs_exist_ok=True)
     print("copied assets/ (style.css)")
+
+    # sitemap.xml + robots.txt -- every PAGES entry, root-relative URLs
+    # resolved against DOMAIN the same way canonical/OG tags are.
+    url_entries = "\n".join(
+        f"  <url><loc>{DOMAIN}{'/' if out_rel == 'index.html' else '/' + out_rel}</loc></url>"
+        for _, out_rel in PAGES
+    )
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{url_entries}\n"
+        "</urlset>\n"
+    )
+    (SITE / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    print("wrote sitemap.xml")
+
+    (SITE / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\n" f"Sitemap: {DOMAIN}/sitemap.xml\n",
+        encoding="utf-8",
+    )
+    print("wrote robots.txt")
 
     # Custom domain for GitHub Pages -- the site uses root-relative links
     # throughout (nav, /assets/..., fetch() calls), which only resolve
