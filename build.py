@@ -20,6 +20,11 @@ SITE = ROOT / "site"
 SITE_NAME = "Second Growth"
 SITE_TAGLINE = "Documenting what happens to a place's people and economy when the single industry that organized it exits."
 DOMAIN = "https://secondgrowthresearch.org"
+# GoatCounter site code (the subdomain of your dashboard URL, e.g.
+# "secondgrowth" for secondgrowth.goatcounter.com) -- no cookies, no
+# personal data, so it doesn't need a consent banner. Leave as None until
+# an account exists; the analytics script is only emitted when this is set.
+GOATCOUNTER_CODE = None
 
 # source markdown path (relative to ROOT) -> output path (relative to SITE, root-relative URL)
 PAGES = [
@@ -226,6 +231,12 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str
     full_title = f"{title} — {SITE_NAME}"
     description = html_attr_escape(page_description(body_html))
     full_title_attr = html_attr_escape(full_title)
+    goatcounter_tag = (
+        f'<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count" '
+        f'async src="//gc.zgo.at/count.js"></script>\n'
+        if GOATCOUNTER_CODE
+        else ""
+    )
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -247,7 +258,7 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
-</head>
+{goatcounter_tag}</head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
