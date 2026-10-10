@@ -889,7 +889,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
 
 ### The long arc, in one timeline
 
-"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first twelve events below are spread across more than a century — including a smaller cluster of four closures from 2010 to 2016 that this project only turned up by searching that window specifically, proof the compounding pattern didn't start in 2020; the last eleven span about six years — though nine of those eleven land within the final three, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
+"Fifty years" and "sixty closures in a single year" are two very different kinds of claim — one about a slow multi-generational pattern, one about a sudden acceleration. Both are true, and the gap between them is itself worth seeing: the first thirteen events below are spread across more than a century — including a smaller cluster of four closures from 2010 to 2016 that this project only turned up by searching that window specifically, proof the compounding pattern didn't start in 2020; the last eleven span about six years — though nine of those eleven land within the final three, the real acceleration point. The zoomed-in panel isn't a different chart — it's the same spine, broken and magnified so the recent cluster doesn't collapse into a single dot.
 
 <div class="chart" id="timeline-chart">
   <p class="chart-title">Central Valley/Sacramento commodity-ag processing, 1912–2026</p>
@@ -902,7 +902,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
   </div>
   <svg viewBox="0 0 780 560" role="img" aria-labelledby="tl-title tl-desc">
     <title id="tl-title">Timeline of Central Valley and Sacramento commodity-ag processing events, 1912 to 2026</title>
-    <desc id="tl-desc">Twenty-three events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s and 1993, the 2000 Tri Valley Growers bankruptcy, a cluster of four commodity-processing closures from 2010 to 2016 found by searching that window specifically, the 2014 Sustainable Groundwater Management Act, and a cluster of eleven bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because nine of the eleven fall within the final three years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
+    <desc id="tl-desc">Twenty-four events from 1912 to 2026: cannery foundings, the 1966-67 UFW Forty Acres ownership precedent, cannery closures in the early 1980s, the 1992 Lindsay Olive Growers closure, and the 1993 Bercut-Richards closure, the 2000 Tri Valley Growers bankruptcy, a cluster of four commodity-processing closures from 2010 to 2016 found by searching that window specifically, the 2014 Sustainable Groundwater Management Act, and a cluster of eleven bankruptcy and closure events from 2020 to 2026, shown in a zoomed inset because nine of the eleven fall within the final three years. Click or tap any point to pin its full description and sourcing below the chart; the table below the chart also has full text and sourcing notes.</desc>
 
     <!-- Track 1: 1912-2020, main spine at y=150 -->
     <line class="axis-line" x1="70" y1="150" x2="740" y2="150"></line>
@@ -937,6 +937,20 @@ These aren't isolated business decisions happening in a vacuum. They track a str
     <circle class="chart-hit" tabindex="0" role="button" data-label="~1982 — Libby, McNeill &amp; Libby cannery closes, Sacramento (closure date not firmly confirmed)" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Thin. No contemporaneous news source located; exact year unconfirmed (early-1980s range, building NRHP-listed March 1982)." cx="504.3" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2" stroke-dasharray="2,1.5"></circle>
     <text class="mark-label" x="504.3" y="180" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">~1982</text>
     <text x="504.3" y="196" text-anchor="middle" font-size="10">Libby closes*</text>
+    </g>
+
+    <!-- 1992 Lindsay Olive Growers closes (far-below, rust, middle --
+         chronologically sits between ~1982 Libby and 1993 Bercut-Richards;
+         nudged a few px left of its strict linear x-position (~566) and
+         given the unused far-below tier rather than the close tiers its
+         two neighbors already occupy, so all three labels clear each
+         other -- same collision-avoidance approach already used for the
+         denser 2010-2016 cluster below. -->
+    <g class="tl-event" data-category="closure">
+    <line x1="558" y1="150" x2="558" y2="200" class="axis-line"></line>
+    <circle class="chart-hit" tabindex="0" role="button" data-label="1992 — Lindsay Olive Growers closes its olive cannery, Lindsay, Tulare County; the world's largest olive-packing operation at its peak (~500 jobs); closure-year headcount not confirmed" data-value="Closure" data-key-color="var(--chart-cat-1)" data-sourcing="Sun-Gazette (Tulare County) retrospective coverage. Employment at the moment of closure not independently confirmed — see the full case study for the plant's two later, separately sourced reopening attempts." cx="558" cy="150" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text class="mark-label" x="558" y="215" text-anchor="middle" fill="var(--chart-cat-1)" font-size="12">1992</text>
+    <text x="558" y="231" text-anchor="middle" font-size="10">Lindsay</text>
     </g>
 
     <!-- 1993 Bercut-Richards closes (above, rust, middle, uncertain = dashed) -->
@@ -1140,6 +1154,7 @@ These aren't isolated business decisions happening in a vacuum. They track a str
         <tr><td>1931</td><td>Bercut-Richards cannery founded, Sacramento</td><td>Well documented</td></tr>
         <tr><td>1966–67</td><td>Forty Acres becomes UFW headquarters; Farm Worker Cooperative founded, Delano</td><td>NPS National Historic Landmark nomination (2008)</td></tr>
         <tr><td>~1982</td><td>Libby cannery closes, Sacramento</td><td><strong>Thin.</strong> No contemporaneous news source located; exact year unconfirmed (early-1980s range, building NRHP-listed March 1982)</td></tr>
+        <tr><td>1992</td><td>Lindsay Olive Growers closes its olive cannery, Lindsay, Tulare County; the world's largest olive-packing operation at its peak (~500 jobs); closure-year headcount not confirmed</td><td>Sun-Gazette (Tulare County) retrospective coverage; employment at closure not independently confirmed</td></tr>
         <tr><td>1993</td><td>Bercut-Richards cannery closes, Sacramento</td><td><strong>Thin.</strong> No contemporaneous 1993 news source located; drawn from retrospective secondary sources</td></tr>
         <tr><td>2000</td><td>Tri Valley Growers files Chapter 11; ~11,000 Central Valley jobs lost</td><td>UC Davis Giannini Foundation (2004), Journal of Cooperatives (2009), cross-verified job figure</td></tr>
         <tr><td>2010</td><td>Land O'Lakes closes its Tulare cheese plant, Tulare County; 80 jobs</td><td>Secondary WARN tracker, not independently verified; trade-press reporting</td></tr>
