@@ -32,7 +32,7 @@ Primary and contemporaneous sourcing for Central Valley/Sacramento commodity-ag 
 
 ## Photographs
 
-Historical photographs on this site are drawn from the Library of Congress's Farm Security Administration/Office of War Information Collection and Historic American Buildings Survey — U.S. government works, confirmed public domain on a per-item basis before use, not assumed from a collection's general reputation. Several other candidate images (1966 Delano UFW photographs, Sacramento cannery interior photographs) were identified and explicitly excluded after turning out to be under copyright.
+Historical photographs on this site are drawn from the Library of Congress's Farm Security Administration/Office of War Information Collection and Historic American Buildings Survey — U.S. government works, confirmed public domain on a per-item basis before use, not assumed from a collection's general reputation. Several other candidate images (1966 Delano UFW photographs, Sacramento cannery interior photographs) were identified and explicitly excluded after turning out to be under copyright. The two Lindsay, California citrus-worker housing photographs on the home page (Dorothea Lange, February 1939, LOC item IDs 2017771233 and 2017771273) were confirmed the same way: rights-advisory and rights statements checked individually against the FSA/OWI collection's public-domain terms before use, not inferred from the collection's reputation.
 
 ## A note on completeness
 

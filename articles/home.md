@@ -4,7 +4,32 @@ Single-industry economies are not built evenly. Someone's labor and someone's la
 
 Second Growth documents what that exit actually looks like, with primary data and named sources, not inherited narrative. We research, we commission original studies, and we republish relevant work with permission — building a real record of what happens when a place's defining industry leaves, who it was built on, and what forms of ownership might have changed the outcome.
 
-We started in California's Central Valley, where commodity agriculture's long withdrawal has displaced farmworkers for over fifty years — plant by plant, county by county, documented in the record we're building. The question driving every study is the same: who owned it, who didn't, and what ownership would need to look like next time.
+## What this looked like, in one place
+
+Six towns sit in Tulare County's eastern citrus belt: Lindsay, Exeter, Strathmore, Farmersville, Woodville, and Tooleville.
+
+The citrus and olive industry that grew up around them did so quickly. Within a generation of the railroad arriving, Lindsay's cannery was the largest olive-packing operation in the world, and Exeter's groves had made it rich enough to call itself the Citrus Capital. The housing built for the people picking and packing that fruit did not keep pace. In the 1930s, the federal government built two labor camps, Woodville and Linnell, because the industry itself hadn't built anywhere for its workers to live. Decades later, residents of both were still living in what the public record calls "rudimentary shacks," which is a federal case study's way of saying nothing had changed. In 1929, a mob in Exeter burned a Filipino labor camp to the ground.
+
+<div class="figure-pair">
+  <figure class="figure">
+    <img src="/assets/photos/08-lindsay-citrus-worker-housing-1939.jpg" alt="Houses inhabited by Mexican citrus workers in Lindsay, California, 1939, simple wood-frame structures in a dirt yard.">
+    <figcaption class="figure-caption"><strong>Lindsay, California, February 1939.</strong> Housing for Mexican citrus workers, photographed eight years before Lindsay's olive cannery would make the town famous as the self-declared Olive Capital of the World. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+  </figure>
+  <figure class="figure">
+    <img src="/assets/photos/09-near-lindsay-citrus-workers-winter-quarters-1939.jpg" alt="Winter quarters for citrus workers near Lindsay, California, 1939, a row of small wooden cabins.">
+    <figcaption class="figure-caption"><strong>Near Lindsay, California, February 1939.</strong> Winter quarters for citrus workers, the off-season housing built around the same industry that was, in the same decade, becoming one of the most productive citrus and olive regions in the country. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+  </figure>
+</div>
+
+The industry kept growing through all of this. Then, in December 1991, one freeze took nearly all of it away in a single week, a $500 million crop gone, nine packing houses in Lindsay dark at once, eight to nine thousand pickers and packers suddenly out of work. These were not workers passing through for a season. They were neighbors who had been there for years. One of them, a packer named Oralia Martinez, watched a $264 weekly paycheck become a $71 unemployment check.
+
+What nobody in Lindsay could have known yet, in 1991, was that the same ground had been absorbing something nobody had tested for. The fertilizer the citrus industry had been buying since the 1920s contained perchlorate. Nobody tested for it until 2008, when the City of Lindsay found it in one of its own drinking wells and shut the well down. The lawsuit that followed took fourteen years. It ended in 2024 with a $9.5 million judgment, money that is now paying for the treatment plant the well still needs before it can reopen. A few miles over, in Strathmore, a nitrate problem has been sitting on the state's books, unresolved, since 1986.
+
+Lindsay Olive Growers' own cannery, the one that had made the town famous, closed in 1992, after its neighbors sued over brine in its wastewater and won. A federal loan guarantee helped reopen the plant under a different name in 1999. It closed again within six months. LoBue Bros., a family citrus packer that had quietly kept part of Lindsay's economy going in the years after, closed for good in 2017, eighty-three years after it started.
+
+So the order, in this one place, runs: the industry arrives, and the workers who built it live in housing the government had to build because the industry wouldn't. The industry keeps profiting while the ground underneath it is already absorbing something nobody has tested for yet. The freeze comes, and the people who were never the ones who owned anything lose the most. The water problem surfaces years later, and takes fourteen more years to resolve. The plant closes. The relief that follows reaches the owners faster than it reaches the workers. And the crop itself never leaves: Tulare County still grows more of it than any county in California. What's gone is the number of families and companies who used to run it themselves, which is the same pattern the [Sector Dependence Index](the-index.md) is built to measure, and the one [Consolidation](consolidation.md) documents at the scale of a whole industry.
+
+The question driving every study on this site is the same one this one place already answers in miniature: who owned it, who didn't, and what ownership would need to look like next time.
 
 ## A record, not a case
 
