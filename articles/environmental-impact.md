@@ -23,7 +23,10 @@ Parts of the San Joaquin Valley have sunk as much as 28 feet since the 1920s fro
 
 What addressing the underlying overdraft actually costs, rather than just repairing its damage, has a real figure too, from inside this project's own home subbasin: two separate, completed recharge-basin projects from the North Kings Groundwater Sustainability Agency (GSA — the local body created under the state's 2014 Sustainable Groundwater Management Act to manage each subbasin's water) — the Carter-Bybee basin (35 acres, $6 million, 840 acre-feet/year) and the Kenneson & Sanchez basins (47 acres, $6.47 million, roughly 960 acre-feet/year) — land within 6% of each other at **roughly $6,700 to $7,100 per acre-foot of new annual recharge capacity**, despite different funding sources and different years. That consistency makes it a real planning figure for this specific subbasin, not a one-off.
 
-
+<figure class="figure">
+  <img src="/assets/photos/11-san-joaquin-irrigation-pump-1938.jpg" alt="A man stands beside an electric irrigation pump at the edge of a field in the San Joaquin Valley, California, 1938, with an irrigation ditch and farmland in the background.">
+  <figcaption class="figure-caption"><strong>San Joaquin Valley, November 1938.</strong> An irrigation pump at the edge of a field — the ordinary, decades-long practice of pumping groundwater for irrigation that the paragraph above identifies as the actual cause of the valley floor's permanent subsidence, not a single dramatic event. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+</figure>
 
 ## When the lake came back
 

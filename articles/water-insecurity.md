@@ -15,6 +15,11 @@ This isn't a coincidence we're asserting — it's a pattern we went and checked,
   </div>
 </div>
 
+<figure class="figure">
+  <img src="/assets/photos/10-tulare-irrigation-pump-1938.jpg" alt="A butane-powered irrigation pump mounted on a wooden platform, Tulare County, California, 1938, with pipes, tanks, and a timber support structure.">
+  <figcaption class="figure-caption"><strong>Tulare County, November 1938.</strong> A Farm Security Administration irrigation pump, part of a federal program to cut small farmers' water costs — the same water infrastructure this region has run on for nearly a century, and whose modern reliability this page documents town by town. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
+</figure>
+
 ## What we found, county by county
 
 ### Kings County
