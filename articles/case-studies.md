@@ -1648,15 +1648,16 @@ Eleven closures across five distinct clusters spanning thirty-three years — mo
 
 ### Tulare County
 
-Five closures spanning thirty-three years — from a world-class fruit ranch's quiet last act to the largest single job loss documented anywhere in this project.
+Six closures spanning thirty-three years — from a world-class fruit ranch's quiet last act to the largest single job loss documented anywhere in this project.
 
 - **1991** — [Tagus Ranch's raisin plant closes near Tulare](case-studies/tulare-1991-tagus-ranch.md) — 60 jobs
 - **1992** — [Kraft closes its Louis Rich turkey plant](case-studies/tulare-1992-kraft-louis-rich-tulare.md) — 1,400 jobs, the largest closure in this county's record
+- **1992** — [Lindsay Olive Growers' cannery closes](case-studies/tulare-1992-lindsay-olive-growers-lindsay.md) — once the largest olive-packing operation in the world; reopened and closed twice since under different names, employment figure at this closure not confirmed
 - **2010** — [Land O'Lakes closes its Tulare cheese plant](case-studies/tulare-2010-land-olakes-tulare.md) — 80 jobs
 - **2024** — [Ruiz Foods closes its Tulare plant](case-studies/tulare-2024-ruiz-foods-tulare.md) — 215 jobs, a consolidation to the company's Dinuba plant
 - **2024** — [Prima Wawona closes its Cutler packing house](case-studies/tulare-2024-prima-wawona-cutler.md) — 5,411 jobs company-wide, the largest closure in this record
 
-Tulare carries real, continuing exposure to the same sector beyond these five case studies — it appears inside the broader ~60-closure wave that hit the region in 2024. Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
+Tulare carries real, continuing exposure to the same sector beyond these six case studies — it appears inside the broader ~60-closure wave that hit the region in 2024. Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
 
 ## What we're documenting
 

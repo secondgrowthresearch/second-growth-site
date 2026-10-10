@@ -34,6 +34,7 @@ PAGES = [
     ("articles/case-studies/kings-2025-leprino-lemoore.md", "case-studies/kings-2025-leprino-lemoore.html"),
     ("articles/case-studies/tulare-1991-tagus-ranch.md", "case-studies/tulare-1991-tagus-ranch.html"),
     ("articles/case-studies/tulare-1992-kraft-louis-rich-tulare.md", "case-studies/tulare-1992-kraft-louis-rich-tulare.html"),
+    ("articles/case-studies/tulare-1992-lindsay-olive-growers-lindsay.md", "case-studies/tulare-1992-lindsay-olive-growers-lindsay.html"),
     ("articles/case-studies/tulare-2010-land-olakes-tulare.md", "case-studies/tulare-2010-land-olakes-tulare.html"),
     ("articles/case-studies/stanislaus-1993-conagra-banquet-turlock.md", "case-studies/stanislaus-1993-conagra-banquet-turlock.html"),
     ("articles/case-studies/stanislaus-2007-hershey-oakdale.md", "case-studies/stanislaus-2007-hershey-oakdale.html"),
