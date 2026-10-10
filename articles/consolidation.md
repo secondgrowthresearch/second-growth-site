@@ -30,6 +30,14 @@ We didn't have to go looking for a separate consolidation story — it was alrea
 
 Four separate ownership chains, three different commodities (tomatoes, dairy, beef), and two outright bankruptcies behind them — all inside a record we built to document closures, not mergers.
 
+## A live test of the same question
+
+Everything above is retrospective — ownership chains we can only trace because the consolidation already happened. A new industry is arriving in these same four counties right now, which makes it possible to ask the same question in real time, before any pattern has had the chance to set: **AI data centers**, with five live proposals as of late 2026 — Naval Air Station Lemoore (Kings County), separate proposals in Modesto and Riverbank (Stanislaus County), and two county-fairgrounds "edge node" proposals in Kings and Tulare.
+
+So far, the answer runs the opposite direction from tomatoes and meatpacking. **Four separate companies sit behind the five proposals, with no shared ownership found between any of them, and no disclosed hyperscaler client behind any of the four:** Ameresco and CyrusOne at Lemoore; an unconfirmed developer, rumored but not company-confirmed, in Modesto; Aemetis — a renewable-fuels company, not a data-center operator, acting as Riverbank's industrial-site leasing agent — partnered with the little-documented Spartan Data Centers; and Global Stack USA, a company formed only seven months before its fairground proposals, at the Kings and Tulare sites. This industry is arriving fragmented, not pre-concentrated.
+
+**What this doesn't claim:** "no shared ownership found" is a negative search result, not proof one doesn't exist. A newly formed, thinly capitalized company like Global Stack, or the undisclosed backers of Spartan Data Centers, could easily be a shell for a hyperscaler that simply hasn't disclosed itself yet — the same way SK Foods' 2009 collapse and Olam's purchase of its Lemoore plant weren't visible as a single ownership chain until years after the fact. We're stating what the public record shows today, not predicting what it will show once any of these projects actually breaks ground.
+
 ## What we don't know, and what this doesn't claim
 
 - **We have not calculated a concentration ratio for any Central Valley-specific commodity.** The 77% cattle and 225-grower tomato figures above are national and statewide, not calculated for Kings, Fresno, Tulare, or Stanislaus counties specifically. Pairing them with our county-level closures is suggestive, not a rigorous local measure — the same caution we apply to every other number on this site.
@@ -42,5 +50,8 @@ Four separate ownership chains, three different commodities (tomatoes, dairy, be
 - U.S. Department of Agriculture, Food Safety and Inspection Service, meatpacking concentration data, FY2021 (via Schaefer et al., 2023).
 - Food & Water Watch / Jacobin-syndicated reporting, "Revealed: the True Extent of America's Food Monopolies, and Who Pays the Price."
 - This project's own case-study research: see the individual closure pages linked above for full primary sourcing on each ownership chain.
+- Data Center Dynamics, "Ameresco partners with CyrusOne to develop off-grid AI data center at Naval Air Station Lemoore in California" (2025).
+- Ceres Courier, "Data centers: existential threat or unique opportunity?" (Riverbank/Aemetis/Spartan Data Centers reporting, 2026).
+- Hanford Sentinel, "Kings fairground CEO: new project is not a traditional data center" (Global Stack USA, 2026).
 
 Full citation detail and source archive: [Data](data.md). Back to [Case Studies](case-studies.md).
