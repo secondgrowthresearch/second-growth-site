@@ -6,11 +6,22 @@ Second Growth documents what that exit actually looks like, with primary data an
 
 We started in California's Central Valley, where commodity agriculture's long withdrawal has displaced farmworkers for over fifty years — plant by plant, county by county, documented in the record we're building. The question driving every study is the same: who owned it, who didn't, and what ownership would need to look like next time.
 
+## A record, not a case
+
+We're not a law firm, a lobbying group, or an advocacy campaign, and this site doesn't argue a policy position. Our only claim is narrower and, we think, more durable: that the record we build is checkable — every figure traceable to a named source, every gap stated as plainly as every finding. Four different audiences have reason to distrust a secondhand account of what's happened to this region — the companies named in our case studies, the agencies that regulate them, the researchers who'd have to take our word for it otherwise, and the communities who've lived the thing we're describing. A checkable record is the only kind that can hold up to all four at once. Where a finding points toward a conclusion, we try to let the finding make that case on its own — see [Methodology](methodology.md) for exactly how we build the numbers, and where today's version still falls short.
+
+## Why this, now
+
+Four counties. Fifty-plus years. Twenty-four documented plant closures, and counting. Twenty communities where the same water crisis and the same farm-labor economy overlap, in some cases for decades. A valley floor that has sunk as much as 28 feet and will never rise back. None of this is abstract, and none of it is over — a new industry (AI data centers) is being proposed across these same four counties right now, which means the pattern this site exists to document is still being written, not just looked back on.
+
 ## What we do
 
 - **Primary research.** We work from source documents — closure filings, employment data, groundwater and land-use records, county reports — rather than secondhand accounts.
 - **Original studies.** Where the existing record has gaps, we commission or conduct new research to close them.
 - **A public evidence record.** What we find, and the sourcing behind it, is meant to be checkable — by the researchers, agencies, and communities who need it, not just read and forgotten.
+- **Making the pattern visible.** A single closure, well documented, can still look like an isolated event. Part of our work is putting findings next to each other — a closure next to its ownership history, a drinking-water crisis next to the farm-labor map, a damaged aquifer next to the industry now drawing on it — so the pattern underneath is something a reader can see for themselves, not something we have to tell them is there.
+
+**What we're not doing yet, by design:** connecting this record to a specific policy, program, or funding mechanism is a later phase of this work, not this one. Right now the record itself — getting it right, sourcing it honestly, and presenting it clearly — is the whole job.
 
 ## A finding, not a hypothesis
 
