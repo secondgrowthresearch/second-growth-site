@@ -29,6 +29,6 @@ California's international trade balance in processed food has flipped from a sm
 
 ## Where we're starting
 
-Our first case study is California's Central Valley, where more than fifty years of commodity agriculture consolidation has repeatedly displaced the people who did the work of growing and processing it. See [Case Studies](case-studies.md) for what we're documenting, [the Index](the-index.md) for the measure at the center of it, and [Methodology](methodology.md) for the full calculation and its sourcing.
+Our first case study is California's Central Valley, where more than fifty years of commodity agriculture consolidation has repeatedly displaced the people who did the work of growing and processing it. See [Case Studies](case-studies.md) for what we're documenting, [Water Insecurity](water-insecurity.md) for how the same geography shows up in who has safe drinking water today, [the Index](the-index.md) for the measure at the center of it, and [Methodology](methodology.md) for the full calculation and its sourcing.
 
 This page is a direct statement of our thesis, not a summary of it — see [About Second Growth](about.md) for more on who we are and how to reach us.
