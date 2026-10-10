@@ -643,9 +643,27 @@ li { margin-bottom: 0.4em; }
 
 .site-header nav {
   display: flex;
+  align-items: center;
   gap: 18px;
   flex-wrap: wrap;
 }
+
+.nav-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Reference pages (how the research is done) read as visually secondary
+   to the content/topic pages a reader actually came for -- same nine
+   links as before, no longer all at one equal weight. */
+.nav-group-secondary {
+  padding-left: 18px;
+  border-left: 2px solid rgba(241, 227, 200, 0.35);
+}
+
+.nav-group-secondary a { font-size: 0.88em; opacity: 0.85; }
 
 .site-header nav a {
   color: #f1e3c8;
@@ -655,6 +673,36 @@ li { margin-bottom: 0.4em; }
 }
 
 .site-header nav a:hover { color: var(--wheat); }
+
+/* Hamburger toggle: hidden above the mobile breakpoint, where the nav is
+   always visible inline (see the media query below for its mobile
+   state). 44x44px touch target per WCAG 2.1 SC 2.5.5. */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid #f1e3c8;
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #f1e3c8;
+  margin: 3px 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* Main content */
 
@@ -680,5 +728,35 @@ main.content {
 @media (max-width: 600px) {
   body { font-size: 16.5px; }
   h1 { font-size: 1.9em; }
-  .site-header .wrap { flex-direction: column; align-items: flex-start; }
+  .site-header .wrap { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  .nav-toggle { display: flex; }
+
+  /* Collapsed by default; .nav-open (toggled by the script above) expands
+     it into a full-width stacked list below the header row. This is the
+     fix for the sticky header permanently eating ~28% of a phone
+     viewport -- it now costs almost nothing until a reader opens it. */
+  .site-header nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-top: 16px;
+  }
+  .site-header nav.nav-open { display: flex; }
+
+  .nav-group { flex-direction: column; align-items: flex-start; width: 100%; gap: 4px; }
+
+  .nav-group-secondary {
+    margin-top: 10px;
+    padding-left: 0;
+    padding-top: 14px;
+    border-left: none;
+    border-top: 2px dashed rgba(241, 227, 200, 0.35);
+    width: 100%;
+  }
+  .nav-group-secondary a { font-size: 0.95em; } /* same size as primary on mobile -- the divider above is the hierarchy cue; shrinking text here would just hurt touch targets */
+
+  /* ~44px touch targets (was ~35px) -- WCAG 2.1 SC 2.5.5 */
+  .site-header nav a { display: inline-block; padding: 9px 0; }
 }

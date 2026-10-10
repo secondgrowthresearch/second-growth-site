@@ -13,6 +13,7 @@ import shutil
 from pathlib import Path
 
 import markdown
+from PIL import Image
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
@@ -81,17 +82,24 @@ PAGES = [
 # basename of source .md file -> root-relative output URL, for link rewriting
 LINK_MAP = {Path(src).name: "/" + out for src, out in PAGES}
 
-NAV = [
+# Split into two groups -- content/topic pages a reader is actually here
+# for, vs. reference pages about how the research itself is done. Same
+# nine pages as before; now visually distinguished instead of sitting at
+# equal weight (see .nav-group-secondary in style.css).
+NAV_PRIMARY = [
     ("/", "Home"),
     ("/the-index.html", "The Index"),
     ("/case-studies.html", "Case Studies"),
     ("/water-insecurity.html", "Water Insecurity"),
     ("/environmental-impact.html", "Environmental Impact"),
     ("/consolidation.html", "Consolidation"),
+]
+NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
     ("/data.html", "Data"),
     ("/about.html", "About"),
 ]
+NAV = NAV_PRIMARY + NAV_SECONDARY
 
 MD_LINK_RE = re.compile(r"\]\(([^)]+)\)")
 # Chart/map source-citation text is written as literal HTML inside JS string
@@ -99,6 +107,10 @@ MD_LINK_RE = re.compile(r"\]\(([^)]+)\)")
 # as Markdown links -- MD_LINK_RE never sees it, so without this second pass
 # every "see Methodology"/"see Data" citation link across the site 404s.
 HTML_HREF_RE = re.compile(r'href="([^"]+\.md)"')
+# Every photo on the site is hand-authored as <img src="/assets/photos/X.jpg"
+# alt="...">, always exactly this shape (checked directly: 8 occurrences,
+# none carry extra attributes) -- a single regex safely rewrites all of them.
+IMG_TAG_RE = re.compile(r'<img src="(/assets/photos/[^"]+\.jpg)" alt="([^"]*)">')
 
 
 def rewrite_links(md_text: str) -> str:
@@ -120,6 +132,48 @@ def rewrite_links(md_text: str) -> str:
     md_text = HTML_HREF_RE.sub(html_repl, md_text)
 
     return MD_LINK_RE.sub(repl, md_text)
+
+
+def analyze_photos() -> dict:
+    """basename.jpg -> (width, height), read directly from the source
+    files. Rendering needs real pixel dimensions (not guesses) so <img>
+    tags can carry explicit width/height and avoid layout shift while the
+    image itself is still loading."""
+    info = {}
+    for path in (ROOT / "assets" / "photos").glob("*.jpg"):
+        with Image.open(path) as img:
+            info[path.name] = img.size
+    return info
+
+
+def rewrite_images(html: str, photo_info: dict) -> str:
+    """<img src=".../X.jpg" alt="..."> -> a <picture> offering a WebP
+    source (smaller, generated at build time -- see generate_webp()) with
+    the original JPEG as the fallback <img>, now carrying explicit
+    width/height and loading="lazy" so offscreen photos don't block the
+    rest of the page and don't cause layout shift once they do load."""
+
+    def repl(match: re.Match) -> str:
+        src, alt = match.group(1), match.group(2)
+        webp_src = src[:-4] + ".webp"
+        size = photo_info.get(src.rsplit("/", 1)[-1])
+        dims = f' width="{size[0]}" height="{size[1]}"' if size else ""
+        return (
+            f'<picture><source srcset="{webp_src}" type="image/webp">'
+            f'<img src="{src}" alt="{alt}"{dims} loading="lazy" decoding="async"></picture>'
+        )
+
+    return IMG_TAG_RE.sub(repl, html)
+
+
+def generate_webp(photos_dir: Path) -> None:
+    """Build-time WebP copies of every JPEG in the output directory --
+    generated, not committed to source (the .jpg originals stay
+    authoritative). <picture> in the rendered HTML offers these first;
+    a browser without WebP support just falls through to the JPEG."""
+    for jpg_path in sorted(photos_dir.glob("*.jpg")):
+        with Image.open(jpg_path) as img:
+            img.save(jpg_path.with_suffix(".webp"), "WEBP", quality=82)
 
 
 def page_title(html_body: str, fallback: str) -> str:
@@ -161,8 +215,11 @@ def html_attr_escape(text: str) -> str:
 
 
 def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str:
-    nav_links = "\n".join(
-        f'      <a href="{href}">{label}</a>' for href, label in NAV
+    primary_links = "\n".join(
+        f'        <a href="{href}">{label}</a>' for href, label in NAV_PRIMARY
+    )
+    secondary_links = "\n".join(
+        f'        <a href="{href}">{label}</a>' for href, label in NAV_SECONDARY
     )
     url_path = "/" if out_rel == "index.html" else "/" + out_rel
     canonical_url = DOMAIN + url_path
@@ -196,8 +253,18 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">{SITE_NAME}</a>
-    <nav>
-{nav_links}
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav id="site-nav">
+      <div class="nav-group nav-group-primary">
+{primary_links}
+      </div>
+      <div class="nav-group nav-group-secondary">
+{secondary_links}
+      </div>
     </nav>
   </div>
 </header>
@@ -210,6 +277,35 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str
   </div>
 </footer>
 <div class="chart-tooltip" id="chart-tooltip" role="status" aria-live="polite"></div>
+<script>
+// Mobile nav toggle. Below the 600px breakpoint (see .nav-toggle /
+// .nav-group-primary / .nav-group-secondary in style.css), the header nav
+// is collapsed behind this hamburger button; above it, CSS keeps the nav
+// always visible regardless of aria-expanded, so this script is inert on
+// desktop -- no resize listener needed, the media query does that work.
+(function () {{
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  function setOpen(open) {{
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav.classList.toggle('nav-open', open);
+  }}
+
+  toggle.addEventListener('click', function () {{
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  }});
+
+  document.addEventListener('keydown', function (e) {{
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {{
+      setOpen(false);
+      toggle.focus();
+    }}
+  }});
+}})();
+</script>
 <script>
 // Generic hover/focus tooltip for any chart on the page. A chart hit
 // element just needs class="chart-hit" plus data-label / data-value and
@@ -474,6 +570,7 @@ def main() -> None:
     SITE.mkdir(parents=True)
 
     md = markdown.Markdown(extensions=["tables", "sane_lists"])
+    photo_info = analyze_photos()
 
     for src_rel, out_rel in PAGES:
         src_path = ROOT / src_rel
@@ -484,6 +581,7 @@ def main() -> None:
         raw = rewrite_links(raw)
         md.reset()
         body_html = md.convert(raw)
+        body_html = rewrite_images(body_html, photo_info)
         title = page_title(body_html, fallback=out_rel)
         display_title = "Home" if title == SITE_NAME else title
         out_path.write_text(render_page(display_title, body_html, out_path, out_rel), encoding="utf-8")
@@ -492,6 +590,9 @@ def main() -> None:
     # Assets
     shutil.copytree(ROOT / "assets", SITE / "assets", dirs_exist_ok=True)
     print("copied assets/ (style.css)")
+
+    generate_webp(SITE / "assets" / "photos")
+    print("generated WebP copies of assets/photos/*.jpg")
 
     # sitemap.xml + robots.txt -- every PAGES entry, root-relative URLs
     # resolved against DOMAIN the same way canonical/OG tags are.
