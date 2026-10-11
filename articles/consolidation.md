@@ -46,12 +46,12 @@ So far, the answer runs the opposite direction from tomatoes and meatpacking. **
 
 ## Sources
 
-- San Francisco Chronicle reporting on California processing-tomato concentration, as compiled by Grist, "What happens when a few large buyers dominate a market?"
-- U.S. Department of Agriculture, Food Safety and Inspection Service, meatpacking concentration data, FY2021 (via Schaefer et al., 2023).
-- Food & Water Watch / Jacobin-syndicated reporting, "Revealed: the True Extent of America's Food Monopolies, and Who Pays the Price."
+- [Grist, "What happens when a few large buyers dominate a market?"](https://grist.org/article/tomato-concentrate) — compiling San Francisco Chronicle reporting on California processing-tomato concentration.
+- Saitone, Schaefer, et al., ["Concentration and Market Power in the U.S. Meatpacking Industry,"](https://doi.org/10.1007/s11151-023-09923-z) *Review of Industrial Organization* (2024) — plant-level USDA FSIS data, the basis for the cattle/hog/broiler concentration figures above. (Corrected from an earlier, imprecise "FY2021... via Schaefer et al., 2023" citation — the published, citable version of this research is the 2024 journal article linked here.)
+- [The Guardian and Food & Water Watch, "Revealed: the true extent of America's food monopolies, and who pays the price"](https://www.theguardian.com/environment/ng-interactive/2021/jul/14/food-monopoly-meals-profits-data-investigation) (July 2021) — the source of the 61-grocery-item concentration figures above. (Corrected from an earlier, unverified "Jacobin-syndicated" attribution; this is the original Guardian/Food & Water Watch investigation.)
 - This project's own case-study research: see the individual closure pages linked above for full primary sourcing on each ownership chain.
-- Data Center Dynamics, "Ameresco partners with CyrusOne to develop off-grid AI data center at Naval Air Station Lemoore in California" (2025).
-- Ceres Courier, "Data centers: existential threat or unique opportunity?" (Riverbank/Aemetis/Spartan Data Centers reporting, 2026).
-- Hanford Sentinel, "Kings fairground CEO: new project is not a traditional data center" (Global Stack USA, 2026).
+- [Data Center Dynamics, "Ameresco partners with CyrusOne to develop off-grid AI data center at Naval Air Station Lemoore in California"](https://www.datacenterdynamics.com/en/news/ameresco-partners-with-cyrusone-to-develop-offgrid-ai-data-center-at-naval-air-station-lemoore-in-california/) (2025).
+- [Ceres Courier, "Data centers: existential threat or unique opportunity?"](https://www.cerescourier.com/news/local/data-centers-existential-threat-or-unique-opportunity/) (Riverbank/Aemetis/Spartan Data Centers reporting, 2026).
+- [Hanford Sentinel, "Kings fairground CEO: new project is not a traditional data center"](https://hanfordsentinel.com/business/agriculture/kings-fairground-ceo-new-project-is-not-a-traditional-data-center/article_90b4f45c-e98e-4077-a585-6e5416581ac3.html) (Global Stack USA, 2026).
 
 Full citation detail and source archive: [Data](data.md). Back to [Case Studies](case-studies.md).

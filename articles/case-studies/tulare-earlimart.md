@@ -25,12 +25,14 @@ Earlimart, in Tulare County, is more than 8,000 people, predominantly Latino, wi
 
 ## Part of a larger pattern
 
-Earlimart is this project's strongest "court case" story in Tulare County — a real settlement, with real money, from the companies that caused the contamination. It's also a caution against mistaking a settlement for a fix: $5.7 million won in 2019 didn't translate into a working well by the time the most recent reporting we found was published. It connects directly to [Corcoran's](kings-corcoran.md) still-unresolved Kings County lawsuit and the broader regional pattern of Shell- and Dow-linked TCP litigation across the San Joaquin Valley, including a Kern County water district's separate $230 million settlement over the same chemical.
+Earlimart is this project's strongest "court case" story in Tulare County — a real settlement, with real money, from the companies that caused the contamination. It's also a caution against mistaking a settlement for a fix: $5.7 million won in 2019 didn't translate into a working well by the time the most recent reporting we found was published. It connects directly to [Corcoran's](kings-corcoran.md) still-unresolved Kings County lawsuit and the broader regional pattern of Shell- and Dow-linked TCP litigation across the San Joaquin Valley, including the Arvin-Edison Water Storage District's separate $230 million Kern County settlement over the same chemical (one of several parallel Kern County groundwater-banking TCP suits against Dow and Shell; Semitropic and North Kern Water Storage Districts have pending cases of their own, and Rosedale-Rio Bravo and Kern Delta are paused in negotiation).
 
 ## Sources
 
-- The Fresno Bee (via Self-Help Enterprises), "What happens when a California town's drinking water system fails? Ask Earlimart" (July 8, 2020).
-- EcoWatch, "Shell, Dow Hid Cancer-Causing Chemical in Pesticides, Contaminating Drinking Water for Millions."
-- sjvwater.org, "Kern water district gets $230 million to settle contamination lawsuit."
+- [The Fresno Bee (Monica Vaughan), via Self-Help Enterprises, "What happens when a California town's drinking water system fails? Ask Earlimart"](https://www.selfhelpenterprises.org/wp-content/uploads/2020/07/What-happens-when-a-California-town%E2%80%99s-drinking-water-system-fails-Ask-Earlimart-THE-FRESNO-BEE-7-8-20.pdf) (July 8, 2020) — confirms the $5.7 million settlement figure directly.
+- [EcoWatch, "Shell, Dow Hid Cancer-Causing Chemical in Pesticides, Contaminating Drinking Water for Millions."](https://www.ecowatch.com/shell-dow-chemical-drinking-water-2355598384.html)
+- [SJV Water (Lois Henry), "Kern water district gets $230 million to settle contamination lawsuit"](https://sjvwater.org/kern-water-district-gets-230-million-to-settle-contamination-lawsuit/) (March 10, 2026) — names the Arvin-Edison Water Storage District specifically, not a generic "Kern County water district," and the other pending Kern County TCP suits.
+
+**What we couldn't independently confirm this pass:** a specific court name or case/docket number for Earlimart's own 2012 lawsuit against Dow, Shell, and Wilbur-Ellis — the Fresno Bee's reporting confirms the settlement amount and date but not the filing details. Worth a direct Tulare County Superior Court records check as a follow-up.
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

@@ -35,9 +35,9 @@ A local news report on this closure noted, in passing, that Lemoore "has already
 
 ## Sources
 
-- KMPH/FOX26 (Madison Wilber), "Leprino Foods plant closure in Lemoore to impact over 300 jobs," November 10, 2025.
-- KMPH/FOX26, "Kings County hosts job fair for workers affected by Leprino Foods closure."
-- Fresno Bee (Melissa Montalvo), syndicated via Yahoo News, "Major cheese producer closes Fresno-area facility, cuts jobs as it opens Texas site," December 26, 2025.
+- [KMPH/FOX26 (Madison Wilber), "Leprino Foods plant closure in Lemoore to impact over 300 jobs,"](https://www.kmph.com/news/local/leprino-foods-plant-closure-in-lemoore-to-impact-over-300-jobs-milk-dairy) November 10, 2025.
+- [KMPH/FOX26, "Kings County hosts job fair for workers affected by Leprino Foods closure."](https://www.kmph.com/news/local/kings-county-hosts-job-fair-for-workers-affected-by-leprino-foods-closure-civic-auditorium-supervisor-richard-valle)
+- [Fresno Bee (Melissa Montalvo), syndicated via Yahoo News, "Major cheese producer closes Fresno-area facility, cuts jobs as it opens Texas site,"](https://www.yahoo.com/news/articles/major-cheese-producer-closes-fresno-222841967.html) December 26, 2025.
 - California EDD WARN report, confirmed directly: Leprino Foods Company, 490 F Street, Lemoore, Kings County — 268 employees (notice 10/23/2025, effective 01/09/2026) and 100 employees (notice 12/15/2025, effective 12/30/2026), both Closure, Permanent.
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).
