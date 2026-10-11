@@ -184,6 +184,82 @@ def generate_webp(photos_dir: Path) -> None:
             img.save(jpg_path.with_suffix(".webp"), "WEBP", quality=82)
 
 
+def generate_pdfs(site: Path, pages: list) -> None:
+    """One PDF per case-study page (see is_case_study_page()), rendered
+    from the already-built HTML via a real browser engine (Playwright +
+    Chromium) rather than a lighter HTML-to-PDF library -- this site's
+    charts are inline SVG inside a CSS layout a simpler converter
+    wouldn't render faithfully. Page-numbered header/footer and a
+    retrieval date/URL come from the PDF template itself, not the page
+    content, so they're accurate no matter when this runs.
+
+    Serves `site` over a real local HTTP server rather than loading pages
+    via file:// -- every page uses root-relative paths (/assets/style.css
+    etc.), which file:// resolves against the filesystem root, not the
+    site directory, silently dropping the stylesheet. Confirmed this the
+    hard way (checked actual computed styles, not just a visual glance at
+    the output) before settling on the HTTP approach.
+
+    Skips cleanly (prints a warning, doesn't fail the whole build) if
+    Playwright's browser isn't installed -- a missing PDF export
+    shouldn't block the rest of the site from shipping."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("playwright not installed -- skipping PDF export")
+        return
+
+    targets = [out_rel for _, out_rel in pages if is_case_study_page(out_rel)]
+    if not targets:
+        return
+
+    import functools
+    import http.server
+    import threading
+
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(site))
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    port = httpd.server_address[1]
+    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+    thread.start()
+
+    footer_template = """
+    <div style="font-size:8px; width:100%; padding:0 0.5in; color:#666;
+                display:flex; justify-content:space-between;">
+      <span>secondgrowthresearch.org &mdash; retrieved <span class="date"></span></span>
+      <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span>
+    </div>
+    """
+
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            for out_rel in targets:
+                pdf_path = (site / out_rel).with_suffix(".pdf")
+                page.goto(f"http://127.0.0.1:{port}/{out_rel}", wait_until="load")
+                # Stat-pair numbers count up via a 1200ms JS animation
+                # (requestAnimationFrame, not a network request) --
+                # "load" doesn't wait for it, so without this a PDF could
+                # capture a stat mid-count instead of its final value.
+                page.wait_for_timeout(1500)
+                page.pdf(
+                    path=str(pdf_path),
+                    format="Letter",
+                    print_background=True,
+                    display_header_footer=True,
+                    header_template="<div></div>",
+                    footer_template=footer_template,
+                    margin={"top": "0.5in", "bottom": "0.6in", "left": "0.5in", "right": "0.5in"},
+                )
+            browser.close()
+        print(f"generated {len(targets)} case-study PDFs")
+    except Exception as exc:  # pragma: no cover -- CI environment issue, not a content bug
+        print(f"PDF export failed ({exc}) -- continuing without it")
+    finally:
+        httpd.shutdown()
+
+
 def page_title(html_body: str, fallback: str) -> str:
     match = re.search(r"<h1[^>]*>(.*?)</h1>", html_body, re.S)
     if match:
@@ -220,6 +296,14 @@ def html_attr_escape(text: str) -> str:
         .replace("<", "&lt;")
         .replace(">", "&gt;")
     )
+
+
+def is_case_study_page(out_rel: str) -> bool:
+    """Individual closure/town case studies get a PDF export (see
+    generate_pdfs()) -- the case-studies.html overview/timeline page
+    itself doesn't (its interactive map and hand-built SVG timeline
+    aren't a single linear document the way one closure's story is)."""
+    return out_rel.startswith("case-studies/") and out_rel != "case-studies.html"
 
 
 def rfc822_date(iso_date: str) -> str:
@@ -268,14 +352,16 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str, src_re
     full_title_attr = html_attr_escape(full_title)
 
     published, updated = git_dates(src_rel)
+    date_line = ""
     if published:
-        date_note = (
-            f'<p class="page-dates">Published {published}'
+        date_line = (
+            f"Published {published}"
             + (f" &middot; Last updated {updated}" if updated != published else "")
-            + "</p>\n"
         )
-    else:
-        date_note = ""
+    pdf_link = ""
+    if is_case_study_page(out_rel):
+        pdf_link = f' &middot; <a href="/{out_rel[:-5]}.pdf">Download as PDF</a>'
+    date_note = f'<p class="page-dates">{date_line}{pdf_link}</p>\n' if (date_line or pdf_link) else ""
     goatcounter_tag = (
         f'<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count" '
         f'async src="//gc.zgo.at/count.js"></script>\n'
@@ -711,6 +797,8 @@ def main() -> None:
 
     generate_webp(SITE / "assets" / "photos")
     print("generated WebP copies of assets/photos/*.jpg")
+
+    generate_pdfs(SITE, PAGES)
 
     # sitemap.xml + robots.txt -- every PAGES entry, root-relative URLs
     # resolved against DOMAIN the same way canonical/OG tags are.

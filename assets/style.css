@@ -816,3 +816,35 @@ main.content {
   /* ~44px touch targets (was ~35px) -- WCAG 2.1 SC 2.5.5 */
   .site-header nav a { display: inline-block; padding: 9px 0; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Print / PDF export                                                  */
+/* ------------------------------------------------------------------ */
+/* Case-study pages get a real PDF built from this at build time (see
+   generate_pdfs() in build.py, via Playwright) -- the goal is a clean,
+   citable document, not a printout of a website. Hides interactive-only
+   chrome (nav, zoom buttons, CSV download, the skip link) that means
+   nothing on paper; the PDF's own header/footer template supplies page
+   numbers and a retrieval date instead of the on-page nav/footer. */
+@media print {
+  .skip-link, .site-header, .site-footer,
+  .nav-toggle, .chart-download-btn, .map-zoom-controls,
+  .chart-tooltip, .lightbox { display: none !important; }
+
+  /* The "Download as PDF" link is redundant inside the PDF it generates;
+     the Published/Last-updated date next to it still prints. */
+  .page-dates a { display: none; }
+
+  body { font-size: 11pt; }
+  a { color: var(--ink); text-decoration-color: var(--chart-muted); }
+
+  h1 { margin-top: 0; }
+  h2, h3 { break-after: avoid; }
+  .stat-pair, .chart, figure.figure { break-inside: avoid; }
+
+  /* A chart's "View as table" is collapsed by default on screen -- on
+     paper there's no way to click it open, so force it open instead of
+     silently hiding the underlying data from a printed copy. */
+  details.chart-table-toggle { display: block; }
+  details.chart-table-toggle summary { display: none; }
+}

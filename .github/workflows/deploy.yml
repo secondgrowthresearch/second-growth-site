@@ -25,6 +25,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -r requirements.txt
+      - run: python -m playwright install --with-deps chromium  # case-study PDF export (generate_pdfs() in build.py)
       - run: python build.py
       - uses: actions/upload-pages-artifact@v3
         with:
