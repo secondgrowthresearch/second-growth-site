@@ -9,7 +9,7 @@
   </div>
   <div class="stat-card">
     <p class="stat-number" data-target="1750" data-decimals="0" data-suffix=" acres">0 acres</p>
-    <p class="stat-label">How much recharge-pond acreage one real, large water bank needs per dedicated field-operations position — the scale this mechanism needs to reach before a basin supports a standalone job.</p>
+    <p class="stat-label">The real-world staffing ratio at one large, established water bank: one field-operations position per this many acres of recharge pond under management.</p>
   </div>
 </div>
 
@@ -17,13 +17,15 @@
 
 Two independent national employment-multiplier models — the U.S. Water Alliance's IMPLAN-based estimate and the Economic Policy Institute's BLS/BEA-based estimate — converge within 2.5% of each other on construction-sector investment: roughly 15 total jobs per $1 million spent (about 5.5–6.1 of those direct). Applied to the two real Kings Subbasin projects already named in Environmental Impact — Carter-Bybee ($6M) and Kenneson & Sanchez ($6.47M) — each produced on the order of 90–100 total job-years, construction-phase only. That's a real number, but it describes a building season, not a career.
 
-## Does it become a permanent job?
+## A method for estimating staffing needs from a real ratio
 
-The honest answer, checked directly rather than assumed: not yet, at the scale this subbasin currently operates at. The Kern Water Bank Authority — a far larger, older operation outside this project's four counties, used here only as a staffing benchmark — manages roughly 7,000 acres of recharge ponds with 4 field-operations employees, per its own public payroll filings (Transparent California). That's about 1 field position per 1,750 acres. The whole Kings Subbasin's combined recharge-basin acreage has grown from roughly 600 acres (2021) to roughly 1,150 acres (2025) — nearly doubling in four years, and now about two-thirds of the way to the acreage that ratio would need to support even one dedicated position. **The honest claim this supports isn't "recharge basins create permanent jobs" — it's "a coordinated, multi-site buildout, the way this subbasin is already doing it, is the only path by which this mechanism could eventually support permanent staff," and it isn't there yet.**
+One way to estimate the ongoing staffing a resource-management operation might require, before it exists at full scale, is to benchmark it against a real, comparable operation already running. The Kern Water Bank Authority — a far larger, older operation outside this project's four counties, used here only as a benchmark — manages roughly 7,000 acres of recharge ponds with 4 field-operations employees, per its own public payroll filings (Transparent California). That's a real, sourced ratio: about 1 field position per 1,750 acres.
+
+Applied as a worked example to the Kings Subbasin's own combined recharge-basin acreage — roughly 600 acres in 2021, roughly 1,150 acres by 2025 — the same ratio produces roughly 0.3 to 0.7 of a position, depending on which year's figure is used. This is the kind of calculation a planner, researcher, or grant writer could run for any comparable buildout, substituting whatever real staffing benchmark best matches their own operation's type, region, and scale.
 
 ## Who pays for this today
 
-Real, active federal money exists for this specific work: USDA NRCS's EQIP-WaterSMART and Groundwater Recharge Pilot Program is currently running in this exact geography — Fresno Irrigation District is a participating district, with published payment rates (roughly $4,187–$4,475 per acre-foot of basin storage). The Bureau of Reclamation's WaterSMART program is the other federal match, but its own FY2026 appropriation was cut to $41 million nationwide — after the administration's budget proposed zero — against a backdrop of Senate and House proposals that had been considerably higher ($90–145 million). A grant writer pursuing this mechanism should expect real competition for a shrinking pool, not an easy ask.
+Real, active federal money exists for this specific work: USDA NRCS's EQIP-WaterSMART and Groundwater Recharge Pilot Program is currently running in this exact geography — Fresno Irrigation District is a participating district, with published payment rates (roughly $4,187–$4,475 per acre-foot of basin storage). The Bureau of Reclamation's WaterSMART program is the other federal match; its own FY2026 appropriation was cut to $41 million nationwide, after the administration's budget proposed zero, against a backdrop of Senate and House proposals that had been considerably higher ($90–145 million).
 
 ## What we don't know
 

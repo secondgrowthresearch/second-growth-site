@@ -5,7 +5,7 @@ Every page on this site so far documents what happened when commodity agricultur
 <div class="stat-pair">
   <div class="stat-card">
     <p class="stat-number" data-target="4" data-decimals="0" data-suffix="B+">0B+</p>
-    <p class="stat-label">Federal funding behind USDA's wetland-easement program (ACEP) through FY2031 — one of the best-funded mechanisms below.</p>
+    <p class="stat-label">Federal funding behind USDA's wetland-easement program (ACEP) through FY2031.</p>
   </div>
   <div class="stat-card">
     <p class="stat-number" data-target="41" data-decimals="0" data-suffix="M">0M</p>

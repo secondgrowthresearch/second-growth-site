@@ -9,7 +9,7 @@ Some land in these four counties is coming out of irrigated production regardles
   </div>
   <div class="stat-card">
     <p class="stat-number" data-target="1000000" data-decimals="0" data-suffix=" ac.">0 ac.</p>
-    <p class="stat-label">Up to this many San Joaquin Valley acres may come out of irrigated production by 2040 under SGMA, per SJV Water reporting — the scale of land this mechanism would need to reach to matter.</p>
+    <p class="stat-label">Up to this many San Joaquin Valley acres may come out of irrigated production by 2040 under SGMA, per SJV Water reporting — for scale, against the $35.56M in MLRP awards made so far.</p>
   </div>
 </div>
 
