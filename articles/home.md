@@ -43,12 +43,12 @@ Four counties. Fifty-plus years. Twenty-four documented plant closures, and coun
 
 ## A finding, not a hypothesis
 
-California's international trade balance in processed food has flipped from a small surplus to an **$11.4 billion annual deficit** over the last fifteen years — the same stretch in which the plants we document in our [case studies](case-studies.md) were closing. In Kings County, food processing's share of the entire local economy **more than doubled between 1990 and 2025**, by the measure we built to track it. See [the Index](the-index.md) for the full numbers.
+California's international trade balance in processed food — a real, measured channel, though not the only one; it doesn't capture interstate shipments, almost certainly the larger channel for a sector like food processing, and no free federal dataset tracks that side at all — has flipped from a small surplus to an **$11.4 billion annual deficit** over the last fifteen years — the same stretch in which the plants we document in our [case studies](case-studies.md) were closing. In Kings County, food processing's share of the entire local economy **more than doubled between 1990 and 2025**, by the measure we built to track it. See [the Index](the-index.md) for the full numbers and [Methodology](methodology.md) for exactly what this figure does and doesn't cover.
 
 <div class="stat-pair">
   <div class="stat-card">
     <p class="stat-number" data-target="11.4" data-decimals="1" data-prefix="$" data-suffix="B">$0.0B</p>
-    <p class="stat-label">California's food-manufacturing trade deficit, 2025 — a small surplus as recently as 2010.</p>
+    <p class="stat-label">California's food-manufacturing trade deficit, 2025 (international trade only) — a small surplus as recently as 2010.</p>
   </div>
   <div class="stat-card">
     <p class="stat-number" data-target="2.2" data-decimals="1" data-suffix="×">0.0×</p>

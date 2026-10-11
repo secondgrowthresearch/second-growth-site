@@ -11,3 +11,7 @@ We work from primary data and named sources. Where the existing record has gaps,
 ## Current work
 
 Our current work is the methodology and evidence base for our first case study: California's Central Valley, where decades of commodity-agriculture and food-processing consolidation have displaced the people who did the work of growing and processing it.
+
+## Contact us
+
+Found an error in something we've published, have a correction with its own source behind it, or work with data that belongs in this record? <a href="mailto:contact@secondgrowthresearch.org?subject=Second%20Growth%20%E2%80%94%20">Email us</a> — that link opens a draft in your own mail client; nothing is sent until you do.

@@ -42,6 +42,7 @@ PAGES = [
     ("articles/water-insecurity.md", "water-insecurity.html"),
     ("articles/environmental-impact.md", "environmental-impact.html"),
     ("articles/consolidation.md", "consolidation.html"),
+    ("articles/compounding.md", "compounding.html"),
     ("articles/mechanisms.md", "mechanisms.html"),
     ("articles/mechanisms/recharge-basins.md", "mechanisms/recharge-basins.html"),
     ("articles/mechanisms/habitat-restoration.md", "mechanisms/habitat-restoration.html"),
@@ -112,6 +113,7 @@ NAV_PRIMARY = [
     ("/water-insecurity.html", "Water Insecurity"),
     ("/environmental-impact.html", "Environmental Impact"),
     ("/consolidation.html", "Consolidation"),
+    ("/compounding.html", "Compounding Impact"),
     ("/mechanisms.html", "Mechanisms"),
 ]
 NAV_SECONDARY = [
@@ -186,6 +188,42 @@ def rewrite_images(html: str, photo_info: dict) -> str:
         )
 
     return IMG_TAG_RE.sub(repl, html)
+
+
+# Every stat-pair number is authored with a placeholder "0"-style initial
+# text (e.g. <p class="stat-number" data-target="11.4" data-decimals="1"
+# data-prefix="$" data-suffix="B">$0.0B</p>) -- the client-side count-up
+# script (see the inline <script> near the end of render_page's template)
+# overwrites it on scroll-into-view. That's fine for a JS-enabled browser,
+# but it means the raw HTML -- what a crawler, a text-extraction tool, or
+# a browser with JS disabled actually sees -- shows meaningless zeros for
+# every headline number on the site. Fixed at build time instead of by
+# hand-editing ~100 instances across ~49 files (error-prone, and silently
+# drifts out of sync the next time a number changes): compute the correct
+# display text directly from each element's own data-target/data-decimals/
+# data-prefix/data-suffix using the exact same formatting the JS uses, so
+# there is exactly one source of truth (the data attributes) and the
+# static fallback can never disagree with the animated value.
+STAT_NUMBER_RE = re.compile(
+    r'(<p class="stat-number"((?:\s+data-[a-z]+="[^"]*")*)>)[^<]*(</p>)'
+)
+STAT_ATTR_RE = re.compile(r'data-([a-z]+)="([^"]*)"')
+
+
+def fix_stat_number_fallbacks(html: str) -> str:
+    def repl(match: re.Match) -> str:
+        open_tag, attrs_blob, close_tag = match.group(1), match.group(2), match.group(3)
+        attrs = dict(STAT_ATTR_RE.findall(attrs_blob))
+        target = attrs.get("target")
+        if target is None:
+            return match.group(0)
+        decimals = int(attrs.get("decimals", "0") or "0")
+        prefix = attrs.get("prefix", "")
+        suffix = attrs.get("suffix", "")
+        text = f"{prefix}{float(target):.{decimals}f}{suffix}"
+        return f"{open_tag}{text}{close_tag}"
+
+    return STAT_NUMBER_RE.sub(repl, html)
 
 
 def generate_webp(photos_dir: Path) -> None:
@@ -741,6 +779,7 @@ def main() -> None:
         md.reset()
         body_html = md.convert(raw)
         body_html = rewrite_images(body_html, photo_info)
+        body_html = fix_stat_number_fallbacks(body_html)
         title = page_title(body_html, fallback=out_rel)
         display_title = "Home" if title == SITE_NAME else title
         out_path.write_text(render_page(display_title, body_html, out_path, out_rel, src_rel), encoding="utf-8")
