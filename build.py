@@ -36,6 +36,12 @@ PAGES = [
     ("articles/water-insecurity.md", "water-insecurity.html"),
     ("articles/environmental-impact.md", "environmental-impact.html"),
     ("articles/consolidation.md", "consolidation.html"),
+    ("articles/mechanisms.md", "mechanisms.html"),
+    ("articles/mechanisms/recharge-basins.md", "mechanisms/recharge-basins.html"),
+    ("articles/mechanisms/habitat-restoration.md", "mechanisms/habitat-restoration.html"),
+    ("articles/mechanisms/land-repurposing.md", "mechanisms/land-repurposing.html"),
+    ("articles/mechanisms/ceqa-leverage.md", "mechanisms/ceqa-leverage.html"),
+    ("articles/mechanisms/ratemaking.md", "mechanisms/ratemaking.html"),
     ("articles/case-studies/kings-1993-safeway-hanford.md", "case-studies/kings-1993-safeway-hanford.html"),
     ("articles/case-studies/kings-2020-olam-lemoore.md", "case-studies/kings-2020-olam-lemoore.html"),
     ("articles/case-studies/kings-2023-lacey-milling-hanford.md", "case-studies/kings-2023-lacey-milling-hanford.html"),
@@ -100,6 +106,7 @@ NAV_PRIMARY = [
     ("/water-insecurity.html", "Water Insecurity"),
     ("/environmental-impact.html", "Environmental Impact"),
     ("/consolidation.html", "Consolidation"),
+    ("/mechanisms.html", "Mechanisms"),
 ]
 NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
