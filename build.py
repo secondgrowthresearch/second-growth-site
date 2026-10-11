@@ -113,12 +113,20 @@ NAV_PRIMARY = [
     ("/water-insecurity.html", "Water Insecurity"),
     ("/environmental-impact.html", "Environmental Impact"),
     ("/consolidation.html", "Consolidation"),
-    ("/compounding.html", "Compounding Impact"),
-    ("/mechanisms.html", "Mechanisms"),
 ]
+# Compounding Impact and Mechanisms both describe themselves, in their own
+# body text, as built from the five pages above rather than as original
+# findings in their own right ("adds no single new claim" / "reference
+# material, not a recommendation") -- secondary nav is where that
+# distinction already lives for every other synthesis/reference page, and
+# it's visually de-emphasized there (see .nav-group-secondary in
+# style.css), which is the point: it genuinely lightens primary nav rather
+# than just relabeling the same weight.
 NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
     ("/data.html", "Data"),
+    ("/compounding.html", "Compounding Impact"),
+    ("/mechanisms.html", "Mechanisms"),
     ("/about.html", "About"),
 ]
 if SHOW_DATES:

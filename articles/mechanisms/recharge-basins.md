@@ -50,7 +50,7 @@ Two independent national employment-multiplier models — the U.S. Water Allianc
 
 One way to estimate the ongoing staffing a resource-management operation might require, before it exists at full scale, is to benchmark it against a real, comparable operation already running. The Kern Water Bank Authority — a far larger, older operation outside this project's four counties, used here only as a benchmark — manages roughly 7,000 acres of recharge ponds with 4 field-operations employees, per its own public payroll filings (Transparent California). That's a real, sourced ratio: about 1 field position per 1,750 acres.
 
-Applied as a worked example to the Kings Subbasin's own combined recharge-basin acreage — roughly 600 acres in 2021, roughly 1,150 acres by 2025 — the same ratio produces roughly 0.3 to 0.7 of a position, depending on which year's figure is used. This is the kind of calculation a planner, researcher, or grant writer could run for any comparable buildout, substituting whatever real staffing benchmark best matches their own operation's type, region, and scale.
+Applied as a worked example to the Kings Subbasin's own combined recharge-basin acreage — roughly 600 acres in 2021, roughly 1,150 acres by 2025 — the same ratio produces roughly 0.3 to 0.7 of a position, depending on which year's figure is used. The same calculation applies to any comparable buildout, substituting whatever real staffing benchmark best matches the operation's type, region, and scale.
 
 <div class="chart">
   <p class="chart-title">The Kings Subbasin's acreage, plotted against the Kern Water Bank ratio</p>

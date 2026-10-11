@@ -38,7 +38,7 @@ Economists sort interventions like these by what they actually do to a market, n
 - **Coasean bargaining** — named for economist Ronald Coase: once a legal right is clearly assigned (here, the right to challenge a project under CEQA), the parties can negotiate a settlement directly, without a government agency needing to price the disputed harm itself.
 - **Pigouvian cost internalization** — named for economist Arthur Pigou: making the party that causes a cost pay a price reflecting its real cost to others, instead of letting that cost fall on everyone's bill equally.
 
-Each page below works the same way: what the mechanism is, what it costs in real, sourced numbers, one real example of it operating today, and — because a reader trying to act on any of this needs to know where the money actually comes from — which federal program is the closest match, and what that program's real, current status is.
+Each page below works the same way: what the mechanism is, what it costs in real, sourced numbers, one real example of it operating today, and which federal program is the closest match — because a program's real, current funding status is part of what makes a mechanism real in practice, not just on paper.
 
 ## Who funds what, as of this writing
 

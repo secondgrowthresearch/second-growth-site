@@ -25,7 +25,7 @@ The tool for asking that question rigorously, rather than just asserting an impr
 
 ## What we found, place by place
 
-Grouped by county. Every claim below is already published, sourced, and cited on its own page — this section only cross-references it against the framework above.
+Grouped by county. Every claim below is already published, sourced, and cited on its own page — this section only cross-references it against the framework above. **The ten places below are not a claim that these are the worst-affected communities in the four counties** — they're the places where this site's own, already-published record happens to cross-reference cleanly across two or more pages right now. Other places may carry the same or worse overlap; we simply haven't documented them closely enough yet to show it this way. See [Water Insecurity](water-insecurity.md) and [Case Studies](case-studies.md) for the full lists this page draws its ten from.
 
 ### Kings County
 
