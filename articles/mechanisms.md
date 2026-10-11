@@ -15,18 +15,28 @@ Every page on this site so far documents what happened when commodity agricultur
 
 ## Two kinds of mechanism
 
-Economists sort interventions like these by which side of a market they act on. We're using that same split to organize what follows:
+Economists sort interventions like these by what they actually do to a market, not just which side they touch. We're organizing these five the same way — and naming the specific concept each one is a real-world instance of, since each is a standard tool from its own branch of economics, not something invented for this project.
 
-**Supply-side mechanisms** increase the supply of something — storage capacity, restored land, a functioning ecosystem — that the region currently has too little of.
+**Supply-augmenting mechanisms** increase the physical supply of something — storage capacity, restored land, a functioning ecosystem — that the region currently has too little of. These are fundamentally efficiency questions: how much of a scarce resource a given dollar can produce.
 
-1. [Recharge-basin construction](mechanisms/recharge-basins.md)
-2. [Habitat and restoration stewardship](mechanisms/habitat-restoration.md)
-3. [Land-repurposing programs](mechanisms/land-repurposing.md)
+1. [Recharge-basin construction](mechanisms/recharge-basins.md) — common-pool resource management
+2. [Habitat and restoration stewardship](mechanisms/habitat-restoration.md) — payment for ecosystem services
+3. [Land-repurposing programs](mechanisms/land-repurposing.md) — opportunity-cost-based land retirement
 
-**Demand-side mechanisms** make the party causing a cost — a new water-intensive development, a new large electrical load — pay for the cost it's actually imposing, instead of spreading it onto everyone else.
+**Cost-internalizing mechanisms** make the party causing a cost — a new water-intensive development, a new large electrical load — bear that cost directly, instead of spreading it onto everyone else. These are fundamentally equity questions: not how much of something exists, but who pays for what it costs to create or disturb it.
 
-4. [CEQA and community-benefit leverage](mechanisms/ceqa-leverage.md)
-5. [Cost-causation ratemaking](mechanisms/ratemaking.md)
+4. [CEQA and community-benefit leverage](mechanisms/ceqa-leverage.md) — Coasean bargaining
+5. [Cost-causation ratemaking](mechanisms/ratemaking.md) — Pigouvian cost internalization
+
+**A note on terms:** some readers will know "supply-side" and "demand-side" from U.S. tax and fiscal policy debates — that's a different, macroeconomic use of similar-sounding words, with no connection to what's being sorted here. This page is only naming which side of one specific resource market each mechanism acts on.
+
+## Five concepts, defined plainly
+
+- **Common-pool resource management** — coordinating access to a resource, like a groundwater basin, that's hard to exclude anyone from and gets depleted by overuse — the category of problem Elinor Ostrom won a Nobel Prize for studying.
+- **Payment for ecosystem services** — paying a landowner directly for a benefit their land produces for others (clean water, flood absorption, habitat) that the market doesn't price on its own.
+- **Opportunity-cost-based land retirement** — paying a landowner roughly what they'd otherwise earn from the land, in exchange for taking it out of a specific use.
+- **Coasean bargaining** — named for economist Ronald Coase: once a legal right is clearly assigned (here, the right to challenge a project under CEQA), the parties can negotiate a settlement directly, without a government agency needing to price the disputed harm itself.
+- **Pigouvian cost internalization** — named for economist Arthur Pigou: making the party that causes a cost pay a price reflecting its real cost to others, instead of letting that cost fall on everyone's bill equally.
 
 Each page below works the same way: what the mechanism is, what it costs in real, sourced numbers, one real example of it operating today, and — because a reader trying to act on any of this needs to know where the money actually comes from — which federal program is the closest match, and what that program's real, current status is.
 
@@ -35,7 +45,7 @@ Each page below works the same way: what the mechanism is, what it costs in real
 <div class="table-scroll">
 <table>
   <thead>
-    <tr><th>Mechanism</th><th>Side</th><th>Closest federal program</th><th>Current status (Oct. 2026)</th></tr>
+    <tr><th>Mechanism</th><th>Acts on</th><th>Closest federal program</th><th>Current status (Oct. 2026)</th></tr>
   </thead>
   <tbody>
     <tr>
@@ -58,13 +68,13 @@ Each page below works the same way: what the mechanism is, what it costs in real
     </tr>
     <tr>
       <td><a href="mechanisms/ceqa-leverage.html">CEQA / community-benefit leverage</a></td>
-      <td>Demand</td>
+      <td>Cost</td>
       <td>No direct federal funding analog.</td>
       <td>CEQA is a state law. The federal cognate is procedural, not financial: NEPA review creates comparable leverage, but only where a federal action, permit, or lease is already involved.</td>
     </tr>
     <tr>
       <td><a href="mechanisms/ratemaking.html">Cost-causation ratemaking</a></td>
-      <td>Demand</td>
+      <td>Cost</td>
       <td>DOE Office of Electricity's grid-infrastructure program (GRIP, now rebranded "SPARK")</td>
       <td>Not a FERC matter for a public entity like an irrigation district — confirmed directly against the statute: 16 U.S.C. § 824(f) exempts political subdivisions of a state from FERC's Part II ratemaking jurisdiction. The real federal angle is DOE grid-capital funding, and GRIP's current round was explicitly rescoped in March 2026 around a different policy emphasis than its first two rounds.</td>
     </tr>
@@ -78,6 +88,7 @@ Each page below works the same way: what the mechanism is, what it costs in real
 - **Federal funding status changes fast, and we're stating it as of a specific date, not as a permanent fact.** The CRP lapse above is current as of October 2026 and could be resolved by the time this is read — check the source link, not just this page.
 - **We have not independently confirmed the Senate's current position on farm bill reauthorization**, only that the House has passed its version and the Senate's companion bill's floor status is unconfirmed in what we could find.
 - **The CEQA/NEPA distinction above is a general legal structure, not a determination that NEPA review currently applies to any specific proposal named elsewhere on this site** — that would need to be checked project by project.
+- **Coasean bargaining assumes the parties negotiating are identifiable and the cost of negotiating is low — an assumption this project's own research has already found reason to doubt.** [Consolidation](consolidation.md) documents that two of the five live Central Valley data-center proposals involve an undisclosed backer or a company formed only months before its proposal. A negotiation needs a known counterpart; that's a real precondition this mechanism can't assume its way past.
 
 ## Sources
 

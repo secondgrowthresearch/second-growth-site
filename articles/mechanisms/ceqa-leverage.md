@@ -15,7 +15,7 @@ Environmental review isn't only a regulatory hurdle — it's also real negotiati
 
 ## How the leverage is structured
 
-A community-benefit agreement (CBA) is a negotiated, legally enforceable commitment a developer makes to a community — funding, hiring commitments, environmental conditions — typically in exchange for community groups dropping or not filing a CEQA challenge that could otherwise delay or block a project. It's a demand-side mechanism in the specific sense that it makes the party generating a local impact pay something back to the people absorbing it, rather than spreading that cost onto the surrounding community for free.
+A community-benefit agreement (CBA) is a negotiated, legally enforceable commitment a developer makes to a community — funding, hiring commitments, environmental conditions — typically in exchange for community groups dropping or not filing a CEQA challenge that could otherwise delay or block a project. It's a cost-internalizing mechanism — a real-world instance of Coasean bargaining — in the specific sense that it makes the party generating a local impact pay something back to the people absorbing it, rather than spreading that cost onto the surrounding community for free.
 
 ## The closest real precedent
 

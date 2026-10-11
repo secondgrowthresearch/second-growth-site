@@ -15,7 +15,7 @@ A large new electrical customer changes what a utility has to build to serve eve
 
 ## The principle
 
-Economists call this cost-causation ratemaking: the idea that whoever causes a cost should be the one billed for it, rather than that cost being folded into everyone's rates equally. It's the same logic behind a developer paying for the sewer-line extension their own subdivision requires, applied to electrical grid capacity.
+Economists call this cost-causation ratemaking — a real-world instance of what's generally known as Pigouvian cost internalization, named for economist Arthur Pigou: the idea that whoever causes a cost should be the one billed for it, rather than that cost being folded into everyone's rates equally. It's the same logic behind a developer paying for the sewer-line extension their own subdivision requires, applied to electrical grid capacity.
 
 ## What one local utility already tried
 
