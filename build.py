@@ -27,6 +27,12 @@ DOMAIN = "https://secondgrowthresearch.org"
 # personal data, so it doesn't need a consent banner. Leave as None until
 # an account exists; the analytics script is only emitted when this is set.
 GOATCOUNTER_CODE = "secondgrowth"
+# Per-page "Published/Last updated" bylines and the Recent Updates page +
+# RSS feed are paused -- a very recent-looking last-updated date works
+# against the site's credibility right now. Flip back to True (no other
+# code changes needed) once enough time has passed; the real git-log
+# dates this is built from aren't going anywhere in the meantime.
+SHOW_DATES = False
 
 # source markdown path (relative to ROOT) -> output path (relative to SITE, root-relative URL)
 PAGES = [
@@ -111,9 +117,10 @@ NAV_PRIMARY = [
 NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
     ("/data.html", "Data"),
-    ("/updates.html", "Updates"),
     ("/about.html", "About"),
 ]
+if SHOW_DATES:
+    NAV_SECONDARY.insert(2, ("/updates.html", "Updates"))
 NAV = NAV_PRIMARY + NAV_SECONDARY
 
 MD_LINK_RE = re.compile(r"\]\(([^)]+)\)")
@@ -360,14 +367,16 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str, src_re
 
     published, updated = git_dates(src_rel)
     date_line = ""
-    if published:
+    if SHOW_DATES and published:
         date_line = (
             f"Published {published}"
             + (f" &middot; Last updated {updated}" if updated != published else "")
         )
     pdf_link = ""
     if is_case_study_page(out_rel):
-        pdf_link = f' &middot; <a href="/{out_rel[:-5]}.pdf">Download as PDF</a>'
+        pdf_link = f'<a href="/{out_rel[:-5]}.pdf">Download as PDF</a>'
+        if date_line:
+            pdf_link = " &middot; " + pdf_link
     date_note = f'<p class="page-dates">{date_line}{pdf_link}</p>\n' if (date_line or pdf_link) else ""
     goatcounter_tag = (
         f'<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count" '
@@ -746,16 +755,20 @@ def main() -> None:
     # (published != updated) surface first within each date, since a
     # correction or new finding on an existing page is often more
     # newsworthy than a fresh page landing the same day.
-    dated = [m for m in page_meta if m[2]]  # skip anything with no git history yet
-    dated.sort(key=lambda m: (m[3] or m[2], m[2] != m[3]), reverse=True)
+    # Paused along with SHOW_DATES above -- not built at all while off,
+    # not just unlinked, so there's no orphaned page sitting at a
+    # guessable URL.
+    if SHOW_DATES:
+        dated = [m for m in page_meta if m[2]]  # skip anything with no git history yet
+        dated.sort(key=lambda m: (m[3] or m[2], m[2] != m[3]), reverse=True)
 
-    rows = "\n".join(
-        f'    <tr><td>{updated or published}</td>'
-        f'<td><a href="/{out_rel}">{html_attr_escape(title)}</a></td>'
-        f'<td>{"Updated" if updated and updated != published else "Published"}</td></tr>'
-        for out_rel, title, published, updated in dated
-    )
-    updates_body = f"""<h1>Recent updates</h1>
+        rows = "\n".join(
+            f'    <tr><td>{updated or published}</td>'
+            f'<td><a href="/{out_rel}">{html_attr_escape(title)}</a></td>'
+            f'<td>{"Updated" if updated and updated != published else "Published"}</td></tr>'
+            for out_rel, title, published, updated in dated
+        )
+        updates_body = f"""<h1>Recent updates</h1>
 
 <p>Every page on this site, in order of when it was last substantively changed — generated directly from this project's own git history, not a hand-maintained list. A page here because it was corrected or extended reads the same as one here because it's brand new; the "Updated"/"Published" column is the only thing that tells them apart.</p>
 
@@ -768,24 +781,24 @@ def main() -> None:
 
 <p class="chart-source">Also available as <a href="/updates.xml">an RSS feed</a>.</p>
 """
-    updates_out = SITE / "updates.html"
-    updates_out.write_text(
-        render_page("Recent Updates", updates_body, updates_out, "updates.html", "build.py"),
-        encoding="utf-8",
-    )
-    print("built updates.html")
+        updates_out = SITE / "updates.html"
+        updates_out.write_text(
+            render_page("Recent Updates", updates_body, updates_out, "updates.html", "build.py"),
+            encoding="utf-8",
+        )
+        print("built updates.html")
 
-    rss_items = "\n".join(
-        f"""  <item>
+        rss_items = "\n".join(
+            f"""  <item>
     <title>{html_attr_escape(title)}</title>
     <link>{DOMAIN}/{out_rel}</link>
     <guid>{DOMAIN}/{out_rel}#{updated or published}</guid>
     <pubDate>{rfc822_date(updated or published)}</pubDate>
     <description>{"Updated" if updated and updated != published else "Published"} {updated or published}</description>
   </item>"""
-        for out_rel, title, published, updated in dated[:30]
-    )
-    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+            for out_rel, title, published, updated in dated[:30]
+        )
+        rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
   <title>{SITE_NAME} — Recent Updates</title>
@@ -795,8 +808,10 @@ def main() -> None:
 </channel>
 </rss>
 """
-    (SITE / "updates.xml").write_text(rss, encoding="utf-8")
-    print("wrote updates.xml (RSS)")
+        (SITE / "updates.xml").write_text(rss, encoding="utf-8")
+        print("wrote updates.xml (RSS)")
+    else:
+        print("skipped updates.html/updates.xml (SHOW_DATES is off)")
 
     # Assets
     shutil.copytree(ROOT / "assets", SITE / "assets", dirs_exist_ok=True)
@@ -809,9 +824,10 @@ def main() -> None:
 
     # sitemap.xml + robots.txt -- every PAGES entry, root-relative URLs
     # resolved against DOMAIN the same way canonical/OG tags are.
+    sitemap_pages = PAGES + ([("", "updates.html")] if SHOW_DATES else [])
     url_entries = "\n".join(
         f"  <url><loc>{DOMAIN}{'/' if out_rel == 'index.html' else '/' + out_rel}</loc></url>"
-        for _, out_rel in PAGES + [("", "updates.html")]
+        for _, out_rel in sitemap_pages
     )
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
