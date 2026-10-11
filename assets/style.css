@@ -123,6 +123,50 @@ blockquote {
   background: var(--paper);
 }
 
+/* Research-note callout: flags a specific claim's confidence level at a
+   glance, instead of relying on a reader to notice hedging language
+   buried in plain paragraph text. Two variants share one visual family
+   (bordered box, small uppercase label) so a skimming reader learns the
+   pattern once and can then tell settled findings apart from open
+   questions anywhere it's used, not just in the one place it's defined. */
+.research-note {
+  margin: 1.2em 0;
+  padding: 0.9em 1.2em;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--denim);
+  background: #f7f9fa;
+  font-size: 0.95em;
+}
+
+.research-note--open { border-left-color: var(--wheat-dark); background: #fbf6ec; }
+
+.research-note-label {
+  display: block;
+  font-family: "Zilla Slab", Georgia, serif;
+  font-weight: 700;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--denim-dark);
+  margin-bottom: 0.4em;
+}
+
+.research-note--open .research-note-label { color: var(--wheat-dark); }
+
+.research-note p { margin: 0 0 0.6em 0; }
+.research-note p:last-child { margin-bottom: 0; }
+
+/* Wraps a wide table (more columns/text than a phone-width viewport can
+   fit) so only the table scrolls horizontally, not the whole page --
+   without this, a table wider than its content column drags the entire
+   page body wider with it on mobile. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 1.1em 0;
+}
+.table-scroll table { margin-bottom: 0; }
+
 table {
   width: 100%;
   border-collapse: collapse;

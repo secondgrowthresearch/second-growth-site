@@ -8,6 +8,18 @@ That's what the **Sector Dependence Index (SDI)** is for: a measure of how conce
 
 It's built on **location quotients**, a standard, long-established tool in regional economics — not something invented for this project. See [Methodology](methodology.md) for the full calculation, the data sources, and the honest limitations of the current version.
 
+### Why this number, not just a job count
+
+"Del Monte's closure cost roughly 500 jobs" is true but incomplete — it doesn't say whether those 500 jobs were marginal to Kings County's economy or central to it. The SDI answers that question directly, the way an economist would build the answer, using public employment data rather than an impression.
+
+### What a location quotient actually measures
+
+The mechanic underneath the SDI is simple, even though the name isn't: a **location quotient** compares a sector's share of local employment to that same sector's share of the benchmark economy's employment. If food manufacturing is 4% of Kings County's jobs, and 2% of U.S. jobs, Kings County's location quotient for food manufacturing is 2.0 — twice as concentrated locally as nationally. A quotient at or below 1.0 means the county has no more of that sector than the national average would predict; well above 1.0 means the county is carrying more of it than a typical place its size would.
+
+That ratio matters because of a specific, named idea in regional economics called **economic base theory**: a local economy's health rests disproportionately on its "basic" sector — the jobs that pull money in from *outside* the local economy, through sales to other regions or countries — because that inflow is what then gets re-spent locally on groceries, rent, and services, which is what supports the "non-basic" jobs that only serve local demand. A sector with a location quotient well above 1.0 is doing more of that work than the benchmark economy typically does — which is why a county like Kings, concentrated in food processing, loses more than just a headcount when a plant like Del Monte's closes: that sector was carrying disproportionate weight in the county's export base, and the job count alone doesn't capture how much outside money was flowing through it in the first place.
+
+**A related but different idea, worth naming precisely so the two don't blur together:** economic base theory is about where money *enters* a local economy. A separate concept — **leakage**, and the local-multiplier methods (like LM3) built to measure it — asks what happens *after* money enters: how much of each dollar stays in local circulation, re-spent at other local businesses, before it leaks out to an outside owner, landlord, or supplier. The SDI measures the first question, not the second. We don't currently calculate a leakage or local-multiplier figure for any Central Valley sector — if and when this site does, it'll be presented as its own distinct measure, not folded into the SDI's own numbers. (The same is true of a *total economic impact* figure — direct, indirect, and induced jobs and income from a single closure, the kind of estimate tools like BEA's RIMS II multipliers produce. The SDI measures how concentrated a sector is, not how large its full ripple effect would be; we don't conflate the two.)
+
 ## What it shows: California's Central Valley food-processing sector
 
 Our first application: how dependent four Central Valley counties are on **food manufacturing** (NAICS 311) — the sector behind the Del Monte and Olam/OFI plant closures we document in our [case studies](case-studies.md).
@@ -433,6 +445,40 @@ Our first application: how dependent four Central Valley counties are on **food 
 
 In plain terms: in Kings County, food processing accounts for about 15% of the county's entire *basic* economy — every export-driven job in every sector, not just food processing. That share has risen steadily since 1990, when it was closer to 7% — though not in a straight line. See the full trajectory below.
 
+**Two refinements to the numbers above, both from this same underlying data.**
+
+The chart above benchmarks each county against the *United States* — and, as the next section explains in full, that comparison **isn't yet adjusted for trade**. Benchmarked against *California* instead, with the real, year-by-year trade adjustment applied, the picture is higher in two of the four counties:
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>County</th><th>Employment SDI (US, not trade-adjusted)</th><th>Employment SDI (CA, trade-adjusted)</th><th>Income SDI (US, not trade-adjusted)</th><th>Income SDI (CA, trade-adjusted)</th></tr></thead>
+  <tbody>
+    <tr><td>Kings</td><td>0.153</td><td><strong>0.339</strong></td><td>0.195</td><td><strong>0.365</strong></td></tr>
+    <tr><td>Fresno</td><td>0.100</td><td>0.108</td><td>0.101</td><td>0.108</td></tr>
+    <tr><td>Tulare</td><td>0.119</td><td>0.121</td><td>0.184</td><td>0.187</td></tr>
+    <tr><td>Stanislaus</td><td>0.205</td><td><strong>0.312</strong></td><td>0.227</td><td><strong>0.338</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+The California-benchmark columns are the more refined figures — they're the ones that actually apply the real trade check described below. We lead with the U.S.-benchmark chart above because it's the more familiar comparison point; the California-benchmark numbers in this table are the ones we trust more. See [Methodology](methodology.md) for how the trade adjustment itself is calculated.
+
+**A separate question the SDI alone can't answer: were these above- or below-average-wage jobs?** Food manufacturing's own average annual pay, against each county's overall average pay across every sector, 2025 (same BLS QCEW data as the SDI itself):
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>County</th><th>Food-manufacturing avg. pay</th><th>County-wide avg. pay, all sectors</th><th>Difference</th></tr></thead>
+  <tbody>
+    <tr><td>Tulare</td><td>$74,031</td><td>$54,792</td><td><strong>35% above</strong> county average</td></tr>
+    <tr><td>Kings</td><td>$73,345</td><td>$57,329</td><td><strong>28% above</strong> county average</td></tr>
+    <tr><td>Stanislaus</td><td>$71,151</td><td>$64,812</td><td><strong>10% above</strong> county average</td></tr>
+    <tr><td>Fresno</td><td>$56,987</td><td>$60,417</td><td>6% <em>below</em> county average</td></tr>
+  </tbody>
+</table>
+</div>
+
+In three of the four counties this project tracks, the food-manufacturing jobs lost to the closures in our [case studies](case-studies.md) paid *above* the county's own average — not marginal, low-wage work, but some of the better-paying jobs locally available. Fresno is the one exception. This is a different measure than the SDI (which asks how *concentrated* a sector is, not how well it pays) — we're showing it alongside, not folding it in.
+
 <div class="chart">
   <p class="chart-title">Kings County's dependence on food manufacturing, 1990–2025</p>
   <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, unadjusted for trade</p>
@@ -483,9 +529,19 @@ In plain terms: in Kings County, food processing accounts for about 15% of the c
   <p class="chart-source">Source: BLS QCEW. Not yet trade-adjusted for the US benchmark — see <a href="methodology.md">Methodology</a>.</p>
 </div>
 
-**The real shape of this trend is sharper than a two-point summary suggests.** Kings County's food-processing dependence didn't rise steadily — it climbed through the 2000s, then **spiked to 0.419 in 2017** and held near 0.40 for five straight years (2017–2021), before falling back to 0.153 by 2025. We haven't yet researched what drove the 2017–2021 plateau specifically; it's a real, open question, not explained here.
+**The real shape of this trend is sharper than a two-point summary suggests.** Kings County's food-processing dependence didn't rise steadily — it climbed through the 2000s, then **spiked to 0.419 in 2017** and held near 0.40 for five straight years (2017–2021), before falling back to 0.153 by 2025.
 
-Stanislaus County — home to the larger Modesto/Hughson closure — tells a different story: it started the most dependent of the four counties in 1990, and has been diversifying *away* from food processing over the long run (Employment SDI: 0.277 → 0.205), without the dramatic mid-2010s spike Kings shows. We haven't drawn conclusions from that contrast yet — it's a real, open question for further research, not yet explained here.
+<div class="research-note">
+<span class="research-note-label">What we found</span>
+Checked directly against the underlying data rather than left unexplained: this plateau is very likely a data artifact, not a real five-year economic shift. Sector 311's own employment barely moved during this window — 3,415 to 3,784 jobs throughout, no real growth. What moved was the <em>denominator</em>: total basic employment summed across every other sector, which roughly halved for exactly these five years and recovered by 2022. The same pattern shows up, much fainter, in Stanislaus County for 2021 alone, and not at all in Fresno — the largest, most diversified of the four counties — which is the signature of smaller counties having more sectors suppressed from public disclosure in any given year, not a real economic swing. Not yet traced to the specific missing data.
+</div>
+
+Stanislaus County — home to the larger Modesto/Hughson closure — tells a different story: it started the most dependent of the four counties in 1990, and has been diversifying *away* from food processing over the long run (Employment SDI: 0.277 → 0.205). It shows a much smaller, single-year version of the same denominator artifact in 2021 (see above), but not the sustained multi-year pattern Kings shows.
+
+<div class="research-note research-note--open">
+<span class="research-note-label">Open question</span>
+We haven't yet drawn conclusions from Stanislaus's own long-run diversification trend — why this county, alone among the four, has grown less dependent on food processing since 1990 even as the sector's absolute employment there has stayed roughly flat. Real, unresolved, not explained here.
+</div>
 
 **All four counties have this same full 36-year trajectory computed — not just Kings.** Seeing them together is more informative than reading two endpoint numbers in prose.
 
@@ -549,7 +605,10 @@ Stanislaus County — home to the larger Modesto/Hughson closure — tells a dif
     <text x="740" y="290" text-anchor="end" font-size="10.5">2025</text>
     <line class="axis-line" x1="50" y1="270" x2="740" y2="270"></line>
   </svg>
-  <p style="font-size:0.82em; color:var(--chart-muted); margin:0.6em 0 0 0;">Tulare's 2019 point (dashed gap above) is excluded: a confirmed error in the underlying calculation, not a real one-year collapse — see the table below.</p>
+  <div class="research-note" style="margin-top:0.8em;">
+  <span class="research-note-label">What we found</span>
+  <p style="font-size:0.92em;">Tulare's 2019 point (dashed gap above) is excluded, not interpolated or smoothed: that year's calculation collapsed to 0.9902 — a confirmed pipeline error, not a real one-year collapse in the underlying economy. Sector 311's own employment was normal that year; the denominator (total basic employment across every other sector) silently dropped every sector except food manufacturing from the sum. See the table below for the real excluded value, and the methodology repository for the full diagnosis.</p>
+  </div>
   <details class="chart-table-toggle">
     <summary>View as table (all four counties, 36 years)</summary>
     <table>
@@ -597,18 +656,6 @@ Stanislaus County — home to the larger Modesto/Hughson closure — tells a dif
   });
 })();
 </script>
-
-## Why this number, not just a job count
-
-"Del Monte's closure cost roughly 500 jobs" is true but incomplete — it doesn't say whether those 500 jobs were marginal to Kings County's economy or central to it. The SDI answers that question directly, the way an economist would build the answer, using public employment data rather than an impression.
-
-## What a location quotient actually measures
-
-The mechanic underneath the SDI is simple, even though the name isn't: a **location quotient** compares a sector's share of local employment to that same sector's share of the benchmark economy's employment. If food manufacturing is 4% of Kings County's jobs, and 2% of U.S. jobs, Kings County's location quotient for food manufacturing is 2.0 — twice as concentrated locally as nationally. A quotient at or below 1.0 means the county has no more of that sector than the national average would predict; well above 1.0 means the county is carrying more of it than a typical place its size would.
-
-That ratio matters because of a specific, named idea in regional economics called **economic base theory**: a local economy's health rests disproportionately on its "basic" sector — the jobs that pull money in from *outside* the local economy, through sales to other regions or countries — because that inflow is what then gets re-spent locally on groceries, rent, and services, which is what supports the "non-basic" jobs that only serve local demand. A sector with a location quotient well above 1.0 is doing more of that work than the benchmark economy typically does, which is why a county like Kings, concentrated in food processing, loses more than 500 jobs' worth of local economic weight when a plant like Del Monte's closes — the job count alone doesn't capture how much outside money was flowing through that one sector in the first place.
-
-**A related but different idea, worth naming precisely so the two don't blur together:** economic base theory is about where money *enters* a local economy. A separate concept — **leakage**, and the local-multiplier methods (like LM3) built to measure it — asks what happens *after* money enters: how much of each dollar stays in local circulation, re-spent at other local businesses, before it leaks out to an outside owner, landlord, or supplier. The SDI measures the first question, not the second. We don't currently calculate a leakage or local-multiplier figure for any Central Valley sector — if and when this site does, it'll be presented as its own distinct measure, not folded into the SDI's own numbers.
 
 ## A real refinement, not a finished number
 
