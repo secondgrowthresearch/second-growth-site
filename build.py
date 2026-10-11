@@ -24,7 +24,7 @@ DOMAIN = "https://secondgrowthresearch.org"
 # "secondgrowth" for secondgrowth.goatcounter.com) -- no cookies, no
 # personal data, so it doesn't need a consent banner. Leave as None until
 # an account exists; the analytics script is only emitted when this is set.
-GOATCOUNTER_CODE = None
+GOATCOUNTER_CODE = "secondgrowth"
 
 # source markdown path (relative to ROOT) -> output path (relative to SITE, root-relative URL)
 PAGES = [
