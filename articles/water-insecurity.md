@@ -54,9 +54,13 @@ This isn't a coincidence we're asserting — it's a pattern we went and checked,
 - [Cowan Tract](case-studies/stanislaus-cowan-tract.md) — no public water system at all; private wells in the worst 4% of the state for water-quality hazard.
 - [Salida](case-studies/stanislaus-salida.md) — part of a regional, polluter-funded bottled-water program covering an estimated 50,000 households.
 
-## What this is, and isn't
+## Who else is doing this work
 
-This is a documentation project, not a remediation one. We are not a water utility, a legal aid organization, or a state regulator, and nothing on this page substitutes for the work those institutions do — in several of these communities, organizations like Leadership Counsel for Justice and Accountability and California Rural Legal Assistance are already doing that work directly, through litigation, advocacy, and state-complaint processes. Our contribution is narrower: establishing, with sources, that the places carrying this region's water burden are overwhelmingly the same places carrying its farm-labor burden — and that the overlap is not incidental to how this region's economy was built.
+This is a documentation project, not a remediation one. Our own contribution is narrower than full resolution: establishing, with sources, that the places carrying this region's water burden are overwhelmingly the same places carrying its farm-labor burden — and that the overlap is not incidental to how this region's economy was built. For readers looking to act on what's documented here, or to work with the underlying data directly, these organizations are already doing that work:
+
+- **Leadership Counsel for Justice and Accountability** and **California Rural Legal Assistance** — litigation, advocacy, and state-complaint processes, active in several of the communities on this page.
+- **The California Water Data Consortium** — the state's own open water-data infrastructure, built under California's Open and Transparent Water Data Act, for readers who want the underlying datasets rather than our summary of them.
+- **Fresno State's WET Center** (Water, Energy, and Technology) — regional water and agricultural-technology research, incubation, and workforce development, based in the same San Joaquin Valley geography this page documents.
 
 ## The honest limitation
 
