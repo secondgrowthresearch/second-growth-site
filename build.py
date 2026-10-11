@@ -10,6 +10,8 @@ Run: python build.py
 
 import re
 import shutil
+import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 
 import markdown
@@ -102,6 +104,7 @@ NAV_PRIMARY = [
 NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
     ("/data.html", "Data"),
+    ("/updates.html", "Updates"),
     ("/about.html", "About"),
 ]
 NAV = NAV_PRIMARY + NAV_SECONDARY
@@ -219,7 +222,39 @@ def html_attr_escape(text: str) -> str:
     )
 
 
-def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str:
+def rfc822_date(iso_date: str) -> str:
+    """YYYY-MM-DD -> RFC 822 (e.g. 'Fri, 10 Oct 2026 00:00:00 GMT'), the
+    format RSS <pubDate> actually requires -- ISO 8601 isn't valid here."""
+    dt = datetime.strptime(iso_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    return dt.strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+
+_GIT_DATES_CACHE: dict = {}
+
+
+def git_dates(src_rel: str) -> tuple:
+    """(first_commit_date, last_commit_date) for a source file, both
+    YYYY-MM-DD or None if the file has no git history yet (e.g. staged but
+    uncommitted). Real commit history, not a hand-maintained date someone
+    has to remember to update -- the whole point is that this can't drift
+    out of sync with what actually changed. Needs full history, not a
+    shallow clone; see the fetch-depth: 0 in the deploy workflow."""
+    if src_rel in _GIT_DATES_CACHE:
+        return _GIT_DATES_CACHE[src_rel]
+    try:
+        result = subprocess.run(
+            ["git", "log", "--follow", "--format=%ad", "--date=short", "--", src_rel],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        )
+        dates = [d for d in result.stdout.strip().split("\n") if d]
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        dates = []
+    pair = (dates[-1], dates[0]) if dates else (None, None)
+    _GIT_DATES_CACHE[src_rel] = pair
+    return pair
+
+
+def render_page(title: str, body_html: str, out_path: Path, out_rel: str, src_rel: str) -> str:
     primary_links = "\n".join(
         f'        <a href="{href}">{label}</a>' for href, label in NAV_PRIMARY
     )
@@ -231,6 +266,16 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str
     full_title = f"{title} — {SITE_NAME}"
     description = html_attr_escape(page_description(body_html))
     full_title_attr = html_attr_escape(full_title)
+
+    published, updated = git_dates(src_rel)
+    if published:
+        date_note = (
+            f'<p class="page-dates">Published {published}'
+            + (f" &middot; Last updated {updated}" if updated != published else "")
+            + "</p>\n"
+        )
+    else:
+        date_note = ""
     goatcounter_tag = (
         f'<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count" '
         f'async src="//gc.zgo.at/count.js"></script>\n'
@@ -281,7 +326,7 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str) -> str
 </header>
 <main class="wrap content" id="main-content">
 {body_html}
-</main>
+{date_note}</main>
 <footer class="site-footer">
   <div class="wrap">
     <p>{SITE_NAME} &middot; <a href="/about.html">About</a></p>
@@ -582,6 +627,7 @@ def main() -> None:
 
     md = markdown.Markdown(extensions=["tables", "sane_lists"])
     photo_info = analyze_photos()
+    page_meta = []  # (out_rel, title, published, updated) -- feeds the Recent Updates page + RSS
 
     for src_rel, out_rel in PAGES:
         src_path = ROOT / src_rel
@@ -595,8 +641,69 @@ def main() -> None:
         body_html = rewrite_images(body_html, photo_info)
         title = page_title(body_html, fallback=out_rel)
         display_title = "Home" if title == SITE_NAME else title
-        out_path.write_text(render_page(display_title, body_html, out_path, out_rel), encoding="utf-8")
+        out_path.write_text(render_page(display_title, body_html, out_path, out_rel, src_rel), encoding="utf-8")
         print(f"built {out_rel}")
+
+        published, updated = git_dates(src_rel)
+        page_meta.append((out_rel, title, published, updated))
+
+    # Recent Updates page + RSS feed -- both built from the same git-log
+    # dates as the per-page bylines above, so there's no separate
+    # hand-maintained changelog to forget to update. "Updated" entries
+    # (published != updated) surface first within each date, since a
+    # correction or new finding on an existing page is often more
+    # newsworthy than a fresh page landing the same day.
+    dated = [m for m in page_meta if m[2]]  # skip anything with no git history yet
+    dated.sort(key=lambda m: (m[3] or m[2], m[2] != m[3]), reverse=True)
+
+    rows = "\n".join(
+        f'    <tr><td>{updated or published}</td>'
+        f'<td><a href="/{out_rel}">{html_attr_escape(title)}</a></td>'
+        f'<td>{"Updated" if updated and updated != published else "Published"}</td></tr>'
+        for out_rel, title, published, updated in dated
+    )
+    updates_body = f"""<h1>Recent updates</h1>
+
+<p>Every page on this site, in order of when it was last substantively changed — generated directly from this project's own git history, not a hand-maintained list. A page here because it was corrected or extended reads the same as one here because it's brand new; the "Updated"/"Published" column is the only thing that tells them apart.</p>
+
+<table>
+<thead><tr><th>Date</th><th>Page</th><th></th></tr></thead>
+<tbody>
+{rows}
+</tbody>
+</table>
+
+<p class="chart-source">Also available as <a href="/updates.xml">an RSS feed</a>.</p>
+"""
+    updates_out = SITE / "updates.html"
+    updates_out.write_text(
+        render_page("Recent Updates", updates_body, updates_out, "updates.html", "build.py"),
+        encoding="utf-8",
+    )
+    print("built updates.html")
+
+    rss_items = "\n".join(
+        f"""  <item>
+    <title>{html_attr_escape(title)}</title>
+    <link>{DOMAIN}/{out_rel}</link>
+    <guid>{DOMAIN}/{out_rel}#{updated or published}</guid>
+    <pubDate>{rfc822_date(updated or published)}</pubDate>
+    <description>{"Updated" if updated and updated != published else "Published"} {updated or published}</description>
+  </item>"""
+        for out_rel, title, published, updated in dated[:30]
+    )
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>{SITE_NAME} — Recent Updates</title>
+  <link>{DOMAIN}/updates.html</link>
+  <description>{SITE_TAGLINE}</description>
+{rss_items}
+</channel>
+</rss>
+"""
+    (SITE / "updates.xml").write_text(rss, encoding="utf-8")
+    print("wrote updates.xml (RSS)")
 
     # Assets
     shutil.copytree(ROOT / "assets", SITE / "assets", dirs_exist_ok=True)
@@ -609,7 +716,7 @@ def main() -> None:
     # resolved against DOMAIN the same way canonical/OG tags are.
     url_entries = "\n".join(
         f"  <url><loc>{DOMAIN}{'/' if out_rel == 'index.html' else '/' + out_rel}</loc></url>"
-        for _, out_rel in PAGES
+        for _, out_rel in PAGES + [("", "updates.html")]
     )
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'

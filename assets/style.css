@@ -489,6 +489,18 @@ li { margin-bottom: 0.4em; }
   color: var(--chart-muted);
 }
 
+/* Published/last-updated byline -- real git-commit dates, not hand-
+   maintained, so it can't silently drift out of sync with the page's
+   actual content. A citable "as of" marker for readers who need to cite
+   a specific version of a page (a reporter, a researcher, a filing). */
+.page-dates {
+  margin-top: 2.5em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--line);
+  font-size: 0.78em;
+  color: var(--chart-muted);
+}
+
 /* ------------------------------------------------------------------ */
 /* Historical photographs                                             */
 /* ------------------------------------------------------------------ */
