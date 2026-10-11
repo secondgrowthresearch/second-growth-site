@@ -1,6 +1,6 @@
 # When a lawsuit threat becomes a line item
 
-Environmental review isn't only a regulatory hurdle — it's also real negotiating leverage. A project that needs to clear a CEQA challenge sometimes buys its way past one, in a real, dollar-denominated settlement. This mechanism documents how that leverage has worked elsewhere, and whether it's been used anywhere near the new industry arriving in these four counties.
+Environmental review isn't only a regulatory hurdle — it's also real negotiating leverage. A project that needs to clear a CEQA challenge sometimes buys its way past one, in a real, dollar-denominated settlement. This mechanism documents how that leverage has been used elsewhere, and whether it's been used anywhere near the new industry arriving in these four counties.
 
 <div class="stat-pair">
   <div class="stat-card">
@@ -13,7 +13,7 @@ Environmental review isn't only a regulatory hurdle — it's also real negotiati
   </div>
 </div>
 
-## How the leverage works
+## How the leverage is structured
 
 A community-benefit agreement (CBA) is a negotiated, legally enforceable commitment a developer makes to a community — funding, hiring commitments, environmental conditions — typically in exchange for community groups dropping or not filing a CEQA challenge that could otherwise delay or block a project. It's a demand-side mechanism in the specific sense that it makes the party generating a local impact pay something back to the people absorbing it, rather than spreading that cost onto the surrounding community for free.
 
