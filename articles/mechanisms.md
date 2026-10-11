@@ -42,6 +42,40 @@ Each page below works the same way: what the mechanism is, what it costs in real
 
 ## Who funds what, as of this writing
 
+<div class="chart">
+  <p class="chart-title">Current federal funding strength, by mechanism</p>
+  <p class="chart-subtitle">Position shows funding health as of October 2026, not the mechanism's value — see the table below for the full picture.</p>
+  <svg viewBox="0 0 600 260" style="width:100%; height:auto; display:block;" role="img" aria-label="A horizontal axis from weaker to stronger current federal funding. Land-repurposing (CRP, lapsed) sits at the weak end, then cost-causation ratemaking (DOE, rescoped), then recharge-basin construction (WaterSMART, cut but active), then habitat restoration (ACEP, well-funded) at the strong end. CEQA leverage is called out separately as having no federal funding channel at all.">
+    <line x1="60" y1="140" x2="480" y2="140" stroke="var(--ink)" stroke-width="2"></line>
+    <line x1="60" y1="134" x2="60" y2="146" stroke="var(--ink)" stroke-width="2"></line>
+    <line x1="480" y1="134" x2="480" y2="146" stroke="var(--ink)" stroke-width="2"></line>
+    <text x="60" y="162" font-size="11.5" fill="var(--chart-muted)" text-anchor="start">Weaker funding</text>
+    <text x="480" y="162" font-size="11.5" fill="var(--chart-muted)" text-anchor="end">Stronger funding</text>
+
+    <circle cx="110" cy="140" r="7" fill="var(--chart-cat-1)"></circle>
+    <text x="110" y="124" font-size="11.5" fill="var(--chart-text-primary)" text-anchor="middle">Land-repurposing</text>
+
+    <line x1="220" y1="128" x2="220" y2="100" stroke="var(--chart-muted)" stroke-width="1"></line>
+    <circle cx="220" cy="140" r="7" fill="var(--chart-cat-2)"></circle>
+    <text x="220" y="92" font-size="11.5" fill="var(--chart-text-primary)" text-anchor="middle">Ratemaking</text>
+
+    <circle cx="330" cy="140" r="7" fill="var(--chart-cat-1)"></circle>
+    <text x="330" y="124" font-size="11.5" fill="var(--chart-text-primary)" text-anchor="middle">Recharge basins</text>
+
+    <line x1="440" y1="128" x2="440" y2="100" stroke="var(--chart-muted)" stroke-width="1"></line>
+    <circle cx="440" cy="140" r="7" fill="var(--chart-cat-1)"></circle>
+    <text x="440" y="92" font-size="11.5" fill="var(--chart-text-primary)" text-anchor="middle">Habitat restoration</text>
+
+    <rect x="60" y="178" width="420" height="55" rx="4" fill="none" stroke="var(--chart-muted)" stroke-width="1" stroke-dasharray="4 3"></rect>
+    <text x="270" y="201" font-size="11" fill="var(--chart-text-secondary)" text-anchor="middle">CEQA / community-benefit leverage isn't placed above —</text>
+    <text x="270" y="218" font-size="11" fill="var(--chart-text-secondary)" text-anchor="middle">it has no federal funding channel at all to measure against this axis.</text>
+  </svg>
+  <div class="chart-legend">
+    <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-cat-1)"></span>Supply-augmenting</span>
+    <span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-cat-2)"></span>Cost-internalizing</span>
+  </div>
+</div>
+
 <div class="table-scroll">
 <table>
   <thead>
