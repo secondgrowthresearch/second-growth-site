@@ -56,6 +56,24 @@ California's international trade balance in processed food has flipped from a sm
   </div>
 </div>
 
+<div class="chart">
+  <p class="chart-title">That 2.2× isn't a straight line</p>
+  <p class="chart-subtitle">Kings County's food-manufacturing dependence, 1990–2025 — the same real data as the Index's full chart, shown here at a glance</p>
+  <svg viewBox="0 0 760 170" role="img" aria-labelledby="home-kings-title home-kings-desc">
+    <title id="home-kings-title">Kings County Employment SDI, 1990 to 2025, preview</title>
+    <desc id="home-kings-desc">Rose from 0.070 in 1990 to a peak of 0.419 in 2017, held near 0.40 through 2021, then fell back to 0.153 by 2025 — still more than double the 1990 starting level.</desc>
+    <path fill="none" stroke="var(--chart-cat-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
+      d="M50.0,140.0 69.7,127.4 89.4,136.7 109.1,136.1 128.9,136.2 148.6,135.6 168.3,136.4 188.0,134.7 207.7,134.5 227.4,127.7 247.1,130.2 266.9,128.7 286.6,123.3 306.3,105.6 326.0,100.2 345.7,102.1 365.4,103.8 385.1,117.1 404.9,102.0 424.6,110.1 444.3,108.0 464.0,103.6 483.7,101.8 503.4,101.8 523.1,103.3 542.9,91.4 562.6,93.6 582.3,20.0 602.0,24.4 621.7,27.2 641.4,25.9 661.1,29.9 680.9,92.0 700.6,101.2 720.3,99.1 740.0,111.5"></path>
+    <circle cx="582.3" cy="20.0" r="5" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="1.5"></circle>
+    <text x="582.3" y="12" text-anchor="middle" font-size="11" fill="var(--chart-text-primary)">0.419 (2017 peak)</text>
+    <circle cx="50" cy="140.0" r="5" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="1.5"></circle>
+    <text x="50" y="158" text-anchor="start" font-size="10.5" fill="var(--chart-text-secondary)">1990: 0.070</text>
+    <circle cx="740" cy="111.5" r="5" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="1.5"></circle>
+    <text x="740" y="158" text-anchor="end" font-size="10.5" fill="var(--chart-text-secondary)">2025: 0.153</text>
+  </svg>
+  <p class="chart-source">Full 36-year chart, the other three counties, and full sourcing: <a href="the-index.html">the Index</a>.</p>
+</div>
+
 ## Where we're starting
 
 Our first case study is California's Central Valley, where more than fifty years of commodity agriculture consolidation has repeatedly displaced the people who did the work of growing and processing it. See [Case Studies](case-studies.md) for what we're documenting, [Water Insecurity](water-insecurity.md) for how the same geography shows up in who has safe drinking water today, [Environmental Impact](environmental-impact.md) for what the industry's operation has done to the land and water system itself, [Consolidation](consolidation.md) for how ownership of the industry is concentrating even as plants close, [the Index](the-index.md) for the measure at the center of it, and [Methodology](methodology.md) for the full calculation and its sourcing.

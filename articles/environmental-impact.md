@@ -23,6 +23,37 @@ Parts of the San Joaquin Valley have sunk as much as 28 feet since the 1920s fro
 
 What addressing the underlying overdraft actually costs, rather than just repairing its damage, has a real figure too, from inside this project's own home subbasin: two separate, completed recharge-basin projects from the North Kings Groundwater Sustainability Agency (GSA — the local body created under the state's 2014 Sustainable Groundwater Management Act to manage each subbasin's water) — the Carter-Bybee basin (35 acres, $6 million, 840 acre-feet/year) and the Kenneson & Sanchez basins (47 acres, $6.47 million, roughly 960 acre-feet/year) — land within 6% of each other at **roughly $6,700 to $7,100 per acre-foot of new annual recharge capacity**, despite different funding sources and different years. That consistency makes it a real planning figure for this specific subbasin, not a one-off.
 
+<div class="chart">
+  <p class="chart-title">Repairing the damage vs. preventing it</p>
+  <p class="chart-subtitle">Real dollar figures from this project's own research — not a matched before/after, since each one covers a different scope and time frame. See each page's own sourcing for what's "spent," "needed," or "awarded."</p>
+  <svg viewBox="0 0 620 260" style="width:100%; height:auto; display:block;" role="img" aria-label="Horizontal bar chart comparing damage-repair figures (100 million dollars spent on subsidence repairs since the 1960s, 250 million dollars estimated needed for Eastside Bypass levee improvements) against restoration and prevention figures (40 million dollars invested in Dos Rios Ranch Preserve over ten years, 35.56 million dollars awarded nationally under the state's land-repurposing program, 12.47 million dollars spent on two real Kings Subbasin recharge basins).">
+    <text x="10" y="20" font-size="12" font-weight="700" fill="var(--chart-cat-1)">Repairing damage already done</text>
+    <rect x="200" y="30" width="160" height="26" fill="var(--chart-cat-1)"></rect>
+    <text x="195" y="48" font-size="11.5" text-anchor="end" fill="var(--chart-text-primary)">$100M, subsidence repairs since 1960s</text>
+    <text x="365" y="48" font-size="11.5" fill="var(--chart-text-primary)">$100M</text>
+
+    <rect x="200" y="62" width="400" height="26" fill="var(--chart-cat-1)"></rect>
+    <text x="195" y="80" font-size="11.5" text-anchor="end" fill="var(--chart-text-primary)">Eastside Bypass levees, est. needed</text>
+    <text x="605" y="80" font-size="11.5" fill="var(--chart-text-primary)">$250M</text>
+
+    <line x1="200" y1="105" x2="600" y2="105" stroke="var(--chart-baseline)" stroke-width="1"></line>
+
+    <text x="10" y="128" font-size="12" font-weight="700" fill="var(--chart-cat-2)">Restoring or preventing it</text>
+    <rect x="200" y="138" width="64" height="26" fill="var(--chart-cat-2)"></rect>
+    <text x="195" y="156" font-size="11.5" text-anchor="end" fill="var(--chart-text-primary)">Dos Rios Ranch Preserve, 10-yr build-out</text>
+    <text x="269" y="156" font-size="11.5" fill="var(--chart-text-primary)">$40M</text>
+
+    <rect x="200" y="170" width="57" height="26" fill="var(--chart-cat-2)"></rect>
+    <text x="195" y="188" font-size="11.5" text-anchor="end" fill="var(--chart-text-primary)">MLRP awards, all 4 grants nationally</text>
+    <text x="262" y="188" font-size="11.5" fill="var(--chart-text-primary)">$35.56M</text>
+
+    <rect x="200" y="202" width="20" height="26" fill="var(--chart-cat-2)"></rect>
+    <text x="195" y="220" font-size="11.5" text-anchor="end" fill="var(--chart-text-primary)">Carter-Bybee + Kenneson-Sanchez basins</text>
+    <text x="225" y="220" font-size="11.5" fill="var(--chart-text-primary)">$12.47M</text>
+  </svg>
+  <p class="chart-source">Repair figures: this page's own sourcing, above. Restoration figures: <a href="mechanisms/habitat-restoration.html">Habitat Restoration</a>, <a href="mechanisms/land-repurposing.html">Land-Repurposing</a>, and <a href="mechanisms/recharge-basins.html">Recharge Basins</a>.</p>
+</div>
+
 <figure class="figure">
   <img src="/assets/photos/11-san-joaquin-irrigation-pump-1938.jpg" alt="A man stands beside an electric irrigation pump at the edge of a field in the San Joaquin Valley, California, 1938, with an irrigation ditch and farmland in the background.">
   <figcaption class="figure-caption"><strong>San Joaquin Valley, November 1938.</strong> An irrigation pump at the edge of a field — the ordinary, decades-long practice of pumping groundwater for irrigation that the paragraph above identifies as the actual cause of the valley floor's permanent subsidence, not a single dramatic event. <span class="figure-source">Dorothea Lange, Farm Security Administration. Public domain, Library of Congress.</span></figcaption>
