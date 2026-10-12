@@ -78,6 +78,26 @@ We didn't have to go looking for a separate consolidation story — it was alrea
 
 Four separate ownership chains, three different commodities (tomatoes, dairy, beef), and two outright bankruptcies behind them — all inside a record we built to document closures, not mergers.
 
+## A real, if imperfect, local concentration proxy
+
+A true concentration ratio — market share, firm by firm — needs company-level revenue data this project doesn't have for private processors. What the U.S. Census Bureau's County Business Patterns (CBP) does publish, free and at the county level, is establishment counts and employment by size class for NAICS 311 — which supports a cruder but real proxy: how large is the typical food-processing plant in each of these four counties, and what share of plants are large-scale operations.
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>County</th><th>NAICS 311 establishments (2023)</th><th>NAICS 311 employment</th><th>Avg. employees per establishment</th><th>Share of establishments with 250+ employees</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Kings</strong></td><td>20</td><td>5,510</td><td><strong>276</strong></td><td>at least 15% (most of this county's size-class detail is suppressed for disclosure — see note)</td></tr>
+    <tr><td>Tulare</td><td>63</td><td>8,612</td><td>137</td><td>at least 8%, possibly up to 13%</td></tr>
+    <tr><td>Fresno</td><td>101</td><td>14,177</td><td>140</td><td>13.9% (fully reported, no suppression)</td></tr>
+    <tr><td>Stanislaus</td><td>92</td><td>10,052</td><td>109</td><td>at least 11%, possibly up to 12%</td></tr>
+  </tbody>
+</table>
+</div>
+
+Kings County's average food-processing plant, by this measure, runs about twice the size of Stanislaus's — consistent with Kings carrying its food-manufacturing weight in a smaller number of larger operations, the same shape its Employment SDI already shows is concentrated in one closure-prone sector. This is 2023 data, so it reflects the county's plant structure *before* the Del Monte Hanford closure documented elsewhere on this site, not after.
+
+**Why the "at least" language, and why this isn't a real HHI:** CBP suppresses exact counts in a size-class bucket when so few establishments fall into it that reporting the number could identify a specific company — exactly the situation in a county with only 20 total food-processing plants, like Kings. Where a county's reported size-class counts don't add up to its total establishment count, the difference is sitting in a suppressed bucket we can't see into, which is why Kings and Tulare's large-plant shares are given as a floor ("at least"), not an exact figure. Fresno's size-class breakdown is the one fully reported, unsuppressed case among the four. None of this is a Herfindahl-Hirschman Index or any other standard market-concentration measure — it's a count of plants and their rough size, not a measure of which companies own them or what share of output they control.
+
 ## A live test of the same question
 
 Everything above is retrospective — ownership chains we can only trace because the consolidation already happened. A new industry is arriving in these same four counties right now, which makes it possible to ask the same question in real time, before any pattern has had the chance to set: **AI data centers**, with five live proposals as of late 2026 — Naval Air Station Lemoore (Kings County), separate proposals in Modesto and Riverbank (Stanislaus County), and two county-fairgrounds "edge node" proposals in Kings and Tulare.
@@ -88,7 +108,7 @@ So far, the answer runs the opposite direction from tomatoes and meatpacking. **
 
 ## What we don't know, and what this doesn't claim
 
-- **We have not calculated a concentration ratio for any Central Valley-specific commodity.** The 77% cattle and 225-grower tomato figures above are national and statewide, not calculated for Kings, Fresno, Tulare, or Stanislaus counties specifically. Pairing them with our county-level closures is suggestive, not a rigorous local measure — the same caution we apply to every other number on this site.
+- **We still have not calculated a true concentration ratio (market share by firm) for any Central Valley-specific commodity.** The 77% cattle and 225-grower tomato figures above remain national and statewide. What we do have now is the plant-size proxy above (establishment counts and average size by county, from CBP) — a real, local, but cruder measure than a firm-level HHI, and explicitly not a substitute for one.
 - **Consolidation and closure are related but not identical.** A plant absorbed into a larger company sometimes keeps running for years (Seneca ran the former Signature Fruit plant for twelve years before closing it) — the ownership change and the eventual closure are two separate events with their own separate causes, and we're not asserting the former caused the latter in every case.
 - **We have not yet quantified how many of our 24 documented closures trace back to a prior bankruptcy or acquisition versus a clean single-owner exit.** Of 24 closures, we can currently trace five to a prior consolidation event; the other 19 may or may not have similar histories we simply haven't found yet.
 
@@ -98,6 +118,7 @@ So far, the answer runs the opposite direction from tomatoes and meatpacking. **
 - Saitone, Schaefer, et al., ["Concentration and Market Power in the U.S. Meatpacking Industry,"](https://doi.org/10.1007/s11151-023-09923-z) *Review of Industrial Organization* (2024) — plant-level USDA FSIS data, the basis for the cattle/hog/broiler concentration figures above. (Corrected from an earlier, imprecise "FY2021... via Schaefer et al., 2023" citation — the published, citable version of this research is the 2024 journal article linked here.)
 - [The Guardian and Food & Water Watch, "Revealed: the true extent of America's food monopolies, and who pays the price"](https://www.theguardian.com/environment/ng-interactive/2021/jul/14/food-monopoly-meals-profits-data-investigation) (July 2021) — the source of the 61-grocery-item concentration figures above. (Corrected from an earlier, unverified "Jacobin-syndicated" attribution; this is the original Guardian/Food & Water Watch investigation.)
 - This project's own case-study research: see the individual closure pages linked above for full primary sourcing on each ownership chain.
+- U.S. Census Bureau, [County Business Patterns, 2023](https://www.census.gov/programs-surveys/cbp.html) (NAICS 311, county-level establishment counts and employment by size class) — the basis for the local plant-size proxy above.
 - [Data Center Dynamics, "Ameresco partners with CyrusOne to develop off-grid AI data center at Naval Air Station Lemoore in California"](https://www.datacenterdynamics.com/en/news/ameresco-partners-with-cyrusone-to-develop-offgrid-ai-data-center-at-naval-air-station-lemoore-in-california/) (2025).
 - [Ceres Courier, "Data centers: existential threat or unique opportunity?"](https://www.cerescourier.com/news/local/data-centers-existential-threat-or-unique-opportunity/) (Riverbank/Aemetis/Spartan Data Centers reporting, 2026).
 - [Hanford Sentinel, "Kings fairground CEO: new project is not a traditional data center"](https://hanfordsentinel.com/business/agriculture/kings-fairground-ceo-new-project-is-not-a-traditional-data-center/article_90b4f45c-e98e-4077-a585-6e5416581ac3.html) (Global Stack USA, 2026).

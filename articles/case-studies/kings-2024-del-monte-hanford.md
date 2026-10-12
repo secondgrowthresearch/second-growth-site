@@ -8,8 +8,8 @@ In March 2026, Del Monte closed its Hanford tomato-processing plant — the only
     <p class="stat-label">Jobs eliminated (378 confirmed by WARN filing; local/trade-press reporting puts the fuller count above 500).</p>
   </div>
   <div class="stat-card">
-    <p class="stat-number" data-target="2.2" data-decimals="1" data-suffix="×">0.0×</p>
-    <p class="stat-label">Kings County's food-processing dependence more than doubled, 1990 → 2025 (Employment SDI 0.070 → 0.153) — this closure landed on a growing share of the county's economy, not a shrinking one.</p>
+    <p class="stat-number" data-target="2.1" data-decimals="1" data-suffix="×">0.0×</p>
+    <p class="stat-label">Kings County's food-processing dependence more than doubled, 1990 → 2025 (Employment SDI 0.070 → 0.150) — this closure landed on a growing share of the county's economy, not a shrinking one.</p>
   </div>
 </div>
 

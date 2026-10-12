@@ -25,7 +25,7 @@ Reporting around the Firebaugh closure situates it inside a much larger wave: ro
 
 - **Jobs:** 275, confirmed by WARN filing.
 - **What happened to the workers:** Not documented in any source this archive has found.
-- **Fresno County's broader exposure:** Fresno carries real, continuing exposure to food-processing closures, but its Sector Dependence Index (0.100 in 2025) is lower than Kings' or Stanislaus' — see [the Index](../the-index.md) for the full county comparison.
+- **Fresno County's broader exposure:** Fresno carries real, continuing exposure to food-processing closures, but its Sector Dependence Index (0.094 in 2025) is lower than Kings' or Stanislaus' — see [the Index](../the-index.md) for the full county comparison.
 
 ## Part of a larger pattern
 

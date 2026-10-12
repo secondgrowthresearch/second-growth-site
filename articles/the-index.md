@@ -45,13 +45,17 @@ Our first application: how dependent four Central Valley counties are on **food 
     <table>
       <thead><tr><th>County</th><th>Employment SDI (2025)</th><th>Unemployment rate (Aug 2026, not seasonally adjusted)</th></tr></thead>
       <tbody>
-        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.153</td><td>8.5%</td></tr>
-        <tr><td>Fresno</td><td>0.100</td><td>7.8%</td></tr>
-        <tr><td>Tulare</td><td>0.119</td><td>10.4%</td></tr>
-        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.205</td><td>7.0%</td></tr>
+        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.150</td><td>8.5%</td></tr>
+        <tr><td>Fresno</td><td>0.094</td><td>7.8%</td></tr>
+        <tr><td>Tulare</td><td>0.116</td><td>10.4%</td></tr>
+        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.200</td><td>7.0%</td></tr>
       </tbody>
     </table>
   </details>
+  <div class="research-note">
+  <span class="research-note-label">A note on the unemployment layer</span>
+  Central Valley unemployment has a real, large seasonal cycle tied to harvest timing — in an agriculture-dependent county, unemployment typically runs lowest during peak harvest and rises in the off-season. The August 2026 figures above are not seasonally adjusted, and August sits inside most of these counties' active harvest window, so the cross-county differences shown are partly a snapshot of where each county's harvest calendar happened to be that month, not purely a stable, year-round difference in labor-market health. BLS doesn't publish a seasonally adjusted series at the county level, which is why we show the raw rate rather than imply a precision the data doesn't have.
+  </div>
   <p class="chart-source" id="cv-map-source">County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
 </div>
 <script>
@@ -59,12 +63,12 @@ Our first application: how dependent four Central Valley counties are on **food 
   var layers = {
     sdi: {
       title: "Food manufacturing dependence, by county",
-      subtitle: "Employment SDI vs. the U.S. benchmark, 2025",
+      subtitle: "Employment SDI vs. the U.S. benchmark, 2025, real trade adjustment applied",
       byFips: {
-        "06031": {name: "Kings", value: 0.153, note: "Hanford closure"},
-        "06019": {name: "Fresno", value: 0.100, note: null},
-        "06107": {name: "Tulare", value: 0.119, note: null},
-        "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
+        "06031": {name: "Kings", value: 0.150, note: "Hanford closure"},
+        "06019": {name: "Fresno", value: 0.094, note: null},
+        "06107": {name: "Tulare", value: 0.116, note: null},
+        "06099": {name: "Stanislaus", value: 0.200, note: "Modesto/Hughson closure"}
       },
       // Green family, light->dark -- trial replacement for the rust ramp,
       // lightness-monotonic and legibility-checked against both text colors.
@@ -361,14 +365,14 @@ Our first application: how dependent four Central Valley counties are on **food 
 })();
 </script>
 
-**Employment SDI, benchmarked against the United States, 2025:**
+**Employment SDI, benchmarked against the United States, 2025.** (Income SDI, charted alongside it below, reweights the same basic-employment figures by each sector's average QCEW payroll — it's a payroll-weighted variant of the employment measure, not a separate income dataset. Full definition and formula: [Methodology](methodology.md).)
 
 <div class="chart">
   <p class="chart-title">Food manufacturing's share of each county's economic base</p>
   <p class="chart-subtitle">Employment and Income SDI by county, 2025, benchmarked against the U.S.</p>
   <svg viewBox="0 0 760 340" role="img" aria-labelledby="sdi-bar-title sdi-bar-desc">
-    <title id="sdi-bar-title">Sector Dependence Index by county, 2025</title>
-    <desc id="sdi-bar-desc">Kings 0.153 employment / 0.195 income. Fresno 0.100 / 0.101. Tulare 0.119 / 0.184. Stanislaus 0.205 / 0.227.</desc>
+    <title id="sdi-bar-title">Sector Dependence Index by county, 2025, real trade-adjusted U.S. benchmark</title>
+    <desc id="sdi-bar-desc">Kings 0.150 employment / 0.192 income. Fresno 0.094 / 0.095. Tulare 0.116 / 0.178. Stanislaus 0.200 / 0.222.</desc>
     <line class="gridline" x1="50" y1="220" x2="740" y2="220"></line>
     <line class="gridline" x1="50" y1="170" x2="740" y2="170"></line>
     <line class="gridline" x1="50" y1="120" x2="740" y2="120"></line>
@@ -383,10 +387,10 @@ Our first application: how dependent four Central Valley counties are on **food 
     <!-- Kings -->
     <g class="mark-group">
       <rect class="mark-hit" x="100" y="20" width="48" height="250"></rect>
-      <rect class="mark-visible chart-hit" data-label="Kings — Employment SDI" data-value="0.153" data-key-color="var(--chart-cat-1)" x="112.25" y="117" width="22" height="153" rx="3" fill="var(--chart-cat-1)"></rect>
-      <rect class="mark-visible chart-hit" data-label="Kings — Income SDI" data-value="0.195" data-key-color="var(--chart-cat-2)" x="138.25" y="75" width="22" height="195" rx="3" fill="var(--chart-cat-2)"></rect>
-      <text class="mark-label" x="133.25" y="110" text-anchor="end">0.153</text>
-      <text class="mark-label" x="139.25" y="68" text-anchor="start">0.195</text>
+      <rect class="mark-visible chart-hit" data-label="Kings — Employment SDI" data-value="0.150" data-key-color="var(--chart-cat-1)" x="112.25" y="120" width="22" height="150" rx="3" fill="var(--chart-cat-1)"></rect>
+      <rect class="mark-visible chart-hit" data-label="Kings — Income SDI" data-value="0.192" data-key-color="var(--chart-cat-2)" x="138.25" y="78" width="22" height="192" rx="3" fill="var(--chart-cat-2)"></rect>
+      <text class="mark-label" x="133.25" y="113" text-anchor="end">0.150</text>
+      <text class="mark-label" x="139.25" y="71" text-anchor="start">0.192</text>
     </g>
     <text x="136.25" y="295" text-anchor="middle" font-size="13" font-weight="700" fill="var(--chart-text-primary)">Kings</text>
     <text x="136.25" y="311" text-anchor="middle" font-size="10.5">Hanford closure</text>
@@ -394,30 +398,30 @@ Our first application: how dependent four Central Valley counties are on **food 
     <!-- Fresno -->
     <g class="mark-group">
       <rect class="mark-hit" x="272.5" y="20" width="48" height="250"></rect>
-      <rect class="mark-visible chart-hit" data-label="Fresno — Employment SDI" data-value="0.100" data-key-color="var(--chart-cat-1)" x="284.75" y="170" width="22" height="100" rx="3" fill="var(--chart-cat-1)"></rect>
-      <rect class="mark-visible chart-hit" data-label="Fresno — Income SDI" data-value="0.101" data-key-color="var(--chart-cat-2)" x="310.75" y="169" width="22" height="101" rx="3" fill="var(--chart-cat-2)"></rect>
-      <text class="mark-label" x="305.75" y="163" text-anchor="end">0.100</text>
-      <text class="mark-label" x="311.75" y="162" text-anchor="start">0.101</text>
+      <rect class="mark-visible chart-hit" data-label="Fresno — Employment SDI" data-value="0.094" data-key-color="var(--chart-cat-1)" x="284.75" y="176" width="22" height="94" rx="3" fill="var(--chart-cat-1)"></rect>
+      <rect class="mark-visible chart-hit" data-label="Fresno — Income SDI" data-value="0.095" data-key-color="var(--chart-cat-2)" x="310.75" y="175" width="22" height="95" rx="3" fill="var(--chart-cat-2)"></rect>
+      <text class="mark-label" x="305.75" y="169" text-anchor="end">0.094</text>
+      <text class="mark-label" x="311.75" y="168" text-anchor="start">0.095</text>
     </g>
     <text x="308.75" y="295" text-anchor="middle" font-size="13" font-weight="700" fill="var(--chart-text-primary)">Fresno</text>
 
     <!-- Tulare -->
     <g class="mark-group">
       <rect class="mark-hit" x="445" y="20" width="48" height="250"></rect>
-      <rect class="mark-visible chart-hit" data-label="Tulare — Employment SDI" data-value="0.119" data-key-color="var(--chart-cat-1)" x="457.25" y="151" width="22" height="119" rx="3" fill="var(--chart-cat-1)"></rect>
-      <rect class="mark-visible chart-hit" data-label="Tulare — Income SDI" data-value="0.184" data-key-color="var(--chart-cat-2)" x="483.25" y="86" width="22" height="184" rx="3" fill="var(--chart-cat-2)"></rect>
-      <text class="mark-label" x="478.25" y="144" text-anchor="end">0.119</text>
-      <text class="mark-label" x="484.25" y="79" text-anchor="start">0.184</text>
+      <rect class="mark-visible chart-hit" data-label="Tulare — Employment SDI" data-value="0.116" data-key-color="var(--chart-cat-1)" x="457.25" y="154" width="22" height="116" rx="3" fill="var(--chart-cat-1)"></rect>
+      <rect class="mark-visible chart-hit" data-label="Tulare — Income SDI" data-value="0.178" data-key-color="var(--chart-cat-2)" x="483.25" y="92" width="22" height="178" rx="3" fill="var(--chart-cat-2)"></rect>
+      <text class="mark-label" x="478.25" y="147" text-anchor="end">0.116</text>
+      <text class="mark-label" x="484.25" y="85" text-anchor="start">0.178</text>
     </g>
     <text x="481.25" y="295" text-anchor="middle" font-size="13" font-weight="700" fill="var(--chart-text-primary)">Tulare</text>
 
     <!-- Stanislaus -->
     <g class="mark-group">
       <rect class="mark-hit" x="617.5" y="20" width="48" height="250"></rect>
-      <rect class="mark-visible chart-hit" data-label="Stanislaus — Employment SDI" data-value="0.205" data-key-color="var(--chart-cat-1)" x="629.75" y="65" width="22" height="205" rx="3" fill="var(--chart-cat-1)"></rect>
-      <rect class="mark-visible chart-hit" data-label="Stanislaus — Income SDI" data-value="0.227" data-key-color="var(--chart-cat-2)" x="655.75" y="43" width="22" height="227" rx="3" fill="var(--chart-cat-2)"></rect>
-      <text class="mark-label" x="650.75" y="58" text-anchor="end">0.205</text>
-      <text class="mark-label" x="656.75" y="36" text-anchor="start">0.227</text>
+      <rect class="mark-visible chart-hit" data-label="Stanislaus — Employment SDI" data-value="0.200" data-key-color="var(--chart-cat-1)" x="629.75" y="70" width="22" height="200" rx="3" fill="var(--chart-cat-1)"></rect>
+      <rect class="mark-visible chart-hit" data-label="Stanislaus — Income SDI" data-value="0.222" data-key-color="var(--chart-cat-2)" x="655.75" y="48" width="22" height="222" rx="3" fill="var(--chart-cat-2)"></rect>
+      <text class="mark-label" x="650.75" y="63" text-anchor="end">0.200</text>
+      <text class="mark-label" x="656.75" y="41" text-anchor="start">0.222</text>
     </g>
     <text x="653.75" y="295" text-anchor="middle" font-size="13" font-weight="700" fill="var(--chart-text-primary)">Stanislaus</text>
     <text x="653.75" y="311" text-anchor="middle" font-size="10.5">Modesto/Hughson closure</text>
@@ -433,10 +437,10 @@ Our first application: how dependent four Central Valley counties are on **food 
     <table>
       <thead><tr><th>County</th><th>Employment SDI</th><th>Income SDI</th></tr></thead>
       <tbody>
-        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.153</td><td>0.195</td></tr>
-        <tr><td>Fresno</td><td>0.100</td><td>0.101</td></tr>
-        <tr><td>Tulare</td><td>0.119</td><td>0.184</td></tr>
-        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.205</td><td>0.227</td></tr>
+        <tr><td><strong>Kings</strong> (Hanford closure)</td><td>0.150</td><td>0.192</td></tr>
+        <tr><td>Fresno</td><td>0.094</td><td>0.095</td></tr>
+        <tr><td>Tulare</td><td>0.116</td><td>0.178</td></tr>
+        <tr><td><strong>Stanislaus</strong> (Modesto/Hughson closure)</td><td>0.200</td><td>0.222</td></tr>
       </tbody>
     </table>
   </details>
@@ -445,23 +449,21 @@ Our first application: how dependent four Central Valley counties are on **food 
 
 In plain terms: in Kings County, food processing accounts for about 15% of the county's entire *basic* economy — every export-driven job in every sector, not just food processing. That share has risen steadily since 1990, when it was closer to 7% — though not in a straight line. See the full trajectory below.
 
-**Two refinements to the numbers above, both from this same underlying data.**
-
-The chart above benchmarks each county against the *United States* — and, as the next section explains in full, that comparison **isn't yet adjusted for trade**. Benchmarked against *California* instead, with the real, year-by-year trade adjustment applied, the picture is higher in two of the four counties:
+**A second benchmark, same underlying method, both now real trade-adjusted.** The chart above benchmarks each county against the *United States*. Benchmarked against *California* instead, the picture is higher in two of the four counties:
 
 <div class="table-scroll">
 <table>
-  <thead><tr><th>County</th><th>Employment SDI (US, not trade-adjusted)</th><th>Employment SDI (CA, trade-adjusted)</th><th>Income SDI (US, not trade-adjusted)</th><th>Income SDI (CA, trade-adjusted)</th></tr></thead>
+  <thead><tr><th>County</th><th>Employment SDI (US benchmark)</th><th>Employment SDI (CA benchmark)</th><th>Income SDI (US benchmark)</th><th>Income SDI (CA benchmark)</th></tr></thead>
   <tbody>
-    <tr><td>Kings</td><td>0.153</td><td><strong>0.339</strong></td><td>0.195</td><td><strong>0.365</strong></td></tr>
-    <tr><td>Fresno</td><td>0.100</td><td>0.108</td><td>0.101</td><td>0.108</td></tr>
-    <tr><td>Tulare</td><td>0.119</td><td>0.121</td><td>0.184</td><td>0.187</td></tr>
-    <tr><td>Stanislaus</td><td>0.205</td><td><strong>0.312</strong></td><td>0.227</td><td><strong>0.338</strong></td></tr>
+    <tr><td>Kings</td><td>0.150</td><td><strong>0.339</strong></td><td>0.192</td><td><strong>0.365</strong></td></tr>
+    <tr><td>Fresno</td><td>0.094</td><td>0.108</td><td>0.095</td><td>0.108</td></tr>
+    <tr><td>Tulare</td><td>0.116</td><td>0.121</td><td>0.178</td><td>0.187</td></tr>
+    <tr><td>Stanislaus</td><td>0.200</td><td><strong>0.312</strong></td><td>0.222</td><td><strong>0.338</strong></td></tr>
   </tbody>
 </table>
 </div>
 
-The California-benchmark columns are the more refined figures — they're the ones that actually apply the real trade check described below. We lead with the U.S.-benchmark chart above because it's the more familiar comparison point; the California-benchmark numbers in this table are the ones we trust more. See [Methodology](methodology.md) for how the trade adjustment itself is calculated.
+**Both columns now carry a real, year-specific trade adjustment** — the U.S. column was unadjusted (factor = 1.0) until this page's own 2026-10-12 update; it no longer is. The gap that remains between the two columns is a benchmark-choice question, not an adjustment-presence one: comparing Kings to the *entire United States'* food-processing footprint is a different question than comparing it to *California's own*, and the two economies don't carry the same share of the sector, so the same county reads as more specialized against one than the other. We lead with the U.S.-benchmark chart above because it's the more familiar comparison point; neither column is "more correct" than the other now that both are real — they're answering two different, both-legitimate questions. See [Methodology](methodology.md) for how the trade adjustment itself is calculated for each benchmark.
 
 **A separate question the SDI alone can't answer: were these above- or below-average-wage jobs?** Food manufacturing's own average annual pay, against each county's overall average pay across every sector, 2025 (same BLS QCEW data as the SDI itself):
 
@@ -481,10 +483,10 @@ In three of the four counties this project tracks, the food-manufacturing jobs l
 
 <div class="chart">
   <p class="chart-title">Kings County's dependence on food manufacturing, 1990–2025</p>
-  <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, unadjusted for trade</p>
+  <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, real trade adjustment applied</p>
   <svg viewBox="0 0 760 300" role="img" aria-labelledby="kings-line-title kings-line-desc">
     <title id="kings-line-title">Kings County Employment SDI, 1990 to 2025</title>
-    <desc id="kings-line-desc">Rose from 0.070 in 1990 to a peak of 0.419 in 2017, held near 0.40 through 2021, then fell back to 0.153 by 2025.</desc>
+    <desc id="kings-line-desc">Rose from 0.070 in 1990 to a peak of 0.419 in 2017, held near 0.40 through 2021, then fell back to 0.150 by 2025.</desc>
     <line class="gridline" x1="50" y1="214.4" x2="740" y2="214.4"></line>
     <line class="gridline" x1="50" y1="158.9" x2="740" y2="158.9"></line>
     <line class="gridline" x1="50" y1="103.3" x2="740" y2="103.3"></line>
@@ -496,17 +498,17 @@ In three of the four counties this project tracks, the food-manufacturing jobs l
     <text x="44" y="51.8"  text-anchor="end" font-size="12">0.40</text>
 
     <path fill="none" stroke="var(--chart-cat-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-      d="M50.0,231.1 69.7,210.7 89.4,225.8 109.1,224.8 128.9,224.9 148.6,224.0 168.3,225.3 188.0,222.5 207.7,222.2 227.4,211.3 247.1,215.3 266.9,212.8 286.6,204.1 306.3,175.5 326.0,166.9 345.7,169.9 365.4,172.7 385.1,194.1 404.9,169.8 424.6,182.8 444.3,179.4 464.0,172.4 483.7,169.4 503.4,169.4 523.1,171.8 542.9,152.6 562.6,156.2 582.3,37.4 602.0,44.5 621.7,49.1 641.4,46.9 661.1,53.3 680.9,153.6 700.6,168.5 720.3,165.1 740.0,185.1"></path>
+      d="M50.0,231.0 69.7,210.7 89.4,225.7 109.1,224.8 128.9,224.9 148.6,224.0 168.3,225.2 188.0,222.5 207.7,222.2 227.4,211.3 247.1,215.3 266.9,212.7 286.6,204.1 306.3,175.4 326.0,166.9 345.7,169.8 365.4,172.6 385.1,194.0 404.9,169.8 424.6,182.8 444.3,178.8 464.0,171.8 483.7,168.8 503.4,168.5 523.1,171.1 542.9,152.2 562.6,156.0 582.3,37.0 602.0,44.4 621.7,49.0 641.4,47.1 661.1,53.7 680.9,154.5 700.6,169.4 720.3,166.2 740.0,186.4"></path>
 
-    <circle class="chart-hit" data-label="Peak, 2017" data-value="0.419" data-key-color="var(--chart-cat-1)" cx="582.3" cy="37.4" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" data-label="Peak, 2017" data-value="0.419" data-key-color="var(--chart-cat-1)" cx="582.3" cy="37.0" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
     <text class="mark-label" x="582.3" y="25" text-anchor="middle">0.419</text>
     <text x="582.3" y="290" text-anchor="middle" font-size="10.5">2017</text>
 
-    <circle class="chart-hit" data-label="Start, 1990" data-value="0.070" data-key-color="var(--chart-cat-1)" cx="50" cy="231.1" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <circle class="chart-hit" data-label="Start, 1990" data-value="0.070" data-key-color="var(--chart-cat-1)" cx="50" cy="231.0" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
     <text x="50" y="290" text-anchor="middle" font-size="10.5">1990</text>
 
-    <circle class="chart-hit" data-label="2025 (most recent)" data-value="0.153" data-key-color="var(--chart-cat-1)" cx="740" cy="185.1" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
-    <text class="mark-label" x="700" y="175" text-anchor="middle">0.153</text>
+    <circle class="chart-hit" data-label="2025 (most recent)" data-value="0.150" data-key-color="var(--chart-cat-1)" cx="740" cy="186.4" r="6" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="2"></circle>
+    <text class="mark-label" x="700" y="176" text-anchor="middle">0.150</text>
     <text x="740" y="290" text-anchor="end" font-size="10.5">2025</text>
 
     <line class="axis-line" x1="50" y1="270" x2="740" y2="270"></line>
@@ -517,26 +519,26 @@ In three of the four counties this project tracks, the food-manufacturing jobs l
       <thead><tr><th>Year</th><th>Employment SDI</th></tr></thead>
       <tbody>
         <tr><td>1990</td><td>0.070</td></tr><tr><td>1995</td><td>0.083</td></tr><tr><td>2000</td><td>0.098</td></tr>
-        <tr><td>2005</td><td>0.180</td></tr><tr><td>2010</td><td>0.163</td></tr><tr><td>2015</td><td>0.211</td></tr>
+        <tr><td>2005</td><td>0.180</td></tr><tr><td>2010</td><td>0.164</td></tr><tr><td>2015</td><td>0.212</td></tr>
         <tr><td>2016</td><td>0.205</td></tr><tr><td><strong>2017</strong></td><td><strong>0.419 (peak)</strong></td></tr>
-        <tr><td>2018</td><td>0.406</td></tr><tr><td>2019</td><td>0.398</td></tr><tr><td>2020</td><td>0.402</td></tr>
-        <tr><td>2021</td><td>0.390</td></tr><tr><td>2022</td><td>0.210</td></tr><tr><td>2023</td><td>0.183</td></tr>
-        <tr><td>2024</td><td>0.189</td></tr><tr><td>2025</td><td>0.153</td></tr>
+        <tr><td>2018</td><td>0.406</td></tr><tr><td>2019</td><td>0.397</td></tr><tr><td>2020</td><td>0.401</td></tr>
+        <tr><td>2021</td><td>0.389</td></tr><tr><td>2022</td><td>0.208</td></tr><tr><td>2023</td><td>0.181</td></tr>
+        <tr><td>2024</td><td>0.187</td></tr><tr><td>2025</td><td>0.150</td></tr>
       </tbody>
     </table>
     <p class="chart-source">Full year-by-year data (all 36 years) is in the project repository's methodology output.</p>
   </details>
-  <p class="chart-source">Source: BLS QCEW. Not yet trade-adjusted for the US benchmark — see <a href="methodology.md">Methodology</a>.</p>
+  <p class="chart-source">Source: BLS QCEW. Real, year-by-year trade adjustment applied to the US benchmark as of 2026-10-12 — see <a href="methodology.md">Methodology</a>.</p>
 </div>
 
-**The real shape of this trend is sharper than a two-point summary suggests.** Kings County's food-processing dependence didn't rise steadily — it climbed through the 2000s, then **spiked to 0.419 in 2017** and held near 0.40 for five straight years (2017–2021), before falling back to 0.153 by 2025.
+**The real shape of this trend is sharper than a two-point summary suggests.** Kings County's food-processing dependence didn't rise steadily — it climbed through the 2000s, then **spiked to 0.419 in 2017** and held near 0.40 for five straight years (2017–2021), before falling back to 0.150 by 2025.
 
 <div class="research-note">
 <span class="research-note-label">What we found</span>
 Checked directly against the underlying data rather than left unexplained: this plateau is very likely a data artifact, not a real five-year economic shift. Sector 311's own employment barely moved during this window — 3,415 to 3,784 jobs throughout, no real growth. What moved was the <em>denominator</em>: total basic employment summed across every other sector, which roughly halved for exactly these five years and recovered by 2022. The same pattern shows up, much fainter, in Stanislaus County for 2021 alone, and not at all in Fresno — the largest, most diversified of the four counties — which is the signature of smaller counties having more sectors suppressed from public disclosure in any given year, not a real economic swing. Not yet traced to the specific missing data.
 </div>
 
-Stanislaus County — home to the larger Modesto/Hughson closure — tells a different story: it started the most dependent of the four counties in 1990, and has been diversifying *away* from food processing over the long run (Employment SDI: 0.277 → 0.205). It shows a much smaller, single-year version of the same denominator artifact in 2021 (see above), but not the sustained multi-year pattern Kings shows.
+Stanislaus County — home to the larger Modesto/Hughson closure — tells a different story: it started the most dependent of the four counties in 1990, and has been diversifying *away* from food processing over the long run (Employment SDI: 0.277 → 0.200). It shows a much smaller, single-year version of the same denominator artifact in 2021 (see above), but not the sustained multi-year pattern Kings shows.
 
 <div class="research-note research-note--open">
 <span class="research-note-label">Open question</span>
@@ -547,7 +549,7 @@ We haven't yet drawn conclusions from Stanislaus's own long-run diversification 
 
 <div class="chart" id="compare-counties-chart">
   <p class="chart-title">Food-processing dependence, all four counties, 1990–2025</p>
-  <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, not yet trade-adjusted. Click a county below to isolate its line.</p>
+  <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, real trade adjustment applied. Click a county below to isolate its line.</p>
   <div class="layer-toggle" role="group" aria-label="Highlight one county's line">
     <button type="button" class="layer-toggle-btn active" data-county="all">All counties</button>
     <button type="button" class="layer-toggle-btn" data-county="kings">Kings</button>
@@ -557,7 +559,7 @@ We haven't yet drawn conclusions from Stanislaus's own long-run diversification 
   </div>
   <svg viewBox="0 0 830 300" role="img" aria-labelledby="cmp-title cmp-desc">
     <title id="cmp-title">Employment SDI, all four counties, 1990 to 2025</title>
-    <desc id="cmp-desc">Kings rises from 0.070 to a 2017 peak of 0.419 then falls to 0.153. Fresno stays roughly flat, 0.086 to 0.100. Tulare rises gradually from 0.079 to 0.120, with 2019 excluded as a confirmed data artifact. Stanislaus starts highest at 0.277 and falls to 0.205, with a 2021 spike to 0.362.</desc>
+    <desc id="cmp-desc">Kings rises from 0.070 to a 2017 peak of 0.419 then falls to 0.150. Fresno stays roughly flat, 0.086 to 0.094. Tulare rises gradually from 0.079 to 0.116, with 2019 excluded as a confirmed data artifact. Stanislaus starts highest at 0.277 and falls to 0.200, with a 2021 spike to 0.360.</desc>
     <line class="gridline" x1="50" y1="214.4" x2="740" y2="214.4"></line>
     <line class="gridline" x1="50" y1="158.9" x2="740" y2="158.9"></line>
     <line class="gridline" x1="50" y1="103.3" x2="740" y2="103.3"></line>
@@ -570,34 +572,34 @@ We haven't yet drawn conclusions from Stanislaus's own long-run diversification 
 
     <g class="compare-line" data-county="fresno">
       <path fill="none" stroke="var(--chart-cat-3)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-        d="M50.0,222.1 69.7,216.5 89.4,220.1 109.1,222.6 128.9,221.7 148.6,217.2 168.3,222.9 188.0,218.3 207.7,218.6 227.4,218.9 247.1,215.8 266.9,207.2 286.6,207.9 306.3,198.1 326.0,191.9 345.7,198.8 365.4,201.5 385.1,205.3 404.9,206.0 424.6,201.2 444.3,201.5 464.0,204.5 483.7,207.9 503.4,204.6 523.1,207.2 542.9,199.0 562.6,202.3 582.3,198.0 602.0,203.2 621.7,204.3 641.4,196.2 661.1,204.2 680.9,206.6 700.6,208.1 720.3,211.6 740.0,214.7"></path>
-      <circle class="chart-hit" data-label="Fresno, 2025" data-value="0.100" data-key-color="var(--chart-cat-3)" cx="740.0" cy="214.7" r="5" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="1.5"></circle>
-      <text x="745" y="218" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-3)">Fresno</text>
+        d="M50.0,222.1 69.7,216.5 89.4,220.1 109.1,222.6 128.9,221.7 148.6,217.2 168.3,222.9 188.0,218.3 207.7,218.6 227.4,218.9 247.1,215.8 266.9,207.2 286.6,207.9 306.3,198.1 326.0,191.9 345.7,198.8 365.4,201.4 385.1,205.3 404.9,206.0 424.6,201.2 444.3,200.3 464.0,203.3 483.7,206.7 503.4,202.6 523.1,205.6 542.9,198.4 562.6,201.9 582.3,197.7 602.0,203.3 621.7,204.6 641.4,196.9 661.1,205.2 680.9,208.8 700.6,210.2 720.3,214.2 740.0,217.7"></path>
+      <circle class="chart-hit" data-label="Fresno, 2025" data-value="0.094" data-key-color="var(--chart-cat-3)" cx="740.0" cy="217.7" r="5" fill="var(--chart-cat-3)" stroke="#fff" stroke-width="1.5"></circle>
+      <text x="745" y="221" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-3)">Fresno</text>
     </g>
 
     <g class="compare-line" data-county="tulare">
       <path fill="none" stroke="var(--chart-cat-4)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-        d="M50.0,225.9 69.7,197.2 89.4,219.4 109.1,229.1 128.9,232.9 148.6,229.7 168.3,243.1 188.0,240.1 207.7,242.5 227.4,237.6 247.1,236.8 266.9,233.7 286.6,230.4 306.3,225.9 326.0,218.0 345.7,217.1 365.4,211.7 385.1,208.5 404.9,211.2 424.6,209.9 444.3,217.3 464.0,209.6 483.7,205.0 503.4,206.6 523.1,204.7 542.9,211.5 562.6,205.3 582.3,204.0 602.0,205.3"></path>
+        d="M50.0,225.9 69.7,197.2 89.4,219.4 109.1,229.1 128.9,232.9 148.6,229.7 168.3,243.1 188.0,240.1 207.7,242.5 227.4,237.6 247.1,236.9 266.9,233.7 286.6,230.4 306.3,225.9 326.0,218.0 345.7,217.1 365.4,211.7 385.1,208.5 404.9,211.2 424.6,209.9 444.3,216.5 464.0,208.8 483.7,204.1 503.4,205.3 523.1,203.6 542.9,211.1 562.6,205.1 582.3,203.7 602.0,205.4"></path>
       <path fill="none" stroke="var(--chart-cat-4)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3,2.5" opacity="0.6"
-        d="M602.0,205.3 621.7,203.2"></path>
+        d="M602.0,205.4 621.7,204.3"></path>
       <path fill="none" stroke="var(--chart-cat-4)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-        d="M641.4,202.8 661.1,200.0 680.9,203.5 700.6,200.5 720.3,204.4 740.0,203.6"></path>
-      <circle class="chart-hit" data-label="Tulare, 2025" data-value="0.120" data-key-color="var(--chart-cat-4)" cx="740.0" cy="203.6" r="5" fill="var(--chart-cat-4)" stroke="#fff" stroke-width="1.5"></circle>
-      <text x="745" y="200" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-4)">Tulare</text>
+        d="M641.4,203.2 661.1,200.6 680.9,205.0 700.6,201.9 720.3,206.3 740.0,205.8"></path>
+      <circle class="chart-hit" data-label="Tulare, 2025" data-value="0.116" data-key-color="var(--chart-cat-4)" cx="740.0" cy="205.8" r="5" fill="var(--chart-cat-4)" stroke="#fff" stroke-width="1.5"></circle>
+      <text x="745" y="202" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-4)">Tulare</text>
     </g>
 
     <g class="compare-line" data-county="stanislaus">
       <path fill="none" stroke="var(--chart-cat-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-        d="M50.0,116.2 69.7,133.0 89.4,132.0 109.1,127.3 128.9,131.3 148.6,139.5 168.3,144.2 188.0,147.3 207.7,150.8 227.4,157.8 247.1,155.4 266.9,151.7 286.6,156.1 306.3,106.0 326.0,99.8 345.7,104.6 365.4,110.8 385.1,177.1 404.9,131.0 424.6,126.9 444.3,126.3 464.0,136.6 483.7,122.6 503.4,160.0 523.1,159.6 542.9,164.5 562.6,163.4 582.3,139.6 602.0,140.3 621.7,146.3 641.4,143.7 661.1,69.1 680.9,147.1 700.6,134.5 720.3,146.3 740.0,156.3"></path>
-      <circle class="chart-hit" data-label="Stanislaus, 2025" data-value="0.205" data-key-color="var(--chart-cat-2)" cx="740.0" cy="156.3" r="5" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="1.5"></circle>
-      <text x="745" y="152" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-2)">Stanislaus</text>
+        d="M50.0,116.0 69.7,132.9 89.4,131.9 109.1,127.2 128.9,131.2 148.6,139.5 168.3,144.1 188.0,147.2 207.7,150.7 227.4,157.7 247.1,155.3 266.9,151.6 286.6,156.1 306.3,105.9 326.0,99.6 345.7,104.4 365.4,110.7 385.1,177.1 404.9,130.9 424.6,126.8 444.3,125.1 464.0,135.5 483.7,121.2 503.4,158.4 523.1,158.3 542.9,164.0 562.6,163.0 582.3,139.2 602.0,140.3 621.7,146.4 641.4,144.2 661.1,70.0 680.9,148.9 700.6,136.2 720.3,148.3 740.0,158.6"></path>
+      <circle class="chart-hit" data-label="Stanislaus, 2025" data-value="0.200" data-key-color="var(--chart-cat-2)" cx="740.0" cy="158.6" r="5" fill="var(--chart-cat-2)" stroke="#fff" stroke-width="1.5"></circle>
+      <text x="745" y="154" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-2)">Stanislaus</text>
     </g>
 
     <g class="compare-line" data-county="kings">
       <path fill="none" stroke="var(--chart-cat-1)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"
-        d="M50.0,231.1 69.7,210.7 89.4,225.8 109.1,224.8 128.9,224.9 148.6,224.0 168.3,225.3 188.0,222.5 207.7,222.2 227.4,211.3 247.1,215.3 266.9,212.8 286.6,204.1 306.3,175.5 326.0,166.9 345.7,169.9 365.4,172.7 385.1,194.1 404.9,169.8 424.6,182.8 444.3,179.4 464.0,172.4 483.7,169.4 503.4,169.4 523.1,171.8 542.9,152.6 562.6,156.2 582.3,37.4 602.0,44.5 621.7,49.1 641.4,46.9 661.1,53.3 680.9,153.6 700.6,168.5 720.3,165.1 740.0,185.1"></path>
-      <circle class="chart-hit" data-label="Kings, 2025" data-value="0.153" data-key-color="var(--chart-cat-1)" cx="740.0" cy="185.1" r="5" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="1.5"></circle>
-      <text x="745" y="189" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-1)">Kings</text>
+        d="M50.0,231.0 69.7,210.7 89.4,225.7 109.1,224.8 128.9,224.9 148.6,224.0 168.3,225.2 188.0,222.5 207.7,222.2 227.4,211.3 247.1,215.3 266.9,212.7 286.6,204.1 306.3,175.4 326.0,166.9 345.7,169.8 365.4,172.6 385.1,194.0 404.9,169.8 424.6,182.8 444.3,178.8 464.0,171.8 483.7,168.8 503.4,168.5 523.1,171.1 542.9,152.2 562.6,156.0 582.3,37.0 602.0,44.4 621.7,49.0 641.4,47.1 661.1,53.7 680.9,154.5 700.6,169.4 720.3,166.2 740.0,186.4"></path>
+      <circle class="chart-hit" data-label="Kings, 2025" data-value="0.150" data-key-color="var(--chart-cat-1)" cx="740.0" cy="186.4" r="5" fill="var(--chart-cat-1)" stroke="#fff" stroke-width="1.5"></circle>
+      <text x="745" y="190" text-anchor="start" font-size="11" font-weight="700" fill="var(--chart-cat-1)">Kings</text>
     </g>
 
     <text x="50" y="290" text-anchor="start" font-size="10.5">1990</text>
@@ -607,7 +609,7 @@ We haven't yet drawn conclusions from Stanislaus's own long-run diversification 
   </svg>
   <div class="research-note" style="margin-top:0.8em;">
   <span class="research-note-label">What we found</span>
-  <p style="font-size:0.92em;">Tulare's 2019 point (dashed gap above) is excluded, not interpolated or smoothed: that year's calculation collapsed to 0.9902 — a confirmed pipeline error, not a real one-year collapse in the underlying economy. Sector 311's own employment was normal that year; the denominator (total basic employment across every other sector) silently dropped every sector except food manufacturing from the sum. See the table below for the real excluded value, and the methodology repository for the full diagnosis.</p>
+  <p style="font-size:0.92em;">Tulare's 2019 point (dashed gap above) is excluded, not interpolated or smoothed: that year's calculation collapsed to 0.9901 — a confirmed pipeline error, not a real one-year collapse in the underlying economy. Sector 311's own employment was normal that year; the denominator (total basic employment across every other sector) silently dropped every sector except food manufacturing from the sum. See the table below for the real excluded value, and the methodology repository for the full diagnosis.</p>
   </div>
   <details class="chart-table-toggle">
     <summary>View as table (all four counties, 36 years)</summary>
@@ -618,18 +620,18 @@ We haven't yet drawn conclusions from Stanislaus's own long-run diversification 
         <tr><td>1995</td><td>0.083</td><td>0.095</td><td>0.072</td><td>0.235</td></tr>
         <tr><td>2000</td><td>0.098</td><td>0.098</td><td>0.060</td><td>0.206</td></tr>
         <tr><td>2005</td><td>0.180</td><td>0.128</td><td>0.095</td><td>0.298</td></tr>
-        <tr><td>2010</td><td>0.163</td><td>0.123</td><td>0.095</td><td>0.259</td></tr>
-        <tr><td>2015</td><td>0.211</td><td>0.128</td><td>0.105</td><td>0.190</td></tr>
-        <tr><td>2016</td><td>0.205</td><td>0.122</td><td>0.116</td><td>0.192</td></tr>
+        <tr><td>2010</td><td>0.164</td><td>0.125</td><td>0.096</td><td>0.261</td></tr>
+        <tr><td>2015</td><td>0.212</td><td>0.129</td><td>0.106</td><td>0.191</td></tr>
+        <tr><td>2016</td><td>0.205</td><td>0.122</td><td>0.117</td><td>0.192</td></tr>
         <tr><td><strong>2017</strong></td><td><strong>0.419 (Kings peak)</strong></td><td>0.130</td><td>0.119</td><td>0.235</td></tr>
-        <tr><td>2018</td><td>0.406</td><td>0.120</td><td>0.116</td><td>0.234</td></tr>
-        <tr><td>2019</td><td>0.398</td><td>0.118</td><td>excluded*</td><td>0.223</td></tr>
-        <tr><td>2020</td><td>0.402</td><td>0.133</td><td>0.121</td><td>0.227</td></tr>
-        <tr><td><strong>2021</strong></td><td>0.390</td><td>0.118</td><td>0.126</td><td><strong>0.362 (Stanislaus peak)</strong></td></tr>
-        <tr><td>2022</td><td>0.210</td><td>0.114</td><td>0.120</td><td>0.221</td></tr>
-        <tr><td>2023</td><td>0.183</td><td>0.111</td><td>0.125</td><td>0.244</td></tr>
-        <tr><td>2024</td><td>0.189</td><td>0.105</td><td>0.118</td><td>0.223</td></tr>
-        <tr><td>2025</td><td>0.153</td><td>0.100</td><td>0.120</td><td>0.205</td></tr>
+        <tr><td>2018</td><td>0.406</td><td>0.120</td><td>0.116</td><td>0.233</td></tr>
+        <tr><td>2019</td><td>0.397</td><td>0.118</td><td>excluded*</td><td>0.222</td></tr>
+        <tr><td>2020</td><td>0.401</td><td>0.132</td><td>0.120</td><td>0.226</td></tr>
+        <tr><td><strong>2021</strong></td><td>0.389</td><td>0.117</td><td>0.125</td><td><strong>0.360 (Stanislaus peak)</strong></td></tr>
+        <tr><td>2022</td><td>0.208</td><td>0.110</td><td>0.117</td><td>0.218</td></tr>
+        <tr><td>2023</td><td>0.181</td><td>0.107</td><td>0.122</td><td>0.241</td></tr>
+        <tr><td>2024</td><td>0.187</td><td>0.100</td><td>0.115</td><td>0.219</td></tr>
+        <tr><td>2025</td><td>0.150</td><td>0.094</td><td>0.116</td><td>0.200</td></tr>
       </tbody>
     </table>
     <p class="chart-source">* Tulare 2019: the underlying calculation's "total basic jobs, all sectors" denominator collapsed to 4,809 that year (vs. ~42,000 in 2018 and ~38,000 in 2020) — nearly equal to sector 311's own basic employment alone, meaning every other sector was silently dropped from the sum for that one county-year. A confirmed data-pipeline bug, not a real economic event. Flagged for a fix in the underlying calculation; excluded here rather than shown as a false 0.99 spike. Full 16-year subset shown; all 36 years are in the downloadable CSV.</p>

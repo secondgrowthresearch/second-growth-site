@@ -7,7 +7,7 @@ Environmental review isn't only a regulatory hurdle — it's also real negotiati
     <p class="stat-number" data-target="20" data-decimals="0" data-suffix="M">0M</p>
     <p class="stat-label">What Facebook committed to East Palo Alto and Menlo Park residents in 2016, resolving community groups' CEQA claims against its campus expansion.</p>
   </div>
-  <div class="stat-card">
+  <div class="stat-card stat-card--absence">
     <p class="stat-number" data-target="0" data-decimals="0">0</p>
     <p class="stat-label">California data-center-specific community-benefit agreements found anywhere, as of a 2026 national scan — including for any of the five proposals active in this project's four counties.</p>
   </div>

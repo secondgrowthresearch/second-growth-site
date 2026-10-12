@@ -631,6 +631,19 @@ li { margin-bottom: 0.4em; }
   margin: 0;
 }
 
+/* A handful of stat-cards report a negative search result (e.g. "0 dollar
+   figures found after two search passes") rather than a measured quantity.
+   Visually distinct from a real measurement -- dashed border, muted number
+   color -- so a reader skimming only the big numerals doesn't read "0" the
+   same way as "$11.4B" elsewhere on the site. */
+.stat-card--absence {
+  border-style: dashed;
+}
+
+.stat-card--absence .stat-number {
+  color: var(--chart-muted);
+}
+
 .chart-download-btn {
   display: inline-block;
   margin: 0.9em 0 0 0;

@@ -56,16 +56,20 @@ This research actually runs on two different geographies — county lines for th
     <table>
       <thead><tr><th>Geography</th><th>Area</th><th>SDI (2025)</th><th>Unemployment (Aug 2026)</th><th>Groundwater depth (2026)</th><th>Change since 2015</th></tr></thead>
       <tbody>
-        <tr><td>County</td><td>Kings</td><td>0.153</td><td>8.5%</td><td>—</td><td>—</td></tr>
-        <tr><td>County</td><td>Fresno</td><td>0.100</td><td>7.8%</td><td>—</td><td>—</td></tr>
-        <tr><td>County</td><td>Tulare</td><td>0.119</td><td>10.4%</td><td>—</td><td>—</td></tr>
-        <tr><td>County</td><td>Stanislaus</td><td>0.205</td><td>7.0%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Kings</td><td>0.150</td><td>8.5%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Fresno</td><td>0.094</td><td>7.8%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Tulare</td><td>0.116</td><td>10.4%</td><td>—</td><td>—</td></tr>
+        <tr><td>County</td><td>Stanislaus</td><td>0.200</td><td>7.0%</td><td>—</td><td>—</td></tr>
         <tr><td>Subbasin</td><td>Kings Subbasin</td><td>—</td><td>—</td><td>131.4 ft</td><td>−11.2 ft</td></tr>
         <tr><td>Subbasin</td><td>Tulare Lake Subbasin</td><td>—</td><td>—</td><td>173.2 ft</td><td>−2.6 ft</td></tr>
       </tbody>
     </table>
     <p class="chart-source">Counties and subbasins are genuinely different geographies, not a single table pivoted two ways — see the "—" cells above. Kings County alone spans both the Kings and Tulare Lake groundwater subbasins.</p>
   </details>
+  <div class="research-note">
+  <span class="research-note-label">A note on the unemployment layer</span>
+  Central Valley unemployment has a real, large seasonal cycle tied to harvest timing — in an agriculture-dependent county, unemployment typically runs lowest during peak harvest and rises in the off-season. The August 2026 figures shown by that layer are not seasonally adjusted, and August sits inside most of these counties' active harvest window, so the cross-county differences it shows are partly a snapshot of where each county's harvest calendar happened to be that month, not purely a stable, year-round difference in labor-market health. BLS doesn't publish a seasonally adjusted series at the county level, which is why we show the raw rate rather than imply a precision the data doesn't have.
+  </div>
   <p class="chart-source" id="explorer-source">County and state boundaries: U.S. Census Bureau via us-atlas. Terrain: Natural Earth 1:50m Gray Earth. SDI: Second Growth calculation, see <a href="methodology.md">Methodology</a>.</p>
 </div>
 <script>
@@ -73,12 +77,12 @@ This research actually runs on two different geographies — county lines for th
   var countyLayers = {
     sdi: {
       title: "Food manufacturing dependence, by county",
-      subtitle: "Employment SDI vs. the U.S. benchmark, 2025",
+      subtitle: "Employment SDI vs. the U.S. benchmark, 2025, real trade adjustment applied",
       byKey: {
-        "06031": {name: "Kings", value: 0.153, note: "Hanford closure"},
-        "06019": {name: "Fresno", value: 0.100, note: null},
-        "06107": {name: "Tulare", value: 0.119, note: null},
-        "06099": {name: "Stanislaus", value: 0.205, note: "Modesto/Hughson closure"}
+        "06031": {name: "Kings", value: 0.150, note: "Hanford closure"},
+        "06019": {name: "Fresno", value: 0.094, note: null},
+        "06107": {name: "Tulare", value: 0.116, note: null},
+        "06099": {name: "Stanislaus", value: 0.200, note: "Modesto/Hughson closure"}
       },
       diverging: false,
       // Green family, matching the-index.md's SDI county map -- the same
@@ -1686,7 +1690,7 @@ Six closures spanning thirty-three years — from a world-class fruit ranch's qu
 - **2024** — [Ruiz Foods closes its Tulare plant](case-studies/tulare-2024-ruiz-foods-tulare.md) — 215 jobs, a consolidation to the company's Dinuba plant
 - **2024** — [Prima Wawona closes its Cutler packing house](case-studies/tulare-2024-prima-wawona-cutler.md) — 5,411 jobs company-wide, the largest closure in this record
 
-Tulare carries real, continuing exposure to the same sector beyond these six case studies — it appears inside the broader ~60-closure wave that hit the region in 2024. Its current Sector Dependence Index (0.119, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
+Tulare carries real, continuing exposure to the same sector beyond these six case studies — it appears inside the broader ~60-closure wave that hit the region in 2024. Its current Sector Dependence Index (0.116, 2025) is published on [the Index](the-index.md) regardless of how many case studies exist; we're not waiting on the narrative to publish the number.
 
 ## What we're documenting
 

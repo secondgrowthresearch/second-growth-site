@@ -15,7 +15,7 @@ Del Monte's Modesto/Hughson canneries closed in April 2026, eliminating 765 perm
 
 ## What happened
 
-Stanislaus County has the *highest* food-processing dependence of the four counties this project tracks — Employment SDI 0.205 in 2025 — but unlike Kings County, that dependence has been *declining* since 1990 (from 0.277), not rising. See [the Index](../the-index.md) for the full county comparison.
+Stanislaus County has the *highest* food-processing dependence of the four counties this project tracks — Employment SDI 0.200 in 2025 — but unlike Kings County, that dependence has been *declining* since 1990 (from 0.277), not rising. See [the Index](../the-index.md) for the full county comparison.
 
 Del Monte Foods filed for Chapter 11 bankruptcy in July 2025, months before this closure — see the timeline on [Case Studies](../case-studies.md) for how that filing relates to both this closure and the company's [Hanford tomato plant closure](kings-2024-del-monte-hanford.md) in Kings County the month before.
 

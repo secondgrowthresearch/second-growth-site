@@ -3,7 +3,7 @@
 A large new electrical customer changes what a utility has to build to serve everyone — more generation, more transmission capacity, sometimes a whole new substation. The question this mechanism asks: who pays for that new capacity, the new customer who caused the need for it, or every existing ratepayer, spread across their bills?
 
 <div class="stat-pair">
-  <div class="stat-card">
+  <div class="stat-card stat-card--absence">
     <p class="stat-number" data-target="0" data-decimals="0">0</p>
     <p class="stat-label">Dollar figure found anywhere, after two independent search passes, for a California publicly owned utility charging a large new load the actual cost of the capacity it requires.</p>
   </div>

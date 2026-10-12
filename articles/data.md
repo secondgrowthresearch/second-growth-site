@@ -26,6 +26,14 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 **USDA Census of Agriculture** (county-level, every five years, 1974–2022) and **county Agricultural Commissioner annual crop reports**, for the longest available run of farm counts, acreage, and labor figures in each county we track.
 
+## Business establishments
+
+**U.S. Census Bureau, County Business Patterns (CBP), 2023.** County-level establishment counts and employment by size class for food manufacturing (NAICS 311) in Kings, Fresno, Tulare, and Stanislaus counties — a real but imperfect local proxy for processing-plant concentration, used in [Consolidation](consolidation.md). Not a firm-level market-share measure; see that page for what this data can and can't show.
+
+## Flood claims
+
+**FEMA, OpenFEMA NFIP Redacted Claims dataset.** Paid National Flood Insurance Program claims with a 2023 date of loss in Kings and Tulare counties, used in [Environmental Impact](environmental-impact.md) alongside — not in place of — the larger, separate farmland-restoration cost estimate already on that page. Covers insured structures only; excludes growing crops and any uninsured property.
+
 ## Historical record
 
 Primary and contemporaneous sourcing for Central Valley/Sacramento commodity-ag processing events going back to 1912 — cannery foundings, the 1966–67 United Farm Workers ownership precedent at Delano's Forty Acres, and documented plant closures from the early 1980s forward — used to test whether the current wave of closures is part of a genuinely continuous, decades-long pattern rather than a recent, isolated event. See [Case Studies](case-studies.md) for the timeline built from this record.
