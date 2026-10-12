@@ -579,7 +579,21 @@ This research actually runs on two different geographies — county lines for th
       .scaleExtent([1, 8])
       .translateExtent([[0, 0], [width, height]])
       .filter(function (event) { return event.type !== "wheel"; })
-      .on("zoom", function (event) { zoomG.attr("transform", event.transform); });
+      .on("zoom", function (event) {
+        zoomG.attr("transform", event.transform);
+        // Marker groups live inside zoomG, so their own translate(...)
+        // (set once, in renderMarkers, from the unzoomed projection)
+        // inherits zoomG's scale too -- at 8x zoom a 7px dot and 10.5px
+        // label would render as if ~56px and ~84px, which is what made
+        // zooming in on one city useless rather than clearer. Re-applying
+        // each marker's translate plus a counter-scale of 1/k on every
+        // zoom tick cancels the inherited scale back out: position still
+        // tracks the zoom/pan correctly, visual size stays constant.
+        zoomG.selectAll(".explorer-marker").attr("transform", function (d) {
+          var p = projection([d.lon, d.lat]);
+          return "translate(" + p[0] + "," + p[1] + ") scale(" + (1 / event.transform.k) + ")";
+        });
+      });
     svg.call(zoomBehavior);
 
     setupZoomControls(container, svg, zoomBehavior);
