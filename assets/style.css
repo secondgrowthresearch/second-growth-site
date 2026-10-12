@@ -686,6 +686,13 @@ li { margin-bottom: 0.4em; }
   padding-bottom: 16px;
   flex-wrap: wrap;
   gap: 10px;
+  /* The shared .wrap class caps content at --max-width (780px) -- the
+     right call for a prose reading column, wrong for a nav bar, which is
+     why the header wrapped across 3-4 rows even on a wide desktop window
+     (the bar never got more room no matter how wide the browser was).
+     This selector is more specific than the bare .wrap rule (two classes
+     vs. one), so it wins on cascade regardless of source order. */
+  max-width: 1400px;
 }
 
 .brand {
