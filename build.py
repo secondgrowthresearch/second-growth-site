@@ -94,6 +94,7 @@ PAGES = [
     ("articles/case-studies/stanislaus-keyes.md", "case-studies/stanislaus-keyes.html"),
     ("articles/case-studies/stanislaus-cowan-tract.md", "case-studies/stanislaus-cowan-tract.html"),
     ("articles/case-studies/stanislaus-salida.md", "case-studies/stanislaus-salida.html"),
+    ("articles/synthetic-control.md", "synthetic-control.html"),
     ("articles/methodology.md", "methodology.html"),
     ("articles/data.md", "data.html"),
     ("articles/about.md", "about.html"),
@@ -124,6 +125,7 @@ NAV_PRIMARY = [
 # than just relabeling the same weight.
 NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
+    ("/synthetic-control.html", "Measuring Closures"),
     ("/data.html", "Data"),
     ("/compounding.html", "Compounding Impact"),
     ("/mechanisms.html", "Mechanisms"),

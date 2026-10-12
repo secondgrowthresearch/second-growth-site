@@ -2,7 +2,7 @@
 
 ## California's Central Valley: the first case study
 
-Second Growth's first body of research documents more than fifty years of commodity agriculture consolidation in California's Central Valley, and what it has meant for the people who did the work of growing and processing it. We're starting with four counties — **Kings, Fresno, Tulare, and Stanislaus** — where that pattern is long-running and well documented.
+Second Growth's first body of research documents more than fifty years of commodity agriculture consolidation in California's Central Valley, and what it has meant for the people who did the work of growing and processing it. We're starting with four counties — **Kings, Fresno, Tulare, and Stanislaus** — where that pattern is long-running and well documented. Each case study below documents what happened at a specific plant; it does not by itself show whether that closure moved the county's broader economy — see [Measuring Closures](synthetic-control.md) for a direct statistical check on two of them, and what we found.
 
 ### Start here: the whole picture, one map
 

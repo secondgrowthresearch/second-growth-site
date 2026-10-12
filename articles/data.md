@@ -4,7 +4,9 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Employment and wages
 
-**U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW).** County-level food-manufacturing (NAICS 311) employment and wages for Kings, Fresno, Tulare, and Stanislaus counties, 1990–2026, alongside matching California-statewide and U.S.-national benchmark data. The backbone of the [Sector Dependence Index](the-index.md).
+**U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW).** County-level food-manufacturing (NAICS 311) employment and wages for Kings, Fresno, Tulare, and Stanislaus counties, 1990–2026, alongside matching California-statewide and U.S.-national benchmark data. The backbone of the [Sector Dependence Index](the-index.md). Extended to all 58 California counties and to U.S. Bureau of Labor Statistics Local Area Unemployment Statistics (LAUS), at both county and incorporated-city geography, for [the synthetic-control check](synthetic-control.md) on individual plant closures.
+
+**U.S. Census Bureau, LEHD Quarterly Workforce Indicators (QWI).** Quarterly, NAICS-specific employment, hires, separations, and earnings — real flow data, not just stock counts. Used in [the synthetic-control check](synthetic-control.md) to test whether a closure's effect shows up at quarterly precision or in sector pay, after county-level annual data found nothing.
 
 ## Trade
 

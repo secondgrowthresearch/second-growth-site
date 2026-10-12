@@ -26,6 +26,10 @@ Industry reporting at the time cited rising grower costs, a tomato surplus depre
 - **What happened to the workers:** Not documented in any source found. No reemployment data, no union or workforce-agency accounting located.
 - **Open question:** Whether a sale of the tomato-processing parcel ever closed, and whether any of the jobs came back, is unconfirmed past February 2022 — worth a direct check with the Kings County Economic Development Corporation or the City of Lemoore.
 
+## Did this closure move Kings County's economy?
+
+We checked directly, with a real statistical method (synthetic control), rather than assuming a 567-job closure would show up in the county's own numbers. It didn't — at county or town level, in employment, unemployment, or wages. See [Measuring Closures](../synthetic-control.md) for the full check, including two real bugs we caught along the way and what the null result actually means.
+
 ## Part of a larger pattern
 
 This was the first of what this archive now documents as three separate commodity-processing closures landing on the same pair of Kings County towns, Hanford and Lemoore — this one, [Del Monte's Hanford tomato plant closure](kings-2024-del-monte-hanford.md) in 2024, and [Leprino Foods' Lemoore East dairy plant closure](kings-2025-leprino-lemoore.md) in 2025–26. A local news report on the Leprino closure noted in passing that Lemoore "has already lost a tomato plant and a grain mill" — the tomato plant is this closure; the grain mill remains an unconfirmed lead.

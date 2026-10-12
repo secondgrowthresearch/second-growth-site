@@ -28,6 +28,10 @@ The Tulare site's butter-manufacturing operation was not affected and kept runni
 - **The building's fate:** No source found describes what became of the cheese-manufacturing building or equipment after 2010.
 - **A discrepancy in the reporting itself:** coverage of this closure uses both "idle" and "close" to describe it, sometimes in the same outlet — not resolved by the source text.
 
+## Did this closure move Tulare County's economy?
+
+We checked, with a real statistical method (synthetic control) rather than an assumption — and caught our own false positive doing it. An early result looked significant, but the gap it found (4,700–14,400 jobs) was two to three orders of magnitude larger than this 80-job closure could plausibly cause — almost certainly the Great Recession's regional recovery and the 2012–2016 drought, not this plant. See [Measuring Closures](../synthetic-control.md) for the full check.
+
 ## Part of a larger pattern
 
 This project's main record documents commodity-processing closures from 2020 forward. Searching the 2000–2020 window specifically, to see whether the pattern reaches back further in the Central Valley's four core counties, turned up four: this one (2010), [Dawn Foods' Modesto bakeries](stanislaus-2012-dawn-foods-modesto.md) (March 2012), [Patterson Vegetable Company](stanislaus-2012-patterson-vegetable.md) (June 2012), and [ConAgra's Hunt-Wesson plant in Helm](fresno-2016-conagra-helm.md) (2016). None of these were previously documented anywhere in this project's record. Tulare County, in particular, had no documented closure case study before this one — the county's continuing exposure to the same sector (noted on the main [Case Studies](../case-studies.md) page) now has an actual historical anchor point.
