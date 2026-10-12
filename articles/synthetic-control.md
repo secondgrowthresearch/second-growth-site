@@ -118,6 +118,7 @@ Every number in this entire check, and in the [Sector Dependence Index](the-inde
 - **We are not asserting field/farm labor was unaffected by either closure.** This check never measured that population at all; see above.
 - **The Q3 "seasonal hiring surge" explanation (check 4) is a plausible mechanism we checked and found didn't hold up statistically** — it's documented because the reasoning behind it is sound and may apply better to a different closure, not because it was confirmed here.
 - **We are not recommending against trying this method on a different closure or a different outcome.** Five checks on two closures is not exhaustive — it's what this pass covered, logged honestly either way.
+- **Every county-level check here inherits the same closed-labor-market assumption [the Index's methodology](methodology.md) already names as a limitation of the Sector Dependence Index itself** — a donor county's or a treated county's QCEW employment reflects where people *work*, not where they *live*, and this method has no more visibility into cross-county commuting than the SDI does. We're cross-referencing that caveat here rather than leaving it implicit in new work that depends on it just as much.
 
 ## Sources
 

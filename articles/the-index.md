@@ -481,6 +481,8 @@ In plain terms: in Kings County, food processing accounts for about 15% of the c
 
 In three of the four counties this project tracks, the food-manufacturing jobs lost to the closures in our [case studies](case-studies.md) paid *above* the county's own average — not marginal, low-wage work, but some of the better-paying jobs locally available. Fresno is the one exception. This is a different measure than the SDI (which asks how *concentrated* a sector is, not how well it pays) — we're showing it alongside, not folding it in.
 
+**What "average pay" doesn't quite capture, for a seasonal sector:** QCEW's avg. pay divides total wages paid by a *smoothed* average employment count, not a headcount of unique workers — so for a seasonal sector like food processing, someone who works a single quarter still pulls the wage total up without fully registering in the employment denominator. It's a real, standard, correctly-computed figure, and still the best available proxy for what these jobs paid — just not the same thing as "what a typical individual processing worker took home in a year," which this data can't directly give.
+
 <div class="chart">
   <p class="chart-title">Kings County's dependence on food manufacturing, 1990–2025</p>
   <p class="chart-subtitle">Employment SDI vs. the U.S. benchmark, real trade adjustment applied</p>
