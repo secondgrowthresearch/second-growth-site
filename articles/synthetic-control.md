@@ -1,11 +1,11 @@
 # The gap the numbers don't show
 
-Every closure in our [case studies](case-studies.md) documents a real company decision and a real headcount. What those pages don't do is show what happened to the county's economy *because* of any single closure — a plant closing and a county's employment numbers moving are both real, but showing one caused the other needs a different kind of check than a case study can give. This page documents that check: a real statistical method, run five independent ways, that consistently could not find a county-level effect large enough to distinguish from ordinary economic noise — and why that result is itself worth publishing, not a dead end.
+Every closure in our [case studies](case-studies.md) documents a real company decision and a real headcount. What those pages don't do is show what happened to the county's economy *because* of any single closure — a plant closing and a county's employment numbers moving are both real, but showing one caused the other needs a different kind of check than a case study can give. This page documents that check: a real statistical method, run seven independent ways, that consistently could not find a county-level effect large enough to distinguish from ordinary economic noise — and why that result is itself worth publishing, not a dead end.
 
 <div class="stat-pair">
   <div class="stat-card">
-    <p class="stat-number" data-target="5" data-decimals="0">0</p>
-    <p class="stat-label">Independent checks run — two closures, three data sources, county and town geography, annual and quarterly precision.</p>
+    <p class="stat-number" data-target="7" data-decimals="0">0</p>
+    <p class="stat-label">Independent checks run — two closures, four data sources, county and town geography, annual and quarterly precision.</p>
   </div>
   <div class="stat-card stat-card--absence">
     <p class="stat-number" data-target="0" data-decimals="0">0</p>
@@ -21,7 +21,7 @@ A plant closes. The county's total employment the following year is some number.
 
 We built this method directly (`methodology/synthetic_control.py` in the project's research repository) rather than relying on a packaged tool, specifically so every step is checkable.
 
-## What five checks on the same two closures found
+## What seven checks on the same two closures found
 
 <div class="chart">
   <p class="chart-title">Kings County total employment: real vs. synthetic, 1990–2025</p>
@@ -76,11 +76,13 @@ We built this method directly (`methodology/synthetic_control.py` in the project
     <tr><td>4</td><td>Olam, Lemoore, 2020</td><td>County, quarterly</td><td>Peak-season (Q3) food-mfg. employment</td><td>No effect once checked against full history (rank 15 of 25, p≈0.62) — see below</td></tr>
     <tr><td rowspan="2">5</td><td rowspan="2">Olam, Lemoore, 2020</td><td rowspan="2">County, quarterly</td><td>Avg. earnings, stable workforce</td><td>No effect (rank 16 of 36)</td></tr>
     <tr><td>Avg. earnings, separating workers</td><td>No effect (rank 26 of 27)</td></tr>
+    <tr><td>6</td><td>Land O'Lakes, Tulare, 2010</td><td>County</td><td>CalFresh (SNAP) enrollment</td><td>Gap looked significant (rank 2 of 24) but reached 43,800 people by 2023 — an 80-job closure can't explain a gap that size, and it ran the wrong direction (real enrollment <em>below</em> synthetic) — see below</td></tr>
+    <tr><td>7</td><td>Olam, Lemoore, 2020</td><td>County</td><td>CalFresh (SNAP) enrollment</td><td>Same problem at smaller scale (rank 1 of 21, 8,000-person gap by 2025, wrong direction) — plus a real COVID-19 Emergency Allotment confound sitting directly in the closure's own quarter — see below</td></tr>
   </tbody>
 </table>
 </div>
 
-## Two bugs and one false positive, caught before they became wrong claims
+## Three bugs and two false positives, caught before they became wrong claims
 
 <div class="research-note">
 <span class="research-note-label">What we found</span>
@@ -102,11 +104,18 @@ Check 3's Tulare total-employment result looked like the strongest finding of th
 Check 4 started from a real, separate observation: quarterly data showed no separations spike in the exact quarter Olam's closure took effect. The explanation turned out to matter — Central Valley food processing is strongly seasonal, so a permanent closure's effect should show up as a <em>missing seasonal hiring surge</em>, not an active layoff spike, since workers who'd have been seasonally rehired simply weren't. Looking only at peak-season (Q3) employment, Kings County's food-manufacturing workforce looked like it had stepped down by roughly 600 jobs in 2020 and never recovered — compelling by eye, and wrong: checked against the county's own full 1992–2025 history rather than just the unusually high years right before 2020, gaps of that size turn out to be ordinary for this specific series. The lesson applies beyond this one check: a short comparison window plus ordinary mean reversion looks exactly like a structural break if it isn't tested against a unit's own full history.
 </div>
 
+<div class="research-note">
+<span class="research-note-label">What we found</span>
+Checks 6 and 7 (CalFresh enrollment) repeated the exact same mistake check 3 already taught us to watch for — at larger scale, and in both checks this time. Both produced the strongest-looking placebo ranks of the entire project (1st and 2nd most extreme), and both were wrong for the same reason: the gaps reached <strong>43,800 people (Tulare) and 8,000 people (Kings)</strong> by the end of their post-periods — magnitudes an 80-job and a 567-job closure cannot plausibly produce — and ran in the wrong direction besides, with real enrollment <em>below</em> the synthetic counterfactual rather than above it. A separate, real pipeline bug surfaced while building this check's own data: CDSS silently shifted its Excel column layout starting fiscal year 2020-21 (an inserted blank column moved "County Name" over by one position), which the first version of our parser didn't catch — caught by checking the output for numeric-looking county names before trusting it, not by anything looking wrong in the final numbers. Two lessons compound here: a statistically extreme placebo rank still needs a magnitude sanity check before it means anything, and a government data source changing its own format mid-series is a real, recurring risk worth checking for explicitly, not assuming away.
+</div>
+
 ## Why a consistent null result is itself informative
 
 None of this means Olam's or Land O'Lakes' workers weren't really affected. It means **county-level aggregate statistics are structurally the wrong instrument to find out** — and that's not a guess, it's the central, well-replicated finding of the actual economics literature on mass layoffs. Jacobson, LaLonde & Sullivan's 1993 study (and three decades of work since) found that individually displaced workers suffer large, persistent earnings losses — commonly 15–25% or more, for years — in counties where the *aggregate* employment and unemployment rate show no detectable effect at all. That isn't a contradiction in their results. It's the expected pattern: a county's aggregate economy absorbs a few hundred lost jobs through ordinary hiring and churn, even while the specific people who lost those jobs don't recover what they had.
 
 The right instrument for "were real people hurt" is individual worker records — state unemployment-insurance wage records, linked across employers over time. Those records exist. They are not public, and were not available to this project. Census LEHD's Quarterly Workforce Indicators (used in checks 4 and 5, above) is the closest public approximation — real, quarterly, NAICS-specific flow data — and even it stops short of showing where a specific displaced worker went or what they earned next; it can only show aggregate separation counts and the pay of workers immediately before they left.
+
+**CalFresh enrollment (checks 6 and 7) was worth trying precisely because it's not a labor-market statistic at all** — it should, in principle, catch someone who left the labor force entirely or was reemployed at much lower pay, which an employment or unemployment rate structurally can't. It still came back unusable, for the same reason as the rest: county-level household-assistance enrollment is driven by population growth, eligibility-policy changes, and economy-wide shocks at a scale that swamps an 80- to 567-job closure just as thoroughly as the labor-market statistics did. A different outcome variable doesn't fix a problem that's really about scale.
 
 ## A gap in what this project has actually measured
 
@@ -117,7 +126,7 @@ Every number in this entire check, and in the [Sector Dependence Index](the-inde
 - **This is not evidence that Olam's or Land O'Lakes' closures had no real effect on anyone.** It's evidence that county-level aggregate data couldn't detect one — a different, narrower claim.
 - **We are not asserting field/farm labor was unaffected by either closure.** This check never measured that population at all; see above.
 - **The Q3 "seasonal hiring surge" explanation (check 4) is a plausible mechanism we checked and found didn't hold up statistically** — it's documented because the reasoning behind it is sound and may apply better to a different closure, not because it was confirmed here.
-- **We are not recommending against trying this method on a different closure or a different outcome.** Five checks on two closures is not exhaustive — it's what this pass covered, logged honestly either way.
+- **We are not recommending against trying this method on a different closure or a different outcome.** Seven checks on two closures is not exhaustive — it's what this pass covered, logged honestly either way.
 - **Every county-level check here inherits the same closed-labor-market assumption [the Index's methodology](methodology.md) already names as a limitation of the Sector Dependence Index itself** — a donor county's or a treated county's QCEW employment reflects where people *work*, not where they *live*, and this method has no more visibility into cross-county commuting than the SDI does. We're cross-referencing that caveat here rather than leaving it implicit in new work that depends on it just as much.
 
 ## Sources
@@ -126,6 +135,7 @@ Every number in this entire check, and in the [Sector Dependence Index](the-inde
 - Jacobson, L. S., LaLonde, R. J., & Sullivan, D. G., ["Earnings Losses of Displaced Workers,"](https://www.jstor.org/stable/2117574) *American Economic Review* (1993) — the founding result on individual displaced-worker earnings losses persisting despite no detectable aggregate effect.
 - U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW) and Local Area Unemployment Statistics (LAUS) — the same sources behind [the Index](the-index.md); extended here to a 54-county donor pool and to incorporated-city geography.
 - U.S. Census Bureau, LEHD Quarterly Workforce Indicators (QWI) — quarterly, NAICS-specific employment, hires, separations, and earnings; bulk file, not the API.
+- California Department of Social Services, CalFresh Participation and Benefit Issuance Report (DFA 256 / CF 256, the report's May 2024 successor) and the historical DFA256 extract on data.ca.gov — monthly, county-level CalFresh (SNAP) enrollment, November 2003–present.
 - This project's own case studies: [Olam's Lemoore closure](case-studies/kings-2020-olam-lemoore.md) and [Land O'Lakes' Tulare closure](case-studies/tulare-2010-land-olakes-tulare.md).
 
 Full citation detail and source archive: [Data](data.md). Back to [Case Studies](case-studies.md) and [the Index](the-index.md).

@@ -32,6 +32,10 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 **U.S. Census Bureau, County Business Patterns (CBP), 2023.** County-level establishment counts and employment by size class for food manufacturing (NAICS 311) in Kings, Fresno, Tulare, and Stanislaus counties — a real but imperfect local proxy for processing-plant concentration, used in [Consolidation](consolidation.md). Not a firm-level market-share measure; see that page for what this data can and can't show.
 
+## Food assistance
+
+**California Department of Social Services, CalFresh Participation and Benefit Issuance Report (DFA 256, and its May 2024 successor CF 256).** Monthly, county-level CalFresh (SNAP) enrollment, November 2003–present, for all 58 California counties — a household-distress signal independent of labor-force status, used in [the synthetic-control check](synthetic-control.md) alongside the employment-based checks.
+
 ## Flood claims
 
 **FEMA, OpenFEMA NFIP Redacted Claims dataset.** Paid National Flood Insurance Program claims with a 2023 date of loss in Kings and Tulare counties, used in [Environmental Impact](environmental-impact.md) alongside — not in place of — the larger, separate farmland-restoration cost estimate already on that page. Covers insured structures only; excludes growing crops and any uninsured property.
