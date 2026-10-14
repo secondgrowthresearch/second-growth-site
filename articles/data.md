@@ -40,6 +40,10 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 **California Department of Tax and Fee Administration (CDTFA), Taxable Sales, by City.** Quarterly, city-level taxable sales transactions, 2009 Q1–present, via CDTFA's Open Data Portal — real economic activity tied to where spending physically happens, independent of any employer's payroll records. Used in [the synthetic-control check](synthetic-control.md) as a third, non-labor-market outcome variable.
 
+## School enrollment
+
+**California Department of Education, historical School Enrollment data files (1981-82 through 2022-23) and the Public Schools and Districts directory.** Annual, school-level enrollment by county, district, and grade, aggregated to the school-district level for this project's own checks. Used in [the synthetic-control check](synthetic-control.md) as a fourth, family-instability-focused outcome variable, independent of anyone's labor-force status or employer.
+
 ## Flood claims
 
 **FEMA, OpenFEMA NFIP Redacted Claims dataset.** Paid National Flood Insurance Program claims with a 2023 date of loss in Kings and Tulare counties, used in [Environmental Impact](environmental-impact.md) alongside — not in place of — the larger, separate farmland-restoration cost estimate already on that page. Covers insured structures only; excludes growing crops and any uninsured property.
