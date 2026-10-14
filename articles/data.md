@@ -36,6 +36,10 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 **California Department of Social Services, CalFresh Participation and Benefit Issuance Report (DFA 256, and its May 2024 successor CF 256).** Monthly, county-level CalFresh (SNAP) enrollment, November 2003–present, for all 58 California counties — a household-distress signal independent of labor-force status, used in [the synthetic-control check](synthetic-control.md) alongside the employment-based checks.
 
+## Retail sales
+
+**California Department of Tax and Fee Administration (CDTFA), Taxable Sales, by City.** Quarterly, city-level taxable sales transactions, 2009 Q1–present, via CDTFA's Open Data Portal — real economic activity tied to where spending physically happens, independent of any employer's payroll records. Used in [the synthetic-control check](synthetic-control.md) as a third, non-labor-market outcome variable.
+
 ## Flood claims
 
 **FEMA, OpenFEMA NFIP Redacted Claims dataset.** Paid National Flood Insurance Program claims with a 2023 date of loss in Kings and Tulare counties, used in [Environmental Impact](environmental-impact.md) alongside — not in place of — the larger, separate farmland-restoration cost estimate already on that page. Covers insured structures only; excludes growing crops and any uninsured property.
