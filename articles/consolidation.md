@@ -123,4 +123,4 @@ So far, the answer runs the opposite direction from tomatoes and meatpacking. **
 - [Ceres Courier, "Data centers: existential threat or unique opportunity?"](https://www.cerescourier.com/news/local/data-centers-existential-threat-or-unique-opportunity/) (Riverbank/Aemetis/Spartan Data Centers reporting, 2026).
 - [Hanford Sentinel, "Kings fairground CEO: new project is not a traditional data center"](https://hanfordsentinel.com/business/agriculture/kings-fairground-ceo-new-project-is-not-a-traditional-data-center/article_90b4f45c-e98e-4077-a585-6e5416581ac3.html) (Global Stack USA, 2026).
 
-Full citation detail and source archive: [Data](data.md). Back to [Case Studies](case-studies.md).
+Full citation detail and source archive: [Data](data.md). See [Same Land, Different Crop](mechanization.md) for a related but distinct finding — while ownership of the *processing* side of this industry consolidates, as documented above, the *land* itself is shifting from hand-harvested crops into mechanically-harvested tree nuts, a different mechanism driven by labor cost rather than ownership structure. Back to [Case Studies](case-studies.md).

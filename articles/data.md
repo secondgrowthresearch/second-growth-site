@@ -22,11 +22,15 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Land and water
 
-**California Department of Water Resources / Land IQ, Statewide Crop Mapping.** Field-level crop and idle/fallow land classification, 2014–2024. **DWR SGMA groundwater level measurements** for the Kings and Tulare Lake subbasins. Used to document the structural land- and water-use pressure behind the closures we study.
+**California Department of Water Resources / Land IQ, Statewide Crop Mapping.** Field-level crop and idle/fallow land classification, 2014–2024. **DWR SGMA groundwater level measurements** for the Kings and Tulare Lake subbasins. Used to document the structural land- and water-use pressure behind the closures we study, and, in [Same Land, Different Crop](mechanization.md), to measure the acreage shift from stone fruit, grapes, and tomatoes into almonds and pistachios.
 
 ## Agricultural statistics
 
 **USDA Census of Agriculture** (county-level, every five years, 1974–2022) and **county Agricultural Commissioner annual crop reports**, for the longest available run of farm counts, acreage, and labor figures in each county we track.
+
+**USDA NASS Quick Stats, grower price received.** Annual, California state-level, for almonds, pistachios, English walnuts, clingstone peaches, raisin-type grapes, and wine-type grapes — used in [Same Land, Different Crop](mechanization.md) to test whether crop-price collapses, not just labor costs, explain the timing of the acreage shift into tree nuts.
+
+**UC Davis / UC Cooperative Extension, Sample Costs to Produce studies.** California-region-specific, per-acre cost-of-production budgets, including itemized labor hours and dollars for cultural practices and harvest — the source for the real per-acre labor-cost comparison in [Same Land, Different Crop](mechanization.md) between almonds, pistachios, and processing peaches.
 
 ## Business establishments
 
