@@ -1,11 +1,11 @@
 # The gap the numbers don't show
 
-Every closure in our [case studies](case-studies.md) documents a real company decision and a real headcount. What those pages don't do is show what happened to the county's economy *because* of any single closure — a plant closing and a county's employment numbers moving are both real, but showing one caused the other needs a different kind of check than a case study can give. This page documents that check: a real statistical method, run nine independent ways, that consistently could not find an effect large enough to distinguish from ordinary noise — and why that result is itself worth publishing, not a dead end.
+Every closure in our [case studies](case-studies.md) documents a real company decision and a real headcount. What those pages don't do is show what happened to the county's economy *because* of any single closure — a plant closing and a county's employment numbers moving are both real, but showing one caused the other needs a different kind of check than a case study can give. This page documents that check: a real statistical method, run ten independent ways, that consistently could not find an effect large enough to distinguish from ordinary noise — and why that result is itself worth publishing, not a dead end.
 
 <div class="stat-pair">
   <div class="stat-card">
-    <p class="stat-number" data-target="9" data-decimals="0">0</p>
-    <p class="stat-label">Independent checks run — two closures, six data sources, county, town, city, and school-district geography, annual and quarterly precision.</p>
+    <p class="stat-number" data-target="10" data-decimals="0">0</p>
+    <p class="stat-label">Independent checks run — two closures, seven data sources, county, town, city, and school-district geography, annual and quarterly precision.</p>
   </div>
   <div class="stat-card stat-card--absence">
     <p class="stat-number" data-target="0" data-decimals="0">0</p>
@@ -83,6 +83,10 @@ We built this method directly (`methodology/synthetic_control.py` in the project
     <tr><td>High school district enrollment</td><td>No effect by placebo rank (rank 3 of 31 on the raw ratio looks elevated, but ratio-free rank is 30 of 50, p≈0.61) — and real enrollment ran <em>above</em> synthetic, the wrong direction for a harm story</td></tr>
     <tr><td rowspan="2">9</td><td rowspan="2">Land O'Lakes, Tulare, 2010</td><td rowspan="2">School district, annual</td><td>Elementary district enrollment</td><td>No effect (rank 18 of 31, p≈0.59)</td></tr>
     <tr><td>High school district enrollment</td><td>No effect by placebo rank (rank 11 of 40, p≈0.29) despite a large raw ratio (9.73) — real enrollment again ran <em>above</em> synthetic</td></tr>
+    <tr><td rowspan="2">10</td><td rowspan="2">Olam, Lemoore, 2020</td><td rowspan="2">County, annual</td><td>Net migration (IRS SOI)</td><td>No effect (rank 45 of 54, p≈0.84)</td></tr>
+    <tr><td>Gross out-migration (IRS SOI)</td><td>No effect (rank 36 of 54, p≈0.67); real ran <em>below</em> synthetic every post year, the wrong direction for a harm story</td></tr>
+    <tr><td rowspan="2">10</td><td rowspan="2">Land O'Lakes, Tulare, 2010</td><td rowspan="2">County, annual</td><td>Net migration (IRS SOI)</td><td>No effect by the reliable statistic (ratio-free rank 23 of 54, p≈0.44) — raw ratio unusable, see below</td></tr>
+    <tr><td>Gross out-migration (IRS SOI)</td><td>No effect (ratio-free rank 15 of 54, p≈0.29); raw ratio unusable, see below</td></tr>
   </tbody>
 </table>
 </div>
@@ -124,9 +128,22 @@ Check 8's donor pool — every real California city with complete data, about 47
 Check 9's first version used a different, shorter California Department of Education enrollment series that only starts in 2016-17 — a 4-year pre-period for Olam's closure, and unusable at all for Land O'Lakes'. Before publishing anything on it, we found a real, longer historical series (1981-82 onward) and switched — but a plain numerical comparison caught something first: the same district's same year reads differently across CDE's two enrollment series (Lemoore Union Elementary's 2016-17 enrollment is 3,555 in the newer "Cumulative Enrollment" series and 3,249 in the historical "Census Day"-era series this page actually uses) — two different, both legitimate, definitions of "enrolled," not an error in either one. Splicing the two series together at their boundary would have built in a fake jump that had nothing to do with any closure. Using one consistently-defined series for the entire 1981-2022 window, rather than stitching two together, avoids that risk entirely — and happens to give both closures a longer, cleaner pre-period than the shorter series ever could have.
 </div>
 
+## Check 10: did people actually leave?
+
+Every check above measures where someone *worked* or what a county's *institutions* recorded — never where someone actually lived. Migration data answers a more literal version of "did workers leave": IRS Statistics of Income publishes county-to-county migration flows, built from comparing consecutive years' tax-return addresses — a real population movement, not a labor-market proxy, and the one outcome on this page that sidesteps the industry-classification question entirely (a displaced worker shows up here regardless of what NAICS sector they're reemployed in, or whether they're reemployed at all).
+
+Both closures, both net migration and gross out-migration, come back null — four more rows added to the pattern above.
+
+<div class="research-note">
+<span class="research-note-label">What we found</span>
+Land O'Lakes' raw rmspe_ratio for this check came back as an absurd number in the trillions — not a real result, the same divide-by-near-zero artifact already caught and documented in Check 2's town-level placebo test, recurring here for a related reason: a short, 3-year pre-period (the earliest clean IRS migration data available only reaches back to 2008) makes a near-perfect pre-period fit common across many placebo counties, not just Tulare's own. The comparable-fit filter already built into this project's own method for exactly this failure mode excludes those unreliable placebos before ranking — Land O'Lakes' real result is squarely unremarkable once that filter is applied (ratio-free rank 23 of 54 for net migration, 15 of 54 for gross out-migration), the same conclusion the filtered ratio rank gives independently. Named here because it's the second time this project has hit this exact numerical failure mode, not a new or different problem.
+</div>
+
+A real limitation stated plainly: IRS migration-year pairs ("2019-2020") reflect address changes between two tax-filing years, an approximate match to a closure's actual date, not an exact one. And this data only reaches 2022-23 so far — it cannot yet test Prima Wawona's March 2024 closure, discussed next.
+
 ## A positive control: does the method find anything at 10x the scale?
 
-Nine checks on two small closures (80 and 567 jobs) came back null. That's suggestive, but it leaves an honest question open: is this method actually capable of detecting a real effect at all, or would it come back null regardless of closure size? The direct way to check is a **positive control** — run the identical method against a much larger, already-documented closure and see whether it finds anything.
+Ten checks on two small closures (80 and 567 jobs) came back null. That's suggestive, but it leaves an honest question open: is this method actually capable of detecting a real effect at all, or would it come back null regardless of closure size? The direct way to check is a **positive control** — run the identical method against a much larger, already-documented closure and see whether it finds anything.
 
 [Prima Wawona's 2024 Cutler liquidation](case-studies/tulare-2024-prima-wawona-cutler.md) is the largest job loss in this project's entire record — 5,411 jobs, nearly ten times Olam's. Run through the same pipeline (Tulare County, 1995–2023 pre-period, 2024–2025 post-period — a short post-window, the most recent closure this method could be run against):
 
@@ -178,6 +195,8 @@ The right instrument for "were real people hurt" is individual worker records �
 
 **School-district enrollment (check 9) is the fourth kind of outcome, and the first check in this entire arc to reach a real pre-period for Land O'Lakes' 2010 closure** — 29 years, longer than that closure has ever had checked against it before. It should, in principle, catch something an individual's labor-market status can't: a whole household leaving a district after a layoff. Both closures, both district types (elementary and high school), came back null — four out of four. Two of the four (the high-school districts) have a large-looking raw ratio on their own, but the placebo comparison — checking that ratio against the same statistic computed for dozens of other real high-school districts — puts both squarely in the unremarkable middle of that distribution, and in both cases the actual gap runs the wrong way for a harm story: real enrollment ran *above* the synthetic counterfactual after the closure, not below it. We're naming this plainly because it's a clean illustration of why a raw ratio alone is never the finding — the placebo rank is.
 
+**Migration data (check 10) is the direct answer to the question the paragraph above leaves open** — "even [QWI] stops short of showing where a specific displaced worker went." IRS SOI migration data can't show where one specific person went either, but it's the closest this project has gotten to a direct residential-mobility measure, at the aggregate county level: real tax-return address changes, not a labor-market proxy standing in for one. It still comes back null, for both closures, on both net migration and gross out-migration — a fifth kind of outcome, and the only one that would catch a worker who left the labor force, the state, or the country entirely, regardless of what they did next.
+
 ## A gap in what this project has actually measured
 
 Every number in this entire check, and in the [Sector Dependence Index](the-index.md) itself, measures **NAICS 311 — food *manufacturing*: processing, canning, packing.** It does not measure NAICS 111, crop production — the field labor that grows what these plants process. Those are different workforces, different employers, and a different, weaker exposure channel: a grower who loses one buyer can often still sell to a different processor, so a single plant's closure doesn't automatically translate into reduced demand for field labor the way it directly eliminates processing-line jobs. This project's language elsewhere sometimes refers to "the farm-labor economy" broadly; the data behind every closure case study and every SDI figure has only ever covered the processing side of that economy. We're naming that precisely here so it isn't left to blur.
@@ -191,6 +210,7 @@ Every number in this entire check, and in the [Sector Dependence Index](the-inde
 - **Check 8's placebo test used a reproducible random sample of 50 of 471 possible donor cities, not every one of them** — the full donor pool was still used for the real fit itself; only the placebo comparison distribution was sampled, for the computational reasons explained above.
 - **Check 9's enrollment counts are primary enrollment only** (CDE's own ENR_TYPE="P", not the combined primary-plus-short-term count some of its own more recent reports use) — the one definition available consistently across the full 1981-2022 window, not a choice that favors either closure.
 - **Every county-level check here inherits the same closed-labor-market assumption [the Index's methodology](methodology.md) already names as a limitation of the Sector Dependence Index itself** — a donor county's or a treated county's QCEW employment reflects where people *work*, not where they *live*, and this method has no more visibility into cross-county commuting than the SDI does. We're cross-referencing that caveat here rather than leaving it implicit in new work that depends on it just as much.
+- **Check 10's migration data only reaches 2022-23** — it cannot test Prima Wawona's March 2024 closure, only Olam and Land O'Lakes. IRS migration-year pairs are an approximate match to a closure's actual date, not an exact one (see above). Land O'Lakes' raw rmspe_ratio for both outcomes was unusable (the divide-by-near-zero artifact described above); only the comparable-fit-filtered and ratio-free ranks are reported for that closure.
 
 ## Sources
 
@@ -201,6 +221,7 @@ Every number in this entire check, and in the [Sector Dependence Index](the-inde
 - California Department of Social Services, CalFresh Participation and Benefit Issuance Report (DFA 256 / CF 256, the report's May 2024 successor) and the historical DFA256 extract on data.ca.gov — monthly, county-level CalFresh (SNAP) enrollment, November 2003–present.
 - California Department of Tax and Fee Administration, Taxable Sales, by City — quarterly, city-level taxable sales transactions, 2009 Q1–present, via CDTFA's Open Data Portal.
 - California Department of Education, historical School Enrollment data files (1981-82 through 2022-23) and the Public Schools and Districts directory — annual, school-level enrollment aggregated to the school-district level for this check.
+- Internal Revenue Service, Statistics of Income (SOI), [County-to-County Migration Data](https://www.irs.gov/statistics/soi-tax-stats-migration-data) — annual, county-level gross and net migration built from consecutive-year tax-return address changes, 2007-08 through 2022-23 — used in check 10.
 - This project's own case studies: [Olam's Lemoore closure](case-studies/kings-2020-olam-lemoore.md) and [Land O'Lakes' Tulare closure](case-studies/tulare-2010-land-olakes-tulare.md).
 
 Full citation detail and source archive: [Data](data.md). Back to [Case Studies](case-studies.md) and [the Index](the-index.md).

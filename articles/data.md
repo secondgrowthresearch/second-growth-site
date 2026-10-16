@@ -8,6 +8,8 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 **U.S. Census Bureau, LEHD Quarterly Workforce Indicators (QWI).** Quarterly, NAICS-specific employment, hires, separations, and earnings — real flow data, not just stock counts. Used in [the synthetic-control check](synthetic-control.md) to test whether a closure's effect shows up at quarterly precision or in sector pay, after county-level annual data found nothing.
 
+**Internal Revenue Service, Statistics of Income (SOI), County-to-County Migration Data.** Annual, county-level gross and net migration built from consecutive-year tax-return address changes, 2007-08 through 2022-23 (2023-24 not yet published). Used in [the synthetic-control check](synthetic-control.md) as a direct residential-mobility measure — the one outcome in that check that doesn't depend on what industry, if any, a displaced worker was reemployed in.
+
 ## Trade
 
 **U.S. Census Bureau, state exports and imports by NAICS code.** Monthly, state-level, international trade data for California's food-manufacturing sector, 2010–present — the basis for the real trade adjustment described in [Methodology](methodology.md).
