@@ -124,6 +124,48 @@ Check 8's donor pool — every real California city with complete data, about 47
 Check 9's first version used a different, shorter California Department of Education enrollment series that only starts in 2016-17 — a 4-year pre-period for Olam's closure, and unusable at all for Land O'Lakes'. Before publishing anything on it, we found a real, longer historical series (1981-82 onward) and switched — but a plain numerical comparison caught something first: the same district's same year reads differently across CDE's two enrollment series (Lemoore Union Elementary's 2016-17 enrollment is 3,555 in the newer "Cumulative Enrollment" series and 3,249 in the historical "Census Day"-era series this page actually uses) — two different, both legitimate, definitions of "enrolled," not an error in either one. Splicing the two series together at their boundary would have built in a fake jump that had nothing to do with any closure. Using one consistently-defined series for the entire 1981-2022 window, rather than stitching two together, avoids that risk entirely — and happens to give both closures a longer, cleaner pre-period than the shorter series ever could have.
 </div>
 
+## A positive control: does the method find anything at 10x the scale?
+
+Nine checks on two small closures (80 and 567 jobs) came back null. That's suggestive, but it leaves an honest question open: is this method actually capable of detecting a real effect at all, or would it come back null regardless of closure size? The direct way to check is a **positive control** — run the identical method against a much larger, already-documented closure and see whether it finds anything.
+
+[Prima Wawona's 2024 Cutler liquidation](case-studies/tulare-2024-prima-wawona-cutler.md) is the largest job loss in this project's entire record — 5,411 jobs, nearly ten times Olam's. Run through the same pipeline (Tulare County, 1995–2023 pre-period, 2024–2025 post-period — a short post-window, the most recent closure this method could be run against):
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Outcome</th><th>2024 gap</th><th>2025 gap</th><th>Placebo rank</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td>Total county employment</td><td>+1,679 (wrong direction)</td><td>−2,289</td><td>21 of 54 (p≈0.38)</td><td>No effect distinguishable from noise</td></tr>
+    <tr><td>NAICS 311 (food-mfg.) employment</td><td>+374 (wrong direction)</td><td>−863</td><td>7 of 54 (p≈0.15)</td><td>The most extreme rank in this entire project, but not conventionally significant — and the wrong outcome variable, see below</td></tr>
+    <tr><td>Unemployment rate</td><td>+0.5 pt</td><td>+0.3 pt</td><td>18 of 54 (p≈0.35)</td><td>No effect</td></tr>
+  </tbody>
+</table>
+</div>
+
+**A real classification question surfaced by running this test, not before:** Prima Wawona was a fresh-fruit *packer* — cleaning, sorting, grading, and boxing stone fruit, not canning or otherwise manufacturing it. Packing-house work of that kind is standardly classified under NAICS 115114 (postharvest crop activities), not NAICS 311 (food manufacturing) — the same sector this entire project's SDI and synthetic-control work is built on. If that classification holds, Prima Wawona's own workforce may never have been counted in the NAICS 311 series at all, which would mean the "most extreme rank in this project" result above is very likely picking up something other than Prima Wawona's own closure — correlated regional conditions, a handful of other food processors' ordinary year-to-year movement, or chance. We have not independently confirmed Prima Wawona's own NAICS code; this is stated as a real, open question, not resolved here.
+
+**Total employment is the outcome variable actually matched to a packing-house closure, and it is squarely null** — rank 21 of 54 is close to the middle of the placebo distribution, not an edge case. Even at nearly ten times Olam's scale, in the correctly-matched outcome series, this method still finds nothing distinguishable from ordinary county-to-county noise. That's a stronger result than nine null checks on small closures alone: it suggests the method's insensitivity isn't just a function of closure size, within the range this project can actually test.
+
+## How big a closure would this method even need to see?
+
+A null result means more when it's paired with a sense of the method's own sensitivity. Post-period RMSPE — the root-mean-squared gap between a county's real and synthetic path after treatment — is already denominated in the outcome's own units (jobs, for total employment). Reading off the spread of post-period RMSPE the 50-plus other California counties produced when run through the identical procedure, as if each were the treated county, gives a real threshold for what this method could actually tell apart from ordinary noise.
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th></th><th>Kings (Olam, 567 jobs)</th><th>Tulare (Land O'Lakes, 80 jobs)</th></tr></thead>
+  <tbody>
+    <tr><td>Avg. total employment, pre-period</td><td>38,919</td><td>129,381</td></tr>
+    <tr><td><strong>Real closure's own post-period RMSPE</strong></td><td><strong>939 jobs</strong></td><td><strong>4,760 jobs</strong></td></tr>
+    <tr><td>Placebo distribution — median</td><td>1,172 jobs</td><td>5,117 jobs</td></tr>
+    <tr><td>Placebo distribution — 90th percentile</td><td>7,697 jobs</td><td>18,029 jobs</td></tr>
+    <tr><td>Placebo distribution — 95th percentile</td><td>12,281 jobs</td><td>20,101 jobs</td></tr>
+  </tbody>
+</table>
+</div>
+
+**Both real closures' own post-period RMSPE sit at or below the placebo distribution's median** — Kings' 939-job figure is below the typical untreated county's own 1,172-job fit error; Tulare's 4,760 sits just below its own 5,117-job median. That's not just "not extreme" — both treated counties fit their synthetic counterfactuals about as well as, or slightly better than, the typical untreated county fit its own. To register as statistically unusual at even a loose p≈0.10 threshold, a closure would need to produce a sustained total-employment gap of roughly **7,700 jobs in a county Kings' size, or 18,000 jobs in a county Tulare's size** — 14 to 225 times larger than the closures actually being tested.
+
+**The Prima Wawona positive control, run through the same Tulare donor pool, makes this concrete.** Its own post-period RMSPE works out to about 2,007 jobs — nearly ten times Olam's own closure size, and still comfortably below even the *median* placebo county's typical RMSPE (5,117 jobs) in the same pool. A closure of 5,411 jobs produced less divergence from its synthetic counterfactual than the typical untreated California county shows from its own, year to year, for reasons that have nothing to do with any closure at all. That's the real scale of noise this method is working against.
+
 ## Why a consistent null result is itself informative
 
 None of this means Olam's or Land O'Lakes' workers weren't really affected. It means **county-level aggregate statistics are structurally the wrong instrument to find out** — and that's not a guess, it's the central, well-replicated finding of the actual economics literature on mass layoffs. Jacobson, LaLonde & Sullivan's 1993 study (and three decades of work since) found that individually displaced workers suffer large, persistent earnings losses — commonly 15–25% or more, for years — in counties where the *aggregate* employment and unemployment rate show no detectable effect at all. That isn't a contradiction in their results. It's the expected pattern: a county's aggregate economy absorbs a few hundred lost jobs through ordinary hiring and churn, even while the specific people who lost those jobs don't recover what they had.

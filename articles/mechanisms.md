@@ -30,6 +30,8 @@ Economists sort interventions like these by what they actually do to a market, n
 
 **A note on terms:** some readers will know "supply-side" and "demand-side" from U.S. tax and fiscal policy debates — that's a different, macroeconomic use of similar-sounding words, with no connection to what's being sorted here. This page is only naming which side of one specific resource market each mechanism acts on.
 
+**Worth naming plainly, since it's the thing underneath all five pages rather than a sixth one of its own:** the groundwater basin itself — not any single recharge basin, easement, or rate structure — is the actual common-pool resource at the center of this whole cluster, in Elinor Ostrom's own original sense of the term: hard to exclude anyone from, depleted by use, degraded when too many users pump without coordination. [Environmental Impact](environmental-impact.md) documents what that depletion has already done (subsidence up to 28 feet, a sunk and narrowed California Aqueduct). SGMA's Groundwater Sustainability Agencies — the GSAs named throughout the five pages below — are themselves a real-world instance of the polycentric, locally-governed response Ostrom's own research found actually works for this class of problem, more often than either pure privatization or pure top-down state control. We're naming that connection here because it's the frame the other five pages are quietly operating inside, not a separate claim.
+
 ## Five concepts, defined plainly
 
 - **Common-pool resource management** — coordinating access to a resource, like a groundwater basin, that's hard to exclude anyone from and gets depleted by overuse — the category of problem Elinor Ostrom won a Nobel Prize for studying.

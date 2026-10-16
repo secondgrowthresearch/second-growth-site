@@ -34,7 +34,9 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Business establishments
 
-**U.S. Census Bureau, County Business Patterns (CBP), 2023.** County-level establishment counts and employment by size class for food manufacturing (NAICS 311) in Kings, Fresno, Tulare, and Stanislaus counties — a real but imperfect local proxy for processing-plant concentration, used in [Consolidation](consolidation.md). Not a firm-level market-share measure; see that page for what this data can and can't show.
+**U.S. Census Bureau, County Business Patterns (CBP), 2023.** County-level establishment counts and employment by size class for food manufacturing (NAICS 311) in Kings, Fresno, Tulare, and Stanislaus counties — a real but imperfect local proxy for *scale*, used in [Consolidation](consolidation.md). Not a firm-level market-share measure; see that page for what this data can and can't show.
+
+**U.S. EPA, Enforcement and Compliance History Online (ECHO).** Environmental-compliance facility registry, NAICS-filtered to food manufacturing — used in [Consolidation](consolidation.md) to build a named-firm count for Kings County, cross-checked against CBP's establishment count. A registry of regulated facilities, not a market-share or revenue dataset; see that page for what this data can and can't show.
 
 ## Food assistance
 
