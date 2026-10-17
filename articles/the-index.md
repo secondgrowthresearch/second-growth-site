@@ -547,9 +547,9 @@ This Kings plateau and Tulare's 2019 collapse (below) were both found by inspect
 
 Stanislaus County — home to the larger Modesto/Hughson closure — tells a different story: it started the most dependent of the four counties in 1990, and has been diversifying *away* from food processing over the long run (Employment SDI: 0.277 → 0.200). It shows a much smaller, single-year version of the same denominator artifact in 2021 (see above), but not the sustained multi-year pattern Kings shows.
 
-<div class="research-note research-note--open">
-<span class="research-note-label">Open question</span>
-We haven't yet drawn conclusions from Stanislaus's own long-run diversification trend — why this county, alone among the four, has grown less dependent on food processing since 1990 even as the sector's absolute employment there has stayed roughly flat. Real, unresolved, not explained here.
+<div class="research-note">
+<span class="research-note-label">What we found</span>
+A direct check of what Stanislaus actually diversified into, and a correction to this page's own earlier premise. NAICS 311 employment there did <em>not</em> stay "roughly flat" over the full 1990-2025 window — it fell 25.4% (14,475 to 10,792 jobs), concentrated in the 1990s plus one sharp, unexplained one-year drop in 2003; "roughly flat" only holds for the 2003-2025 sub-window. What filled the gap: Health Care/Social Assistance and Educational Services combined, rising from 18.9% to 31.4% of county total employment — nearly doubling in headcount, 26,101 to 62,515 jobs. No other sector comes remotely close (the next-largest gainer, Accommodation/Food Services, managed +2.7 points). Manufacturing broadly, not just food processing, lost 8 points of share county-wide — Stanislaus's falling SDI is one piece of a county-wide shift into "eds and meds," not an isolated food-processing story. A real BLS data-quality issue surfaced while computing this: the 1990 county file misfiled 13,852 real jobs — 10% of that year's total county employment — under a retired aggregate code instead of the standard sector rows this calculation reads; corrected explicitly using BLS's own more granular disclosed figures, documented in the project's methodology output rather than silently patched over.
 </div>
 
 **All four counties have this same full 36-year trajectory computed — not just Kings.** Seeing them together is more informative than reading two endpoint numbers in prose.
