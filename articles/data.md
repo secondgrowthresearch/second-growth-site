@@ -4,7 +4,9 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Employment and wages
 
-**U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW).** County-level food-manufacturing (NAICS 311) employment and wages for Kings, Fresno, Tulare, and Stanislaus counties, 1990–2026, alongside matching California-statewide and U.S.-national benchmark data. The backbone of the [Sector Dependence Index](the-index.md). Extended to all 58 California counties and to U.S. Bureau of Labor Statistics Local Area Unemployment Statistics (LAUS), at both county and incorporated-city geography, for [the synthetic-control check](synthetic-control.md) on individual plant closures.
+**U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW).** County-level food-manufacturing (NAICS 311) employment and wages for Kings, Fresno, Tulare, and Stanislaus counties, 1990–2026, alongside matching California-statewide and U.S.-national benchmark data. The backbone of the [Sector Dependence Index](the-index.md). Extended to all 58 California counties and to U.S. Bureau of Labor Statistics Local Area Unemployment Statistics (LAUS), at both county and incorporated-city geography, for [the synthetic-control check](synthetic-control.md) on individual plant closures. Extended further, at the 4- and 6-digit subsector level, to NAICS 3114/3115/3116 wage and establishment-count trends for [Consolidation](consolidation.md), to NAICS 115115 (Farm Labor Contractors) and NAICS 111 (Crop Production) for [Who Works Here](who-works-here.md), and to all-sector employment for San Joaquin County's own logistics-sector growth, also on [Consolidation](consolidation.md). The healthcare-diversification figures on [the Index](the-index.md) isolate a single BLS reporting change (NAICS 624120, in-home supportive-care providers newly captured as UI-covered establishments starting with 2013 data) from this same source.
+
+**U.S. Census Bureau, Population Estimates Program, and U.S. Bureau of Economic Analysis, Regional Economic Accounts (county GDP).** Total population, total employment, and county GDP for all eight San Joaquin Valley counties, 1990–2025 — the basis for the regional growth figures on [Home](home.md) and throughout this site's current framing.
 
 **U.S. Census Bureau, LEHD Quarterly Workforce Indicators (QWI).** Quarterly, NAICS-specific employment, hires, separations, and earnings — real flow data, not just stock counts. Used in [the synthetic-control check](synthetic-control.md) to test whether a closure's effect shows up at quarterly precision or in sector pay, after county-level annual data found nothing.
 
@@ -32,7 +34,9 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Agricultural statistics
 
-**USDA Census of Agriculture** (county-level, every five years, 1974–2022) and **county Agricultural Commissioner annual crop reports**, for the longest available run of farm counts, acreage, and labor figures in each county we track.
+**USDA Census of Agriculture** (county-level, every five years, 1974–2022) and **county Agricultural Commissioner annual crop reports**, for the longest available run of farm counts, acreage, and labor figures in each county we track. Fresno and Tulare's own annual reports break grape acreage out by variety (raisin/table/wine), which Land IQ's satellite classification can't — the basis for identifying which grape type actually accounts for the acreage loss in [Same Land, Different Crop](mechanization.md).
+
+**Real estate press coverage with attributed per-acre land-value figures** (Farm Progress, The Business Journal, Our Valley Voice) — illustrative, press-sourced anchors for recent almond and pistachio land values in [Same Land, Different Crop](mechanization.md), used because no free, public, transaction-based land-value dataset exists at the crop-specific, county level; the one source built for that purpose (the California Chapter of ASFMRA's annual land-value survey) is a paid report this project doesn't have access to.
 
 **USDA NASS Quick Stats, grower price received.** Annual, California state-level, for almonds, pistachios, English walnuts, clingstone peaches, raisin-type grapes, and wine-type grapes — used in [Same Land, Different Crop](mechanization.md) to test whether crop-price collapses, not just labor costs, explain the timing of the acreage shift into tree nuts.
 
@@ -42,7 +46,7 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 **U.S. Census Bureau, County Business Patterns (CBP), 2023.** County-level establishment counts and employment by size class for food manufacturing (NAICS 311) in Kings, Fresno, Tulare, and Stanislaus counties — a real but imperfect local proxy for *scale*, used in [Consolidation](consolidation.md). Not a firm-level market-share measure; see that page for what this data can and can't show.
 
-**U.S. EPA, Enforcement and Compliance History Online (ECHO).** Environmental-compliance facility registry, NAICS-filtered to food manufacturing — used in [Consolidation](consolidation.md) to build a named-firm count for Kings County, cross-checked against CBP's establishment count. A registry of regulated facilities, not a market-share or revenue dataset; see that page for what this data can and can't show.
+**U.S. EPA, Enforcement and Compliance History Online (ECHO).** Environmental-compliance facility registry, NAICS-filtered to food manufacturing — used in [Consolidation](consolidation.md) to build named-firm counts for Kings County's food processors and, separately, for Fresno's poultry/meat sector and Tulare's dairy sector, each cross-checked against CBP's establishment counts. A registry of regulated facilities, not a market-share or revenue dataset; see that page for what this data can and can't show.
 
 ## Food assistance
 
