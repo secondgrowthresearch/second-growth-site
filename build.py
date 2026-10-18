@@ -43,6 +43,7 @@ PAGES = [
     ("articles/environmental-impact.md", "environmental-impact.html"),
     ("articles/consolidation.md", "consolidation.html"),
     ("articles/mechanization.md", "mechanization.html"),
+    ("articles/who-works-here.md", "who-works-here.html"),
     ("articles/compounding.md", "compounding.html"),
     ("articles/mechanisms.md", "mechanisms.html"),
     ("articles/mechanisms/recharge-basins.md", "mechanisms/recharge-basins.html"),
@@ -116,6 +117,7 @@ NAV_PRIMARY = [
     ("/environmental-impact.html", "Environmental Impact"),
     ("/consolidation.html", "Consolidation"),
     ("/mechanization.html", "Same Land, Different Crop"),
+    ("/who-works-here.html", "Who Works Here"),
 ]
 # Compounding Impact and Mechanisms both describe themselves, in their own
 # body text, as built from the five pages above rather than as original
