@@ -1,12 +1,12 @@
 # Water insecurity and farm labor occupy the same map
 
-Our [case studies](case-studies.md) document what happens when the industry that built a place leaves. This page documents something that happens *while* it's still there: the same Central Valley communities that supply the region's farm labor are, disproportionately, the ones whose own drinking water isn't safe or reliable.
+Our [case studies](case-studies.md) document individual plants closing and their capacity moving to fewer, larger owners. This page documents what the same communities live with the entire time, closure or no closure: the Central Valley towns that supply the region's farm labor are, disproportionately, the ones whose own drinking water isn't safe or reliable.
 
 This isn't a coincidence we're asserting — it's a pattern we went and checked, town by town, the same way we built our closure record: pulling the public filings, news coverage, state water-board records, and legal filings behind each place, not a secondhand list.
 
 <div class="stat-pair">
   <div class="stat-card">
-    <p class="stat-number" data-target="20" data-decimals="0">0</p>
+    <p class="stat-number" data-target="{{towns}}" data-decimals="0">0</p>
     <p class="stat-label">Communities across four counties where we've independently confirmed both a farm-labor economy and a documented water-insecurity problem.</p>
   </div>
   <div class="stat-card">
@@ -22,7 +22,7 @@ This isn't a coincidence we're asserting — it's a pattern we went and checked,
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <div class="chart" id="wi-map-chart">
-  <p class="chart-title">Where these 20 communities sit</p>
+  <p class="chart-title">Where these {{towns}} communities sit</p>
   <p class="chart-subtitle">Real county boundaries and town locations — the same geographic data, terrain, and zoom behavior as every other map on this site.</p>
   <div id="wi-map-svg-container" style="min-height:420px; position:relative;">
     <div class="map-zoom-controls">
@@ -117,7 +117,7 @@ This isn't a coincidence we're asserting — it's a pattern we went and checked,
     var svg = d3.select(container).append("svg")
       .attr("viewBox", "0 0 " + width + " " + height)
       .attr("role", "img")
-      .attr("aria-label", "A zoomable map of Kings, Fresno, Tulare, and Stanislaus counties with 20 communities marked by real location, color-coded by county. Click a point for what was found there, or use the zoom controls to get a closer look.");
+      .attr("aria-label", "A zoomable map of Kings, Fresno, Tulare, and Stanislaus counties with {{towns}} communities marked by real location, color-coded by county. Click a point for what was found there, or use the zoom controls to get a closer look.");
 
     // Fit tightly to just these four counties, not the whole state --
     // this map's job is distinguishing 20 close-together towns, not

@@ -2,7 +2,7 @@
 
 ## The question we're trying to measure
 
-Before you can document what happens when a single industry leaves a place, you need a plain way to say how dependent that place was on the industry in the first place. A county where one processing sector accounts for a sliver of local employment is a different story than a county where that same sector is a large share of how people earn a living. We needed a consistent way to tell those two situations apart, across counties and across time — not a one-off judgment call for each case.
+Before you can document what happens when a single industry consolidates around a place, you need a plain way to say how dependent that place is on the industry in the first place. A county where one processing sector accounts for a sliver of local employment is a different story than a county where that same sector is a large share of how people earn a living — and a county whose dependence is *rising* while its plant count falls is a third story again. We needed a consistent way to tell those situations apart, across counties and across time — not a one-off judgment call for each case.
 
 That's what the **Sector Dependence Index (SDI)** is for: a measure of how concentrated a local economy is in a single industry, built so the same method applies to any county and any sector, and can be compared fairly across both.
 

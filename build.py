@@ -20,7 +20,7 @@ from PIL import Image
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
 SITE_NAME = "Second Growth"
-SITE_TAGLINE = "Documenting what happens to a place's people and economy when the single industry that organized it exits."
+SITE_TAGLINE = "Documenting consolidation, water, and labor in a farming region that keeps growing — fewer owners on the same land, and wages that went the other way."
 DOMAIN = "https://secondgrowthresearch.org"
 # GoatCounter site code (the subdomain of your dashboard URL, e.g.
 # "secondgrowth" for secondgrowth.goatcounter.com) -- no cookies, no
@@ -106,6 +106,90 @@ PAGES = [
 
 # basename of source .md file -> root-relative output URL, for link rewriting
 LINK_MAP = {Path(src).name: "/" + out for src, out in PAGES}
+
+# The site states its own counts in prose -- "twenty-five documented plant
+# closures", "Five closures across thirty-three years", "these 20
+# communities". Typed by hand, those drift the moment a case study is added:
+# the closure count was simultaneously published as 20, 24 and 26 in four
+# different places while 25 closure files sat on disk. So they aren't typed
+# any more. The prose writes a {{token}} and the number is counted here, from
+# PAGES -- which is already the register of what this site actually contains.
+#
+# Closures and water-insecurity town profiles share one directory and are
+# told apart the only way this corpus distinguishes them at all: the filename
+# pattern. <county>-<year>-<firm>.md is a closure; <county>-<town>.md is a
+# town profile.
+CLOSURE_FILE_RE = re.compile(r"^[a-z]+-\d{4}-")
+COUNT_TOKEN_RE = re.compile(r"\{\{([^{}\s]+)\}\}")
+
+_ONES = (
+    "zero one two three four five six seven eight nine ten eleven twelve "
+    "thirteen fourteen fifteen sixteen seventeen eighteen nineteen"
+).split()
+_TENS = ("", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
+
+
+def spell_number(n: int) -> str:
+    """25 -> "twenty-five". Prose on this site writes counts of this size as
+    words ("Twenty-four documented plant closures"), so a token has to be
+    able to render that way and not just as digits. Past 99 it falls back to
+    digits rather than failing a build over a house-style preference."""
+    if n < 20:
+        return _ONES[n]
+    if n < 100:
+        tens, ones = divmod(n, 10)
+        return _TENS[tens] + ("-" + _ONES[ones] if ones else "")
+    return str(n)
+
+
+def content_counts() -> dict:
+    """{{token}} -> replacement text, counted off the case-study entries in
+    PAGES. Every count is offered three ways -- digits, words, and
+    Capitalized-words -- because the same number is written all three ways
+    across the site and the point is that no page has to pick a spelling
+    the mechanism can't produce."""
+    names = [Path(src).name for src, _ in PAGES if src.startswith("articles/case-studies/")]
+    closures = [n for n in names if CLOSURE_FILE_RE.match(n)]
+    towns = [n for n in names if not CLOSURE_FILE_RE.match(n)]
+    counts = {
+        "closures": len(closures),
+        "towns": len(towns),
+        "case-studies": len(names),
+    }
+    # Per-county closure counts -- case-studies.md introduces each county
+    # section with one, and they drift for exactly the same reason the
+    # sitewide total did.
+    for county in sorted({n.split("-")[0] for n in closures}):
+        counts["closures-" + county] = sum(1 for n in closures if n.startswith(county + "-"))
+
+    tokens = {}
+    for key, value in counts.items():
+        tokens[key] = str(value)
+        tokens[key + ":words"] = spell_number(value)
+        tokens[key + ":Words"] = spell_number(value).capitalize()
+    return tokens
+
+
+COUNT_TOKENS = content_counts()
+
+
+def fill_counts(md_text: str, src_rel: str) -> str:
+    """Substitute {{token}} before the Markdown converter runs, so one
+    mechanism covers a count written in a sentence, in a chart's aria-label,
+    and in a stat card's data-target alike. An unknown token is a typo that
+    would otherwise ship as literal braces on a live page, so it stops the
+    build -- the same contract as validate_pages()."""
+
+    def repl(match: re.Match) -> str:
+        token = match.group(1)
+        if token not in COUNT_TOKENS:
+            raise SystemExit(
+                f"build.py: {src_rel} uses an unknown count token "
+                f"{{{{{token}}}}}.\nKnown tokens: " + ", ".join(sorted(COUNT_TOKENS))
+            )
+        return COUNT_TOKENS[token]
+
+    return COUNT_TOKEN_RE.sub(repl, md_text)
 
 # Split into two groups -- content/topic pages a reader is actually here
 # for, vs. reference pages about how the research itself is done. Same
@@ -782,6 +866,12 @@ def validate_pages() -> None:
             + "\n\nAdd each to the PAGES list in build.py, or delete it if unused."
         )
 
+    # Same idea for {{count}} tokens (see fill_counts): catch a misspelled
+    # token across every page up front, rather than partway through a build
+    # that has already written output for the pages before it.
+    for src_rel, _ in PAGES:
+        fill_counts((ROOT / src_rel).read_text(encoding="utf-8"), src_rel)
+
 
 def main() -> None:
     validate_pages()
@@ -800,6 +890,7 @@ def main() -> None:
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
         raw = src_path.read_text(encoding="utf-8")
+        raw = fill_counts(raw, src_rel)
         raw = rewrite_links(raw)
         md.reset()
         body_html = md.convert(raw)

@@ -1,6 +1,6 @@
 # The same ground, several accounts
 
-Every other page on this site documents one kind of loss at a time — a plant closure, a contaminated well, an ownership chain. This page doesn't add a single new claim. It asks a different question of data already published elsewhere on this site: for a given place, how many of these losses land in the same ground at once?
+Every other page on this site documents one kind of pressure at a time — a plant closure, a contaminated well, an ownership chain tightening. This page doesn't add a single new claim. It asks a different question of data already published elsewhere on this site: for a given place, how many of these losses land in the same ground at once?
 
 The tool for asking that question rigorously, rather than just asserting an impression, is the **Community Capitals Framework** — an established tool in regional economics and rural sociology (Flora & Flora), not something built for this project. It sorts a place's assets into distinct categories — human, natural, built, financial, and social/political capital — on the premise that a place's trajectory depends on all of them together, not any one in isolation. Underinvestment or loss concentrated in one capital tends to suppress the others rather than staying contained, a dynamic the literature calls a downward spiral, the mirror of the "spiraling up" effect a community shows when its capitals reinforce each other instead.
 
