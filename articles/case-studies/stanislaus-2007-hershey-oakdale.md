@@ -31,8 +31,8 @@ This is another instance of a pattern that shows up elsewhere in this project â€
 
 ## Sources
 
-- The Modesto Bee, 21 Jan 2026, "What workers can expect as Del Monte Modesto shuts down" (retrospective reference).
-- CBS News (Sacramento), "Hershey factory long gone, Oakdale cancels its chocolate festival for good after 30 years."
-- Hershey Company, FY2007 Form 10-K (SEC EDGAR).
+- The Modesto Bee, 21 Jan 2026, "What workers can expect as Del Monte Modesto shuts down" (retrospective reference). *Access: paywalled â€” read in the print edition; the publisher's online copy sits behind a subscription.*
+- [CBS News (Sacramento), "Hershey factory long gone, Oakdale cancels its chocolate festival for good after 30 years."](https://www.cbsnews.com/sacramento/news/hershey-factory-long-gone-oakdale-cancels-its-chocolate-festival-for-good-after-30-years)
+- [Hershey Company, Form 10-K for the fiscal year ended 31 December 2007, SEC EDGAR](https://www.sec.gov/Archives/edgar/data/47111/000119312508033182/d10k.htm) (accession 0001193125-08-033182).
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

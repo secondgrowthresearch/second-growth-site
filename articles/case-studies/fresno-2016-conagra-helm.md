@@ -32,8 +32,8 @@ Searching this project's four-county record for the 2000–2020 window — outsi
 
 ## Sources
 
-- Just-Food, ConAgra Helm plant closure coverage (published 2016-02-01).
-- HortiDaily, "US (CA): ConAgra to close Helm tomato processing plant, lay off 102 workers" (published 2016-02-03).
-- Food Business News, ConAgra California tomato paste plant closure coverage.
+- Just-Food, ConAgra Helm plant closure coverage (published 2016-02-01). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- [HortiDaily, "US (CA): ConAgra to close Helm tomato processing plant, lay off 102 workers"](https://www.hortidaily.com/article/6023885/us-ca-conagra-to-close-helm-tomato-processing-plant-lay-off-102-workers/) (published 2016-02-03).
+- [Food Business News, "ConAgra to close California tomato paste plant."](https://www.foodbusinessnews.net/articles/7405-conagra-to-close-california-tomato-paste-plant)
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

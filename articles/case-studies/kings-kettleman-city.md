@@ -32,7 +32,7 @@ Kettleman City is this project's starkest example of the water-and-land pattern 
 
 ## Sources
 
-- Greenaction for Health and Environmental Justice, community profile, "Kettleman City, California" (greenaction.org/kettleman-city).
-- KQED, "Kettleman City Birth Defects Declining" (citing California Department of Public Health birth-defect surveillance data).
+- [Greenaction for Health and Environmental Justice, community profile, "Kettleman City, California."](https://greenaction.org/kettleman-city/)
+- KQED, "Kettleman City Birth Defects Declining" (citing California Department of Public Health birth-defect surveillance data). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

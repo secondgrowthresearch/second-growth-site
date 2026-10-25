@@ -70,11 +70,11 @@ Field-labor pay moved the opposite direction from field-labor headcount. Real, i
 
 ## Sources
 
-- U.S. Census Bureau, American Community Survey 5-Year Estimates, Public Use Microdata Sample (PUMS), 2019-2023 — custom tabulation, food-manufacturing workers by county.
-- U.S. Census Bureau, American Community Survey, Subject Tables S2403/S2413 (Industry by Sex, Industry by Earnings) — published county-level Manufacturing (NAICS 31-33) figures.
-- U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW), county-industry-annual files — NAICS 311 subsector wages and establishment counts, NAICS 115115 (Farm Labor Contractors and Crew Leaders), and NAICS 111 (Crop Production), 1990-2025.
-- Martin, P., Hooker, B., Rutledge, Z., Stockton, M., California Agriculture (2024) — farm labor contractor employment share and wage-comparison literature.
-- California Department of Food and Agriculture (2017) — on the agricultural minimum-wage and overtime law's effect on farm labor costs.
-- California Labor Commissioner's Office, 2023 wage-theft enforcement action (Fresno-area farm labor contractor and two growers, $1.9 million, 356 workers).
+- U.S. Census Bureau, American Community Survey 5-Year Estimates, Public Use Microdata Sample (PUMS), 2019-2023 — custom tabulation, food-manufacturing workers by county. *Access: obtained — bulk data file downloaded from the agency, not a web page.*
+- U.S. Census Bureau, American Community Survey, Subject Tables S2403/S2413 (Industry by Sex, Industry by Earnings) — published county-level Manufacturing (NAICS 31-33) figures. *Access: obtained — bulk data file downloaded from the agency, not a web page.*
+- U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW), county-industry-annual files — NAICS 311 subsector wages and establishment counts, NAICS 115115 (Farm Labor Contractors and Crew Leaders), and NAICS 111 (Crop Production), 1990-2025. *Access: obtained — bulk data file downloaded from the agency, not a web page.*
+- [Martin, P., Hooker, B., Rutledge, Z., Stockton, M., "California has 882,000 farmworkers to fill 413,000 jobs," *California Agriculture* (2024)](https://californiaagriculture.org/article/94420-california-has-882-000-farmworkers-to-fill-413-000-jobs) — farm labor contractor employment share and wage-comparison literature.
+- California Department of Food and Agriculture (2017) — on the agricultural minimum-wage and overtime law's effect on farm labor costs. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California Labor Commissioner's Office, 2023 wage-theft enforcement action (Fresno-area farm labor contractor and two growers, $1.9 million, 356 workers). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](data.md). See [Consolidation](consolidation.md) for the ownership side of the wage finding above, and [Same Land, Different Crop](mechanization.md) for the land-use shift behind the field-labor numbers. Back to [Case Studies](case-studies.md).

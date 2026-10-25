@@ -131,7 +131,7 @@ Each page below works the same way: what the mechanism is, what it costs in real
 - [DTN Progressive Farmer, "CRP Enrollment Paused as Farm Bill Expires"](https://www.dtnpf.com/agriculture/web/ag/news/article/2026/10/01/crp-enrollment-paused-farm-bill) (October 2026).
 - [EveryCRSReport, "The 2026 Farm Bill: Comparison of the House and Senate Bills with Current Law"](https://www.everycrsreport.com/reports/R48918.html).
 - [EveryCRSReport, "Bureau of Reclamation: FY2026 Budget and Appropriations"](https://www.everycrsreport.com/files/2026-02-02_IF13066_f292a873d811651c444e6deb0e263a6787f9776b.pdf).
-- USDA NRCS California, EQIP-WaterSMART and Groundwater Recharge Pilot Program notices (Fresno Irrigation District, 2026).
+- USDA NRCS California, EQIP-WaterSMART and Groundwater Recharge Pilot Program notices (Fresno Irrigation District, 2026). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 - [NRCS ACEP Factsheet](https://nrcs-prod.azureedge.us/sites/default/files/2026-08/ACEP%20Factsheet.pdf) (2026).
 - [U.S. Army Corps of Engineers, Section 206 Continuing Authorities Program fact sheet](https://planning.erdc.dren.mil/toolbox/library/FactSheets/CAP_Sec206_FactSheet_15Apr2025.pdf) (April 2025).
 - [DOE Office of Electricity, Grid Resilience and Innovation Partnerships (GRIP) Program](https://www.energy.gov/oe/grid-resilience-and-innovation-partnerships-grip-program).

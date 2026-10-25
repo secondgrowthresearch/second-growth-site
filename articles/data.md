@@ -2,6 +2,39 @@
 
 Every number we publish is meant to be traceable back to a named, public source — not a proprietary dataset or an unsourced estimate. This page lists what we draw from.
 
+## Reading the source lists
+
+Most pages on this site end in a `Sources` list. Until recently, 149 of our 213 source bullets — 70% — carried no link, and nothing in the list told you why. A microfilm citation to a 1991 front page sat next to a news article we simply hadn't written the URL down for, and the two looked identical.
+
+Those are not the same failure, and treating them as one would make this record worse rather than better. More than 70% of the URLs cited in the *Harvard Law Review* no longer reach what they cited, and half the URLs in U.S. Supreme Court opinions have gone the same way — much of it not dead links but silent drift, where the page still loads and no longer says what was cited. A citation reading *"The Tulare Advance-Register, front page + p. 6, Wed 13 Feb 1991, 'Tagus plant may close' (byline Vicki Mailes)"* is a **more** durable reference than a live link, not a worse one. It names an object that can still be found in fifty years.
+
+So a missing URL is now a stated condition rather than a silence. Where a bullet carries no link and the reason isn't obvious, it ends in an *Access* note in one of these states:
+
+<table>
+  <thead><tr><th>State</th><th>What it means</th><th>A defect?</th></tr></thead>
+  <tbody>
+    <tr><td><strong>web</strong></td><td>A live URL that resolves. Written as an ordinary link, with no note — this is the unmarked default.</td><td>No</td></tr>
+    <tr><td><strong>web-dead</strong></td><td>A URL we cited that no longer resolves, or that now shows something other than what we cited.</td><td>No — but it needs an archived copy</td></tr>
+    <tr><td><strong>web-blocked</strong></td><td>The page exists; the publisher refuses automated requests, so we could not verify a URL for it ourselves.</td><td>No</td></tr>
+    <tr><td><strong>paywalled</strong></td><td>A URL exists behind a subscription. Usually a print edition we read on paper or microfilm.</td><td>No</td></tr>
+    <tr><td><strong>offline-archival</strong></td><td><strong>No URL exists.</strong> Microfilm, a bound volume, a court file, a physical archive. Always carries a <strong>holding</strong> — the repository or catalogue through which a reader can obtain the thing itself.</td><td>No</td></tr>
+    <tr><td><strong>obtained</strong></td><td>Acquired directly rather than read off a page — a records request, an agency filing we pulled, a bulk dataset we downloaded.</td><td>No</td></tr>
+    <tr><td><strong>not-captured</strong></td><td>A public URL exists for this source and we have not recorded it.</td><td><strong>Yes — the only one</strong></td></tr>
+  </tbody>
+</table>
+
+Two states are left unwritten because they're obvious from the bullet itself: a bullet with a link and no note is `web`, and a bullet whose only links point at other pages here is a cross-reference, sourced in full where it points. Everything else without a note is `not-captured`. Our build counts all of this on every run and refuses to build an `offline-archival` citation that names no holding, because a citation with neither a URL nor a repository cannot be checked by anybody, which is the one thing this project claims to be.
+
+The honest number, as of this writing: of 213 source bullets, **71 are `not-captured`** — 33%, not 70%. That is a backlog we can work through, and it is the figure to hold us to.
+
+### Obtaining an offline-archival source
+
+Where we cite a California newspaper we read on microfilm, we have not in every case confirmed which library holds the reel, and we say so in the note rather than guessing. The catalogue that answers it is the **California Newspaper Project** at the Center for Bibliographical Studies and Research, UC Riverside ([cbsrinfo.ucr.edu/CNP](https://cbsrinfo.ucr.edu/CNP)), which indexes newspaper holdings across more than 1,400 California repositories and marks microfilm holdings with the format code `FM`. Free digitised runs of many California papers are at the **California Digital Newspaper Collection** ([cdnc.ucr.edu](https://cdnc.ucr.edu)). Naming the repository outright, rather than the catalogue, is work still outstanding on every microfilm citation here.
+
+### Archiving
+
+Live links rot, so citing one is not the end of the job. We checked all 59 distinct URLs currently cited in these source lists against the Internet Archive's CDX index: **54 already have a snapshot**, three have none, and two could not be checked. The gap is small enough that bulk submission would be the wrong tool — we archive a page at the point we first cite it, and check the rest against the index rather than re-submitting a corpus that is already largely captured.
+
 ## Employment and wages
 
 **U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages (QCEW).** County-level food-manufacturing (NAICS 311) employment and wages for Kings, Fresno, Tulare, and Stanislaus counties, 1990–2026, alongside matching California-statewide and U.S.-national benchmark data. The backbone of the [Sector Dependence Index](the-index.md). Extended to all 58 California counties and to U.S. Bureau of Labor Statistics Local Area Unemployment Statistics (LAUS), at both county and incorporated-city geography, for [the synthetic-control check](synthetic-control.md) on individual plant closures. Extended further, at the 4- and 6-digit subsector level, to NAICS 3114/3115/3116 wage and establishment-count trends for [Consolidation](consolidation.md), to NAICS 115115 (Farm Labor Contractors) and NAICS 111 (Crop Production) for [Who Works Here](who-works-here.md), and to all-sector employment for San Joaquin County's own logistics-sector growth, also on [Consolidation](consolidation.md). The healthcare-diversification figures on [the Index](the-index.md) isolate a single BLS reporting change (NAICS 624120, in-home supportive-care providers newly captured as UI-covered establishments starting with 2013 data) from this same source. Wage data from these same files also covers direct-hire field labor (NAICS 111/1113) for [Who Works Here](who-works-here.md).

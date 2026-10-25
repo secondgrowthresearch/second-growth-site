@@ -33,9 +33,9 @@ A systematic review of every Fresno, Stanislaus, and Tulare County WARN filing s
 
 ## Sources
 
-- California EDD WARN report, confirmed directly: Tropicale Foods, LLC, aka PLM Operations, LLC, 2068 Lapham Drive, Modesto, Stanislaus County — 168 employees, notice 05/15/2024, received 05/17/2024, effective 07/12/2024, Closure, Permanent.
-- AOL/Modesto Bee syndication, "Modesto plant that manufactures Mexican-style ice cream will close, costing 290 jobs."
-- ABC10, "Tropicale Foods closing Modesto plant."
-- Univision, "Cierra la fábrica de La Michoacana y Helados México en Modesto: advierten despidos" (Spanish-language coverage).
+- California EDD WARN report, confirmed directly: Tropicale Foods, LLC, aka PLM Operations, LLC, 2068 Lapham Drive, Modesto, Stanislaus County — 168 employees, notice 05/15/2024, received 05/17/2024, effective 07/12/2024, Closure, Permanent. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
+- [AOL/Modesto Bee syndication, "Modesto plant that manufactures Mexican-style ice cream will close, costing 290 jobs."](https://www.aol.com/news/modesto-plant-manufactures-mexican-style-172405101.html)
+- ABC10, "Tropicale Foods closing Modesto plant." *Access: web-blocked — the outlet refuses automated requests, so no URL could be verified for it here.*
+- [Univision, "Cierra la fábrica de La Michoacana y Helados México en Modesto: advierten despidos"](https://www.univision.com/local/tampa-wvea/fabrica-la-michoacana-helados-mexico-cerrara-california) (Spanish-language coverage).
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

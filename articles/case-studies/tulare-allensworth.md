@@ -29,7 +29,7 @@ Allensworth's twelve-year gap between identifying arsenic and completing a fix i
 
 ## Sources
 
-- FERN (Food & Environment Reporting Network), KQED, and KVPR reporting on Allensworth's founding and water crisis (compiled via prior research pass; original AB 686 research bank).
-- California State Water Resources Control Board, SAFER program grant records, 2025–26.
+- FERN (Food & Environment Reporting Network), KQED, and KVPR reporting on Allensworth's founding and water crisis (compiled via prior research pass; original AB 686 research bank). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California State Water Resources Control Board, SAFER program grant records, 2025–26. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

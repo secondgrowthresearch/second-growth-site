@@ -31,9 +31,9 @@ Searching this project's four-county record for the 2000–2020 window — outsi
 
 ## Sources
 
-- Baking Business, "Dawn closing Modesto, Calif., facility."
-- Refrigerated & Frozen Food, citing the Modesto Bee.
-- CBS13/CBS Sacramento, "Another Plant Scheduled To Close In Struggling Stanislaus County."
-- Secondary WARN tracker (not independently verified against an official state filing — predates this project's local WARN-PDF archive, which starts at fiscal year 2014–2015).
+- Baking Business, "Dawn closing Modesto, Calif., facility." *Access: web-blocked — the outlet refuses automated requests, so no URL could be verified for it here.*
+- [Refrigerated & Frozen Food, "Sara Lee, Dawn closing plants,"](https://www.refrigeratedfrozenfood.com/articles/85597-sara-lee-dawn-closing-plants) citing the Modesto Bee.
+- [CBS13/CBS Sacramento, "Another Plant Scheduled To Close In Struggling Stanislaus County."](https://www.cbsnews.com/sacramento/news/another-plant-scheduled-to-close-in-struggling-stanislaus-county)
+- Secondary WARN tracker (not independently verified against an official state filing — predates this project's local WARN-PDF archive, which starts at fiscal year 2014–2015). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

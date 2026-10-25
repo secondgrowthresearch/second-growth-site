@@ -29,6 +29,6 @@ East Porterville is the community every other case in this record gets measured 
 
 ## Sources
 
-- Mother Jones, KVPR, sjvwater.org, and Wikipedia reporting on the East Porterville drought water crisis (compiled via prior research pass; original AB 686 research bank).
+- Mother Jones, KVPR, sjvwater.org, and Wikipedia reporting on the East Porterville drought water crisis (compiled via prior research pass; original AB 686 research bank). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

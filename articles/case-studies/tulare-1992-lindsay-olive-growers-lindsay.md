@@ -35,10 +35,10 @@ This is a different kind of case study than most of this project's closures: not
 
 ## Sources
 
-- The Sun-Gazette (Tulare County), 18 March 2004, "Console to reopen as Lindsay Foods, LLC."
-- The Sun-Gazette (Tulare County), 7 July 2004, "More than 300 local jobs held in legal limbo."
-- The Sun-Gazette (Tulare County), 30 June 2021, "Growers help Lindsay reconnect with its olive roots."
-- The Sun-Gazette (Tulare County), 9 August 2017, "LoBue packing house legacy ends after 83 years."
+- The Sun-Gazette (Tulare County), 18 March 2004, "Console to reopen as Lindsay Foods, LLC." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- The Sun-Gazette (Tulare County), 7 July 2004, "More than 300 local jobs held in legal limbo." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- The Sun-Gazette (Tulare County), 30 June 2021, "Growers help Lindsay reconnect with its olive roots." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- The Sun-Gazette (Tulare County), 9 August 2017, "LoBue packing house legacy ends after 83 years." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 - [The Recorder (Tulare County), "Lindsay suing fertilizer company for tainted well."](https://www.recorderonline.com/lindsay-suing-fertilizer-company-for-tainted-well/article_5b86150f-97fc-541c-a9a3-a1f131b8abef.html)
 - [The Recorder (Tulare County), "Lindsay receives $9.5 million to clean drinking water."](https://www.recorderonline.com/news/lindsay-receives-9-5-million-to-clean-drinking-water/article_2fe3b0de-6ef8-11ef-9663-b34b9267ba6c.html)
 

@@ -29,7 +29,7 @@ Shady Lakes is the one case in this Fresno County pass where litigation produced
 
 ## Sources
 
-- California Rural Legal Assistance, Litigation Update (Dec. 15, 2023).
-- Fresno County LAFCo, Disadvantaged Unincorporated Communities Narrative (Feb. 12, 2020).
+- California Rural Legal Assistance, Litigation Update (Dec. 15, 2023). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- Fresno County LAFCo, Disadvantaged Unincorporated Communities Narrative (Feb. 12, 2020). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

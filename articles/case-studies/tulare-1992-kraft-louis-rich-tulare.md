@@ -33,9 +33,9 @@ This closure fills what had been a genuine gap in this project's record — Tula
 
 ## Sources
 
-- The Tulare Advance-Register, front page, Fri 6 Dec 1991, "Closing hits many hard: Louis Rich workers look to an uncertain future" (byline Vicki Mailes).
-- The Business Journal (Fresno), "French group buys Kraft Cheese division, including Tulare plant."
-- The Sun-Gazette, "World's leading cheese company to expand Kraft plant in Tulare" (2022-02-25).
-- Land O'Lakes, February 2007 8-K/press release; Saputo newsroom, acquisition announcement (closed 2007-04-02); The Sun-Gazette, "Hispanic cheese maker buys Tulare plant" (2026-06-02).
+- The Tulare Advance-Register, front page, Fri 6 Dec 1991, "Closing hits many hard: Louis Rich workers look to an uncertain future" (byline Vicki Mailes). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- The Business Journal (Fresno), "French group buys Kraft Cheese division, including Tulare plant." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- The Sun-Gazette, "World's leading cheese company to expand Kraft plant in Tulare" (2022-02-25). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- Land O'Lakes, February 2007 8-K/press release; Saputo newsroom, acquisition announcement (closed 2007-04-02); The Sun-Gazette, "Hispanic cheese maker buys Tulare plant" (2026-06-02). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

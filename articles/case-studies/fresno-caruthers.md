@@ -29,7 +29,7 @@ Caruthers is the least dramatic water story in this Fresno County pass, and that
 
 ## Sources
 
-- California Environmental Quality Act project filings, "Caruthers Community Services District Well and Well Water Treatment Facility," California State Clearinghouse (SCH No. 2008051098).
-- California State Water Resources Control Board, Proposition 84 Active Projects List.
+- California Environmental Quality Act project filings, "Caruthers Community Services District Well and Well Water Treatment Facility," California State Clearinghouse ([SCH No. 2008051098](https://ceqanet.opr.ca.gov/2008051098)).
+- California State Water Resources Control Board, Proposition 84 Active Projects List. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

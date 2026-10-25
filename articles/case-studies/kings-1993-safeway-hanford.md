@@ -33,7 +33,7 @@ This also pushes Kings County's documented closure history back to the same year
 
 ## Sources
 
-- The Hanford Sentinel, front page, Fri 8 Jan 1993, "Safeway plant may close" (byline Robert Monroe).
-- The Hanford Sentinel, front page, Fri 3 Apr 1992, "Mill shakeup continues: DeRaad shifts production" (byline Mark Pratter).
+- The Hanford Sentinel, front page, Fri 8 Jan 1993, "Safeway plant may close" (byline Robert Monroe). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- The Hanford Sentinel, front page, Fri 3 Apr 1992, "Mill shakeup continues: DeRaad shifts production" (byline Mark Pratter). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

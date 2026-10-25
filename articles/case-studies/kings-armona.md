@@ -30,7 +30,7 @@ Armona is this project's clearest "the fix worked, mostly" story — unlike [Str
 
 ## Sources
 
-- ABC30, "Armona looks to grow with new and improved water system."
-- Armona Water Supply Reliability Project, Federal Nexus letter to the House Appropriations Committee (Rep. David Valadao's office), citing Section 1452 of the Safe Drinking Water Act (42 U.S.C. §300j-12).
+- ABC30, "Armona looks to grow with new and improved water system." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- Armona Water Supply Reliability Project, Federal Nexus letter to the House Appropriations Committee (Rep. David Valadao's office), citing Section 1452 of the Safe Drinking Water Act (42 U.S.C. §300j-12). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

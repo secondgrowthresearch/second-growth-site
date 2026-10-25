@@ -38,8 +38,8 @@ This project's main record documents commodity-processing closures from 2020 for
 
 ## Sources
 
-- Dairy Herd, "Land O'Lakes to Close California Cheese Plant."
-- Brownfield Ag News, "Land O'Lakes to idle Tulare cheese plant."
-- Secondary WARN tracker (not independently verified against an official state filing — predates this project's local WARN-PDF archive, which starts at fiscal year 2014–2015).
+- Dairy Herd, "Land O'Lakes to Close California Cheese Plant." *Access: web-blocked — the outlet refuses automated requests, so no URL could be verified for it here.*
+- Brownfield Ag News, "Land O'Lakes to idle Tulare cheese plant." *Access: web-blocked — the outlet refuses automated requests, so no URL could be verified for it here.*
+- Secondary WARN tracker (not independently verified against an official state filing — predates this project's local WARN-PDF archive, which starts at fiscal year 2014–2015). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

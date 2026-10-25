@@ -29,9 +29,9 @@ Every other closure or layoff in this project's record — tomato and fruit cann
 
 ## Sources
 
-- Newsweek, "Trader Joe's Two Buck Chuck Winemaker Layoffs."
-- AOL/syndicated, "Stanislaus-based winery announces 146 more layoffs. First wave was 81."
-- La Nación, "Más de 100 trabajadores: este importante productor de vino de California anunció un despido masivo."
-- California Employment Development Department, WARN Act filing, FY2024–2025 (Bronco Wine Company, Bivio Transport and Logistics Company, WC Ag Services).
+- Newsweek, "Trader Joe's Two Buck Chuck Winemaker Layoffs." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- AOL/syndicated, "Stanislaus-based winery announces 146 more layoffs. First wave was 81." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- La Nación, "Más de 100 trabajadores: este importante productor de vino de California anunció un despido masivo." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California Employment Development Department, WARN Act filing, FY2024–2025 (Bronco Wine Company, Bivio Transport and Logistics Company, WC Ag Services). *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

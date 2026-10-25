@@ -29,7 +29,7 @@ Strathmore's near-40-year documented history is this project's starkest illustra
 
 ## Sources
 
-- California Environmental Quality Act project filings: "Water System-Nitrate Removal Program" (SCH No. 1986110933); "Strathmore PUD Nitrate Removal" (SCH No. 1986100602); "Water Supply/Nitrate Compliance Project" (SCH No. 1995062043).
-- California Central Valley Regional Water Quality Control Board, Order R5-2016-0061.
+- California Environmental Quality Act project filings: "Water System-Nitrate Removal Program" (SCH No. 1986110933); "Strathmore PUD Nitrate Removal" (SCH No. 1986100602); "Water Supply/Nitrate Compliance Project" (SCH No. 1995062043). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California Central Valley Regional Water Quality Control Board, Order R5-2016-0061. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

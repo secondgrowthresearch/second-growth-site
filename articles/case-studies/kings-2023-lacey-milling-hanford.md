@@ -34,12 +34,12 @@ This closure sits inside the same Kings County cluster this project already docu
 
 ## Sources
 
-- Hanford Sentinel, 17 December 1987, "Lacey Milling celebrates 100" (100th-anniversary feature, company history).
-- Hanford Sentinel, 23 April 1953, "Hanford's Lacey Milling Company Only Flour Mill Left in Valley."
-- Hanford Sentinel, 20 May 2001, Hanford Lifetime Business Achievement Award coverage.
-- Hanford Sentinel, 21 December 2023, "Lacey Milling Co. is shutting down operations after a century of commerce."
-- Hanford Sentinel, "Historic Lacey Milling building faces destruction" (headline confirmed; full article not yet read).
-- Hanford Insider, "The Lacey Milling Legacy" (podcast/blog, ~14 January 2025) — source of the unconfirmed drought/water explanation, flagged above as not independently verified.
-- California EDD WARN report, checked directly: no filing found for Lacey Milling Co. in this project's local archive.
+- Hanford Sentinel, 17 December 1987, "Lacey Milling celebrates 100" (100th-anniversary feature, company history). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- Hanford Sentinel, 23 April 1953, "Hanford's Lacey Milling Company Only Flour Mill Left in Valley." *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- Hanford Sentinel, 20 May 2001, Hanford Lifetime Business Achievement Award coverage. *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- Hanford Sentinel, 21 December 2023, "Lacey Milling Co. is shutting down operations after a century of commerce." *Access: paywalled — read in the print edition; the publisher's online copy sits behind a subscription.*
+- Hanford Sentinel, "Historic Lacey Milling building faces destruction" (headline confirmed; full article not yet read). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- Hanford Insider, "The Lacey Milling Legacy" (podcast/blog, ~14 January 2025) — source of the unconfirmed drought/water explanation, flagged above as not independently verified. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California EDD WARN report, checked directly: no filing found for Lacey Milling Co. in this project's local archive. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

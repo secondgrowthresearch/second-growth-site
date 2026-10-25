@@ -32,7 +32,7 @@ A systematic review of every Fresno, Stanislaus, and Tulare County WARN filing s
 
 ## Sources
 
-- California EDD WARN report, confirmed directly: Reyes Coca-Cola Bottling, LLC, 1733 Morgan Road, Modesto, Stanislaus County — 101 employees, notice/received 11/08/2024, Closure, Permanent.
-- Secondary WARN aggregators (warnscan.com, warntracker.com, layofftracker.us), cross-checked against each other and against the primary filing for the effective-date discrepancy noted above.
+- California EDD WARN report, confirmed directly: Reyes Coca-Cola Bottling, LLC, 1733 Morgan Road, Modesto, Stanislaus County — 101 employees, notice/received 11/08/2024, Closure, Permanent. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
+- Secondary WARN aggregators (warnscan.com, warntracker.com, layofftracker.us), cross-checked against each other and against the primary filing for the effective-date discrepancy noted above. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

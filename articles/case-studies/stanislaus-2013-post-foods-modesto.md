@@ -31,9 +31,9 @@ This closure sits in the same narrow window as [Dawn Foods' Modesto bakeries](st
 
 ## Sources
 
-- Ceres Courier, "140 jobs at stake if post closes plant."
-- bakeryandsnacks.com / foodnavigator-usa.com, "Post Holdings will close Modesto, CA, plant by September 2014" (8 April 2013).
-- CBS News (San Francisco), "Cereal maker wants to pack its boxes and move out of California."
-- California Employment Development Department, WARN Act filings, FY2014–2015.
+- Ceres Courier, "140 jobs at stake if post closes plant." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- bakeryandsnacks.com / foodnavigator-usa.com, "Post Holdings will close Modesto, CA, plant by September 2014" (8 April 2013). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- CBS News (San Francisco), "Cereal maker wants to pack its boxes and move out of California." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California Employment Development Department, WARN Act filings, FY2014–2015. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

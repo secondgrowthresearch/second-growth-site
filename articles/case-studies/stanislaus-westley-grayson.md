@@ -30,7 +30,7 @@ A public elementary school going seventy years without drinkable water is this p
 
 ## Sources
 
-- CBS News (Sacramento), "California school could finally provide clean drinking water after 70 years."
-- California Attorney General's Office, SB 1000/SB 244 letter to Stanislaus County regarding its General Plan Environmental Justice Update.
+- CBS News (Sacramento), "California school could finally provide clean drinking water after 70 years." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- California Attorney General's Office, SB 1000/SB 244 letter to Stanislaus County regarding its General Plan Environmental Justice Update. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

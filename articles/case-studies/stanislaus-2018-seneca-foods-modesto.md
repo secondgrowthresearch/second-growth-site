@@ -31,8 +31,8 @@ If the 1,975 figure holds up, this would be the second-largest closure in this p
 
 ## Sources
 
-- The Modesto Bee, Sat 22 July 2006, front page + "The Back Page" (p. A12), "Thousands employed at cannery in Modesto during summer peak" (byline John Holland).
-- The Modesto Bee, 21 Jan 2026, "What workers can expect as Del Monte Modesto shuts down," p. A1.
-- einpresswire.com, "Seneca Foods to Close its Modesto, California Facility"; Seneca Foods Corporation, SEC EDGAR filings (data/88948), 8-K (16 Aug 2018) and subsequent 10-Qs.
+- The Modesto Bee, Sat 22 July 2006, front page + "The Back Page" (p. A12), "Thousands employed at cannery in Modesto during summer peak" (byline John Holland). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- The Modesto Bee, 21 Jan 2026, "What workers can expect as Del Monte Modesto shuts down," p. A1. *Access: paywalled — read in the print edition; the publisher's online copy sits behind a subscription.*
+- einpresswire.com, "Seneca Foods to Close its Modesto, California Facility"; Seneca Foods Corporation, SEC EDGAR filings (data/88948), 8-K (16 Aug 2018) and subsequent 10-Qs. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).
