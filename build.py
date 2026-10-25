@@ -40,6 +40,7 @@ PAGES = [
     ("articles/the-index.md", "the-index.html"),
     ("articles/case-studies.md", "case-studies.html"),
     ("articles/water-insecurity.md", "water-insecurity.html"),
+    ("articles/sgma-probation-tule.md", "sgma-probation-tule.html"),
     ("articles/environmental-impact.md", "environmental-impact.html"),
     ("articles/consolidation.md", "consolidation.html"),
     ("articles/mechanization.md", "mechanization.html"),
@@ -99,6 +100,7 @@ PAGES = [
     ("articles/synthetic-control.md", "synthetic-control.html"),
     ("articles/methodology.md", "methodology.html"),
     ("articles/data.md", "data.html"),
+    ("articles/unclassified-wells.md", "unclassified-wells.html"),
     ("articles/about.md", "about.html"),
 ]
 
@@ -114,6 +116,7 @@ NAV_PRIMARY = [
     ("/the-index.html", "The Index"),
     ("/case-studies.html", "Case Studies"),
     ("/water-insecurity.html", "Water Insecurity"),
+    ("/sgma-probation-tule.html", "Groundwater Probation"),
     ("/environmental-impact.html", "Environmental Impact"),
     ("/consolidation.html", "Consolidation"),
     ("/mechanization.html", "Same Land, Different Crop"),
@@ -131,6 +134,14 @@ NAV_SECONDARY = [
     ("/methodology.html", "Methodology"),
     ("/synthetic-control.html", "Measuring Closures"),
     ("/data.html", "Data"),
+    # Unclassified Wells is an original count, but what it documents is a gap
+    # in the state's own well record -- it carries its own "How this was
+    # built" section and leads with its limits, which is the same shape as
+    # Measuring Closures above. Sits next to Data for that reason, with the
+    # reader-facing finding it supports (Groundwater Probation) in primary.
+    # Placed after Data, not before, so the SHOW_DATES insert(2) below still
+    # puts Updates where it always went.
+    ("/unclassified-wells.html", "Unclassified Wells"),
     ("/compounding.html", "Compounding Impact"),
     ("/mechanisms.html", "Mechanisms"),
     ("/about.html", "About"),

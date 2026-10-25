@@ -36,6 +36,10 @@ Every number we publish is meant to be traceable back to a named, public source 
 
 ## Land and water
 
+**California Department of Water Resources, Well Completion Reports, and the DWR i03 GSA boundary layer.** The statewide well-completion record — each well's coordinates, its use class under DWR Bulletin 118, the record type of the filing, and the date work ended — spatially joined to the state's own Groundwater Sustainability Agency territory polygons. This project's own well counts by agency and use class across eleven Tule-area territories, including the 26.4% that carry no use classification at all, come from these two files and nothing else; the method and its limits are set out in full on [Unclassified Wells](unclassified-wells.md). Well Completion Reports record wells drilled and reported, not wells in use — see that page before treating any count built from them as a census.
+
+**California State Water Resources Control Board, Tule Subbasin probationary records.** The September 2024 probationary designation, the April 21, 2026 exclusion determinations, the published fee schedule and late-penalty terms, the GEARS reporting deadlines, and the Board's own agency-by-agency compliance table — the basis for [Probation in the Tule Subbasin](sgma-probation-tule.md).
+
 **California Department of Water Resources / Land IQ, Statewide Crop Mapping.** Field-level crop and idle/fallow land classification, 2014–2024. **DWR SGMA groundwater level measurements** for the Kings and Tulare Lake subbasins, and separately for the Kaweah and Tule subbasins — confirmed by direct spatial overlap to be the ones that actually underlie Tulare County, distinct from the first two. Used to document the structural land- and water-use pressure behind the closures we study, and, in [Same Land, Different Crop](mechanization.md), to measure the acreage shift from stone fruit, grapes, and tomatoes into almonds and pistachios, and the resulting change in applied water demand.
 
 ## Agricultural statistics
