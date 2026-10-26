@@ -29,6 +29,6 @@ Plainview is the thinnest-sourced case in this Tulare County pass, included deli
 
 ## Sources
 
-- California State Water Resources Control Board, "Plainview Nitrate Relief Project," CEQA filings (2023) and related public notices (2026).
+- California State Water Resources Control Board, "Plainview Nitrate Relief Project," CEQA filings (2023) and related public notices (2026). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

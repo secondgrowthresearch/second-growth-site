@@ -32,8 +32,8 @@ Searching this project's four-county record for the 2000–2020 window — outsi
 
 ## Sources
 
-- CBS13/CBS Sacramento, "Another Plant Scheduled To Close In Struggling Stanislaus County" (the February announcement).
-- CBS13/CBS Sacramento, "Patterson Vegetable Company Closes Doors, Lays Off Hundreds" (the June shutdown).
-- Secondary WARN tracker (not independently verified against an official state filing — predates this project's local WARN-PDF archive, which starts at fiscal year 2014–2015).
+- [CBS13/CBS Sacramento, "Another Plant Scheduled To Close In Struggling Stanislaus County"](https://www.cbsnews.com/sacramento/news/another-plant-scheduled-to-close-in-struggling-stanislaus-county) (the February announcement).
+- CBS13/CBS Sacramento, "Patterson Vegetable Company Closes Doors, Lays Off Hundreds" (the June shutdown). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- Secondary WARN tracker (not independently verified against an official state filing — predates this project's local WARN-PDF archive, which starts at fiscal year 2014–2015). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

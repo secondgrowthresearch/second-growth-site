@@ -29,6 +29,6 @@ Unlike most closures in this project's record, this one is explicitly not an exi
 
 ## Sources
 
-- Visalia Times-Delta/Tulare Advance-Register, front page, Tue 11 June 2024, "Ruiz Foods closing Tulare plant: 215 jobs lost" (byline John Lindt).
+- Visalia Times-Delta/Tulare Advance-Register, front page, Tue 11 June 2024, "Ruiz Foods closing Tulare plant: 215 jobs lost" (byline John Lindt). *Access: paywalled — read in the print edition; the publisher's online copy sits behind a subscription.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

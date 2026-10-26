@@ -36,10 +36,10 @@ This closure sits inside the same 2024 wave this project documents elsewhere —
 ## Sources
 
 - [Fresh Fruit Portal, "Prima Wawona sells farmland, announces massive layoffs"](https://www.freshfruitportal.com/news/2024/01/31/prima-wawona-sells-farmland-announces-massive-layoffs/) (Jan. 31, 2024).
-- The Sun-Gazette (Mid Valley Times), "Farmworker town loses long-time employer" (April 2024).
+- The Sun-Gazette (Mid Valley Times), "Farmworker town loses long-time employer" (April 2024). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 - [Yahoo News, "Massive fruit grower bankrupt in Fresno, 5,400 jobs lost. Who gets 16K acres prime farmland?"](https://news.yahoo.com/massive-fruit-grower-bankrupt-fresno-185539247.html)
 - [ABC30, "Resources being offered for Prima Wawona employees as layoffs near."](https://abc30.com/post/prima-wawona-business-closure-employee-layoffs-resouces/14490887/)
 - [Assemblymember Joaquin Arambula's office, March 2024 town hall announcement.](https://a31.asmdc.org/press-releases/20240301-assemblymember-arambula-and-state-senator-anna-caballero-host-virtual-town)
-- California EDD WARN report, checked directly: no filing found under Prima Wawona, Wawona, Gerawan, Cutler, or Reedley in the FY2023-2024 or FY2024-2025 archives.
+- California EDD WARN report, checked directly: no filing found under Prima Wawona, Wawona, Gerawan, Cutler, or Reedley in the FY2023-2024 or FY2024-2025 archives. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

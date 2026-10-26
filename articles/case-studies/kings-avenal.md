@@ -29,6 +29,6 @@ Avenal reframes what "water insecurity" means in this project's record: not ever
 
 ## Sources
 
-- Avenal Community Profile, Kings County Local Hazard Mitigation Plan (December 2012), hosted by the City of Hanford.
+- Avenal Community Profile, Kings County Local Hazard Mitigation Plan (December 2012), hosted by the City of Hanford. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

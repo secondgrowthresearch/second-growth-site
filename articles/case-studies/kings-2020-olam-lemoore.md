@@ -36,8 +36,8 @@ This was the first of what this archive now documents as three separate commodit
 
 ## Sources
 
-- Tomato News (crediting The Business Journal, Fresno), "California: Lemoore's Olam plant not likely to operate in 2020," March 31, 2020.
-- HortiDaily / FreshPlaza, "International food company Olam intends to sell off Lemoore tomato plant," February 18, 2022.
-- California EDD WARN report, confirmed directly: Olam West Coast Inc., Lemoore, Kings County, 567 employees, Closure, Permanent, notice date April 29, 2020, effective July 1, 2020.
+- [Tomato News (crediting The Business Journal, Fresno), "California: Lemoore's Olam plant not likely to operate in 2020,"](https://tomatonews.com/california-lemoores-olam-plant-not-likely-to-operate-in-2020/) March 31, 2020.
+- [HortiDaily / FreshPlaza, "International food company Olam intends to sell off Lemoore tomato plant,"](https://www.hortidaily.com/article/9402089/international-food-company-olam-intends-to-sell-off-lemoore-tomato-plant) February 18, 2022.
+- California EDD WARN report, confirmed directly: Olam West Coast Inc., Lemoore, Kings County, 567 employees, Closure, Permanent, notice date April 29, 2020, effective July 1, 2020. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
 
 Full citation detail and source archive: [Data](data.md). Back to [all case studies](case-studies.md).

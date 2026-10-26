@@ -29,6 +29,6 @@ Lanare's failed-plant-then-well-fix arc mirrors [Allensworth's](tulare-allenswor
 
 ## Sources
 
-- KVPR, Mother Jones, and KQED reporting on Lanare's arsenic contamination and treatment-plant failure (compiled via prior research pass; original AB 686 research bank).
+- KVPR, Mother Jones, and KQED reporting on Lanare's arsenic contamination and treatment-plant failure (compiled via prior research pass; original AB 686 research bank). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

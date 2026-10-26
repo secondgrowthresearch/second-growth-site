@@ -33,10 +33,10 @@ OFI/Olam is a second major commodity-processing company (alongside Del Monte) ex
 
 ## Sources
 
-- KMPH, "Olam plant in Firebaugh to close by August, 275 jobs affected."
-- The Business Journal (Fresno), plant-closure coverage.
-- AOL/syndicated, "What led to closure of food plant in Fresno County? It has to do with parsley."
-- aviationpros.com (syndicated business-layoff wire), "String of Layoffs in Fresno, California Area Keep Adding Up" — names the broader ~60-closure pattern.
-- WARN Act filing, June 28, 2024, effective August 30, 2024.
+- KMPH, "Olam plant in Firebaugh to close by August, 275 jobs affected." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- The Business Journal (Fresno), plant-closure coverage. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- AOL/syndicated, "What led to closure of food plant in Fresno County? It has to do with parsley." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- aviationpros.com (syndicated business-layoff wire), "String of Layoffs in Fresno, California Area Keep Adding Up" — names the broader ~60-closure pattern. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- WARN Act filing, June 28, 2024, effective August 30, 2024. *Access: obtained — taken directly from the agency's own filings rather than from a web page.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

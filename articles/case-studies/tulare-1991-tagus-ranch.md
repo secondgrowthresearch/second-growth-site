@@ -29,6 +29,6 @@ This is the earliest commercial closure documented anywhere in Tulare County's r
 
 ## Sources
 
-- The Tulare Advance-Register, front page + p. 6, Wed 13 Feb 1991, "Tagus plant may close" (byline Vicki Mailes).
+- The Tulare Advance-Register, front page + p. 6, Wed 13 Feb 1991, "Tagus plant may close" (byline Vicki Mailes). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

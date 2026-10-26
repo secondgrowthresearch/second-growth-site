@@ -29,6 +29,6 @@ Salida's story is a regional-scale version of the same nitrate pattern documente
 
 ## Sources
 
-- CBS News (Sacramento), "Free bottled water coming to thousands of homes with contaminated water."
+- CBS News (Sacramento), "Free bottled water coming to thousands of homes with contaminated water." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

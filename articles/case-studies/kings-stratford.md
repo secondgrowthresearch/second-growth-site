@@ -30,10 +30,10 @@ Stratford's story is less about a single contaminant than about infrastructure f
 
 ## Sources
 
-- ABC30, "Black water in Stratford tap, Kings County" (2014).
-- KMPH, "Wells fail, people in Stratford told not to drink the water."
-- ABC30, "Stratford residents likely to be out of water for rest of week."
-- ABC30, "Stratford water still not drinkable, despite temporary fix."
-- KMPH, "Stratford gets funding for new well, more drinking water delivered."
+- ABC30, "Black water in Stratford tap, Kings County" (2014). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- KMPH, "Wells fail, people in Stratford told not to drink the water." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- ABC30, "Stratford residents likely to be out of water for rest of week." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- ABC30, "Stratford water still not drinkable, despite temporary fix." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- KMPH, "Stratford gets funding for new well, more drinking water delivered." *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

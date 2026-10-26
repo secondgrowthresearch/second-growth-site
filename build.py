@@ -335,6 +335,16 @@ def fix_stat_number_fallbacks(html: str) -> str:
     return STAT_NUMBER_RE.sub(repl, html)
 
 
+def mark_access_tags(html: str) -> str:
+    """Give the Access tag a class so CSS can set it back a register.
+
+    The tag is authored as ordinary emphasis -- *Access: offline-archival
+    -- holding: ...* -- so the markdown stays readable on its own and
+    degrades to plain italics anywhere this stylesheet isn't. Here it
+    just picks up a class."""
+    return html.replace("<em>Access:", '<em class="source-access">Access:')
+
+
 def generate_webp(photos_dir: Path) -> None:
     """Build-time WebP copies of every JPEG in the output directory --
     generated, not committed to source (the .jpg originals stay
@@ -846,6 +856,118 @@ def render_page(title: str, body_html: str, out_path: Path, out_rel: str, src_re
 """
 
 
+# --- Citation discipline -------------------------------------------------
+#
+# 70% of this site's source bullets carried no URL. That number was never a
+# single defect. A microfilm citation to the Tulare Advance-Register of
+# 13 Feb 1991 -- front page, page number, byline -- is a more durable
+# reference than half the live links on this site; more than 70% of the URLs
+# cited in the Harvard Law Review no longer reach what they cited. The real
+# defect was that nothing in the source list distinguished "no URL exists"
+# from "a URL exists and we failed to write it down."
+#
+# So each source bullet now carries an access state, and only one of the
+# states is a defect. The convention is deliberately inline prose rather
+# than frontmatter -- this site has no frontmatter anywhere, and adding a
+# metadata layer for this one field would have been a worse trade than a
+# sentence a reader can also read:
+#
+#   - The Tulare Advance-Register, front page + p. 6, Wed 13 Feb 1991,
+#     "Tagus plant may close" (byline Vicki Mailes). *Access:
+#     offline-archival -- holding: newspaper microfilm, repository not yet
+#     confirmed; locate the reel through the California Newspaper Project
+#     catalogue (see [Data](../data.md)).*
+#
+# Two states are inferred rather than written out, so the common cases stay
+# unmarked and the diff stays honest:
+#   - a bullet carrying an http(s) link and no tag is `web`;
+#   - a bullet whose only links point at other pages on this site is a
+#     cross-reference, sourced in full where it points, and is exempt;
+#   - anything else untagged is `not-captured` -- counted below as a defect.
+# An explicit tag always overrides inference, which is how a bullet that
+# cites two things and has a URL for only one of them still counts.
+ACCESS_STATES = {
+    "web",              # live URL, resolves
+    "web-dead",         # URL existed, no longer resolves
+    "web-blocked",      # URL exists, automated access refused
+    "paywalled",        # URL exists behind a subscription
+    "offline-archival", # no URL exists -- microfilm, print, physical archive
+    "obtained",         # direct from an agency, a records request, a bulk download
+    "not-captured",     # a URL exists and we have not recorded it: THE defect
+}
+ACCESS_RE = re.compile(r"\*Access:\s*([a-z-]+)")
+SOURCE_BULLET_RE = re.compile(r"^\s*[-*]\s+")
+
+
+def audit_sources() -> None:
+    """Classify every source bullet and fail the build on a malformed one.
+
+    Errors (build stops):
+      - an Access value outside ACCESS_STATES;
+      - an `offline-archival` bullet with no `holding:` -- the repository is
+        the whole point. A citation with no URL and no named holding is not
+        checkable by anyone, which is the one thing this project claims to be.
+
+    Not an error (printed): the `not-captured` count. That is the backlog,
+    and it is meant to be driven to zero without pretending microfilm has
+    a URL.
+    """
+    from collections import Counter
+
+    counts = Counter()
+    errors = []
+    not_captured = []
+
+    for src_rel, _ in PAGES:
+        lines = (ROOT / src_rel).read_text(encoding="utf-8").split("\n")
+        in_sources = False
+        for n, line in enumerate(lines, 1):
+            if line.startswith("## "):
+                in_sources = line.startswith("## Sources")
+                continue
+            if not in_sources or not SOURCE_BULLET_RE.match(line):
+                continue
+
+            match = ACCESS_RE.search(line)
+            if match:
+                state = match.group(1)
+                if state not in ACCESS_STATES:
+                    errors.append(f"{src_rel}:{n}: unknown Access state {state!r}")
+                    continue
+                if state == "offline-archival" and "holding:" not in line:
+                    errors.append(
+                        f"{src_rel}:{n}: offline-archival with no 'holding:' -- "
+                        "name the repository, or the citation cannot be checked"
+                    )
+                    continue
+            elif "http://" in line or "https://" in line:
+                state = "web"
+            elif "](" in line:
+                state = "cross-reference"
+            else:
+                state = "not-captured"
+
+            counts[state] += 1
+            if state == "not-captured":
+                not_captured.append(f"{src_rel}:{n}")
+
+    if errors:
+        raise SystemExit(
+            "build.py: malformed source citations:\n  " + "\n  ".join(errors)
+        )
+
+    total = sum(counts.values())
+    print(f"\nsource citations: {total} bullets")
+    for state in sorted(counts):
+        label = f"  {state}"
+        flag = "   <- the only state that is a defect" if state == "not-captured" else ""
+        print(f"{label:<22}{counts[state]:>4}{flag}")
+    print(
+        f"  not-captured is {counts['not-captured']} of {total} "
+        f"({counts['not-captured'] * 100 // total}%) -- drive this to zero\n"
+    )
+
+
 def validate_pages() -> None:
     """build.py hardcodes PAGES rather than globbing articles/ -- deliberate
     (explicit over magic), but it means a new .md file left out of PAGES
@@ -875,6 +997,7 @@ def validate_pages() -> None:
 
 def main() -> None:
     validate_pages()
+    audit_sources()
 
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -896,6 +1019,7 @@ def main() -> None:
         body_html = md.convert(raw)
         body_html = rewrite_images(body_html, photo_info)
         body_html = fix_stat_number_fallbacks(body_html)
+        body_html = mark_access_tags(body_html)
         title = page_title(body_html, fallback=out_rel)
         display_title = "Home" if title == SITE_NAME else title
         out_path.write_text(render_page(display_title, body_html, out_path, out_rel, src_rel), encoding="utf-8")

@@ -29,6 +29,6 @@ Cowan Tract represents the private-well version of this project's water-insecuri
 
 ## Sources
 
-- California Attorney General's Office, SB 1000/SB 244 letter to Stanislaus County regarding its General Plan Environmental Justice Update.
+- California Attorney General's Office, SB 1000/SB 244 letter to Stanislaus County regarding its General Plan Environmental Justice Update. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

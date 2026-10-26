@@ -31,6 +31,6 @@ Fresno County's other documented closure, [ConAgra's Hunt-Wesson plant in Helm](
 
 ## Sources
 
-- The Fresno Bee, p. A5, 14 July 2024, "LAYOFFS" (continued from 1A, byline Tim Sheehan).
+- The Fresno Bee, p. A5, 14 July 2024, "LAYOFFS" (continued from 1A, byline Tim Sheehan). *Access: paywalled — read in the print edition; the publisher's online copy sits behind a subscription.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

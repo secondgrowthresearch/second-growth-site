@@ -32,7 +32,7 @@ This is the only closure in this archive outside Kings and Fresno counties, and 
 
 ## Sources
 
-- Multiple independent news outlets, federal aid records.
-- Company bankruptcy filing (Del Monte Foods, Chapter 11), July 2025.
+- Multiple independent news outlets, federal aid records. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
+- Company bankruptcy filing (Del Monte Foods, Chapter 11), July 2025. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

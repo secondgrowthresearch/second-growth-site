@@ -29,7 +29,7 @@ Tooleville shows a water crisis compounding on itself: a contamination problem t
 
 ## Sources
 
-- The Guardian (via Self-Help Enterprises), "'It smells bad': the US farmworkers grappling with unsafe water at home" (Jan. 23, 2024).
-- Water Education Foundation (Aquafornia), "How drought forced California to mandate drinking water consolidation for Tooleville."
+- [The Guardian (via Self-Help Enterprises), "'It smells bad': the US farmworkers grappling with unsafe water at home"](https://www.selfhelpenterprises.org/media-coverage/it-smells-bad-the-us-farmworkers-grappling-with-unsafe-water-at-home/) (Jan. 23, 2024).
+- [Water Education Foundation (Aquafornia), "How drought forced California to mandate drinking water consolidation for Tooleville."](https://www.watereducation.org/aquafornia-news/how-drought-forced-california-mandate-drinking-water-consolidation-tooleville)
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

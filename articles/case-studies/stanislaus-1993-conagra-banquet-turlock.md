@@ -33,7 +33,7 @@ This closure also pushes Stanislaus County's earliest documented cluster back to
 
 ## Sources
 
-- The Modesto Bee, front page, Tue 11 May 1993, "Turlock to lose ConAgra plant: Banquet will close on July 9" (byline Tony Walker) and "Mayor: 'Social tragedy'" (byline Alvie Lindsay).
-- The Modesto Bee, front page, Thu 29 July 1993, "Another plant to close; 235 jobs lost" (James River Corp., cited as context).
+- The Modesto Bee, front page, Tue 11 May 1993, "Turlock to lose ConAgra plant: Banquet will close on July 9" (byline Tony Walker) and "Mayor: 'Social tragedy'" (byline Alvie Lindsay). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
+- The Modesto Bee, front page, Thu 29 July 1993, "Another plant to close; 235 jobs lost" (James River Corp., cited as context). *Access: offline-archival — holding: newspaper microfilm, repository not yet confirmed; locate the reel through the California Newspaper Project catalogue (see [Data](../data.md)).*
 
 Full citation detail and source archive: [Data](../data.md). Back to [all case studies](../case-studies.md).

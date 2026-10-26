@@ -113,12 +113,12 @@ Real, active federal money exists for this specific work: USDA NRCS's EQIP-Water
 
 ## Sources
 
-- Fresno Irrigation District / North Kings GSA, Carter-Bybee and Kenneson & Sanchez recharge-basin project records (2026); see [Environmental Impact](../environmental-impact.md) for full citation.
+- Fresno Irrigation District / North Kings GSA, Carter-Bybee and Kenneson & Sanchez recharge-basin project records (2026); see [Environmental Impact](../environmental-impact.md) for full citation. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 - U.S. Water Alliance, [Economic Impact of Investing in Water Infrastructure](https://uswateralliance.org/wp-content/uploads/2023/09/Economic-Impact-of-Investing-in-Water-Infrastructure_VOW_FINAL_pages_0.pdf).
 - Economic Policy Institute, [Updated Employment Multipliers for the U.S. Economy](https://www.epi.org/publication/updated-employment-multipliers-for-the-u-s-economy/).
 - Kern Water Bank Authority staffing, via [Transparent California, 2019 salary database](https://transparentcalifornia.com/salaries/2019/kern-water-bank-authority); [Kern Water Bank FAQs](https://www.kwb.org/faqs).
 - North Kings GSA, ["Kings digs deeper on projects during less-than-average 2025 water year"](https://northkingsgsa.org/kings-digs-deeper-on-projects-during-less-than-average-2025-water-year/).
-- USDA NRCS California, EQIP-WaterSMART / Groundwater Recharge Pilot Program notices (2026).
+- USDA NRCS California, EQIP-WaterSMART / Groundwater Recharge Pilot Program notices (2026). *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 - [EveryCRSReport, "Bureau of Reclamation: FY2026 Budget and Appropriations"](https://www.everycrsreport.com/files/2026-02-02_IF13066_f292a873d811651c444e6deb0e263a6787f9776b.pdf).
 
 Back to [Mechanisms](../mechanisms.md).

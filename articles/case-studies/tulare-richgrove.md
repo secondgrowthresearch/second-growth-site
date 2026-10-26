@@ -29,6 +29,6 @@ Richgrove's triple contamination — arsenic, nitrates, and a legacy fumigant ch
 
 ## Sources
 
-- The Guardian (via Self-Help Enterprises), "'It smells bad': the US farmworkers grappling with unsafe water at home" (Jan. 23, 2024).
+- [The Guardian (via Self-Help Enterprises), "'It smells bad': the US farmworkers grappling with unsafe water at home"](https://www.selfhelpenterprises.org/media-coverage/it-smells-bad-the-us-farmworkers-grappling-with-unsafe-water-at-home/) (Jan. 23, 2024).
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

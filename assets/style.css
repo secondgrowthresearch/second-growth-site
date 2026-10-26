@@ -489,6 +489,20 @@ li { margin-bottom: 0.4em; }
   color: var(--chart-muted);
 }
 
+/* Access tag on a source bullet -- says whether a citation has no URL
+   because none exists (microfilm, a physical archive, a records request)
+   or because we haven't recorded one yet. It is a real part of the
+   citation, so it stays readable; it is not the citation, so it sits a
+   register back. Not italic: the surrounding bullets already use italics
+   for publication titles, and the tag runs long enough that a whole
+   italic sentence fights the headline it follows. */
+.source-access {
+  font-style: normal;
+  font-size: 0.85em;
+  color: var(--chart-muted);
+}
+.source-access a { color: inherit; }
+
 /* Published/last-updated byline -- real git-commit dates, not hand-
    maintained, so it can't silently drift out of sync with the page's
    actual content. A citable "as of" marker for readers who need to cite

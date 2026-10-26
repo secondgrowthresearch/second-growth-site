@@ -29,6 +29,6 @@ Keyes is this project's clearest consolidation success story — four wells, fou
 
 ## Sources
 
-- California State Water Resources Control Board, Division of Drinking Water, "Keyes Story" (Partnership Success case study).
+- [California State Water Resources Control Board, Division of Drinking Water, "Keyes Story"](https://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/documents/partnership_success/keyes_story.pdf) (Partnership Success case study, PDF).
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).

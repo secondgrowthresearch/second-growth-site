@@ -64,6 +64,6 @@ Grouped by county. Every claim below is already published, sourced, and cited on
 
 Every factual claim above is sourced on its own originating page, linked inline. This page adds no new primary sourcing of its own — see [Case Studies](case-studies.md), [Water Insecurity](water-insecurity.md), [Environmental Impact](environmental-impact.md), and [Consolidation](consolidation.md) for the full citation trail behind each entry.
 
-- Flora, C.B. & Flora, J.L., *Rural Communities: Legacy and Change* — the Community Capitals Framework used to organize this page.
+- Flora, C.B. & Flora, J.L., *Rural Communities: Legacy and Change* — the Community Capitals Framework used to organize this page. *Access: offline-archival — holding: published monograph; locate through a university library catalogue or WorldCat.*
 
 Full citation detail and source archive: [Data](data.md).

@@ -90,7 +90,7 @@ This is the one mechanism on these five pages whose closest federal match is cur
 ## Sources
 
 - California Department of Conservation, [Multibenefit Land Repurposing Program Awarded Projects List](https://www.conservation.ca.gov/dlrp/grant-programs/SiteAssets/Multibenefit%20Land%20Repurposing%20Program_Awarded%20Projects%20List.pdf).
-- SJV Water, on SGMA fallowing projections for the San Joaquin Valley.
+- SJV Water, on SGMA fallowing projections for the San Joaquin Valley. *Access: not-captured — a public URL exists for this source and this project has not recorded it.*
 - [DTN Progressive Farmer, "CRP Enrollment Paused as Farm Bill Expires"](https://www.dtnpf.com/agriculture/web/ag/news/article/2026/10/01/crp-enrollment-paused-farm-bill) (October 2026).
 - [EveryCRSReport, "The 2026 Farm Bill: Comparison of the House and Senate Bills with Current Law"](https://www.everycrsreport.com/reports/R48918.html).
 - [NRCS ACEP Factsheet](https://nrcs-prod.azureedge.us/sites/default/files/2026-08/ACEP%20Factsheet.pdf) (2026).

@@ -29,7 +29,7 @@ Cantua Creek is the plainest version of this project's water-and-labor thesis in
 
 ## Sources
 
-- KFF Health News, "A million Californians don't have clean drinking water. Where do they live?"
-- The Guardian (via Self-Help Enterprises), "'It smells bad': the US farmworkers grappling with unsafe water at home" (Jan. 23, 2024).
+- [KFF Health News (Harriet Blair Rowan), "A million Californians don't have clean drinking water. Where do they live?"](https://kffhealthnews.org/news/a-million-californians-dont-have-clean-drinking-water-where-do-they-live/) (June 28, 2019).
+- [The Guardian (via Self-Help Enterprises), "'It smells bad': the US farmworkers grappling with unsafe water at home"](https://www.selfhelpenterprises.org/media-coverage/it-smells-bad-the-us-farmworkers-grappling-with-unsafe-water-at-home/) (Jan. 23, 2024).
 
 Full citation detail and source archive: [Data](../data.md). Back to [water insecurity in the Central Valley](../water-insecurity.md).
