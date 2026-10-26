@@ -160,7 +160,7 @@ Food processing and AI data centers aren't the only places a consolidation quest
 
 - **We now have a bounded concentration ratio for two subsectors, not yet for the rest.** Fresno meat/poultry processing (NAICS 3116) and Tulare dairy processing (NAICS 3115) each have a real, plant-level HHI estimate above. Kings' and Stanislaus' food-processing sectors, and every subsector besides these two, still rest on the cruder plant-size and named-firm proxies elsewhere on this page — CBP's suppressed size-class cells block a reliable HHI for Kings specifically, and we haven't yet attempted the calculation for Stanislaus. The 77% cattle and 225-grower tomato figures remain national and statewide, not Central-Valley-specific.
 - **Consolidation and closure are related but not identical.** A plant absorbed into a larger company sometimes keeps running for years (Seneca ran the former Signature Fruit plant for twelve years before closing it) — the ownership change and the eventual closure are two separate events with their own separate causes, and we're not asserting the former caused the latter in every case.
-- **We have not yet quantified how many of our 24 documented closures trace back to a prior bankruptcy or acquisition versus a clean single-owner exit.** Of 24 closures, we can currently trace five to a prior consolidation event; the other 19 may or may not have similar histories we simply haven't found yet.
+- **We have not yet quantified how many of our {{closures}} documented closures trace back to a prior bankruptcy or acquisition versus a clean single-owner exit.** Of {{closures}} closures, we can currently trace five to a prior consolidation event; the rest may or may not have similar histories we simply haven't found yet.
 
 ## Sources
 

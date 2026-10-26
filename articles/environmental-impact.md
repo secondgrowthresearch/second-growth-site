@@ -1,6 +1,6 @@
 # The land itself is a casualty
 
-Everything else on this site documents what happens to people when commodity agriculture closes a plant or contaminates a well. This page documents something different: the land and water system underneath this industry have themselves been damaged by its ordinary operation, not by an accident — in ways that are physically permanent and that show up, by no coincidence, in the same towns already named elsewhere in this project.
+Everything else on this site documents what happens to people as commodity agriculture here consolidates — a plant closes and a larger owner absorbs it, a well goes bad and nobody is left accountable for it. This page documents something different: the land and water system underneath this industry have themselves been damaged by its ordinary operation, not by an accident — in ways that are physically permanent and that show up, by no coincidence, in the same towns already named elsewhere in this project.
 
 <div class="stat-pair">
   <div class="stat-card">
