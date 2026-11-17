@@ -101,6 +101,9 @@ PAGES = [
     ("articles/methodology.md", "methodology.html"),
     ("articles/data.md", "data.html"),
     ("articles/unclassified-wells.md", "unclassified-wells.html"),
+    ("articles/working-papers.md", "working-papers.html"),
+    ("articles/working-papers/sdi-synthetic-control-2026.md", "working-papers/sdi-synthetic-control-2026.html"),
+    ("articles/working-papers/mlrp-methodology-memo-2026.md", "working-papers/mlrp-methodology-memo-2026.html"),
     ("articles/about.md", "about.html"),
 ]
 
@@ -228,6 +231,11 @@ NAV_SECONDARY = [
     ("/unclassified-wells.html", "Unclassified Wells"),
     ("/compounding.html", "Compounding Impact"),
     ("/mechanisms.html", "Mechanisms"),
+    # Citable, self-contained writeups of work already on the site (the
+    # synthetic-control test) plus one genuinely original research design
+    # (the MLRP memo) -- reference-register pages either way, not part of
+    # the primary reader-facing narrative above.
+    ("/working-papers.html", "Working Papers"),
     ("/about.html", "About"),
 ]
 if SHOW_DATES:
