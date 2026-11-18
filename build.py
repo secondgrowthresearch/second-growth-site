@@ -104,6 +104,7 @@ PAGES = [
     ("articles/working-papers.md", "working-papers.html"),
     ("articles/working-papers/sdi-synthetic-control-2026.md", "working-papers/sdi-synthetic-control-2026.html"),
     ("articles/working-papers/mlrp-methodology-memo-2026.md", "working-papers/mlrp-methodology-memo-2026.html"),
+    ("articles/working-papers/price-capture-aina-to-table-2026.md", "working-papers/price-capture-aina-to-table-2026.html"),
     ("articles/about.md", "about.html"),
 ]
 
